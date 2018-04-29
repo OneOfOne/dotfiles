@@ -1,0 +1,65 @@
+[core]
+	editor = code --wait
+
+[hub]
+	protocol = https
+
+[user]
+	signingkey = 760B7805
+
+[commit]
+	gpgsign = true
+
+[branch]
+	autosetupmerge = true
+
+[diff]
+	rename = copy
+	suppress-blank-empty = true
+	renamelimit = 0
+	algorithm = patience
+	tool = code
+
+[difftool "code"]
+	cmd = code --wait --diff $LOCAL $REMOTE
+
+[log]
+	date = iso
+	decorate = short
+	abbrevCommit = true
+
+[status]
+	relativePaths = false
+	submodulesummary = true
+
+[http]
+	cookiefile = ~/.gitcookies
+
+[credential]
+	helper = store
+
+[alias]
+	d = diff -p -b -w --ignore-space-at-eol --src-prefix=old/ --dst-prefix=new/
+	dlast = !git d HEAD~1
+	cdiff = !git d --cached
+	hdiff = !git d HEAD
+	
+	master = !git checkout master && git pull
+	merge-master = !git fetch origin master && git merge origin/master -m 'master sync'
+	stash-and-merge = !git stash && git merge-master && git stash apply
+	stash-and-pull = !git stash && git pull && git stash apply
+	new-branch = !git master && git checkout -b
+	sam = stash-and-merge
+	sap = stash-and-pull
+	nb = new-branch
+	
+	grep-all = "!f() { git grep -ni $@ `git for-each-ref --format='%(refname)' refs/` | perl -pe 's@refs/[^/]+/@@g'; }; f"
+	g = grep --break --heading --line-number
+	
+	list-old-branches = !git branch --merged | perl -ne 'print unless /master|dev/'
+	
+	delete-merged-branches = !git branch -d $(git list-old-branches)
+	
+	clean-old = "!f() { git delete-merged-branches; du -h --max-depth=0 .git && git reflog expire --all --expire=now && git gc --prune=now --aggressive; du -h --max-depth=0 .git; }; f"
+	
+	fuck = !git reset --hard && git pull

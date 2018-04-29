@@ -1,6 +1,6 @@
 [submodule ".env.d/oh-my-zsh"]
 	path = .env.d/oh-my-zsh
 	url = https://github.com/robbyrussell/oh-my-zsh
-[submodule "/home/oneofone/.env.d/oh-my-zsh.custom/plugins/zsh-syntax-highlighting"]
-	path = /home/oneofone/.env.d/oh-my-zsh.custom/plugins/zsh-syntax-highlighting
+[submodule ".env.d/oh-my-zsh.custom/plugins/zsh-syntax-highlighting"]
+	path = .env.d/oh-my-zsh.custom/plugins/zsh-syntax-highlighting
 	url = https://github.com/zsh-users/zsh-syntax-highlighting
