@@ -64,6 +64,7 @@ plugins=(
 	systemd
 	shrink-path
 	git
+	gitfast
 )
 
 

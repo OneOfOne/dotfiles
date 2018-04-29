@@ -2,13 +2,13 @@ setopt globdots
 setopt ignoreeof
 setopt autocontinue
 setopt extendedglob
-setopt automenu
-setopt alwaystoend
 setopt rmstarsilent
 
 setopt histreduceblanks
 setopt histignorespace
 setopt histignorealldups
+
+zstyle ':completion:*' rehash true
 
 alias which='type -a'
 alias ..='cd ..'
