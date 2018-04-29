@@ -9,6 +9,7 @@ setopt histignorespace
 setopt histignorealldups
 
 zstyle ':completion:*' rehash true
+zstyle ':completion:*' completer _complete _ignored _files
 
 alias which='type -a'
 alias ..='cd ..'
