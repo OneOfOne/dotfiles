@@ -1,0 +1,299 @@
+{
+	"editor.fontFamily": "Fira Code",
+	"editor.fontLigatures": true,
+	"editor.fontSize": 13,
+	"editor.fontWeight": "500",
+	"editor.tabSize": 4,
+	"editor.insertSpaces": false,
+	"editor.quickSuggestionsDelay": 50,
+	"editor.quickSuggestions": {
+		"other": true,
+		"comments": true,
+		"strings": false
+	},
+	"editor.rulers": [140],
+	"editor.cursorBlinking": "solid",
+	"editor.renderWhitespace": "boundary",
+	"editor.renderLineHighlight": "all",
+	"editor.renderIndentGuides": true,
+	"editor.formatOnSaveTimeout": 10000,
+	"editor.formatOnType": true,
+	"editor.formatOnSave": true,
+	"editor.formatOnPaste": true,
+	"editor.autoIndent": true,
+	"editor.dragAndDrop": false,
+	"editor.smoothScrolling": true,
+	"editor.minimap.renderCharacters": false,
+	"editor.minimap.showSlider": "always",
+	"editor.snippetSuggestions": "top",
+	"editor.codeLens": false,
+
+	"workbench.editor.enablePreview": false,
+	"workbench.editor.enablePreviewFromQuickOpen": false,
+	"workbench.editor.closeOnFileDelete": false,
+
+	"window.menuBarVisibility": "visible",
+	"window.openFilesInNewWindow": "on",
+	"window.newWindowDimensions": "maximized",
+	"window.restoreWindows": "none",
+	"window.closeWhenEmpty": true,
+
+	"terminal.integrated.shell.linux": "/bin/fish",
+	"terminal.external.linuxExec": "konsole",
+	"terminal.integrated.copyOnSelection": true,
+
+	"files.insertFinalNewline": true,
+	"files.trimTrailingWhitespace": true,
+	"files.encoding": "utf8",
+	"files.autoSave": "onFocusChange",
+	"files.associations": {
+		"*.mustache": "html",
+		"*.user": "json",
+		".tslintrc": "jsonc"
+	},
+	"files.exclude": {
+		"**/.git": true,
+		"**/.svn": true,
+		"**/.hg": true,
+		"**/CVS": true,
+		"**/.DS_Store": true,
+		"**/*.pprof": true,
+		"**/*.prof": true,
+		"**/*.test": true,
+		"**/*.db": true,
+		"**/*.min.js": true,
+		"**/compiled.js": true,
+		"**/*.js": {
+			"when": "$(basename).ts"
+		},
+		"**/*.map": {
+			"when": "$(basename).map"
+		},
+		"node_modules": true
+	},
+	"search.quickOpen.includeSymbols": true,
+
+	"typescript.useCodeSnippetsOnMethodSuggest": true,
+	"typescript.referencesCodeLens.enabled": false,
+	"typescript.implementationsCodeLens.enabled": false,
+
+	"typescript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
+	"typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
+
+	"javascript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
+	"javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
+	"javascript.implicitProjectConfig.checkJs": true,
+
+	"npm.enableScriptExplorer": true,
+	"npm.packageManager": "yarn",
+
+	"eslint.enable": true,
+	"eslint.packageManager": "yarn",
+	"eslint.provideLintTask": true,
+	"eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
+	"eslint.autoFixOnSave": true,
+	"eslint.run": "onSave",
+
+	"prettier.bracketSpacing": false,
+	"prettier.jsonEnable": ["jsonc", "json"],
+	"prettier.javascriptEnable": [],
+	"prettier.typescriptEnable": [],
+	"prettier.statusBar": false,
+	"prettier.openOutput": false,
+
+	"go.formatTool": "goreturns",
+	"go.useCodeSnippetsOnFunctionSuggest": true,
+	"go.autocompleteUnimportedPackages": true,
+	"go.useCodeSnippetsOnFunctionSuggestWithoutType": true,
+	"go.docsTool": "gogetdoc",
+	"go.lintTool": "megacheck",
+	"go.buildFlags": ["-v"],
+	"go.testFlags": ["-v"],
+	"go.liveErrors": {
+		"enabled": true,
+		"delay": 200
+	},
+	"go.editorContextMenuCommands": {
+		"toggleTestFile": true,
+		"addTags": true,
+		"removeTags": true,
+		"testAtCursor": false,
+		"testFile": false,
+		"testPackage": true,
+		"generateTestForFunction": true,
+		"generateTestForFile": false,
+		"generateTestForPackage": true,
+		"addImport": false,
+		"testCoverage": true,
+		"playground": false
+	},
+	"go.addTags": {
+		"tags": "json",
+		"options": "json=omitempty",
+		"promptForTags": false,
+		"transform": "camelcase"
+	},
+	"go.coverageDecorator": "gutter",
+	"go.useLanguageServer": true,
+
+	"html.format.unformatted": "p, a, abbr, acronym, b, bdo, big, br, button, cite, code, dfn, em, i, img, input, kbd, label, map, object, q, samp, select, small, span, strong, sub, sup, textarea, tt, var",
+	"html.format.endWithNewline": true,
+	"html.format.maxPreserveNewLines": 1,
+	"html.format.extraLiners": "-",
+	"html.suggest.angular1": false,
+	"html.suggest.ionic": false,
+
+	"markdownlint.config": {
+		"MD010": false,
+		"MD013": false,
+		"MD033": false,
+		"MD040": false
+	},
+
+	"emmet.showSuggestionsAsSnippets": true,
+
+	"php.suggest.basic": false,
+
+	"cSpell.language": "en,en-US",
+	"cSpell.allowCompoundWords": true,
+	"cSpell.enabled": false,
+	"cSpell.numSuggestions": 10,
+	"cSpell.userWords": [
+		"ASTs",
+		"CORS",
+		"Cashout",
+		"Cmps",
+		"Elts",
+		"Fira",
+		"Gruvbox",
+		"Influencers",
+		"Injectable",
+		"JSONP",
+		"Protos",
+		"TODO",
+		"Unimported",
+		"apiserv",
+		"apiv",
+		"autofetch",
+		"boltdb",
+		"csel",
+		"dups",
+		"fatih",
+		"fname",
+		"fset",
+		"gmail",
+		"gogetdoc",
+		"goimports",
+		"golang",
+		"gometalinter",
+		"jsbeautify",
+		"julienschmidt",
+		"konsole",
+		"nolint",
+		"oneofone",
+		"pidx",
+		"pprof",
+		"prox",
+		"rbuf",
+		"redir",
+		"samp",
+		"struct",
+		"structs",
+		"uint",
+		"ulimit",
+		"unmarshals",
+		"xast",
+		"xonsh",
+		"apiserv",
+		"jsonp"
+	],
+	"cSpell.ignoreRegExpList": ["0x[a-f0-9]+", "<?[\\w.\\-+]+@\\w+(\\.\\w+)+>?"],
+	"cSpell.ignorePaths": [
+		"**/node_modules/**",
+		"**/vscode-extension/**",
+		"**/.git/**",
+		".vscode",
+		"typings",
+		".gitignore"
+	],
+
+	"git.autofetch": false,
+	"git.confirmSync": false,
+	"git.enableSmartCommit": true,
+	"git.enableCommitSigning": true,
+
+	"gitlens.codeLens.enabled": false,
+	"gitlens.advanced.messages": {
+		"suppressCommitHasNoPreviousCommitWarning": false,
+		"suppressCommitNotFoundWarning": false,
+		"suppressFileNotUnderSourceControlWarning": false,
+		"suppressGitVersionWarning": false,
+		"suppressLineUncommittedWarning": false,
+		"suppressNoRepositoryWarning": false,
+		"suppressResultsExplorerNotice": false,
+		"suppressShowKeyBindingsNotice": true,
+		"suppressUpdateNotice": false,
+		"suppressWelcomeNotice": false
+	},
+	"gitlens.keymap": "none",
+	"gitlens.statusBar.reduceFlicker": true,
+	"gitlens.historyExplorer.enabled": true,
+
+	"extensions.autoUpdate": true,
+	"extensions.showRecommendationsOnlyOnDemand": true,
+	"update.enableWindowsBackgroundUpdates": false,
+
+	"telemetry.enableTelemetry": false,
+	"telemetry.enableCrashReporter": false,
+	"code-runner.enableAppInsights": false,
+	"gitlens.advanced.telemetry.enabled": false,
+
+	"workbench.iconTheme": "material-icon-theme",
+	"material-icon-theme.showUpdateMessage": false,
+	"workbench.colorTheme": "Gruvbox Dark (Medium Contrast)",
+	"workbench.colorCustomizations": {
+		"[Gruvbox Dark (Medium Contrast)]": {
+			"editor.background": "#222",
+			"statusBar.background": "#333",
+			"panel.background": "#333",
+			"sideBar.background": "#222",
+			"tab.activeBackground": "#555",
+			"tab.inactiveBackground": "#333",
+			"tab.inactiveForeground": "#aaa"
+		}
+	},
+	"window.zoomLevel": 1,
+
+	"code-runner.saveFileBeforeRun": true,
+	"code-runner.runInTerminal": true,
+
+	"[css]": {
+		"editor.formatOnType": false,
+		"editor.formatOnSave": false,
+		"editor.formatOnPaste": false
+	},
+
+	"[javascript]": {
+		"editor.formatOnType": false,
+		"editor.formatOnSave": false,
+		"editor.formatOnPaste": false
+	},
+
+	"[javascriptreact]": {
+		"editor.formatOnType": false,
+		"editor.formatOnSave": false,
+		"editor.formatOnPaste": false
+	},
+
+	"[typescript]": {
+		"editor.formatOnType": false,
+		"editor.formatOnSave": false,
+		"editor.formatOnPaste": false
+	},
+
+	"[typescriptreact]": {
+		"editor.formatOnType": false,
+		"editor.formatOnSave": false,
+		"editor.formatOnPaste": false
+	}
+}

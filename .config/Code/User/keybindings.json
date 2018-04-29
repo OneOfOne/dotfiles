@@ -1,0 +1,33 @@
+[
+	{
+		"key": "ctrl+shift+d",
+		"command": "editor.action.copyLinesDownAction",
+		"when": "editorTextFocus"
+	},
+	{
+		"key": "ctrl+shift+alt+d",
+		"command": "editor.action.copyLinesUpAction",
+		"when": "editorTextFocus"
+	},
+	{
+		"key": "ctrl+m",
+		"command": "workbench.action.toggleMenuBar",
+		"when": "editorTextFocus"
+	},
+	{
+		"key": "ctrl+q",
+		"command": "workbench.action.quickOpenView"
+	},
+	{
+		"key": "ctrl+j",
+		"command": "editor.action.joinLines"
+	},
+	{
+		"key": "alt+left",
+		"command": "workbench.action.navigateBack"
+	},
+	{
+		"key": "alt+right",
+		"command": "workbench.action.navigateForward"
+	}
+]
