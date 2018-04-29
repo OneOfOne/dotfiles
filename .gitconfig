@@ -39,6 +39,8 @@
 	helper = store
 
 [alias]
+	st = status --short --untracked-files=no
+
 	d = diff -p -b -w --ignore-space-at-eol --src-prefix=old/ --dst-prefix=new/
 	dlast = !git d HEAD~1
 	cdiff = !git d --cached

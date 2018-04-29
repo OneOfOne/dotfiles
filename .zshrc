@@ -2,7 +2,7 @@ export ZSH="$HOME/.env.d/oh-my-zsh"
 
 HYPHEN_INSENSITIVE="true"
 DISABLE_AUTO_UPDATE="true"
-ENABLE_CORRECTION="true"
+# ENABLE_CORRECTION="true"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 HIST_STAMPS="yyyy-mm-dd"
 

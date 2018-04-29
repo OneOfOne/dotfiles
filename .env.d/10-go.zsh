@@ -4,7 +4,7 @@ export GOBIN="$GOPATH/bin"
 
 path[1,0]=$GOBIN
 
-for gv in $(command ls /usr/src/ | grep go); do
+for gv in $(command ls /usr/src/ | egrep '^go'); do
 	name="${gv/./}"
 	[ "$name" = "go" ] && name="gotip"
 	alias $name="/usr/src/$gv/bin/go"
@@ -17,28 +17,11 @@ alias gow32="env GOOS="windows" GOARCH="386" CGO_ENABLED="1" CC="i686-w64-mingw3
 
 alias killgo="killall -9 gocode go-langserver &>/dev/null"
 
-function cdmeteora { 
-	local base="$GOPATH/src/github.com/missionMeteora"
-	cd "$base/$1" && true
-}
-
-function cdsway { 
-	local base="$GOPATH/src/github.com/swayops/"
-	cd "$base/$1" && true
-}
-
-function cdpdna { 
-	local base="$GOPATH/src/github.com/PathDNA/"
-	cd "$base/$1" && true
-}
-
-function cdgh { 
-	cd $GOPATH/src/github.com/$1 && true
-}
-
-function cdooo { 
-	cd $GOPATH/src/github.com/OneOfOne/$1 && true
-}
+hash -d gh="$GOPATH/src/github.com/"
+hash -d mygh="$GOPATH/src/github.com/OneOfOne/"
+hash -d meteora="$GOPATH/src/github.com/missionMeteora/" 
+hash -d swayops="$GOPATH/src/github.com/swayops/" 
+hash -d pdna="$GOPATH/src/github.com/PathDNA/" 
 
 function setgo {
 	local v="$1"
@@ -66,7 +49,7 @@ function rebuildgo {
 	local v="$1"
 	pushd "/usr/src/go$v/src" >/dev/null
 	trap "popd >/dev/null" RETURN
-	rm -rf ../pkg ../bin &>/dev/null
+	rm -rf ../pkg ../bin $GOPATH/pkg &>/dev/null
 
 	git reset --hard || return 1
 	git clean -fdx || return 1
@@ -104,6 +87,5 @@ function rebuildgotools {
 		honnef.co/go/tools/... \
 		github.com/sourcegraph/go-langserver \
 		github.com/derekparker/delve/cmd/dlv \
-		github.com/davidrjenni/reftools/cmd/fillstruct \
-
+		github.com/davidrjenni/reftools/cmd/fillstruct
 }
