@@ -33,3 +33,6 @@ done
 # ensure path includes only unique pathes
 typeset -aU path
 autoload -U compinit && compinit
+
+alias .git="git --git-dir=$HOME/code/dotfiles --work-tree=$HOME"
+alias _reload="source ~/.zshrc"

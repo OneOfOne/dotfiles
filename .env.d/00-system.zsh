@@ -11,9 +11,9 @@ setopt histignorealldups
 zstyle ':completion:*' rehash true
 zstyle ':completion:*' completer _complete _ignored _files
 
-alias which='type -a'
-alias ..='cd ..'
-alias ...='cd ../..'
+alias which="type -a"
+alias ..="cd .."
+alias ...="cd ../.."
 
 alias y="env PATH=/usr/bin yaourt"
 alias yup="y -Syu --aur"
@@ -33,12 +33,14 @@ alias df="df -Tha --total"
 alias duh="du -ach | sort -h"
 alias myip="curl http://ipecho.net/plain; echo"
 
-alias grep='grep --color'
-alias egrep='egrep --color'
-alias fgrep='fgrep --color'
+alias grep="grep --color"
+alias egrep="egrep --color"
+alias fgrep="fgrep --color"
 
-alias sudo='sudo '
-alias ports='netstat -tunp'
+alias sudo="sudo "
+alias ports="sudo ss -nl -tup"
+
+alias pss="ps -Ao pid:5,state:1,user,cmd | grep -v grep | egrep"
 
 function mcd {
 	command mkdir -p $1 && cd $1
@@ -47,6 +49,3 @@ function mcd {
 function mkgit {
 	mcd $1 && git init
 }
-
-alias .git="git --git-dir=$HOME/code/dotfiles --work-tree=$HOME"
-alias _reload="source ~/.zshrc"

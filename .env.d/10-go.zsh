@@ -2,7 +2,7 @@ export GOCACHE="/tmp/.gocache"
 export GOPATH="$HOME/code/go"
 export GOBIN="$GOPATH/bin"
 
-path[1,0]=$GOBIN
+path=($GOBIN $path)
 
 for gv in $(command ls /usr/src/ | egrep '^go'); do
 	name="${gv/./}"
