@@ -1,0 +1,5 @@
+#!/bin/sh
+CACHE=/dev/shm/chrome-cache-work
+# google-chrome-beta --disk-cache-dir=$CACHE --media-cache-dir=$CACHE --allow-file-access-from-files \
+# 	--disable-web-security --disable-prompt-on-repost 1>/dev/null 2>&1 $* &
+google-chrome-stable --user-data-dir="$HOME/.config/work-chrome" --disk-cache-dir=$CACHE --media-cache-dir=$CACHE --allow-file-access-from-files --disable-prompt-on-repost --ignore-certificate-errors 1>/dev/null 2>&1 $* &

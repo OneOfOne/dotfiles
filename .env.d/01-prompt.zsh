@@ -31,7 +31,7 @@ local git_status='$(git_prompt_info)'
 
 PROMPT="${return_code}┏━%{$reset_color%} $(ssh_connection)${user_host} ${current_dir} ${git_status} ${return_code}%(?..%?)
 ┗━━%{$reset_color%}%B➤%b "
-RPROMPT="❨%D{%y-%m-%f} %D{%L:%M:%S}❩"
+RPROMPT=""
 
 
 #dcdccc

@@ -1,0 +1,28 @@
+#!/bin/sh
+
+die() {
+	echo $1
+	exit $2
+}
+
+if [ "$1" = "update-vsc" ]; then
+	tmp="/tmp/vscode"
+	typ="stable"
+	[ "$2" != "" ] && typ="$2"
+	pushd /usr/src
+	rm -rf $tmp
+	mkdir -p $tmp
+	echo curl -L https://vscode-update.azurewebsites.net/latest/linux-x64/$typ
+	curl -L https://vscode-update.azurewebsites.net/latest/linux-x64/$typ | tar -vxzC $tmp || exit 1
+
+	rm -rf VSCode-linux-x64.previous &>/dev/null
+	mv VSCode-linux-x64 VSCode-linux-x64.previous &>/dev/null
+	mv $tmp/VSCode-linux-x64 .
+	exit 0
+fi
+
+if [ -x /usr/src/VSCode-linux-x64/bin/code-insiders ]; then
+	exec /usr/src/VSCode-linux-x64/bin/code-insiders $@
+else
+	exec /usr/src/VSCode-linux-x64/bin/code $@
+fi

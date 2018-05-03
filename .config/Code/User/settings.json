@@ -31,6 +31,7 @@
 	"workbench.editor.enablePreview": false,
 	"workbench.editor.enablePreviewFromQuickOpen": false,
 	"workbench.editor.closeOnFileDelete": false,
+	"workbench.startupEditor": "newUntitledFile",
 
 	"window.menuBarVisibility": "visible",
 	"window.openFilesInNewWindow": "on",
@@ -38,7 +39,7 @@
 	"window.restoreWindows": "none",
 	"window.closeWhenEmpty": true,
 
-	"terminal.integrated.shell.linux": "/bin/fish",
+	"terminal.integrated.shell.linux": "/bin/zsh",
 	"terminal.external.linuxExec": "konsole",
 	"terminal.integrated.copyOnSelection": true,
 
@@ -245,7 +246,6 @@
 
 	"telemetry.enableTelemetry": false,
 	"telemetry.enableCrashReporter": false,
-	"code-runner.enableAppInsights": false,
 	"gitlens.advanced.telemetry.enabled": false,
 
 	"workbench.iconTheme": "material-icon-theme",
@@ -263,9 +263,6 @@
 		}
 	},
 	"window.zoomLevel": 1,
-
-	"code-runner.saveFileBeforeRun": true,
-	"code-runner.runInTerminal": true,
 
 	"[css]": {
 		"editor.formatOnType": false,
@@ -295,5 +292,18 @@
 		"editor.formatOnType": false,
 		"editor.formatOnSave": false,
 		"editor.formatOnPaste": false
-	}
+	},
+
+	"save-runner.enabled": true,
+	"save-runner.commands": [
+		{
+			"enabled": true,
+			"match": "\\.[tj]sx?$",
+			"notMatch": "/node_modules/",
+			"useTempFile": true,
+			"pre": "eslint_d --fix ${tmpFile}",
+			"post": "echo saved ${relname}",
+			"isAsync": false
+		},
+	],
 }

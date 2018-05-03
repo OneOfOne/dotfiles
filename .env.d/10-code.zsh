@@ -2,6 +2,7 @@ export GOCACHE="/tmp/.gocache"
 export GOPATH="$HOME/code/go"
 export GOBIN="$GOPATH/bin"
 
+path=($HOME/.config/yarn/global/node_modules/.bin $path)
 path=($GOBIN $path)
 
 for gv in $(command ls /usr/src/ | egrep '^go'); do
@@ -30,10 +31,10 @@ function setgo {
 		return
 	fi
 
-	[ "$v" == "tip" -o "$v" == "master" ] && v=""
+	[ "$v" = "tip" -o "$v" = "master" ] && v=""
 
 	local p="/usr/src/go$v/bin/"
-
+	
 	if [ ! -d "$p" ]; then
 		_err "$p doesn't exist."
 		return 1

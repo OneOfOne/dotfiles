@@ -1,0 +1,45 @@
+{
+	".source.go": {
+		"Error Return": {
+			"prefix": "iferr",
+			"body": "if err != nil {\n\treturn err\n}",
+			"description": "Insert an error handling block to return err if not nil"
+		},
+		"test function": {
+			"prefix": "test",
+			"body": "func Test$1(t *testing.T) {\n\t$0\n}"
+		},
+		"bench function": {
+			"prefix": "bench",
+			"body": "func Benchmark$1(b *testing.B) {\n\tfor i := 0; i < b.N; i++ {\n\t\t$0\n\t}\n}"
+		},
+		"bench (bp) function": {
+			"prefix": "pbench",
+			"body": "func Benchmark$1(b *testing.B) {\n\tb.RunParallel(func(pb *testing.PB) {\n\t\tfor pb.Next() {\n\t\t\t$0\n\t\t}\n\t})\n}"
+		},
+		"bolt view": {
+			"prefix": "bview",
+			"body": "${1}db.View(func(tx *bolt.Tx) error{\n\t$0\n\treturn nil\n})"
+		},
+		"bolt view err": {
+			"prefix": "bviewerr",
+			"body": "if err := ${1}db.View(func(tx *bolt.Tx) error{\n\t$0\n\treturn nil\n}); err != nil {\n}"
+		},
+		"bolt update": {
+			"prefix": "bupdate",
+			"body": "${1}db.Update(func(tx *bolt.Tx) error{\n\t$0\n\treturn nil\n})"
+		},
+		"bolt update err": {
+			"prefix": "bupdateerr",
+			"body": "if err := ${1}db.Update(func(tx *bolt.Tx) error{\n\t$0\n\treturn nil\n}); err != nil {\n}"
+		},
+		"context arg": {
+			"prefix": "ctxa",
+			"body": "ctx context.Context,$0"
+		},
+		"context fn": {
+			"prefix": "ctxfn",
+			"body": "func $1(ctx context.Context) {\n\t$0\n}\n"
+		}
+	}
+}
