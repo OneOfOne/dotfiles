@@ -49,3 +49,5 @@ function mcd {
 function mkgit {
 	mcd $1 && git init
 }
+
+which nvim &>/dev/null && alias vim="env VTE_VERSION=100 nvim"
