@@ -1,0 +1,56 @@
+#!/bin/bash -x
+
+function err {
+	for l in "$@"; do
+		echo $l > /dev/stderr
+	done	
+}
+
+function die {
+	for l in "$@"; do
+		echo $l > /dev/stderr
+	done
+	exit 1
+}
+
+function usage {
+	die "Usage:" " " "env [AB_DIR=$AB_DIR] ABE_PASSWD=android-password $(basename $0) extract org.package.name [file.tar]" " " "errors:" "$@"
+}
+
+ABE_RELEASE_URL="${ABE_RELEASE_URL:-https://github.com/nelenkov/android-backup-extractor/releases/download/v1.0/abe-all.jar}"
+ABE_PATH=${ABE_PATH:-~/bin/abe.jar}
+PKG_NAME=$2
+AB_DIR=/tmp
+AB_PATH="$AB_DIR/$PKG_NAME.ab"
+TAR_PATH="${3:-$PKG_NAME.tar}"
+
+[ -z "$ABE_PATH" -o ! -d "$(dirname $ABE_PATH)" ] && usage "- \$ABE_PATH is empty."
+[ -z "$ABE_RELEASE_URL" ] && usage "- \$ABE_RELEASE_URL is empty."
+
+if [ ! -f "$ABE_PATH" ]; then
+	err "installing $ABE_RELEASE_URL to $ABE_PATH."
+	curl -L "$ABE_RELEASE_URL" > $ABE_PATH || die
+fi
+
+[ -z "$PKG_NAME" ] && usage "- missing package name."
+
+function runADB {
+	err "running adb backup -f $1 $2"
+	adb backup -f "$1" "$2"
+}
+
+function runABE {
+	err "running java -jar $ABE_PATH unpack $1 $2"
+	env ABE_PASSWD=$ABE_PASSWD java -jar $ABE_PATH unpack $1 $2
+}
+
+case "$1" in
+	extract)
+		AB_PATH="$AB_DIR/$PKG_NAME.ab"
+		runADB "$AB_PATH" "$PKG_NAME" || die
+		runABE "$AB_PATH" "$TAR_PATH" || die
+		echo "$PKG_NAME backup as at $TAR_PATH"
+		;;
+	*)
+		usage
+esac

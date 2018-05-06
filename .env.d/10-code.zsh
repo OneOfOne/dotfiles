@@ -71,7 +71,7 @@ function rebuildgotools {
 	echo -------------------------------
 
 	go get -u $@ golang.org/x/... \
-		github.com/OneOfOne/gocode \
+		github.com/mdempsky/gocode \
 		github.com/uudashr/gopkgs/cmd/gopkgs \
 		github.com/ramya-rao-a/go-outline \
 		github.com/acroca/go-symbols \
