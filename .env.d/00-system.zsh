@@ -42,6 +42,8 @@ alias ports="sudo ss -nl -tup"
 
 alias pss="ps -Ao pid:5,state:1,user,cmd | grep -v grep | egrep"
 
+path=($HOME/bin $path)
+
 function mcd {
 	command mkdir -p $1 && cd $1
 }
