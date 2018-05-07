@@ -33,6 +33,7 @@ alias fgrep="fgrep --color"
 
 alias sudo="sudo "
 
+path=($HOME/.dotfiles/bin $path)
 path=($HOME/bin $path)
 
 function mcd {

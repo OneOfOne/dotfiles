@@ -1,7 +1,7 @@
 {
 	"editor.fontFamily": "Fira Code",
 	"editor.fontLigatures": true,
-	"editor.fontSize": 15,
+	"editor.fontSize": 13,
 	"editor.fontWeight": "500",
 	"editor.tabSize": 4,
 	"editor.insertSpaces": false,
@@ -108,12 +108,12 @@
 	"go.useCodeSnippetsOnFunctionSuggestWithoutType": true,
 	"go.docsTool": "gogetdoc",
 	"go.lintTool": "megacheck",
-	"go.buildFlags": ["-v"],
-	"go.testFlags": ["-v"],
+
 	"go.liveErrors": {
 		"enabled": true,
 		"delay": 200
 	},
+
 	"go.editorContextMenuCommands": {
 		"toggleTestFile": true,
 		"addTags": true,
@@ -252,16 +252,16 @@
 	"workbench.colorTheme": "Gruvbox Dark (Medium Contrast)",
 	"workbench.colorCustomizations": {
 		"[Gruvbox Dark (Medium Contrast)]": {
-			"editor.background": "#222",
-			"statusBar.background": "#333",
-			"panel.background": "#333",
-			"sideBar.background": "#222",
-			"tab.activeBackground": "#555",
-			"tab.inactiveBackground": "#333",
-			"tab.inactiveForeground": "#aaa"
+			"editor.background": "#151515",
+			"statusBar.background": "#232323",
+			"panel.background": "#232323",
+			"sideBar.background": "#151515",
+			"tab.activeBackground": "#454545",
+			"tab.inactiveBackground": "#232323",
+			"tab.inactiveForeground": "#aaa",
+			"terminal.background": "#151515"
 		}
 	},
-	"window.zoomLevel": 1,
 
 	"[css]": {
 		"editor.formatOnType": false,
@@ -303,6 +303,6 @@
 			"pre": "eslint_d --fix ${tmpFile}",
 			"post": "echo saved ${relname}",
 			"isAsync": false
-		},
+		}
 	]
 }
