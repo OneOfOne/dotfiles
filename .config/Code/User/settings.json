@@ -17,9 +17,9 @@
 	"editor.renderLineHighlight": "all",
 	"editor.renderIndentGuides": true,
 	"editor.formatOnSaveTimeout": 10000,
-	"editor.formatOnType": true,
+	"editor.formatOnPaste": false,
+	"editor.formatOnType": false,
 	"editor.formatOnSave": true,
-	"editor.formatOnPaste": true,
 	"editor.autoIndent": true,
 	"editor.dragAndDrop": false,
 	"editor.smoothScrolling": true,
@@ -27,6 +27,26 @@
 	"editor.minimap.showSlider": "always",
 	"editor.snippetSuggestions": "top",
 	"editor.codeLens": false,
+
+	"[css]": {
+		"editor.formatOnSave": false
+	},
+
+	"[javascript]": {
+		"editor.formatOnSave": false
+	},
+
+	"[javascriptreact]": {
+		"editor.formatOnSave": false
+	},
+
+	"[typescript]": {
+		"editor.formatOnSave": false
+	},
+
+	"[typescriptreact]": {
+		"editor.formatOnSave": false
+	},
 
 	"workbench.editor.enablePreview": false,
 	"workbench.editor.enablePreviewFromQuickOpen": false,
@@ -261,36 +281,6 @@
 			"tab.inactiveForeground": "#aaa",
 			"terminal.background": "#151515"
 		}
-	},
-
-	"[css]": {
-		"editor.formatOnType": false,
-		"editor.formatOnSave": false,
-		"editor.formatOnPaste": false
-	},
-
-	"[javascript]": {
-		"editor.formatOnType": false,
-		"editor.formatOnSave": false,
-		"editor.formatOnPaste": false
-	},
-
-	"[javascriptreact]": {
-		"editor.formatOnType": false,
-		"editor.formatOnSave": false,
-		"editor.formatOnPaste": false
-	},
-
-	"[typescript]": {
-		"editor.formatOnType": false,
-		"editor.formatOnSave": false,
-		"editor.formatOnPaste": false
-	},
-
-	"[typescriptreact]": {
-		"editor.formatOnType": false,
-		"editor.formatOnSave": false,
-		"editor.formatOnPaste": false
 	},
 
 	"save-runner.enabled": true,
