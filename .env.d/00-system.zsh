@@ -15,12 +15,6 @@ alias which="type -a"
 alias ..="cd .."
 alias ...="cd ../.."
 
-alias y="env PATH=/usr/bin yaourt"
-alias yup="y -Syu --aur"
-alias yr="y -Rscd"
-alias yi="y -S"
-alias ys="y -Ss"
-
 alias ls="ls -hF --group-directories-first --color"
 alias ll="ls -l --time-style='+%Y-%m-%d %H:%M'"
 alias rm="rm -i"
@@ -38,9 +32,6 @@ alias egrep="egrep --color"
 alias fgrep="fgrep --color"
 
 alias sudo="sudo "
-alias ports="sudo ss -nl -tup"
-
-alias pss="ps -Ao pid:5,state:1,user,cmd | grep -v grep | egrep"
 
 path=($HOME/bin $path)
 
