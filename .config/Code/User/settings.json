@@ -1,7 +1,7 @@
 {
 	"editor.fontFamily": "Fira Code",
 	"editor.fontLigatures": true,
-	"editor.fontSize": 13,
+	"editor.fontSize": 15,
 	"editor.fontWeight": "500",
 	"editor.tabSize": 4,
 	"editor.insertSpaces": false,
