@@ -8,6 +8,9 @@ setopt histreduceblanks
 setopt histignorespace
 setopt histignorealldups
 
+autoload -U regexp-replace
+setopt re_match_pcre
+
 zstyle ':completion:*' rehash true
 zstyle ':completion:*' completer _complete _ignored _files
 

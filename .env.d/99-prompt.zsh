@@ -6,6 +6,15 @@ function ssh_connection() {
 	fi
 }
 
+function cur_dir() {
+	local pwd=$PWD
+	regexp-replace pwd $GOPATH/src/github.com '✪'
+	regexp-replace pwd $GOPATH/src '☯'
+	regexp-replace pwd $HOME '~'
+
+	echo "${pwd}"
+}
+
 local pre_arch="$fg_bold[white]❨%{$reset_color%}"
 local post_arch="$fg_bold[white]❩%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_PREFIX="%{$reset_color%}${pre_arch}"
@@ -19,20 +28,20 @@ ZSH_THEME_GIT_PROMPT_UNSTAGED="%{$fg_bold[red]%}●"
 ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg_bold[white]%}●"
 ZSH_THEME_GIT_PROMPT_UNMERGED="%{$fg_bold[red]%}✕"
 
+export ZSH_THEME_TERM_TITLE_IDLE='$(cur_dir)'
+
 if [[ $UID -eq 0 ]]; then
-	local user_host='$fg_bold[red]%}%n%{$fg_bold[white]%}@%{$fg_bold[cyan]%}%m%{$reset_color%}'
+	local user_host='$fg_bold[red]%}%n%{$fg_bold[white]%}@%{$fg_bold[yellow]%}%m%{$reset_color%}'
 else
-	local user_host='$fg_bold[yellow]%}%n%{$fg_bold[white]%}@%{$fg_bold[cyan]%}%m%{$reset_color%}'
+	local user_host='$fg_bold[yellow]%}%n%{$fg_bold[white]%}@%{$fg_bold[yellow]%}%m%{$reset_color%}'
 fi
 
-local current_dir='${pre_arch}$fg_bold[blue]%}$(shrink_path -f -T)%{$reset_color%}${post_arch}'
-
+local cur_dir='${pre_arch}$fg_bold[cyan]%}$(cur_dir)%{$reset_color%}${post_arch}'
 local git_status='$(git_prompt_info)'
 
-PROMPT="%{$return_code%}┏━%{$reset_color%} $(ssh_connection)${user_host} ${current_dir} ${git_status} %{$return_code%}%(?..%?)
+PROMPT="%{$return_code%}┏━%{$reset_color%} $(ssh_connection)${user_host} ${cur_dir} ${git_status} %{$return_code%}%(?..%?)
 ┗━━%{$reset_color%}%B➤%b "
 RPROMPT=""
-
 
 #dcdccc
 #2c2c2c
