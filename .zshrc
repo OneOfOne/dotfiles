@@ -30,5 +30,5 @@ done
 typeset -aU path
 autoload -U compinit && compinit
 
-alias .git="git --git-dir=$HOME/code/dotfiles --work-tree=$HOME"
+alias .git="git --git-dir=$HOME/.dotfiles/.git --work-tree=$HOME/.dotfiles"
 alias _reload="source ~/.zshrc"
