@@ -44,4 +44,8 @@ function mkgit {
 	mcd $1 && git init
 }
 
-which nvim &>/dev/null && alias vim="env VTE_VERSION=100 nvim"
+if [ -x /usr/bin/nvim  ]; then
+	export VTE_VERSION=100
+	export EDITOR="/usr/bin/nvim"
+	alias vim="/usr/bin/nvim"
+fi

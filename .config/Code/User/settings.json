@@ -123,6 +123,10 @@
 	"prettier.openOutput": false,
 
 	"go.formatTool": "goimports",
+	"[go]": {
+		"editor.formatOnSave": false
+	},
+
 	"go.useCodeSnippetsOnFunctionSuggest": true,
 	"go.autocompleteUnimportedPackages": true,
 	"go.useCodeSnippetsOnFunctionSuggestWithoutType": true,
@@ -287,10 +291,18 @@
 	"save-runner.commands": [
 		{
 			"enabled": true,
-			"match": "\\.[tj]sx?$",
-			"notMatch": "/node_modules/",
+			"include": "\\.[tj]sx?$",
+			"exclude": "/node_modules/",
 			"useTempFile": true,
 			"pre": "eslint_d --fix ${tmpFile}",
+			"post": "echo saved ${relname}",
+			"isAsync": false
+		},
+		{
+			"enabled": true,
+			"include": "\\.go$",
+			"useTempFile": false,
+			"pre": "goimports",
 			"post": "echo saved ${relname}",
 			"isAsync": false
 		}
