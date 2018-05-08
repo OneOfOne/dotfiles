@@ -4,3 +4,6 @@
 [submodule ".env.d/oh-my-zsh.custom/plugins/zsh-syntax-highlighting"]
 	path = .env.d/oh-my-zsh.custom/plugins/zsh-syntax-highlighting
 	url = https://github.com/zsh-users/zsh-syntax-highlighting
+[submodule ".config/nvim/dein/repos/github.com/Shougo/dein.vim"]
+	path = .config/nvim/dein/repos/github.com/Shougo/dein.vim
+	url = https://github.com/Shougo/dein.vim
