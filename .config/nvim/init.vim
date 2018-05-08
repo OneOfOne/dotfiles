@@ -19,11 +19,14 @@ if dein#load_state('~/.config/nvim/dein')
 
 	call dein#end()
 	call dein#save_state()
+	call dein#update()
 endif
 
 syntax on
 filetype indent on
 filetype plugin indent on
+set nosmartindent
+
 colorscheme onedark
 
 set incsearch           " search as characters are entered
@@ -34,24 +37,17 @@ nnoremap <leader><space> :nohlsearch<CR>
 
 filetype plugin on
 
-if &term=="xterm"
-		 set t_Co=8
-		 set t_Sb=[4%dm
-		 set t_Sf=[3%dm
-endif
-
 " Don't wake up system with blinking cursor:
 " http://www.linuxpowertop.org/known.php
-let &guicursor = &guicursor . ",a:blinkon0"
+let &guicursor = ""
 
 set number
 set wildmenu
-set showcmd  
+set showcmd
 set cursorline
 set lazyredraw
-set showmatch 
+set showmatch
 
 set noexpandtab
 set tabstop=4
 set shiftwidth=4
-
