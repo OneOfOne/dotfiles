@@ -12,7 +12,8 @@ function cur_dir() {
 	regexp-replace pwd $GOPATH/src '☯'
 	regexp-replace pwd $HOME '~'
 
-	echo "${pwd}"
+	# https://unix.stackexchange.com/a/247008/2759
+	echo "${(j:/:)${(@r:1:)${(@s:/:)${pwd:h}}}}/${pwd:t}"
 }
 
 local pre_arch="$fg_bold[white]❨%{$reset_color%}"
