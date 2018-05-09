@@ -20,9 +20,9 @@ alias killgo="killall -9 gocode go-langserver &>/dev/null"
 
 hash -d gh="$GOPATH/src/github.com/"
 hash -d mygh="$GOPATH/src/github.com/OneOfOne/"
-hash -d meteora="$GOPATH/src/github.com/missionMeteora/" 
-hash -d swayops="$GOPATH/src/github.com/swayops/" 
-hash -d pdna="$GOPATH/src/github.com/PathDNA/" 
+hash -d meteora="$GOPATH/src/github.com/missionMeteora/"
+hash -d swayops="$GOPATH/src/github.com/swayops/"
+hash -d pdna="$GOPATH/src/github.com/PathDNA/"
 
 function setgo {
 	local v="$1"
@@ -34,7 +34,7 @@ function setgo {
 	[ "$v" = "tip" -o "$v" = "master" ] && v=""
 
 	local p="/usr/src/go$v/bin/"
-	
+
 	if [ ! -d "$p" ]; then
 		_err "$p doesn't exist."
 		return 1
@@ -49,7 +49,7 @@ function setgo {
 function rebuildgo {
 	local v="$1"
 	pushd "/usr/src/go$v/src" >/dev/null
-	trap "popd >/dev/null" RETURN
+	trap "popd >/dev/null" EXIT
 	rm -rf ../pkg ../bin $GOPATH/pkg &>/dev/null
 
 	git reset --hard || return 1
@@ -70,7 +70,10 @@ function rebuildgotools {
 	echo using $(go version)
 	echo -------------------------------
 
-	go get -u $@ golang.org/x/... \
+	go clean -r -cache -testcache
+
+	go get -u $@ \
+		golang.org/x/... \
 		github.com/mdempsky/gocode \
 		github.com/uudashr/gopkgs/cmd/gopkgs \
 		github.com/ramya-rao-a/go-outline \

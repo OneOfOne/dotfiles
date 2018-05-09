@@ -52,3 +52,7 @@ if [ -x /usr/bin/nvim  ]; then
 	export EDITOR="/usr/bin/nvim"
 	alias vim="/usr/bin/nvim"
 fi
+
+function _err {
+	echo $@ >/dev/stderr
+}

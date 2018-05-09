@@ -53,7 +53,7 @@
 	"workbench.editor.closeOnFileDelete": false,
 	"workbench.startupEditor": "newUntitledFile",
 
-	"window.menuBarVisibility": "visible",
+	"window.menuBarVisibility": "toggle",
 	"window.openFilesInNewWindow": "on",
 	"window.newWindowDimensions": "maximized",
 	"window.restoreWindows": "none",
