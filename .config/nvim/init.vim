@@ -19,7 +19,7 @@ if dein#load_state('~/.config/nvim/dein')
 
 	call dein#end()
 	call dein#save_state()
-	call dein#update()
+	"call dein#update()
 endif
 
 syntax on

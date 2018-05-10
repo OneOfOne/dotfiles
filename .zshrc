@@ -34,5 +34,5 @@ autoload -U compinit && compinit
 ttyctl -f # fix annoying apps that don't exit right
 
 alias .git="git --git-dir=$HOME/.dotfiles/.git --work-tree=$HOME/.dotfiles"
-alias .gitup=".git submodule update --recursive --remote --checkout"
+alias .gitup="git --git-dir=$HOME/.dotfiles/.git --work-tree=$HOME/.dotfiles submodule update --recursive --remote --checkout"
 alias _reload="source ~/.zshrc"
