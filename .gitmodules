@@ -7,3 +7,6 @@
 [submodule ".config/nvim/dein/repos/github.com/Shougo/dein.vim"]
 	path = .config/nvim/dein/repos/github.com/Shougo/dein.vim
 	url = https://github.com/Shougo/dein.vim
+[submodule ".env.d/oh-my-zsh.custom/plugins/resty"]
+	path = .env.d/oh-my-zsh.custom/plugins/resty
+	url = https://github.com/micha/resty

@@ -40,8 +40,10 @@ fi
 local cur_dir='${pre_arch}$fg_bold[cyan]%}$(cur_dir)%{$reset_color%}${post_arch}'
 local git_status='$(git_prompt_info)'
 
+[ ! -z "_RESTY_HOST" ] && local resty_prompt='${pre_arch}$fg_bold[cyan]%}RESTY%{$reset_color%}${post_arch}'
+
 PROMPT="%{$return_code%}┏━%{$reset_color%} $(ssh_connection)${user_host} ${cur_dir} ${git_status} %{$return_code%}%(?..%?)
-┗━━%{$reset_color%}%B➤%b "
+┗━━%{$reset_color%}%B${resty_prompt}➤%b "
 RPROMPT=""
 
 #dcdccc
