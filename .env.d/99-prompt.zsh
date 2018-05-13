@@ -11,9 +11,16 @@ function cur_dir() {
 	regexp-replace pwd $GOPATH/src/github.com '✪'
 	regexp-replace pwd $GOPATH/src '☯'
 	regexp-replace pwd $HOME '~'
-
+	if [ "$pwd" = "~" ]; then
+		echo "$pwd"
+		return
+	fi
 	# https://unix.stackexchange.com/a/247008/2759
 	echo "${(j:/:)${(@r:1:)${(@s:/:)${pwd:h}}}}/${pwd:t}"
+}
+
+function in_resty() {
+	[ ! -z "$_RESTY_HOST" -a "$_RESTY_HOST" != 'http://*' ] && echo "${pre_arch}$fg_bold[cyan]%}RESTY%{$reset_color%}${post_arch}"
 }
 
 local pre_arch="$fg_bold[white]❨%{$reset_color%}"
@@ -40,7 +47,7 @@ fi
 local cur_dir='${pre_arch}$fg_bold[cyan]%}$(cur_dir)%{$reset_color%}${post_arch}'
 local git_status='$(git_prompt_info)'
 
-[ ! -z "_RESTY_HOST" ] && local resty_prompt='${pre_arch}$fg_bold[cyan]%}RESTY%{$reset_color%}${post_arch}'
+local resty_prompt='$(in_resty)'
 
 PROMPT="%{$return_code%}┏━%{$reset_color%} $(ssh_connection)${user_host} ${cur_dir} ${git_status} %{$return_code%}%(?..%?)
 ┗━━%{$reset_color%}%B${resty_prompt}➤%b "

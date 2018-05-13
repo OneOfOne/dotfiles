@@ -5,13 +5,10 @@
 	"editor.fontWeight": "500",
 	"editor.tabSize": 4,
 	"editor.insertSpaces": false,
-	"editor.quickSuggestionsDelay": 50,
-	"editor.quickSuggestions": {
-		"other": true,
-		"comments": true,
-		"strings": false
-	},
-	"editor.rulers": [140],
+	"editor.quickSuggestionsDelay": 150,
+	"editor.rulers": [80, 140],
+	"editor.wordWrapColumn": 140,
+	"editor.wordWrap": "bounded",
 	"editor.cursorBlinking": "solid",
 	"editor.renderWhitespace": "boundary",
 	"editor.renderLineHighlight": "all",
@@ -25,7 +22,8 @@
 	"editor.smoothScrolling": true,
 	"editor.minimap.renderCharacters": false,
 	"editor.minimap.showSlider": "always",
-	"editor.snippetSuggestions": "top",
+	"editor.snippetSuggestions": "inline",
+	"editor.codeActionsOnSaveTimeout": 3000,
 	"editor.codeLens": false,
 
 	"[css]": {
@@ -50,10 +48,25 @@
 
 	"workbench.editor.enablePreview": false,
 	"workbench.editor.enablePreviewFromQuickOpen": false,
-	"workbench.editor.closeOnFileDelete": false,
 	"workbench.startupEditor": "newUntitledFile",
+	"workbench.iconTheme": "material-icon-theme",
+	"workbench.list.multiSelectModifier": "ctrlCmd",
+	"workbench.colorTheme": "Gruvbox Dark (Medium Contrast)",
+	"workbench.colorCustomizations": {
+		"[Gruvbox Dark (Medium Contrast)]": {
+			"editor.background": "#151515",
+			"statusBar.background": "#232323",
+			"panel.background": "#232323",
+			"sideBar.background": "#151515",
+			"tab.activeBackground": "#454545",
+			"tab.inactiveBackground": "#232323",
+			"tab.inactiveForeground": "#aaa",
+			"terminal.background": "#151515"
+		}
+	},
+	"material-icon-theme.showUpdateMessage": false,
 
-	"window.menuBarVisibility": "toggle",
+	"window.menuBarVisibility": "default",
 	"window.openFilesInNewWindow": "on",
 	"window.newWindowDimensions": "maximized",
 	"window.restoreWindows": "none",
@@ -128,8 +141,8 @@
 	},
 
 	"go.useCodeSnippetsOnFunctionSuggest": true,
-	"go.autocompleteUnimportedPackages": true,
 	"go.useCodeSnippetsOnFunctionSuggestWithoutType": true,
+	"go.autocompleteUnimportedPackages": true,
 	"go.docsTool": "gogetdoc",
 	"go.lintTool": "megacheck",
 
@@ -271,22 +284,6 @@
 	"telemetry.enableTelemetry": false,
 	"telemetry.enableCrashReporter": false,
 	"gitlens.advanced.telemetry.enabled": false,
-
-	"workbench.iconTheme": "material-icon-theme",
-	"material-icon-theme.showUpdateMessage": false,
-	"workbench.colorTheme": "Gruvbox Dark (Medium Contrast)",
-	"workbench.colorCustomizations": {
-		"[Gruvbox Dark (Medium Contrast)]": {
-			"editor.background": "#151515",
-			"statusBar.background": "#232323",
-			"panel.background": "#232323",
-			"sideBar.background": "#151515",
-			"tab.activeBackground": "#454545",
-			"tab.inactiveBackground": "#232323",
-			"tab.inactiveForeground": "#aaa",
-			"terminal.background": "#151515"
-		}
-	},
 
 	"save-runner.enabled": true,
 	"save-runner.commands": [

@@ -40,7 +40,7 @@ path=($HOME/.dotfiles/bin $path)
 path=($HOME/bin $path)
 
 function mcd {
-	command mkdir -p $1 && cd $1
+	command mkdir -p $1 && pushd $1 >/dev/null
 }
 
 function mkgit {
