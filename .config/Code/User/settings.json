@@ -172,7 +172,8 @@
 		"transform": "camelcase"
 	},
 	"go.coverageDecorator": "gutter",
-	"go.useLanguageServer": false,
+	"go.coverOnSingleTest": true,
+	"go.useLanguageServer": true,
 
 	"html.format.unformatted": "p, a, abbr, acronym, b, bdo, big, br, button, cite, code, dfn, em, i, img, input, kbd, label, map, object, q, samp, select, small, span, strong, sub, sup, textarea, tt, var",
 	"html.format.endWithNewline": true,
@@ -297,7 +298,7 @@
 			"isAsync": false
 		},
 		{
-			"enabled": true,
+			"enabled": false,
 			"include": "\\.go$",
 			"useTempFile": false,
 			"pre": "goimports",

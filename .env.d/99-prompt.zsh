@@ -15,8 +15,9 @@ function cur_dir() {
 		echo "$pwd"
 		return
 	fi
+
 	# https://unix.stackexchange.com/a/247008/2759
-	echo "${(j:/:)${(@r:1:)${(@s:/:)${pwd:h}}}}/${pwd:t}"
+	echo $pwd | sed 's!\([^/]\)[^/]*/!\1/!g'
 }
 
 function in_resty() {
@@ -49,8 +50,7 @@ local git_status='$(git_prompt_info)'
 
 local resty_prompt='$(in_resty)'
 
-PROMPT="%{$return_code%}┏━%{$reset_color%} $(ssh_connection)${user_host} ${cur_dir} ${git_status} %{$return_code%}%(?..%?)
-┗━━%{$reset_color%}%B${resty_prompt}➤%b "
+PROMPT="%{$reset_color%} $(ssh_connection)${user_host} ${cur_dir} ${git_status} %{$reset_color%}%B${resty_prompt}%{$return_code%}%(?..%?)━➤%b "
 RPROMPT=""
 
 #dcdccc
