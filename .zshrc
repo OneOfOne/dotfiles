@@ -18,7 +18,6 @@ plugins=(
 	git
 	gitfast
 	zsh-syntax-highlighting
-	resty
 )
 
 

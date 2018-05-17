@@ -1,8 +1,16 @@
-local return_code="%(?..%{$fg_bold[red]%})"
+local FG_RED="%{$fg_bold[red]%}"
+local FG_WHITE="%{$fg_bold[white]%}"
+local FG_YELLOW="%{$fg_bold[yellow]%}"
+local FG_CYAN="%{$fg_bold[cyan]%}"
+local FG_RESET="%{$reset_color%}"
+local LEFT_ARCH="$FG_WHITE❰$FG_RESET"
+local RIGHT_ARCH="$FG_WHITE❱$FG_RESET"
+
+local LAST_RET="%(?..$LEFT_ARCH$FG_RED%?$RIGHT_ARCH━)"
 
 function ssh_connection() {
 	if [[ -n $SSH_CONNECTION ]]; then
-		echo "%{$fg_bold[red]%}(ssh):"
+		echo "$FG_RED(ssh)$FG_WHITE:"
 	fi
 }
 
@@ -20,37 +28,30 @@ function cur_dir() {
 	echo $pwd | sed 's!\([^/]\)[^/]*/!\1/!g'
 }
 
-function in_resty() {
-	[ ! -z "$_RESTY_HOST" -a "$_RESTY_HOST" != 'http://*' ] && echo "${pre_arch}$fg_bold[cyan]%}RESTY%{$reset_color%}${post_arch}"
-}
-
-local pre_arch="$fg_bold[white]❨%{$reset_color%}"
-local post_arch="$fg_bold[white]❩%{$reset_color%}"
-ZSH_THEME_GIT_PROMPT_PREFIX="%{$reset_color%}${pre_arch}"
-ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}${post_arch}"
-ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg_bold[yellow]%} ⚡%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_PREFIX="$FG_RESET${LEFT_ARCH}"
+ZSH_THEME_GIT_PROMPT_SUFFIX="$FG_RESET${RIGHT_ARCH}"
+ZSH_THEME_GIT_PROMPT_DIRTY="$FG_YELLOW ⚡$FG_RESET"
 ZSH_THEME_GIT_PROMPT_CLEAN=""
 
 ZSH_THEME_GIT_PROMPT_AHEAD="%{$fg_bold[magenta]%}↑"
 ZSH_THEME_GIT_PROMPT_STAGED="%{$fg_bold[green]%}●"
-ZSH_THEME_GIT_PROMPT_UNSTAGED="%{$fg_bold[red]%}●"
-ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg_bold[white]%}●"
-ZSH_THEME_GIT_PROMPT_UNMERGED="%{$fg_bold[red]%}✕"
+ZSH_THEME_GIT_PROMPT_UNSTAGED="$FG_RED●"
+ZSH_THEME_GIT_PROMPT_UNTRACKED="$FG_WHITE●"
+ZSH_THEME_GIT_PROMPT_UNMERGED="$FG_RED✕"
 
 export ZSH_THEME_TERM_TITLE_IDLE='$(cur_dir)'
 
 if [[ $UID -eq 0 ]]; then
-	local user_host='$fg_bold[red]%}%n%{$fg_bold[white]%}@%{$fg_bold[yellow]%}%m%{$reset_color%}'
+	local user_host='$FG_RED%n$FG_WHITE@$FG_YELLOW%m$FG_RESET'
 else
-	local user_host='$fg_bold[yellow]%}%n%{$fg_bold[white]%}@%{$fg_bold[yellow]%}%m%{$reset_color%}'
+	local user_host='$FG_YELLOW%n$FG_WHITE@$FG_YELLOW%m$FG_RESET'
 fi
 
-local cur_dir='${pre_arch}$fg_bold[cyan]%}$(cur_dir)%{$reset_color%}${post_arch}'
+local cur_dir='${LEFT_ARCH}$FG_CYAN$(cur_dir)$FG_RESET${RIGHT_ARCH}'
 local git_status='$(git_prompt_info)'
 
-local resty_prompt='$(in_resty)'
-
-PROMPT="%{$reset_color%} $(ssh_connection)${user_host} ${cur_dir} ${git_status} %{$reset_color%}%B${resty_prompt}%{$return_code%}%(?..%?)━➤%b "
+PROMPT="$FG_WHITE┏━ $FG_RESET$(ssh_connection)$user_host $cur_dir $git_status
+┗━$LAST_RET$FG_WHITE●$FG_RESET "
 RPROMPT=""
 
 #dcdccc
