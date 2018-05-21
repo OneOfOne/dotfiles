@@ -25,16 +25,25 @@ alias mv="mv -i"
 alias cp="cp --reflink=auto --sparse=always -ia"
 
 alias mkdir="mkdir -pv"
-alias psg="ps aux | grep -v grep | grep -i -e VSZ -e"
 alias df="df -Tha --total"
 alias duh="du -ach | sort -h"
-alias myip="curl http://ipecho.net/plain; echo"
+alias myip="curl -s -S https://icanhazip.com"
 
 alias grep="grep --color"
 alias egrep="egrep --color"
 alias fgrep="fgrep --color"
 
 alias sudo="sudo "
+
+alias ports="sudo ss -nl -tup"
+alias pss="ps -Ao pid:5,state:1,user,cmd | grep -v grep | egrep"
+alias psg="ps aux | grep -v grep | grep -i -e VSZ -e"
+
+alias psmem='ps -e -orss=,args= | sort -b -k1,1n'
+alias psmem10='ps -e -orss=,args= | sort -b -k1,1n| head -10'
+# get top process eating cpu if not work try excute : export LC_ALL='C'
+alias pscpu='ps -e -o pcpu,cpu,nice,state,cputime,args|sort -k1 -nr'
+alias pscpu10='ps -e -o pcpu,cpu,nice,state,cputime,args|sort -k1 -nr | head -10'
 
 path=($HOME/.dotfiles/bin $path)
 path=($HOME/bin $path)

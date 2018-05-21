@@ -13,10 +13,9 @@ ZSH_CUSTOM="$ZSH.custom/"
 
 plugins=(
 	common-aliases
+	docker-compose
 	systemd
-	shrink-path
-	git
-	gitfast
+	git-prompt
 	zsh-syntax-highlighting
 )
 

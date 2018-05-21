@@ -27,17 +27,9 @@ function cur_dir() {
 	# https://unix.stackexchange.com/a/247008/2759
 	echo $pwd | sed 's!\([^/]\)[^/]*/!\1/!g'
 }
-
-ZSH_THEME_GIT_PROMPT_PREFIX="$FG_RESET${LEFT_ARCH}"
-ZSH_THEME_GIT_PROMPT_SUFFIX="$FG_RESET${RIGHT_ARCH}"
-ZSH_THEME_GIT_PROMPT_DIRTY="$FG_YELLOW ⚡$FG_RESET"
-ZSH_THEME_GIT_PROMPT_CLEAN=""
-
-ZSH_THEME_GIT_PROMPT_AHEAD="%{$fg_bold[magenta]%}↑"
-ZSH_THEME_GIT_PROMPT_STAGED="%{$fg_bold[green]%}●"
-ZSH_THEME_GIT_PROMPT_UNSTAGED="$FG_RED●"
-ZSH_THEME_GIT_PROMPT_UNTRACKED="$FG_WHITE●"
-ZSH_THEME_GIT_PROMPT_UNMERGED="$FG_RED✕"
+ZSH_THEME_GIT_PROMPT_PREFIX="$LEFT_ARCH"
+ZSH_THEME_GIT_PROMPT_SUFFIX="$RIGHT_ARCH"
+ZSH_THEME_GIT_PROMPT_BRANCH="%{$fg_bold[yellow]%}"
 
 export ZSH_THEME_TERM_TITLE_IDLE='$(cur_dir)'
 
@@ -48,11 +40,11 @@ else
 fi
 
 local cur_dir='${LEFT_ARCH}$FG_CYAN$(cur_dir)$FG_RESET${RIGHT_ARCH}'
-local git_status='$(git_prompt_info)'
+local git_status='$(git_super_status)'
 
 PROMPT="$FG_WHITE┏━ $FG_RESET$(ssh_connection)$user_host $cur_dir $git_status
 ┗━$LAST_RET$FG_WHITE●$FG_RESET "
-RPROMPT=""
+RPROMPT=''
 
 #dcdccc
 #2c2c2c

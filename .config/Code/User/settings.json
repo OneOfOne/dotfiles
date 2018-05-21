@@ -6,7 +6,7 @@
 	"editor.tabSize": 4,
 	"editor.insertSpaces": false,
 	"editor.quickSuggestionsDelay": 150,
-	"editor.rulers": [80, 140],
+	"editor.rulers": [140],
 	"editor.wordWrapColumn": 140,
 	"editor.wordWrap": "bounded",
 	"editor.cursorBlinking": "solid",
@@ -260,6 +260,7 @@
 	"git.confirmSync": false,
 	"git.enableSmartCommit": true,
 	"git.enableCommitSigning": true,
+	"git.autoRepositoryDetection": false,
 
 	"gitlens.codeLens.enabled": false,
 	"gitlens.advanced.messages": {
@@ -289,21 +290,18 @@
 	"save-runner.enabled": true,
 	"save-runner.commands": [
 		{
-			"enabled": true,
+			"enabled": false,
 			"include": "\\.[tj]sx?$",
 			"exclude": "/node_modules/",
-			"useTempFile": true,
 			"pre": "eslint_d --fix ${tmpFile}",
 			"post": "echo saved ${relname}",
-			"isAsync": false
 		},
 		{
 			"enabled": false,
 			"include": "\\.go$",
 			"useTempFile": false,
 			"pre": "goimports",
-			"post": "echo saved ${relname}",
-			"isAsync": false
+			"post": "echo saved ${relname}"
 		}
 	]
 }
