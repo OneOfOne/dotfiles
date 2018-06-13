@@ -52,16 +52,16 @@
 	master = !git checkout master && git pull
 	merge-master = !git fetch origin master && git merge origin/master -m 'master sync'
 	stash-and-merge = !git stash && git merge-master && git stash apply
-	stash-and-pull = !git stash && git pull && git stash apply
+	stash-and-pull = !git stash && git pull && git stash pop
 	new-branch = !git master && git checkout -b
-	sam = stash-and-merge
-	sap = stash-and-pull
-	nb = new-branch
+	sam = !git stash-and-merge
+	sap = !git stash-and-pull
+	nb = !git new-branch
 
 	grep-all = "!f() { git grep -ni $@ `git for-each-ref --format='%(refname)' refs/` | perl -pe 's@refs/[^/]+/@@g'; }; f"
 	g = grep --break --heading --line-number
 
-	list-old-branches = !git branch --merged | perl -ne 'print unless /master|dev/'
+	list-old-branches = "!git branch --merged | perl -ne 's/^\\*\\s+//g; print unless /master|dev/'"
 
 	delete-merged-branches = !git branch -d $(git list-old-branches)
 

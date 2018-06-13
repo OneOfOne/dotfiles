@@ -1,6 +1,6 @@
 
 
-alias am="sudo -u aur env -i PATH=/usr/bin HOME=/var/tmp aurman"
+alias am="sudo -u aur env -i PATH=/usr/bin HOME=/tmp/aurman LANG=en_US.UTF-8 aurman"
 alias amup="am -Syu"
 alias amr="am -Rscd"
 alias ami="am -S"

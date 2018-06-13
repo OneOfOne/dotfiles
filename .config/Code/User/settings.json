@@ -8,7 +8,7 @@
 	"editor.quickSuggestionsDelay": 150,
 	"editor.rulers": [140],
 	"editor.wordWrapColumn": 140,
-	"editor.wordWrap": "bounded",
+	"editor.wordWrap": "off",
 	"editor.cursorBlinking": "solid",
 	"editor.renderWhitespace": "boundary",
 	"editor.renderLineHighlight": "all",
@@ -50,7 +50,7 @@
 	"workbench.editor.enablePreviewFromQuickOpen": false,
 	"workbench.startupEditor": "newUntitledFile",
 	"workbench.iconTheme": "material-icon-theme",
-	"workbench.list.multiSelectModifier": "ctrlCmd",
+	"workbench.list.multiSelectModifier": "alt",
 	"workbench.colorTheme": "Gruvbox Dark (Medium Contrast)",
 	"workbench.colorCustomizations": {
 		"[Gruvbox Dark (Medium Contrast)]": {
@@ -83,7 +83,8 @@
 	"files.associations": {
 		"*.mustache": "html",
 		"*.user": "json",
-		".tslintrc": "jsonc"
+		".tslintrc": "jsonc",
+		"*.json": "jsonc"
 	},
 	"files.exclude": {
 		"**/.git": true,
@@ -137,15 +138,15 @@
 
 	"go.formatTool": "goimports",
 	"[go]": {
-		"editor.formatOnSave": true
+		"editor.formatOnSave": false
 	},
 
 	"go.useCodeSnippetsOnFunctionSuggest": true,
 	"go.useCodeSnippetsOnFunctionSuggestWithoutType": true,
 	"go.autocompleteUnimportedPackages": true,
 	"go.docsTool": "gogetdoc",
-	"go.lintTool": "megacheck",
-
+	"go.lintTool": "golangci-lint",
+	"go.lintFlags": ["-D", "errcheck"],
 	"go.liveErrors": {
 		"enabled": true,
 		"delay": 200
@@ -171,9 +172,16 @@
 		"promptForTags": false,
 		"transform": "camelcase"
 	},
-	"go.coverageDecorator": "gutter",
+	"go.coverageDecorator": {
+		"type": "gutter"
+	},
 	"go.coverOnSingleTest": true,
-	"go.useLanguageServer": true,
+
+	"go.useLanguageServer": false,
+	"go.languageServerExperimentalFeatures": {
+		"format": false,
+		"autoComplete": false
+	},
 
 	"html.format.unformatted": "p, a, abbr, acronym, b, bdo, big, br, button, cite, code, dfn, em, i, img, input, kbd, label, map, object, q, samp, select, small, span, strong, sub, sup, textarea, tt, var",
 	"html.format.endWithNewline": true,
@@ -293,15 +301,13 @@
 			"enabled": false,
 			"include": "\\.[tj]sx?$",
 			"exclude": "/node_modules/",
-			"pre": "eslint_d --fix ${tmpFile}",
-			"post": "echo saved ${relname}",
+			"pre": "eslint_d --fix ${tmpFile}"
 		},
 		{
-			"enabled": false,
+			"enabled": true,
 			"include": "\\.go$",
 			"useTempFile": false,
-			"pre": "goimports",
-			"post": "echo saved ${relname}"
+			"pre": "goimports"
 		}
 	]
 }
