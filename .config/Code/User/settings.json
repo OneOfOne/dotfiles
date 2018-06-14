@@ -286,6 +286,31 @@
 	"gitlens.keymap": "none",
 	"gitlens.statusBar.reduceFlicker": true,
 	"gitlens.historyExplorer.enabled": true,
+	"gitlens.mode.active": "review",
+	"gitlens.settings.mode": "advanced",
+	"gitlens.menus": {
+		"editor": false,
+		"editorGroup": {
+			"blame": true,
+			"compare": true,
+			"history": false,
+			"remote": false
+		},
+		"editorTab": {
+			"compare": false,
+			"history": true,
+			"remote": true
+		},
+		"explorer": {
+			"compare": true,
+			"history": true,
+			"remote": true
+		}
+	},
+	"gitlens.gitExplorer.files.layout": "list",
+	"gitlens.gitExplorer.branches.layout": "list",
+	"gitlens.historyExplorer.location": "scm",
+	"gitlens.mode.statusBar.enabled": false,
 
 	"extensions.autoUpdate": true,
 	"extensions.showRecommendationsOnlyOnDemand": true,
