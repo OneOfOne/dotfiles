@@ -51,22 +51,27 @@
 	"workbench.startupEditor": "newUntitledFile",
 	"workbench.iconTheme": "material-icon-theme",
 	"workbench.list.multiSelectModifier": "alt",
-	"workbench.colorTheme": "Gruvbox Dark (Medium Contrast)",
+	"workbench.colorTheme": "Night Owl",
 	"workbench.colorCustomizations": {
-		"[Gruvbox Dark (Medium Contrast)]": {
-			"editor.background": "#151515",
-			"statusBar.background": "#232323",
-			"panel.background": "#232323",
-			"sideBar.background": "#151515",
-			"tab.activeBackground": "#454545",
-			"tab.inactiveBackground": "#232323",
-			"tab.inactiveForeground": "#aaa",
-			"terminal.background": "#151515"
+		"[Night Owl]": {
+			"activityBar.background": "#000C1D",
+			"activityBar.border": "#102a44",
+			"sideBar.background": "#001122",
+			"sideBar.border": "#102a44",
+			"sideBar.foreground": "#8BADC1"
 		}
 	},
 	"material-icon-theme.showUpdateMessage": false,
+	"material-icon-theme.showReloadMessage": false,
+	"material-icon-theme.showWelcomeMessage": false,
+	"material-icon-theme.hidesExplorerArrows": true,
+	"material-icon-theme.opacity": 0.5,
 
-	"window.menuBarVisibility": "default",
+	"bracketPairColorizer.forceIterationColorCycle": true,
+	"bracketPairColorizer.showHorizontalScopeLine": false,
+	"bracketPairColorizer.consecutivePairColors": ["()", "[]", "{}", ["Gold", "Aqua", "Green"], "Red"],
+
+	"window.menuBarVisibility": "toggle",
 	"window.openFilesInNewWindow": "on",
 	"window.newWindowDimensions": "maximized",
 	"window.restoreWindows": "none",
