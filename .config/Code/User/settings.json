@@ -5,10 +5,9 @@
 	"editor.fontWeight": "500",
 	"editor.tabSize": 4,
 	"editor.insertSpaces": false,
-	"editor.quickSuggestionsDelay": 150,
+	"editor.quickSuggestionsDelay": 200,
 	"editor.rulers": [140],
 	"editor.wordWrapColumn": 140,
-	"editor.wordWrap": "off",
 	"editor.cursorBlinking": "solid",
 	"editor.renderWhitespace": "boundary",
 	"editor.renderLineHighlight": "all",
@@ -22,9 +21,13 @@
 	"editor.smoothScrolling": true,
 	"editor.minimap.renderCharacters": false,
 	"editor.minimap.showSlider": "always",
-	"editor.snippetSuggestions": "inline",
 	"editor.codeActionsOnSaveTimeout": 3000,
+	"editor.minimap.maxColumn": 140,
+	"editor.snippetSuggestions": "bottom",
+	"editor.hover.delay": 200,
 	"editor.codeLens": false,
+
+	"breadcrumbs.enabled": true,
 
 	"[css]": {
 		"editor.formatOnSave": false
@@ -49,17 +52,33 @@
 	"workbench.editor.enablePreview": false,
 	"workbench.editor.enablePreviewFromQuickOpen": false,
 	"workbench.startupEditor": "newUntitledFile",
-	"workbench.iconTheme": "material-icon-theme",
+	"workbench.iconTheme": "eq-material-theme-icons-darker",
 	"workbench.list.multiSelectModifier": "alt",
-	"workbench.colorTheme": "Night Owl",
+	"workbench.colorTheme": "Gotham",
+	"workbench.settings.enableNaturalLanguageSearch": false,
+	"workbench.settings.editor": "json",
+
+	"materialTheme.accent": "Yellow",
+	"editor.tokenColorCustomizations": {
+		"comments": "#afafaf88"
+	},
 	"workbench.colorCustomizations": {
-		"[Night Owl]": {
-			"activityBar.background": "#000C1D",
-			"activityBar.border": "#102a44",
-			"sideBar.background": "#001122",
-			"sideBar.border": "#102a44",
-			"sideBar.foreground": "#8BADC1"
-		}
+		"badge.background": "#323232",
+		"badge.foreground": "#fff",
+		"activityBarBadge.background": "#FFA000",
+		"list.activeSelectionForeground": "#FFA000",
+		"list.inactiveSelectionForeground": "#FFA000",
+		"list.highlightForeground": "#FFA000",
+		"scrollbarSlider.activeBackground": "#FFA00050",
+		"editorSuggestWidget.highlightForeground": "#FFA000",
+		"textLink.foreground": "#FFA000",
+		"progressBar.background": "#FFA000",
+		"pickerGroup.foreground": "#FFA000",
+		"tab.activeBorder": "#FFA000",
+		"notificationLink.foreground": "#FFA000",
+		"editorWidget.resizeBorder": "#FFA000",
+		"editorWidget.border": "#FFA000",
+		"panelTitle.activeBorder": "#FFA000"
 	},
 	"material-icon-theme.showUpdateMessage": false,
 	"material-icon-theme.showReloadMessage": false,
@@ -76,13 +95,18 @@
 	"window.newWindowDimensions": "maximized",
 	"window.restoreWindows": "none",
 	"window.closeWhenEmpty": true,
+	"window.zoomLevel": 0,
 
 	"terminal.integrated.shell.linux": "/bin/zsh",
 	"terminal.external.linuxExec": "konsole",
 	"terminal.integrated.copyOnSelection": true,
+	"terminal.integrated.fontWeight": "500",
+	"terminal.integrated.enableBell": true,
 
 	"files.insertFinalNewline": true,
 	"files.trimTrailingWhitespace": true,
+	"files.trimFinalNewlines": true,
+	"files.useExperimentalFileWatcher": true,
 	"files.encoding": "utf8",
 	"files.autoSave": "onFocusChange",
 	"files.associations": {
@@ -112,6 +136,7 @@
 		"node_modules": true
 	},
 	"search.quickOpen.includeSymbols": true,
+	"debug.inlineValues": true,
 
 	"typescript.useCodeSnippetsOnMethodSuggest": true,
 	"typescript.referencesCodeLens.enabled": false,
@@ -149,7 +174,8 @@
 	"go.useCodeSnippetsOnFunctionSuggest": true,
 	"go.useCodeSnippetsOnFunctionSuggestWithoutType": true,
 	"go.autocompleteUnimportedPackages": true,
-	"go.docsTool": "gogetdoc",
+	"go.gocodeAutoBuild": true,
+	"go.docsTool": "guru",
 	"go.lintTool": "golangci-lint",
 	"go.lintFlags": ["-D", "errcheck"],
 	"go.liveErrors": {

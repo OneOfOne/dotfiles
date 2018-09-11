@@ -18,6 +18,10 @@ if [ "$1" = "update-vsc" ]; then
 	rm -rf VSCode-linux-x64.previous &>/dev/null
 	mv VSCode-linux-x64 VSCode-linux-x64.previous &>/dev/null
 	mv $tmp/VSCode-linux-x64 .
+
+	# patchelf --set-interpreter /usr/share/skypeforlinux/glibc/usr/lib/ld-linux-x86-64.so.2 /usr/src/VSCode-linux-x64/code
+	# patchelf --set-rpath /usr/src/VSCode-linux-x64/code:/usr/share/skypeforlinux/glibc/usr/lib /usr/src/VSCode-linux-x64/code
+
 	exit 0
 fi
 

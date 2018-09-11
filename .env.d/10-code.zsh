@@ -8,7 +8,7 @@ path=($GOBIN $path)
 for gv in $(command ls /usr/src/ | egrep '^go'); do
 	name="${gv/./}"
 	[ "$name" = "go" ] && name="gotip"
-	alias $name="/usr/src/$gv/bin/go"
+	alias $name="env GO111MODULE=off /usr/src/$gv/bin/go"
 done
 
 unset gv name
@@ -45,6 +45,8 @@ function setgo {
 	go clean -cache -testcache &>/dev/null
 	go version
 }
+
+alias setgomod="export GO111MODULE=on"
 
 function rebuildgo {
 	local v="$1"
