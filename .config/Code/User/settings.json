@@ -167,6 +167,7 @@
 	"prettier.openOutput": false,
 
 	"go.formatTool": "goimports",
+	"go.buildOnSave": "package",
 	"[go]": {
 		"editor.formatOnSave": false
 	},
@@ -365,5 +366,6 @@
 			"useTempFile": false,
 			"pre": "goimports"
 		}
-	]
+	],
+	"terminal.integrated.rendererType": "dom"
 }

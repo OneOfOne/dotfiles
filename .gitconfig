@@ -51,9 +51,9 @@
 
 	master = !git checkout master && git pull
 	merge-master = !git fetch origin master && git merge origin/master -m 'master sync'
-	stash-and-merge = !git stash && git merge-master && git stash apply
+	stash-and-merge = !git stash && git merge-master && git stash pop
 	stash-and-pull = !git stash && git pull && git stash pop
-	new-branch = "!f() { git stash && git checkout -b $@ && git stash pop; }; f"
+	new-branch = "!f() { git stash &>/dev/null ; git checkout -b $@ && git stash pop &>/dev/null; }; f"
 	sam = !git stash-and-merge
 	sap = !git stash-and-pull
 	nb = !git new-branch

@@ -20,6 +20,7 @@ alias killgo="killall -9 gocode go-langserver &>/dev/null"
 
 hash -d gh="$GOPATH/src/github.com/"
 hash -d mygh="$GOPATH/src/github.com/OneOfOne/"
+hash -d ooo="$GOPATH/src/oneofone.net/"
 hash -d meteora="$GOPATH/src/github.com/missionMeteora/"
 hash -d swayops="$GOPATH/src/github.com/swayops/"
 hash -d pdna="$GOPATH/src/github.com/PathDNA/"
@@ -46,7 +47,8 @@ function setgo {
 	go version
 }
 
-alias setgomod="export GO111MODULE=on"
+alias setgomod="export GO111MODULE=on; killgo"
+alias unsetgomod="export GO111MODULE=off; killgo"
 
 function rebuildgo {
 	local v="$1"
