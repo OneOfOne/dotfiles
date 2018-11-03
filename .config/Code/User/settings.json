@@ -52,12 +52,12 @@
 	"workbench.editor.enablePreview": false,
 	"workbench.editor.enablePreviewFromQuickOpen": false,
 	"workbench.startupEditor": "newUntitledFile",
-	"workbench.iconTheme": "eq-material-theme-icons-darker",
 	"workbench.list.multiSelectModifier": "alt",
-	"workbench.colorTheme": "Gotham",
 	"workbench.settings.enableNaturalLanguageSearch": false,
 	"workbench.settings.editor": "json",
 
+	"workbench.iconTheme": "eq-material-theme-icons-darker",
+	"workbench.colorTheme": "Gotham",
 	"materialTheme.accent": "Yellow",
 	"editor.tokenColorCustomizations": {
 		"comments": "#afafaf88"
@@ -90,6 +90,7 @@
 	"bracketPairColorizer.showHorizontalScopeLine": false,
 	"bracketPairColorizer.consecutivePairColors": ["()", "[]", "{}", ["Gold", "Aqua", "Green"], "Red"],
 
+	"window.titleBarStyle": "native",
 	"window.menuBarVisibility": "toggle",
 	"window.openFilesInNewWindow": "on",
 	"window.newWindowDimensions": "maximized",
@@ -138,7 +139,7 @@
 	"search.quickOpen.includeSymbols": true,
 	"debug.inlineValues": true,
 
-	"typescript.useCodeSnippetsOnMethodSuggest": true,
+	"typescript.suggest.completeFunctionCalls": true,
 	"typescript.referencesCodeLens.enabled": false,
 	"typescript.implementationsCodeLens.enabled": false,
 
@@ -169,14 +170,14 @@
 	"go.formatTool": "goimports",
 	"go.buildOnSave": "package",
 	"[go]": {
-		"editor.formatOnSave": false
+		"editor.formatOnSave": true
 	},
 
 	"go.useCodeSnippetsOnFunctionSuggest": true,
 	"go.useCodeSnippetsOnFunctionSuggestWithoutType": true,
 	"go.autocompleteUnimportedPackages": true,
 	"go.gocodeAutoBuild": true,
-	"go.docsTool": "guru",
+	"go.docsTool": "gogetdoc",
 	"go.lintTool": "golangci-lint",
 	"go.lintFlags": ["-D", "errcheck"],
 	"go.liveErrors": {
@@ -351,6 +352,8 @@
 	"telemetry.enableTelemetry": false,
 	"telemetry.enableCrashReporter": false,
 	"gitlens.advanced.telemetry.enabled": false,
+	"githubPullRequests.telemetry.enabled": false,
+	"telemetry.optout": true,
 
 	"save-runner.enabled": true,
 	"save-runner.commands": [
@@ -361,11 +364,11 @@
 			"pre": "eslint_d --fix ${tmpFile}"
 		},
 		{
-			"enabled": true,
+			"enabled": false,
 			"include": "\\.go$",
 			"useTempFile": false,
 			"pre": "goimports"
 		}
 	],
-	"terminal.integrated.rendererType": "dom"
+	"materialTheme.autoApplyIcons": true
 }
