@@ -25,8 +25,9 @@ alias mv="mv -i"
 alias cp="cp --reflink=auto --sparse=always -ia"
 
 alias mkdir="mkdir -pv"
-alias df="df -Tha --total"
+alias df="df -Th --total"
 alias duh="du -ach | sort -h"
+alias duh1="du -ach --max-depth=1 | sort -h"
 alias myip="curl -s -S https://icanhazip.com"
 
 alias grep="grep --color"
@@ -48,7 +49,7 @@ alias pscpu10='ps -e -o pcpu,cpu,nice,state,cputime,args|sort -k1 -nr | head -10
 path=($HOME/.dotfiles/bin $path)
 path=($HOME/bin $path)
 
-function mcd {
+function mkcd {
 	command mkdir -p $1 && pushd $1 >/dev/null
 }
 
@@ -56,7 +57,7 @@ function mkgit {
 	mcd $1 && git init
 }
 
-if [ -x /usr/bin/nvim  ]; then
+if [ -x /usr/bin/nvim ]; then
 	export VTE_VERSION=100
 	export EDITOR="/usr/bin/nvim"
 	alias vim="/usr/bin/nvim"

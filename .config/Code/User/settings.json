@@ -25,7 +25,7 @@
 	"editor.minimap.maxColumn": 140,
 	"editor.snippetSuggestions": "bottom",
 	"editor.hover.delay": 200,
-	"editor.codeLens": false,
+	"editor.suggest.localityBonus": true,
 
 	"breadcrumbs.enabled": true,
 
@@ -53,12 +53,20 @@
 	"workbench.editor.enablePreviewFromQuickOpen": false,
 	"workbench.startupEditor": "newUntitledFile",
 	"workbench.list.multiSelectModifier": "alt",
-	"workbench.settings.enableNaturalLanguageSearch": false,
 	"workbench.settings.editor": "json",
-
+	"workbench.editor.highlightModifiedTabs": true,
 	"workbench.iconTheme": "eq-material-theme-icons-darker",
 	"workbench.colorTheme": "Gotham",
+
 	"materialTheme.accent": "Yellow",
+	"material-icon-theme.showUpdateMessage": false,
+	"material-icon-theme.showReloadMessage": false,
+	"material-icon-theme.showWelcomeMessage": false,
+	"material-icon-theme.hidesExplorerArrows": true,
+	"material-icon-theme.activeIconPack": "react_redux",
+	"material-icon-theme.opacity": 0.5,
+	"materialTheme.autoApplyIcons": true,
+
 	"editor.tokenColorCustomizations": {
 		"comments": "#afafaf88"
 	},
@@ -78,13 +86,13 @@
 		"notificationLink.foreground": "#FFA000",
 		"editorWidget.resizeBorder": "#FFA000",
 		"editorWidget.border": "#FFA000",
-		"panelTitle.activeBorder": "#FFA000"
+		"panelTitle.activeBorder": "#FFA000",
+		"settings.modifiedItemIndicator": "#FFA000",
+		"settings.headerForeground": "#FFA000",
+		"breadcrumb.activeSelectionForeground": "#FFA000",
+		"menu.selectionForeground": "#FFA000",
+		"menubar.selectionForeground": "#FFA000"
 	},
-	"material-icon-theme.showUpdateMessage": false,
-	"material-icon-theme.showReloadMessage": false,
-	"material-icon-theme.showWelcomeMessage": false,
-	"material-icon-theme.hidesExplorerArrows": true,
-	"material-icon-theme.opacity": 0.5,
 
 	"bracketPairColorizer.forceIterationColorCycle": true,
 	"bracketPairColorizer.showHorizontalScopeLine": false,
@@ -103,11 +111,15 @@
 	"terminal.integrated.copyOnSelection": true,
 	"terminal.integrated.fontWeight": "500",
 	"terminal.integrated.enableBell": true,
+	"terminal.integrated.experimentalBufferImpl": "TypedArray",
+	"terminal.integrated.fontSize": 13,
+	"terminal.integrated.fontWeightBold": "normal",
 
 	"files.insertFinalNewline": true,
 	"files.trimTrailingWhitespace": true,
 	"files.trimFinalNewlines": true,
 	"files.useExperimentalFileWatcher": true,
+	"files.maxMemoryForLargeFilesMB": 8192,
 	"files.encoding": "utf8",
 	"files.autoSave": "onFocusChange",
 	"files.associations": {
@@ -136,8 +148,14 @@
 		},
 		"node_modules": true
 	},
+
 	"search.quickOpen.includeSymbols": true,
+	"search.showLineNumbers": true,
+	"search.smartCase": true,
+	"search.usePCRE2": true,
+
 	"debug.inlineValues": true,
+	"debug.enableAllHovers": true,
 
 	"typescript.suggest.completeFunctionCalls": true,
 	"typescript.referencesCodeLens.enabled": false,
@@ -348,12 +366,13 @@
 	"extensions.autoUpdate": true,
 	"extensions.showRecommendationsOnlyOnDemand": true,
 	"update.enableWindowsBackgroundUpdates": false,
+	"workbench.settings.enableNaturalLanguageSearch": false,
+	"workbench.enableExperiments": false,
+	"npm.fetchOnlinePackageInfo": false,
 
 	"telemetry.enableTelemetry": false,
 	"telemetry.enableCrashReporter": false,
 	"gitlens.advanced.telemetry.enabled": false,
-	"githubPullRequests.telemetry.enabled": false,
-	"telemetry.optout": true,
 
 	"save-runner.enabled": true,
 	"save-runner.commands": [
@@ -369,6 +388,5 @@
 			"useTempFile": false,
 			"pre": "goimports"
 		}
-	],
-	"materialTheme.autoApplyIcons": true
+	]
 }
