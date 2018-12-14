@@ -56,7 +56,7 @@
 	"workbench.settings.editor": "json",
 	"workbench.editor.highlightModifiedTabs": true,
 	"workbench.iconTheme": "eq-material-theme-icons-darker",
-	"workbench.colorTheme": "Gotham",
+	"workbench.colorTheme": "Material Theme Darker High Contrast",
 
 	"materialTheme.accent": "Yellow",
 	"material-icon-theme.showUpdateMessage": false,
@@ -186,7 +186,8 @@
 	"prettier.openOutput": false,
 
 	"go.formatTool": "goimports",
-	"go.buildOnSave": "package",
+	"go.buildOnSave": "off",
+	"go.vetOnSave": "off",
 	"[go]": {
 		"editor.formatOnSave": true
 	},
@@ -194,13 +195,15 @@
 	"go.useCodeSnippetsOnFunctionSuggest": true,
 	"go.useCodeSnippetsOnFunctionSuggestWithoutType": true,
 	"go.autocompleteUnimportedPackages": true,
-	"go.gocodeAutoBuild": true,
+	"go.gocodeFlags": ["-builtin", "-ignore-case", "-unimported-packages", "-fallback-to-source"],
 	"go.docsTool": "gogetdoc",
+
 	"go.lintTool": "golangci-lint",
-	"go.lintFlags": ["-D", "errcheck"],
+	"go.lintFlags": ["--fast", "-D=errcheck"],
+
 	"go.liveErrors": {
 		"enabled": true,
-		"delay": 200
+		"delay": 500
 	},
 
 	"go.editorContextMenuCommands": {
@@ -223,23 +226,33 @@
 		"promptForTags": false,
 		"transform": "camelcase"
 	},
-	"go.coverageDecorator": {
-		"type": "gutter"
-	},
+
 	"go.coverOnSingleTest": true,
 
+	"go.gotoSymbol.includeGoroot": true,
+
+	"go.alternateTools": {
+		"go-langserver": "golsp"
+	},
 	"go.useLanguageServer": false,
 	"go.languageServerExperimentalFeatures": {
-		"format": false,
-		"autoComplete": false
+		"format": true,
+		"autoComplete": true,
+		"rename": true,
+		"goToDefinition": true,
+		"hover": true,
+		"signatureHelp": true,
+		"goToTypeDefinition": true,
+		"goToImplementation": true,
+		"documentSymbols": true,
+		"workspaceSymbols": true,
+		"findReferences": true
 	},
 
 	"html.format.unformatted": "p, a, abbr, acronym, b, bdo, big, br, button, cite, code, dfn, em, i, img, input, kbd, label, map, object, q, samp, select, small, span, strong, sub, sup, textarea, tt, var",
 	"html.format.endWithNewline": true,
 	"html.format.maxPreserveNewLines": 1,
 	"html.format.extraLiners": "-",
-	"html.suggest.angular1": false,
-	"html.suggest.ionic": false,
 
 	"markdownlint.config": {
 		"MD010": false,
@@ -336,7 +349,6 @@
 	},
 	"gitlens.keymap": "none",
 	"gitlens.statusBar.reduceFlicker": true,
-	"gitlens.historyExplorer.enabled": true,
 	"gitlens.mode.active": "review",
 	"gitlens.settings.mode": "advanced",
 	"gitlens.menus": {
@@ -358,10 +370,12 @@
 			"remote": true
 		}
 	},
-	"gitlens.gitExplorer.files.layout": "list",
-	"gitlens.gitExplorer.branches.layout": "list",
-	"gitlens.historyExplorer.location": "scm",
 	"gitlens.mode.statusBar.enabled": false,
+	"gitlens.views.repositories.branches.layout": "list",
+	"gitlens.views.fileHistory.enabled": true,
+	"gitlens.views.fileHistory.location": "scm",
+	"gitlens.views.lineHistory.enabled": true,
+	"gitlens.views.lineHistory.location": "scm",
 
 	"extensions.autoUpdate": true,
 	"extensions.showRecommendationsOnlyOnDemand": true,
