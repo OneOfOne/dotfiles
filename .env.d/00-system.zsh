@@ -54,7 +54,7 @@ function mkcd {
 }
 
 function mkgit {
-	mcd $1 && git init
+	mkcd $1 && git init
 }
 
 if [ -x /usr/bin/nvim ]; then

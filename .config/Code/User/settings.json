@@ -186,10 +186,10 @@
 	"prettier.openOutput": false,
 
 	"go.formatTool": "goimports",
-	"go.buildOnSave": "off",
+	"go.buildOnSave": "package",
 	"go.vetOnSave": "off",
 	"[go]": {
-		"editor.formatOnSave": true
+		"editor.formatOnSave": false
 	},
 
 	"go.useCodeSnippetsOnFunctionSuggest": true,
@@ -237,7 +237,7 @@
 	"go.useLanguageServer": false,
 	"go.languageServerExperimentalFeatures": {
 		"format": true,
-		"autoComplete": true,
+		"autoComplete": false,
 		"rename": true,
 		"goToDefinition": true,
 		"hover": true,
@@ -397,7 +397,7 @@
 			"pre": "eslint_d --fix ${tmpFile}"
 		},
 		{
-			"enabled": false,
+			"enabled": true,
 			"include": "\\.go$",
 			"useTempFile": false,
 			"pre": "goimports"

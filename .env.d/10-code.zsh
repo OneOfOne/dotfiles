@@ -60,7 +60,7 @@ function rebuildgo {
 	git clean -fdx || return 1
 	git pull -v || return 1
 
-	env GOROOT_BOOTSTRAP=/usr/src/go1.4 CC=gcc GOGC=off bash make.bash
+	env GOROOT_BOOTSTRAP=/usr/lib/go CC=gcc GOGC=off bash make.bash || return 1
 
 	../bin/go clean -r -cache -testcache &>/dev/null
 	echo -------------------------------
@@ -70,6 +70,7 @@ function rebuildgo {
 
 function rebuildgotools {
 	killall -9 gocode go-langserver &>/dev/null
+
 	echo -------------------------------
 	echo using $(go version)
 	echo -------------------------------
@@ -77,23 +78,7 @@ function rebuildgotools {
 	go clean -r -cache -testcache
 
 	go get -u $@ \
-		golang.org/x/... \
-		github.com/mdempsky/gocode \
-		github.com/uudashr/gopkgs/cmd/gopkgs \
-		github.com/ramya-rao-a/go-outline \
-		github.com/acroca/go-symbols \
-		github.com/fatih/gomodifytags \
-		github.com/haya14busa/goplay/cmd/goplay \
-		github.com/josharian/impl \
-		github.com/tylerb/gotype-live \
-		github.com/rogpeppe/godef \
-		github.com/zmb3/gogetdoc \
-		github.com/sqs/goreturns \
-		github.com/golang/lint/golint \
-		github.com/cweill/gotests/... \
-		github.com/alecthomas/gometalinter \
+		golang.org/x/tools... \
 		honnef.co/go/tools/... \
-		github.com/sourcegraph/go-langserver \
-		github.com/derekparker/delve/cmd/dlv \
 		github.com/davidrjenni/reftools/cmd/fillstruct
 }
