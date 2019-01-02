@@ -35,3 +35,45 @@ function certbot-add-subdomain {
 
 	unset shouldRun
 }
+
+function qemu-uefi() {
+	local bios=uefi_vars.fd
+	if [ ! -f uefi_vars.fd ]; then
+		bios=/tmp/uefi_vars.fd
+		_err "no uefi_vars.fd, using $bios"
+		[ ! -f $bios ] && cp -v /usr/share/ovmf/x64/OVMF_VARS.fd $bios
+	fi
+
+	mkdir qemu-shared &>/dev/null
+
+	local args=()
+	local ignore=0
+
+	for arg in $@; do
+		if [ "$ignore" = 1 ]; then
+			ignore=0
+		elif [[ "$arg" =~ "\.iso$" ]]; then
+			args+=(-drive)
+			arg="file=$arg,media=cdrom"
+		elif [[ "$arg" =~ "^/dev/" ]]; then
+			args+=(-drive)
+			arg="file=$arg,format=raw,if=virtio,aio=native,cache=none"
+		elif [[ "$arg" =~ "^-" ]]; then
+			ignore=1
+		fi
+
+		args+=($arg)
+	done
+
+	set -x
+
+	QEMU_AUDIO_DRV=pa qemu-system-x86_64 -enable-kvm -m 16G \
+		-machine q35,accel=kvm -cpu host,kvm=off -smp 8 \
+		-device virtio-balloon \
+		-object rng-random,id=rng0,filename=/dev/urandom -device virtio-rng-pci,rng=rng0 \
+		-drive if=pflash,format=raw,readonly,file=/usr/share/ovmf/x64/OVMF_CODE.fd \
+		-drive if=pflash,format=raw,file=$bios \
+		-fsdev local,security_model=passthrough,id=fsdev0,path=qemu-shared \
+		-device virtio-9p-pci,id=fs0,fsdev=fsdev0,mount_tag=hostshare \
+		$args
+}

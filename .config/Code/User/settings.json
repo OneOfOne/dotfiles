@@ -146,7 +146,8 @@
 		"**/*.map": {
 			"when": "$(basename).map"
 		},
-		"node_modules": true
+		"node_modules": true,
+		"wasm_exec.js": true
 	},
 
 	"search.quickOpen.includeSymbols": true,
@@ -189,7 +190,7 @@
 	"go.buildOnSave": "package",
 	"go.vetOnSave": "off",
 	"[go]": {
-		"editor.formatOnSave": false
+		"editor.formatOnSave": true
 	},
 
 	"go.useCodeSnippetsOnFunctionSuggest": true,
@@ -232,12 +233,13 @@
 	"go.gotoSymbol.includeGoroot": true,
 
 	"go.alternateTools": {
-		"go-langserver": "golsp"
+		"go-langserver": "bingo"
 	},
-	"go.useLanguageServer": false,
+	"go.useLanguageServer": true,
+	"go.languageServerFlags": ["-format-style=goimports", "-disable-diagnostics", "-enable-global-cache"],
 	"go.languageServerExperimentalFeatures": {
 		"format": true,
-		"autoComplete": false,
+		"autoComplete": true,
 		"rename": true,
 		"goToDefinition": true,
 		"hover": true,
@@ -397,7 +399,7 @@
 			"pre": "eslint_d --fix ${tmpFile}"
 		},
 		{
-			"enabled": true,
+			"enabled": false,
 			"include": "\\.go$",
 			"useTempFile": false,
 			"pre": "goimports"

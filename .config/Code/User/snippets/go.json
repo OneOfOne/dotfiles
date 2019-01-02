@@ -39,7 +39,27 @@
 		},
 		"context fn": {
 			"prefix": "ctxfn",
-			"body": "func $1(ctx context.Context) {\n\t$0\n}\n"
+			"body": "func $1(ctx context.Context) ${2} {\n\t$0\n}\n"
+		},
+		"mutex lock": {
+			"prefix": "ml",
+			"body": "mutex.Lock()",
+			"description": "Snippet for mutex.Lock()"
+		},
+		"mutex unlock": {
+			"prefix": "mu",
+			"body": "mutex.Unlock()",
+			"description": "Snippet for mutex.Unlock()"
+		},
+		"mutex rlock": {
+			"prefix": "mrl",
+			"body": "mutex.RLock()",
+			"description": "Snippet for mutex.RLock()"
+		},
+		"mutex runlock": {
+			"prefix": "mru",
+			"body": "mutex.RUnlock()",
+			"description": "Snippet for mutex.RUnlock()"
 		}
 	}
 }
