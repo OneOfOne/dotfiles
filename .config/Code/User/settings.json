@@ -41,14 +41,6 @@
 		"editor.formatOnSave": false
 	},
 
-	"[typescript]": {
-		"editor.formatOnSave": false
-	},
-
-	"[typescriptreact]": {
-		"editor.formatOnSave": false
-	},
-
 	"workbench.editor.enablePreview": false,
 	"workbench.editor.enablePreviewFromQuickOpen": false,
 	"workbench.startupEditor": "newUntitledFile",
@@ -167,7 +159,9 @@
 
 	"javascript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
 	"javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
+
 	"javascript.implicitProjectConfig.checkJs": true,
+	"javascript.updateImportsOnFileMove.enabled": "always",
 
 	"npm.enableScriptExplorer": true,
 	"npm.packageManager": "yarn",
@@ -182,7 +176,6 @@
 	"prettier.bracketSpacing": false,
 	"prettier.jsonEnable": ["jsonc", "json"],
 	"prettier.javascriptEnable": [],
-	"prettier.typescriptEnable": [],
 	"prettier.statusBar": false,
 	"prettier.openOutput": false,
 

@@ -17,9 +17,6 @@
 	algorithm = patience
 	tool = code
 
-[pull]
-	rebase = true
-
 [fetch]
 	recurseSubmodules = true
 
