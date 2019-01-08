@@ -10,3 +10,4 @@ mkdir ~/bin &>/dev/null
 ln -vsf $DOTS/bin/* ~/bin/
 
 ln -vsf $DOTS/.config/nvim ~/.config/
+ln -vsf $DOTS/.config/coc ~/.config/
