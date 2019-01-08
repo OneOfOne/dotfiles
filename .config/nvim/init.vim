@@ -42,6 +42,7 @@ Plug 'vimlab/split-term.vim'
 Plug 'mileszs/ack.vim'
 
 Plug 'Shougo/neosnippet.vim'
+Plug 'Shougo/neosnippet-snippets.vim'
 
 "" Color
 Plug 'tomasr/molokai'
@@ -66,7 +67,7 @@ filetype plugin indent on
 set encoding=utf-8
 set fileencoding=utf-8
 set fileencodings=utf-8
-set bomb
+set nobomb
 set binary
 
 
@@ -297,9 +298,10 @@ noremap <leader><s-tab> :bp<CR>
 "" Close buffer
 noremap <leader>c :bd<CR>
 
-command -nargs=? -bang Buffer if <q-args> != '' | exe 'buffer '.<q-args> | else | ls<bang> | let buffer_nn=input('Select: ') | if buffer_nn != '' | exe buffer_nn != 0 ? 'buffer '.buffer_nn : 'enew' | endif | endif
-nnoremap <silent> <leader>ls Buffer
-
+if !has('Buffer')
+	command -nargs=? -bang Buffer if <q-args> != '' | exe 'buffer '.<q-args> | else | ls<bang> | let buffer_nn=input('Select: ') | if buffer_nn != '' | exe buffer_nn != 0 ? 'buffer '.buffer_nn : 'enew' | endif | endif
+	nnoremap <silent> <leader>ls Buffer
+endif
 "" Clean search (highlight)
 nnoremap <silent> <leader><space> :noh<cr>
 
@@ -376,7 +378,7 @@ endif
 
 set completeopt+=noinsert
 set signcolumn=yes
-set cmdheight=2
+set cmdheight=10
 let g:markdown_fenced_languages = ['css', 'javascript', 'js=javascript', 'typescript', 'go']
 set updatetime=300
 
@@ -404,46 +406,48 @@ function! s:check_back_space() abort
 	return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-" Use <c-space> for trigger completion.
-inoremap <silent><expr> <c-space> coc#refresh()
+if has('CocUpdate')
+	" Use <c-space> for trigger completion.
+	inoremap <silent><expr> <c-space> coc#refresh()
 
-" Use <cr> for confirm completion, `<C-g>u` means break undo chain at current position.
-" Coc only does snippet and additional edit on confirm.
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+	" Use <cr> for confirm completion, `<C-g>u` means break undo chain at current position.
+	" Coc only does snippet and additional edit on confirm.
+	inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
-" Use `[c` and `]c` for navigate diagnostics
-nmap <silent> [c <Plug>(coc-diagnostic-prev)
-nmap <silent> ]c <Plug>(coc-diagnostic-next)
-nmap <silent> <leader>gd <Plug>(coc-definition)
-nmap <silent> <leader>gy <Plug>(coc-type-definition)
-nmap <silent> <leader>gi <Plug>(coc-implementation)
-nmap <silent> <leader>gr <Plug>(coc-references)
+	" Use `[c` and `]c` for navigate diagnostics
+	nmap <silent> [c <Plug>(coc-diagnostic-prev)
+	nmap <silent> ]c <Plug>(coc-diagnostic-next)
+	nmap <silent> <leader>gd <Plug>(coc-definition)
+	nmap <silent> <leader>gy <Plug>(coc-type-definition)
+	nmap <silent> <leader>gi <Plug>(coc-implementation)
+	nmap <silent> <leader>gr <Plug>(coc-references)
 
-nmap <leader>rn <Plug>(coc-rename)
+	nmap <leader>rn <Plug>(coc-rename)
 
-" Use K for show documentation in preview window
-nnoremap <silent> K :call <SID>show_documentation()<CR>
+	" Use K for show documentation in preview window
+	nnoremap <silent> K :call <SID>show_documentation()<CR>
 
-function! s:show_documentation()
-	if &filetype == 'vim'
-		execute 'h '.expand('<cword>')
-	else
-		call CocAction('doHover')
-	endif
-endfunction
+	function! s:show_documentation()
+		if &filetype == 'vim'
+			execute 'h '.expand('<cword>')
+		else
+			call CocAction('doHover')
+		endif
+	endfunction
 
-" Highlight symbol under cursor on CursorHold
-autocmd CursorHold * silent call CocActionAsync('highlight')
+	" Highlight symbol under cursor on CursorHold
+	autocmd CursorHold * silent call CocActionAsync('highlight')
 
-" Remap for rename current word
+	" Remap for rename current word
 
-" Remap for format selected region
-vmap <leader>da  <Plug>(coc-format-selected)
-vmap <leader>df  <Plug>(coc-codeaction-selected)
-nmap <leader>da  <Plug>(coc-codeaction)
-nmap <leader>df  <Plug>(coc-format)
+	" Remap for format selected region
+	vmap <leader>da  <Plug>(coc-format-selected)
+	vmap <leader>df  <Plug>(coc-codeaction-selected)
+	nmap <leader>da  <Plug>(coc-codeaction)
+	nmap <leader>df  <Plug>(coc-format)
 
-" Use `:Format` for format current buffer
-command! -nargs=0 Format :call CocAction('format')
+	" Use `:Format` for format current buffer
+	command! -nargs=0 Format :call CocAction('format')
 
-command! -nargs=0 UpdateAll :PlugUpgrade | :PlugUpdate | :CocUpdate | :source $MYVIMRC
+	command! -nargs=0 UpdateAll :PlugUpgrade | :PlugUpdate | :CocUpdate | :source $MYVIMRC
+endif
