@@ -6,9 +6,7 @@
 	"editor.tabSize": 4,
 	"editor.insertSpaces": false,
 	"editor.quickSuggestionsDelay": 200,
-	"editor.rulers": [
-		140
-	],
+	"editor.rulers": [140],
 	"editor.wordWrapColumn": 140,
 	"editor.cursorBlinking": "solid",
 	"editor.renderWhitespace": "boundary",
@@ -16,10 +14,6 @@
 	"editor.renderIndentGuides": true,
 	"editor.formatOnSaveTimeout": 10000,
 	"editor.codeActionsOnSaveTimeout": 10000,
-	"editor.formatOnPaste": false,
-	"editor.formatOnType": false,
-	"editor.formatOnSave": true,
-	"editor.autoIndent": true,
 	"editor.dragAndDrop": false,
 	"editor.smoothScrolling": true,
 	"editor.minimap.renderCharacters": false,
@@ -28,7 +22,13 @@
 	"editor.snippetSuggestions": "bottom",
 	"editor.hover.delay": 200,
 	"editor.suggest.localityBonus": true,
+
 	"breadcrumbs.enabled": true,
+
+	"editor.formatOnPaste": false,
+	"editor.formatOnType": false,
+	"editor.formatOnSave": true,
+	"editor.autoIndent": true,
 	"[css]": {
 		"editor.formatOnSave": false
 	},
@@ -38,6 +38,7 @@
 	"[javascriptreact]": {
 		"editor.formatOnSave": false
 	},
+
 	"workbench.editor.enablePreview": false,
 	"workbench.editor.enablePreviewFromQuickOpen": false,
 	"workbench.startupEditor": "newUntitledFile",
@@ -80,19 +81,11 @@
 		"menu.selectionForeground": "#FFA000",
 		"menubar.selectionForeground": "#FFA000"
 	},
+
 	"bracketPairColorizer.forceIterationColorCycle": true,
 	"bracketPairColorizer.showHorizontalScopeLine": false,
-	"bracketPairColorizer.consecutivePairColors": [
-		"()",
-		"[]",
-		"{}",
-		[
-			"Gold",
-			"Aqua",
-			"Green"
-		],
-		"Red"
-	],
+	"bracketPairColorizer.consecutivePairColors": ["()", "[]", "{}", ["Gold", "Aqua", "Green"], "Red"],
+
 	"window.titleBarStyle": "native",
 	"window.menuBarVisibility": "toggle",
 	"window.openFilesInNewWindow": "on",
@@ -100,6 +93,7 @@
 	"window.restoreWindows": "none",
 	"window.closeWhenEmpty": true,
 	"window.zoomLevel": 0,
+
 	"terminal.integrated.shell.linux": "/bin/zsh",
 	"terminal.external.linuxExec": "konsole",
 	"terminal.integrated.copyOnSelection": true,
@@ -108,6 +102,7 @@
 	"terminal.integrated.experimentalBufferImpl": "TypedArray",
 	"terminal.integrated.fontSize": 13,
 	"terminal.integrated.fontWeightBold": "normal",
+
 	"files.insertFinalNewline": true,
 	"files.trimTrailingWhitespace": true,
 	"files.trimFinalNewlines": true,
@@ -115,6 +110,7 @@
 	"files.maxMemoryForLargeFilesMB": 8192,
 	"files.encoding": "utf8",
 	"files.autoSave": "onFocusChange",
+
 	"files.associations": {
 		"*.mustache": "html",
 		"*.user": "json",
@@ -139,15 +135,18 @@
 		"**/*.map": {
 			"when": "$(basename).map"
 		},
-		"node_modules": true,
-		"wasm_exec.js": true
+		"**/node_modules": true,
+		"**/wasm_exec.js": true
 	},
+
 	"search.quickOpen.includeSymbols": true,
 	"search.showLineNumbers": true,
 	"search.smartCase": true,
 	"search.usePCRE2": true,
+
 	"debug.inlineValues": true,
 	"debug.enableAllHovers": true,
+
 	"typescript.suggest.completeFunctionCalls": true,
 	"typescript.referencesCodeLens.enabled": false,
 	"typescript.implementationsCodeLens.enabled": false,
@@ -159,46 +158,33 @@
 	"javascript.updateImportsOnFileMove.enabled": "always",
 	"npm.enableScriptExplorer": true,
 	"npm.packageManager": "yarn",
+
 	"eslint.enable": true,
 	"eslint.packageManager": "yarn",
 	"eslint.provideLintTask": true,
-	"eslint.validate": [
-		"javascript",
-		"javascriptreact",
-		"typescript",
-		"typescriptreact"
-	],
+	"eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
 	"eslint.autoFixOnSave": true,
 	"eslint.run": "onSave",
-	"prettier.bracketSpacing": false,
-	"prettier.jsonEnable": [
-		"jsonc",
-		"json"
-	],
-	"prettier.javascriptEnable": [],
-	"prettier.statusBar": false,
-	"prettier.openOutput": false,
+
+	"prettier.jsxBracketSameLine": true,
+	"prettier.singleQuote": true,
+	"prettier.tabWidth": 4,
+	"prettier.trailingComma": "es5",
+	"prettier.tslintIntegration": true,
+	"prettier.useTabs": true,
+	"prettier.arrowParens": "always",
+	"prettier.printWidth": 120,
+
 	"go.formatTool": "goimports",
 	"go.buildOnSave": "package",
 	"go.vetOnSave": "off",
-	"[go]": {
-		"editor.formatOnSave": true
-	},
 	"go.useCodeSnippetsOnFunctionSuggest": true,
 	"go.useCodeSnippetsOnFunctionSuggestWithoutType": true,
 	"go.autocompleteUnimportedPackages": true,
-	"go.gocodeFlags": [
-		"-builtin",
-		"-ignore-case",
-		"-unimported-packages",
-		"-fallback-to-source"
-	],
+	"go.gocodeFlags": ["-builtin", "-ignore-case", "-unimported-packages", "-fallback-to-source"],
 	"go.docsTool": "gogetdoc",
 	"go.lintTool": "golangci-lint",
-	"go.lintFlags": [
-		"--fast",
-		"-D=errcheck"
-	],
+	"go.lintFlags": ["--fast", "-D=errcheck"],
 	"go.liveErrors": {
 		"enabled": true,
 		"delay": 500
@@ -228,10 +214,8 @@
 	"go.alternateTools": {
 		"go-langserver": "bingo"
 	},
-	"go.useLanguageServer": false,
-	"go.languageServerFlags": [
-		"-format-style=goimports"
-	],
+	"go.useLanguageServer": true,
+	"go.languageServerFlags": ["-format-style=goimports"],
 	"go.languageServerExperimentalFeatures": {
 		"format": true,
 		"autoComplete": true,
@@ -245,7 +229,7 @@
 		"workspaceSymbols": true,
 		"findReferences": true
 	},
-	"html.format.unformatted": "p, a, abbr, acronym, b, bdo, big, br, button, cite, code, dfn, em, i, img, input, kbd, label, map, object, q, samp, select, small, span, strong, sub, sup, textarea, tt, var",
+
 	"html.format.endWithNewline": true,
 	"html.format.maxPreserveNewLines": 1,
 	"html.format.extraLiners": "-",
@@ -256,7 +240,9 @@
 		"MD040": false
 	},
 	"emmet.showSuggestionsAsSnippets": true,
+
 	"php.suggest.basic": false,
+
 	"cSpell.language": "en,en-US",
 	"cSpell.allowCompoundWords": true,
 	"cSpell.enabled": false,
@@ -310,10 +296,7 @@
 		"apiserv",
 		"jsonp"
 	],
-	"cSpell.ignoreRegExpList": [
-		"0x[a-f0-9]+",
-		"<?[\\w.\\-+]+@\\w+(\\.\\w+)+>?"
-	],
+	"cSpell.ignoreRegExpList": ["0x[a-f0-9]+", "<?[\\w.\\-+]+@\\w+(\\.\\w+)+>?"],
 	"cSpell.ignorePaths": [
 		"**/node_modules/**",
 		"**/vscode-extension/**",
@@ -369,15 +352,7 @@
 	"gitlens.views.fileHistory.location": "scm",
 	"gitlens.views.lineHistory.enabled": true,
 	"gitlens.views.lineHistory.location": "scm",
-	"extensions.autoUpdate": true,
-	"extensions.showRecommendationsOnlyOnDemand": true,
-	"update.enableWindowsBackgroundUpdates": false,
-	"workbench.settings.enableNaturalLanguageSearch": false,
-	"workbench.enableExperiments": false,
-	"npm.fetchOnlinePackageInfo": false,
-	"telemetry.enableTelemetry": false,
-	"telemetry.enableCrashReporter": false,
-	"gitlens.advanced.telemetry.enabled": false,
+
 	"save-runner.enabled": true,
 	"save-runner.commands": [
 		{
@@ -392,5 +367,15 @@
 			"useTempFile": false,
 			"pre": "goimports"
 		}
-	]
+	],
+
+	"extensions.autoUpdate": true,
+	"extensions.showRecommendationsOnlyOnDemand": true,
+	"update.enableWindowsBackgroundUpdates": false,
+	"workbench.settings.enableNaturalLanguageSearch": false,
+	"workbench.enableExperiments": false,
+	"npm.fetchOnlinePackageInfo": false,
+	"telemetry.enableTelemetry": false,
+	"telemetry.enableCrashReporter": false,
+	"gitlens.advanced.telemetry.enabled": false
 }

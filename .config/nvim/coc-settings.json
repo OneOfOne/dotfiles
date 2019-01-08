@@ -1,25 +1,11 @@
 {
-	"coc.preferences.formatOnSaveFiletypes": [
-		"go",
-		"json",
-		"jsonc"
-	],
+	"coc.preferences.formatOnSaveFiletypes": ["go", "json", "jsonc"],
 	"languageserver": {
 		"golang": {
 			"command": "bingo",
-			"args": [
-				"-mode=stdio",
-				"-format-style=goimports"
-			],
-			"rootPatterns": [
-				"go.mod",
-				".vim/",
-				".git/",
-				".hg/"
-			],
-			"filetypes": [
-				"go"
-			]
+			"args": ["-mode=stdio", "-format-style=goimports"],
+			"rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
+			"filetypes": ["go"]
 		}
 	}
 }
