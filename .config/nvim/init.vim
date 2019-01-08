@@ -1,17 +1,7 @@
-" vim-bootstrap b0a75e4
 
-"*****************************************************************************
-"" Vim-PLug core
-"*****************************************************************************
-if has('vim_starting')
-	set nocompatible               " Be iMproved
-endif
-
+set nocompatible
 let vimDir = fnamemodify(expand($MYVIMRC), ':h')
 let vimplug_exists = vimDir . '/autoload/plug.vim'
-
-let g:vim_bootstrap_langs = ""
-let g:vim_bootstrap_editor = "nvim"				" nvim or vim
 
 if !filereadable(vimplug_exists)
 	if !executable("curl")
@@ -23,7 +13,7 @@ if !filereadable(vimplug_exists)
 	silent !\curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 	let g:not_finish_vimplug = "yes"
 
-	autocmd VimEnter * PlugInstall
+	autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
 
 " Required:
@@ -42,6 +32,10 @@ Plug 'vim-scripts/CSApprox'
 Plug 'bronson/vim-trailing-whitespace'
 Plug 'Yggdroot/indentLine'
 Plug 'sheerun/vim-polyglot'
+
+Plug 'xolox/vim-misc'
+Plug 'xolox/vim-session'
+
 
 Plug 'vimlab/split-term.vim'
 
@@ -132,12 +126,7 @@ set t_Co=256
 set guioptions=egmrti
 set gfn=Monospace\ 10
 
-if has("gui_running")
-	if has("gui_mac") || has("gui_macvim")
-		set guifont=Menlo:h12
-		set transparency=7
-	endif
-else
+if !has("gui_running")
 	let g:CSApprox_loaded = 1
 
 	" IndentLine
@@ -145,8 +134,6 @@ else
 	let g:indentLine_concealcursor = 0
 	let g:indentLine_char = '┆'
 	let g:indentLine_faster = 1
-
-
 endif
 
 "" Disable the blinking cursor.
@@ -183,7 +170,7 @@ let g:airline#extensions#tagbar#enabled = 1
 let g:airline_skip_empty_sections = 1
 
 
-"" NERDTree configuration
+" NERDTree configuration
 let g:NERDTreeQuitOnOpen = 1
 let g:NERDTreeChDirMode=2
 let g:NERDTreeIgnore=['\.rbc$', '\~$', '\.pyc$', '\.db$', '\.sqlite$', '__pycache__']
@@ -193,8 +180,8 @@ let g:NERDTreeWinSize = 50
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,*.db,*.sqlite
 nnoremap <silent> <F3> :NERDTreeToggle<CR>
 
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'cd' argv()[0] | endif
+" change cwd to git dir if we can
+autocmd VimEnter * silent! Gcd
 
 nnoremap <silent> <leader>f :LAck!<space>
 
@@ -209,7 +196,7 @@ if !exists('*s:setupWrapping')
 	function s:setupWrapping()
 		set wrap
 		set wm=2
-		set textwidth=79
+		set textwidth=119
 	endfunction
 endif
 
