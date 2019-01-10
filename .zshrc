@@ -32,5 +32,5 @@ autoload -U compinit && compinit
 
 ttyctl -f # fix annoying apps that don't exit right
 
-alias .git="git -C $HOME/.dotfiles/.git"
+alias .git="git -C $HOME/.dotfiles/"
 alias .gitup=".git pull"

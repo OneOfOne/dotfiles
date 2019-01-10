@@ -77,8 +77,12 @@ function rebuildgotools {
 
 	go clean -r -cache -testcache
 
-	go get -u $@ \
+	go get -u -v $@ \
 		golang.org/x/tools... \
 		honnef.co/go/tools/... \
 		github.com/davidrjenni/reftools/cmd/fillstruct
+
+	pushd ~gh/saibing/bingo
+	git pull
+	GO111MODULE=on go install
 }

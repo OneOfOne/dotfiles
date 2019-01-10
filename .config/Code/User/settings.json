@@ -47,6 +47,7 @@
 	"workbench.editor.highlightModifiedTabs": true,
 	"workbench.iconTheme": "eq-material-theme-icons-darker",
 	"workbench.colorTheme": "Material Theme Darker High Contrast",
+
 	"materialTheme.accent": "Yellow",
 	"material-icon-theme.showUpdateMessage": false,
 	"material-icon-theme.showReloadMessage": false,
@@ -166,6 +167,7 @@
 	"eslint.autoFixOnSave": true,
 	"eslint.run": "onSave",
 
+	"prettier.disableLanguages": ["vue", "markdown"],
 	"prettier.jsxBracketSameLine": true,
 	"prettier.singleQuote": true,
 	"prettier.tabWidth": 4,

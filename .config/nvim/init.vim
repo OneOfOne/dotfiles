@@ -42,7 +42,7 @@ Plug 'vimlab/split-term.vim'
 Plug 'mileszs/ack.vim'
 
 Plug 'Shougo/neosnippet.vim'
-Plug 'Shougo/neosnippet-snippets.vim'
+Plug 'Shougo/neosnippet-snippets'
 
 "" Color
 Plug 'tomasr/molokai'
@@ -378,7 +378,7 @@ endif
 
 set completeopt+=noinsert
 set signcolumn=yes
-set cmdheight=10
+set cmdheight=3
 let g:markdown_fenced_languages = ['css', 'javascript', 'js=javascript', 'typescript', 'go']
 set updatetime=300
 
