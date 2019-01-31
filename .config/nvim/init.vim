@@ -54,6 +54,8 @@ Plug 'Shougo/denite.nvim'
 
 Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
 Plug 'neoclide/coc.nvim', {'tag': '*', 'do': 'yarn install'}
+
+Plug 'sebdah/vim-delve'
 call plug#end()
 
 " Required:
@@ -406,48 +408,54 @@ function! s:check_back_space() abort
 	return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-if has('CocUpdate')
-	" Use <c-space> for trigger completion.
-	inoremap <silent><expr> <c-space> coc#refresh()
+" Use <c-space> for trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
 
-	" Use <cr> for confirm completion, `<C-g>u` means break undo chain at current position.
-	" Coc only does snippet and additional edit on confirm.
-	inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+" Use <cr> for confirm completion, `<C-g>u` means break undo chain at current position.
+" Coc only does snippet and additional edit on confirm.
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
-	" Use `[c` and `]c` for navigate diagnostics
-	nmap <silent> [c <Plug>(coc-diagnostic-prev)
-	nmap <silent> ]c <Plug>(coc-diagnostic-next)
-	nmap <silent> <leader>gd <Plug>(coc-definition)
-	nmap <silent> <leader>gy <Plug>(coc-type-definition)
-	nmap <silent> <leader>gi <Plug>(coc-implementation)
-	nmap <silent> <leader>gr <Plug>(coc-references)
+" Use `[c` and `]c` for navigate diagnostics
+nmap <silent> [c <Plug>(coc-diagnostic-prev)
+nmap <silent> ]c <Plug>(coc-diagnostic-next)
+nmap <silent> <leader>gd <Plug>(coc-definition)
+nmap <silent> <leader>gy <Plug>(coc-type-definition)
+nmap <silent> <leader>gi <Plug>(coc-implementation)
+nmap <silent> <leader>gr <Plug>(coc-references)
 
-	nmap <leader>rn <Plug>(coc-rename)
+nmap <leader>rn <Plug>(coc-rename)
 
-	" Use K for show documentation in preview window
-	nnoremap <silent> K :call <SID>show_documentation()<CR>
+" Use K for show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
 
-	function! s:show_documentation()
-		if &filetype == 'vim'
-			execute 'h '.expand('<cword>')
-		else
-			call CocAction('doHover')
-		endif
-	endfunction
+function! s:show_documentation()
+	if &filetype == 'vim'
+		execute 'h '.expand('<cword>')
+	else
+		call CocAction('doHover')
+	endif
+endfunction
 
-	" Highlight symbol under cursor on CursorHold
-	autocmd CursorHold * silent call CocActionAsync('highlight')
+" Highlight symbol under cursor on CursorHold
+autocmd CursorHold * silent call CocActionAsync('highlight')
 
-	" Remap for rename current word
+" Remap for rename current word
 
-	" Remap for format selected region
-	vmap <leader>da  <Plug>(coc-format-selected)
-	vmap <leader>df  <Plug>(coc-codeaction-selected)
-	nmap <leader>da  <Plug>(coc-codeaction)
-	nmap <leader>df  <Plug>(coc-format)
+" Remap for format selected region
+vmap <leader>da  <Plug>(coc-format-selected)
+vmap <leader>df  <Plug>(coc-codeaction-selected)
+nmap <leader>da  <Plug>(coc-codeaction)
+nmap <leader>df  <Plug>(coc-format)
 
-	" Use `:Format` for format current buffer
-	command! -nargs=0 Format :call CocAction('format')
 
-	command! -nargs=0 UpdateAll :PlugUpgrade | :PlugUpdate | :CocUpdate | :source $MYVIMRC
-endif
+let g:delve_new_command = "new"
+nnoremap <leader>dd :DlvDebug
+nnoremap <leader>dt :DlvTest
+nnoremap <leader>bp :DlvToggleBreakpoint
+nnoremap <leader>bt :DlvToggleTracePoint
+
+
+" Use `:Format` for format current buffer
+command! -nargs=0 Format :call CocAction('format')
+
+command! -nargs=0 UpdateAll :PlugUpgrade | :PlugUpdate | :CocUpdate | :source $MYVIMRC

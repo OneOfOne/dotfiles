@@ -1,6 +1,7 @@
 export GOCACHE="/tmp/.gocache"
 export GOPATH="$HOME/code/go"
 export GOBIN="$GOPATH/bin"
+export GOFLAGS="-gcflags=-c=16"
 
 path=($HOME/.config/yarn/global/node_modules/.bin $path)
 path=($GOBIN $path)
@@ -8,15 +9,15 @@ path=($GOBIN $path)
 for gv in $(command ls /usr/src/ | egrep '^go'); do
 	name="${gv/./}"
 	[ "$name" = "go" ] && name="gotip"
-	alias $name="env GO111MODULE=off /usr/src/$gv/bin/go"
+	alias $name="/usr/src/$gv/bin/go"
 done
 
 unset gv name
 
-alias gow64="env GOOS="windows" GOARCH="amd64" CGO_ENABLED="1" CC="x86_64-w64-mingw32-gcc" CXX="x86_64-w64-mingw32-g++" go"
-alias gow32="env GOOS="windows" GOARCH="386" CGO_ENABLED="1" CC="i686-w64-mingw32-gcc" CXX="i686-w64-mingw32-g++" go"
+alias gow64="env GOOS=windows GOARCH=amd64 CGO_ENABLED=1 CC=x86_64-w64-mingw32-gcc CXX=x86_64-w64-mingw32-g++ go"
+alias gow32="env GOOS=windows GOARCH=386 CGO_ENABLED=1 CC=i686-w64-mingw32-gcc CXX=i686-w64-mingw32-g++ go"
 
-alias killgo="killall -9 gocode go-langserver &>/dev/null"
+alias killgo="killall -9 gocode go-langserver bingo &>/dev/null"
 
 hash -d gh="$GOPATH/src/github.com/"
 hash -d mygh="$GOPATH/src/github.com/OneOfOne/"
@@ -43,7 +44,7 @@ function setgo {
 
 	ln -svf $p/{go,gofmt} $HOME/bin || return 1
 
-	go clean -cache -testcache &>/dev/null
+	go clean -r -cache -testcache &>/dev/null
 	go version
 }
 
@@ -69,7 +70,7 @@ function rebuildgo {
 }
 
 function rebuildgotools {
-	killall -9 gocode go-langserver &>/dev/null
+	killgo
 
 	echo -------------------------------
 	echo using $(go version)
@@ -85,4 +86,5 @@ function rebuildgotools {
 	pushd ~gh/saibing/bingo
 	git pull
 	GO111MODULE=on go install
+	popd
 }

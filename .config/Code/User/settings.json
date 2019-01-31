@@ -95,6 +95,8 @@
 	"window.closeWhenEmpty": true,
 	"window.zoomLevel": 0,
 
+	"explorer.confirmDelete": false,
+
 	"terminal.integrated.shell.linux": "/bin/zsh",
 	"terminal.external.linuxExec": "konsole",
 	"terminal.integrated.copyOnSelection": true,
@@ -217,7 +219,7 @@
 		"go-langserver": "bingo"
 	},
 	"go.useLanguageServer": true,
-	"go.languageServerFlags": ["-format-style=goimports"],
+	"go.languageServerFlags": ["-enhance-signature-help"],
 	"go.languageServerExperimentalFeatures": {
 		"format": true,
 		"autoComplete": true,

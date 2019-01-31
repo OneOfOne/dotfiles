@@ -60,7 +60,7 @@
 
 	list-old-branches = "!git branch --merged | perl -ne 's/^\\*\\s+//g; print unless /master|dev/'"
 
-	delete-merged-branches = !git branch -d $(git list-old-branches)
+	delete-merged-branches = "!git branch -d $(git list-old-branches) && !git remote prune origin"
 
 	clean-old = "!f() { git delete-merged-branches; du -h --max-depth=0 .git && git reflog expire --all --expire=now && git gc --prune=now --aggressive; du -h --max-depth=0 .git; }; f"
 
