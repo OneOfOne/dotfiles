@@ -23,6 +23,11 @@
 	"editor.hover.delay": 200,
 	"editor.suggest.localityBonus": true,
 
+	"editor.codeActionsOnSave": {
+		"source.fixAll": true,
+		"source.organizeImports": true
+	},
+
 	"breadcrumbs.enabled": true,
 
 	"editor.formatOnPaste": false,
@@ -47,6 +52,7 @@
 	"workbench.editor.highlightModifiedTabs": true,
 	"workbench.iconTheme": "eq-material-theme-icons-darker",
 	"workbench.colorTheme": "Material Theme Darker High Contrast",
+	"workbench.settings.useSplitJSON": true,
 
 	"materialTheme.accent": "Yellow",
 	"material-icon-theme.showUpdateMessage": false,
@@ -102,7 +108,6 @@
 	"terminal.integrated.copyOnSelection": true,
 	"terminal.integrated.fontWeight": "500",
 	"terminal.integrated.enableBell": true,
-	"terminal.integrated.experimentalBufferImpl": "TypedArray",
 	"terminal.integrated.fontSize": 13,
 	"terminal.integrated.fontWeightBold": "normal",
 
@@ -120,6 +125,7 @@
 		".tslintrc": "jsonc",
 		"*.json": "jsonc"
 	},
+
 	"files.exclude": {
 		"**/.git": true,
 		"**/.svn": true,
@@ -219,7 +225,7 @@
 		"go-langserver": "bingo"
 	},
 	"go.useLanguageServer": true,
-	"go.languageServerFlags": ["-enhance-signature-help"],
+	"go.languageServerFlags": [],
 	"go.languageServerExperimentalFeatures": {
 		"format": true,
 		"autoComplete": true,
@@ -301,19 +307,14 @@
 		"jsonp"
 	],
 	"cSpell.ignoreRegExpList": ["0x[a-f0-9]+", "<?[\\w.\\-+]+@\\w+(\\.\\w+)+>?"],
-	"cSpell.ignorePaths": [
-		"**/node_modules/**",
-		"**/vscode-extension/**",
-		"**/.git/**",
-		".vscode",
-		"typings",
-		".gitignore"
-	],
+	"cSpell.ignorePaths": ["**/node_modules/**", "**/vscode-extension/**", "**/.git/**", ".vscode", "typings", ".gitignore"],
+
 	"git.autofetch": true,
 	"git.confirmSync": false,
 	"git.enableSmartCommit": true,
 	"git.enableCommitSigning": true,
 	"git.autoRepositoryDetection": false,
+
 	"gitlens.codeLens.enabled": false,
 	"gitlens.advanced.messages": {
 		"suppressCommitHasNoPreviousCommitWarning": false,

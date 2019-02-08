@@ -16,9 +16,14 @@ const plugins = ['typescript', 'react', 'optimize-regex', 'json'];
 module.exports = {
 	extends: ['eslint:recommended', 'airbnb', 'plugin:react/recommended'],
 	plugins,
-	parserOptions: {
-		ecmaVersion: 2018,
-		sourceType: 'module',
+	"parser": "babel-eslint",
+	"parserOptions": {
+		"ecmaVersion": 6,
+		"sourceType": "module",
+		"ecmaFeatures": {
+			"jsx": true,
+			"modules": true,
+		}
 	},
 
 	env: {
