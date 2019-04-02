@@ -67,3 +67,9 @@
 	clean-old = "!f() { git delete-merged-branches; du -h --max-depth=0 .git && git reflog expire --all --expire=now && git gc --prune=now --aggressive; du -h --max-depth=0 .git; }; f"
 
 	fuck = !git reset --hard && git pull
+
+[filter "lfs"]
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f

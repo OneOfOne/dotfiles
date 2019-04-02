@@ -1,8 +1,8 @@
 {
 	"editor.fontFamily": "Fira Code",
-	"editor.fontLigatures": true,
 	"editor.fontSize": 13,
 	"editor.fontWeight": "500",
+	"editor.fontLigatures": true,
 	"editor.tabSize": 4,
 	"editor.insertSpaces": false,
 	"editor.quickSuggestionsDelay": 200,
@@ -22,10 +22,10 @@
 	"editor.snippetSuggestions": "bottom",
 	"editor.hover.delay": 200,
 	"editor.suggest.localityBonus": true,
+	"editor.largeFileOptimizations": false,
 
 	"editor.codeActionsOnSave": {
-		"source.fixAll": true,
-		"source.organizeImports": true
+		"source.fixAll": true
 	},
 
 	"breadcrumbs.enabled": true,
@@ -50,7 +50,7 @@
 	"workbench.list.multiSelectModifier": "alt",
 	"workbench.settings.editor": "json",
 	"workbench.editor.highlightModifiedTabs": true,
-	"workbench.iconTheme": "eq-material-theme-icons-darker",
+	"workbench.iconTheme": "material-icon-theme",
 	"workbench.colorTheme": "Material Theme Darker High Contrast",
 	"workbench.settings.useSplitJSON": true,
 
@@ -61,7 +61,6 @@
 	"material-icon-theme.hidesExplorerArrows": true,
 	"material-icon-theme.activeIconPack": "react_redux",
 	"material-icon-theme.opacity": 0.5,
-	"materialTheme.autoApplyIcons": true,
 	"editor.tokenColorCustomizations": {
 		"comments": "#afafaf88"
 	},
@@ -157,6 +156,7 @@
 	"debug.enableAllHovers": true,
 
 	"typescript.suggest.completeFunctionCalls": true,
+	"typescript.updateImportsOnFileMove.enabled": "always",
 	"typescript.referencesCodeLens.enabled": false,
 	"typescript.implementationsCodeLens.enabled": false,
 	"typescript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
@@ -180,25 +180,17 @@
 	"prettier.singleQuote": true,
 	"prettier.tabWidth": 4,
 	"prettier.trailingComma": "es5",
-	"prettier.tslintIntegration": true,
 	"prettier.useTabs": true,
 	"prettier.arrowParens": "always",
 	"prettier.printWidth": 120,
 
-	"go.formatTool": "goimports",
-	"go.buildOnSave": "package",
+	"go.buildOnSave": "workspace",
 	"go.vetOnSave": "off",
 	"go.useCodeSnippetsOnFunctionSuggest": true,
 	"go.useCodeSnippetsOnFunctionSuggestWithoutType": true,
 	"go.autocompleteUnimportedPackages": true,
-	"go.gocodeFlags": ["-builtin", "-ignore-case", "-unimported-packages", "-fallback-to-source"],
-	"go.docsTool": "gogetdoc",
 	"go.lintTool": "golangci-lint",
 	"go.lintFlags": ["--fast", "-D=errcheck"],
-	"go.liveErrors": {
-		"enabled": true,
-		"delay": 500
-	},
 	"go.editorContextMenuCommands": {
 		"toggleTestFile": true,
 		"addTags": true,
@@ -222,10 +214,10 @@
 	"go.coverOnSingleTest": true,
 	"go.gotoSymbol.includeGoroot": true,
 	"go.alternateTools": {
-		"go-langserver": "bingo"
+		"go-langserver": "gopls"
 	},
 	"go.useLanguageServer": true,
-	"go.languageServerFlags": [],
+	// "go.languageServerFlags": ["-enhance-signature-help"],
 	"go.languageServerExperimentalFeatures": {
 		"format": true,
 		"autoComplete": true,
@@ -237,7 +229,8 @@
 		"goToImplementation": true,
 		"documentSymbols": true,
 		"workspaceSymbols": true,
-		"findReferences": true
+		"findReferences": true,
+		"diagnostics": true
 	},
 
 	"html.format.endWithNewline": true,
@@ -307,7 +300,14 @@
 		"jsonp"
 	],
 	"cSpell.ignoreRegExpList": ["0x[a-f0-9]+", "<?[\\w.\\-+]+@\\w+(\\.\\w+)+>?"],
-	"cSpell.ignorePaths": ["**/node_modules/**", "**/vscode-extension/**", "**/.git/**", ".vscode", "typings", ".gitignore"],
+	"cSpell.ignorePaths": [
+		"**/node_modules/**",
+		"**/vscode-extension/**",
+		"**/.git/**",
+		".vscode",
+		"typings",
+		".gitignore"
+	],
 
 	"git.autofetch": true,
 	"git.confirmSync": false,
@@ -315,7 +315,7 @@
 	"git.enableCommitSigning": true,
 	"git.autoRepositoryDetection": false,
 
-	"gitlens.codeLens.enabled": false,
+	"gitlens.codeLens.enabled": true,
 	"gitlens.advanced.messages": {
 		"suppressCommitHasNoPreviousCommitWarning": false,
 		"suppressCommitNotFoundWarning": false,
@@ -373,6 +373,8 @@
 			"pre": "goimports"
 		}
 	],
+
+	"bookmarks.useWorkaroundForFormatters": true,
 
 	"extensions.autoUpdate": true,
 	"extensions.showRecommendationsOnlyOnDemand": true,

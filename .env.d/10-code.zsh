@@ -17,7 +17,7 @@ unset gv name
 alias gow64="env GOOS=windows GOARCH=amd64 CGO_ENABLED=1 CC=x86_64-w64-mingw32-gcc CXX=x86_64-w64-mingw32-g++ go"
 alias gow32="env GOOS=windows GOARCH=386 CGO_ENABLED=1 CC=i686-w64-mingw32-gcc CXX=i686-w64-mingw32-g++ go"
 
-alias killgo="killall -9 gocode go-langserver bingo &>/dev/null"
+alias killgo="killall -9 gocode go-langserver bingo gopls &>/dev/null"
 
 hash -d gh="$GOPATH/src/github.com/"
 hash -d mygh="$GOPATH/src/github.com/OneOfOne/"
@@ -35,7 +35,7 @@ function setgo {
 
 	[ "$v" = "tip" -o "$v" = "master" ] && v=""
 
-	local p="/usr/src/go$v/bin/"
+	local p="/usr/src/go$v/bin"
 
 	if [ ! -d "$p" ]; then
 		_err "$p doesn't exist."
@@ -63,7 +63,7 @@ function rebuildgo {
 
 	env GOROOT_BOOTSTRAP=/usr/lib/go CC=gcc GOGC=off bash make.bash || return 1
 
-	../bin/go clean -r -cache -testcache &>/dev/null
+	[ "$v" != "" ] && ../bin/go clean -r -cache -testcache &>/dev/null
 	echo -------------------------------
 	echo updated $(../bin/go version)
 	echo -------------------------------
@@ -76,15 +76,10 @@ function rebuildgotools {
 	echo using $(go version)
 	echo -------------------------------
 
-	go clean -r -cache -testcache
-
-	go get -u -v $@ \
-		golang.org/x/tools... \
+	env GO111MODULE=off GOGC=off go get -u $@ \
+		golang.org/x/tools/cmd/... \
 		honnef.co/go/tools/... \
 		github.com/davidrjenni/reftools/cmd/fillstruct
 
-	pushd ~gh/saibing/bingo
-	git pull
-	GO111MODULE=on go install
-	popd
+	env GO111MODULE=off go install golang.org/x/tools/cmd/gopls
 }
