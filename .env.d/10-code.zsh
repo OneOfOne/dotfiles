@@ -2,6 +2,7 @@ export GOCACHE="/tmp/.gocache"
 export GOPATH="$HOME/code/go"
 export GOBIN="$GOPATH/bin"
 export GOFLAGS="-gcflags=-c=16"
+export GO111MODULE="${GO111MODULE:-off}" # off by default for now
 
 path=($HOME/.config/yarn/global/node_modules/.bin $path)
 path=($GOBIN $path)
@@ -13,6 +14,8 @@ for gv in $(command ls /usr/src/ | egrep '^go'); do
 done
 
 unset gv name
+
+alias code-gomod="env GO111MODULE=on code"
 
 alias gow64="env GOOS=windows GOARCH=amd64 CGO_ENABLED=1 CC=x86_64-w64-mingw32-gcc CXX=x86_64-w64-mingw32-g++ go"
 alias gow32="env GOOS=windows GOARCH=386 CGO_ENABLED=1 CC=i686-w64-mingw32-gcc CXX=i686-w64-mingw32-g++ go"
@@ -81,5 +84,5 @@ function rebuildgotools {
 		honnef.co/go/tools/... \
 		github.com/davidrjenni/reftools/cmd/fillstruct
 
-	env GO111MODULE=off go install golang.org/x/tools/cmd/gopls
+	env GO111MODULE=off go install -v golang.org/x/tools/cmd/gopls
 }

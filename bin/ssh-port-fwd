@@ -1,0 +1,3 @@
+#!/bin/sh
+set -e
+ssh -o ControlMaster=no -o ControlPath=none -NL 127.0.0.1:$2:localhost:$2 $1
