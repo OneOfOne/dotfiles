@@ -52,8 +52,8 @@ Plug 'tomasr/molokai'
 Plug 'tpope/vim-markdown'
 Plug 'Shougo/denite.nvim'
 
-Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
-Plug 'neoclide/coc.nvim', {'tag': '*', 'do': 'yarn install'}
+Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'}
+" Plug 'neoclide/coc.nvim', {'tag': '*', 'do': 'yarn install'}
 
 Plug 'sebdah/vim-delve'
 call plug#end()

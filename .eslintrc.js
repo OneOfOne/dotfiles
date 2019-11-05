@@ -14,7 +14,7 @@ local:
 const plugins = ['typescript', 'react', 'optimize-regex', 'json'];
 
 module.exports = {
-	extends: ['eslint:recommended', 'airbnb', 'plugin:react/recommended'],
+	extends: ['eslint:recommended'],
 	plugins,
 	"parser": "babel-eslint",
 	"parserOptions": {
@@ -78,7 +78,6 @@ module.exports = {
 		'jsx-a11y/click-events-have-key-events': 0,
 		'jsx-a11y/no-static-element-interactions': 0,
 
-		'import/parsers': { 'typescript-eslint-parser': ['.ts', '.tsx'] },
 		'import/no-unresolved': 0,
 		'import/extensions': ['.ts', '.tsx'],
 		'import/prefer-default-export': 0,

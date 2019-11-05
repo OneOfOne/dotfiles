@@ -25,9 +25,7 @@ alias killgo="killall -9 gocode go-langserver bingo gopls &>/dev/null"
 hash -d gh="$GOPATH/src/github.com/"
 hash -d mygh="$GOPATH/src/github.com/OneOfOne/"
 hash -d ooo="$GOPATH/src/oneofone.net/"
-hash -d meteora="$GOPATH/src/github.com/missionMeteora/"
-hash -d swayops="$GOPATH/src/github.com/swayops/"
-hash -d pdna="$GOPATH/src/github.com/PathDNA/"
+
 
 function setgo {
 	local v="$1"
@@ -79,10 +77,9 @@ function rebuildgotools {
 	echo using $(go version)
 	echo -------------------------------
 
-	env GO111MODULE=off GOGC=off go get -u $@ \
+	env GO111MODULE=off GOGC=off go get -u -v $@ \
 		golang.org/x/tools/cmd/... \
 		honnef.co/go/tools/... \
 		github.com/davidrjenni/reftools/cmd/fillstruct
 
-	env GO111MODULE=off go install -v golang.org/x/tools/cmd/gopls
 }

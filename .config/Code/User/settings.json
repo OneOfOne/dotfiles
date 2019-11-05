@@ -6,7 +6,9 @@
 	"editor.tabSize": 4,
 	"editor.insertSpaces": false,
 	"editor.quickSuggestionsDelay": 200,
-	"editor.rulers": [140],
+	"editor.rulers": [
+		140
+	],
 	"editor.wordWrapColumn": 140,
 	"editor.cursorBlinking": "solid",
 	"editor.renderWhitespace": "boundary",
@@ -16,34 +18,27 @@
 	"editor.codeActionsOnSaveTimeout": 10000,
 	"editor.dragAndDrop": false,
 	"editor.smoothScrolling": true,
-	"editor.minimap.renderCharacters": false,
-	"editor.minimap.showSlider": "always",
+
+	"editor.minimap.renderCharacters": true,
+	"editor.minimap.showSlider": "mouseover",
 	"editor.minimap.maxColumn": 140,
+	"editor.minimap.scale": 2,
+
 	"editor.snippetSuggestions": "bottom",
 	"editor.hover.delay": 200,
 	"editor.suggest.localityBonus": true,
 	"editor.suggestSelection": "recentlyUsed",
-
 	"editor.codeActionsOnSave": {
 		"source.fixAll": true
 	},
-
-	"breadcrumbs.enabled": true,
-
 	"editor.formatOnPaste": false,
 	"editor.formatOnType": false,
 	"editor.formatOnSave": true,
 	"editor.autoIndent": true,
-	"[css]": {
-		"editor.formatOnSave": false
-	},
-	"[javascript]": {
-		"editor.formatOnSave": false,
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
-	},
-	"[javascriptreact]": {
-		"editor.formatOnSave": false
-	},
+
+	"diffEditor.maxComputationTime": 0,
+
+	"breadcrumbs.symbolSortOrder": "name",
 
 	"workbench.editor.enablePreview": false,
 	"workbench.editor.enablePreviewFromQuickOpen": false,
@@ -54,11 +49,10 @@
 	"workbench.iconTheme": "material-icon-theme",
 	"workbench.colorTheme": "Gotham",
 	"workbench.settings.useSplitJSON": true,
-
-	"workbench.tree.indent": 8,
+	"workbench.tree.indent": 16,
 	"workbench.tree.renderIndentGuides": "always",
 
-	"materialTheme.accent": "Yellow",
+	"materialTheme.accent": "Red",
 	"material-icon-theme.showUpdateMessage": false,
 	"material-icon-theme.showReloadMessage": false,
 	"material-icon-theme.showWelcomeMessage": false,
@@ -68,7 +62,7 @@
 	"editor.tokenColorCustomizations": {
 		"comments": "#afafaf88"
 	},
-	"workbench.colorCustomizations": {
+	"xworkbench.colorCustomizations": {
 		"badge.background": "#323232",
 		"badge.foreground": "#fff",
 		"activityBarBadge.background": "#FFA000",
@@ -91,11 +85,19 @@
 		"menu.selectionForeground": "#FFA000",
 		"menubar.selectionForeground": "#FFA000"
 	},
-
 	"bracketPairColorizer.forceIterationColorCycle": true,
 	"bracketPairColorizer.showHorizontalScopeLine": false,
-	"bracketPairColorizer.consecutivePairColors": ["()", "[]", "{}", ["Gold", "Aqua", "Green"], "Red"],
-
+	"bracketPairColorizer.consecutivePairColors": [
+		"()",
+		"[]",
+		"{}",
+		[
+			"Gold",
+			"Aqua",
+			"Green"
+		],
+		"Red"
+	],
 	"window.titleBarStyle": "native",
 	"window.menuBarVisibility": "toggle",
 	"window.openFilesInNewWindow": "on",
@@ -104,7 +106,6 @@
 	"window.closeWhenEmpty": true,
 	"window.zoomLevel": 0,
 	"window.customMenuBarAltFocus": false,
-
 	"explorer.confirmDelete": false,
 
 	"terminal.integrated.shell.linux": "/bin/zsh",
@@ -121,14 +122,12 @@
 	"files.maxMemoryForLargeFilesMB": 8192,
 	"files.encoding": "utf8",
 	"files.autoSave": "onFocusChange",
-
 	"files.associations": {
 		"*.mustache": "html",
 		"*.user": "json",
 		".tslintrc": "jsonc",
 		"*.json": "jsonc"
 	},
-
 	"files.exclude": {
 		"**/.git": true,
 		"**/.svn": true,
@@ -140,7 +139,7 @@
 		"**/*.test": true,
 		"**/*.db": true,
 		"**/*.min.js": true,
-		"**/compiled.js": true,
+		"**/*compiled.js": true,
 		"**/*.js": {
 			"when": "$(basename).ts"
 		},
@@ -150,14 +149,28 @@
 		"**/node_modules": true,
 		"**/wasm_exec.js": true
 	},
-
 	"search.quickOpen.includeSymbols": true,
 	"search.showLineNumbers": true,
 	"search.smartCase": true,
-	"search.usePCRE2": true,
-
 	"debug.inlineValues": true,
 	"debug.enableAllHovers": true,
+
+	"[css]": {
+		"editor.formatOnSave": false
+	},
+	"[javascript]": {
+		"editor.formatOnSave": false,
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[javascriptreact]": {
+		"editor.formatOnSave": false
+	},
+	"[html]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[jsonc]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
 
 	"typescript.suggest.completeFunctionCalls": true,
 	"typescript.updateImportsOnFileMove.enabled": "always",
@@ -165,22 +178,29 @@
 	"typescript.implementationsCodeLens.enabled": false,
 	"typescript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
 	"typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
+
 	"javascript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
 	"javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
 	"javascript.implicitProjectConfig.checkJs": true,
 	"javascript.updateImportsOnFileMove.enabled": "always",
+
 	"npm.enableScriptExplorer": true,
 	"npm.packageManager": "yarn",
 
 	"eslint.enable": true,
 	"eslint.packageManager": "yarn",
-	"eslint.provideLintTask": true,
-	"eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
+	"eslint.validate": [
+		"javascript",
+		"javascriptreact",
+		"typescript",
+		"typescriptreact"
+	],
 	"eslint.autoFixOnSave": true,
 	"eslint.run": "onSave",
 
-	"prettier.disableLanguages": ["vue", "markdown"],
+	"prettier.disableLanguages": [ "vue", "markdown" ],
 	"prettier.jsxBracketSameLine": true,
+	"prettier.quoteProps": "consistent",
 	"prettier.singleQuote": true,
 	"prettier.tabWidth": 4,
 	"prettier.trailingComma": "es5",
@@ -191,14 +211,13 @@
 	"yaml.format.enable": true,
 	"yaml.format.printWidth": 120,
 
-	"go.formatTool": "goimports",
 	"go.buildOnSave": "off",
 	"go.vetOnSave": "off",
+	"go.lintOnSave": "off",
 	"go.useCodeSnippetsOnFunctionSuggest": true,
 	"go.useCodeSnippetsOnFunctionSuggestWithoutType": true,
 	"go.autocompleteUnimportedPackages": true,
-	"go.lintTool": "golangci-lint",
-	"go.lintFlags": ["--fast", "-D=errcheck"],
+	"go.lintTool": "staticcheck",
 	"go.editorContextMenuCommands": {
 		"toggleTestFile": true,
 		"addTags": true,
@@ -235,9 +254,9 @@
 		"documentSymbols": true,
 		"workspaceSymbols": true,
 		"findReferences": true,
-		"diagnostics": true
+		"diagnostics": true,
+		"documentLink": true
 	},
-
 	"[go]": {
 		"editor.insertSpaces": false,
 		"editor.formatOnSave": false,
@@ -246,11 +265,15 @@
 		}
 	},
 	"go.toolsEnvVars": {
-		"GOGC": "1600"
+		"GOGC": "3000"
 	},
+
 	"gopls": {
-		"enablePlaceholders": true, // add parameter placeholders when completing a function
-		"enhancedHover": true // experimental to improve quality of hover (will be on by default soon)
+		"usePlaceholders": true,
+		"completeUnimported": true,
+		"staticcheck": true,
+		"watchChangedFiles": true, // watch file changes outside of the editor
+		"deepComplete": true // deep completion
 	},
 
 	"html.format.endWithNewline": true,
@@ -263,9 +286,7 @@
 		"MD040": false
 	},
 	"emmet.showSuggestionsAsSnippets": true,
-
 	"php.suggest.basic": false,
-
 	"cSpell.language": "en,en-US",
 	"cSpell.allowCompoundWords": true,
 	"cSpell.enabled": false,
@@ -313,13 +334,17 @@
 		"samp",
 		"struct",
 		"structs",
+		"tmpl",
 		"uint",
 		"ulimit",
 		"unmarshals",
 		"xast",
 		"xonsh"
 	],
-	"cSpell.ignoreRegExpList": ["0x[a-f0-9]+", "<?[\\w.\\-+]+@\\w+(\\.\\w+)+>?"],
+	"cSpell.ignoreRegExpList": [
+		"0x[a-f0-9]+",
+		"<?[\\w.\\-+]+@\\w+(\\.\\w+)+>?"
+	],
 	"cSpell.ignorePaths": [
 		"**/node_modules/**",
 		"**/vscode-extension/**",
@@ -328,12 +353,12 @@
 		"typings",
 		".gitignore"
 	],
-
 	"git.autofetch": true,
 	"git.confirmSync": false,
 	"git.enableSmartCommit": true,
 	"git.enableCommitSigning": true,
 	"git.autoRepositoryDetection": false,
+	"git.untrackedChanges": "separate",
 
 	"gitlens.codeLens.enabled": true,
 	"gitlens.advanced.messages": {
@@ -351,7 +376,6 @@
 	"gitlens.keymap": "none",
 	"gitlens.statusBar.reduceFlicker": true,
 	"gitlens.mode.active": "review",
-	"gitlens.settings.mode": "advanced",
 	"gitlens.menus": {
 		"editor": false,
 		"editorGroup": {
@@ -378,7 +402,7 @@
 	"gitlens.views.lineHistory.enabled": true,
 	"gitlens.views.lineHistory.location": "scm",
 
-	"save-runner.enabled": true,
+	"save-runner.enabled": false,
 	"save-runner.commands": [
 		{
 			"enabled": false,
@@ -398,14 +422,10 @@
 
 	"extensions.autoUpdate": true,
 	"extensions.showRecommendationsOnlyOnDemand": true,
-
 	"workbench.settings.enableNaturalLanguageSearch": false,
 	"workbench.enableExperiments": false,
 	"npm.fetchOnlinePackageInfo": false,
 	"telemetry.enableTelemetry": false,
 	"telemetry.enableCrashReporter": false,
-	"gitlens.advanced.telemetry.enabled": false,
-	"[html]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
-	}
+	"gitlens.advanced.telemetry.enabled": false
 }
