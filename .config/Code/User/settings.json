@@ -6,9 +6,7 @@
 	"editor.tabSize": 4,
 	"editor.insertSpaces": false,
 	"editor.quickSuggestionsDelay": 200,
-	"editor.rulers": [
-		140
-	],
+	"editor.rulers": [140],
 	"editor.wordWrapColumn": 140,
 	"editor.cursorBlinking": "solid",
 	"editor.renderWhitespace": "boundary",
@@ -44,13 +42,15 @@
 	"workbench.editor.enablePreviewFromQuickOpen": false,
 	"workbench.startupEditor": "newUntitledFile",
 	"workbench.list.multiSelectModifier": "alt",
-	"workbench.settings.editor": "json",
 	"workbench.editor.highlightModifiedTabs": true,
 	"workbench.iconTheme": "material-icon-theme",
-	"workbench.colorTheme": "Gotham",
+	"workbench.colorTheme": "Material Theme Darker High Contrast",
+	"workbench.settings.editor": "json",
 	"workbench.settings.useSplitJSON": true,
 	"workbench.tree.indent": 16,
 	"workbench.tree.renderIndentGuides": "always",
+
+	"problems.showCurrentInStatus": true,
 
 	"materialTheme.accent": "Red",
 	"material-icon-theme.showUpdateMessage": false,
@@ -62,42 +62,13 @@
 	"editor.tokenColorCustomizations": {
 		"comments": "#afafaf88"
 	},
-	"xworkbench.colorCustomizations": {
-		"badge.background": "#323232",
-		"badge.foreground": "#fff",
-		"activityBarBadge.background": "#FFA000",
-		"list.activeSelectionForeground": "#FFA000",
-		"list.inactiveSelectionForeground": "#FFA000",
-		"list.highlightForeground": "#FFA000",
-		"scrollbarSlider.activeBackground": "#FFA00050",
-		"editorSuggestWidget.highlightForeground": "#FFA000",
-		"textLink.foreground": "#FFA000",
-		"progressBar.background": "#FFA000",
-		"pickerGroup.foreground": "#FFA000",
-		"tab.activeBorder": "#FFA000",
-		"notificationLink.foreground": "#FFA000",
-		"editorWidget.resizeBorder": "#FFA000",
-		"editorWidget.border": "#FFA000",
-		"panelTitle.activeBorder": "#FFA000",
-		"settings.modifiedItemIndicator": "#FFA000",
-		"settings.headerForeground": "#FFA000",
-		"breadcrumb.activeSelectionForeground": "#FFA000",
-		"menu.selectionForeground": "#FFA000",
-		"menubar.selectionForeground": "#FFA000"
+	"workbench.colorCustomizations": {
+		"sideBar.foreground": "#fff"
 	},
 	"bracketPairColorizer.forceIterationColorCycle": true,
 	"bracketPairColorizer.showHorizontalScopeLine": false,
-	"bracketPairColorizer.consecutivePairColors": [
-		"()",
-		"[]",
-		"{}",
-		[
-			"Gold",
-			"Aqua",
-			"Green"
-		],
-		"Red"
-	],
+	"bracketPairColorizer.consecutivePairColors": ["()", "[]", "{}", ["Gold", "Aqua", "Green"], "Red"],
+	"window.title": "VSCode${separator}${dirty}${rootName}${separator}${activeEditorShort}",
 	"window.titleBarStyle": "native",
 	"window.menuBarVisibility": "toggle",
 	"window.openFilesInNewWindow": "on",
@@ -111,10 +82,9 @@
 	"terminal.integrated.shell.linux": "/bin/zsh",
 	"terminal.external.linuxExec": "konsole",
 	"terminal.integrated.copyOnSelection": true,
-	// "terminal.integrated.fontWeight": "500",
+	"terminal.integrated.experimentalUseTitleEvent": true,
 	"terminal.integrated.enableBell": true,
-	// "terminal.integrated.fontSize": 13,
-	// "terminal.integrated.fontWeightBold": "normal",
+	"terminal.integrated.rendererType": "experimentalWebgl",
 
 	"files.insertFinalNewline": true,
 	"files.trimTrailingWhitespace": true,
@@ -126,7 +96,8 @@
 		"*.mustache": "html",
 		"*.user": "json",
 		".tslintrc": "jsonc",
-		"*.json": "jsonc"
+		"*.json": "jsonc",
+		"*.html": "html"
 	},
 	"files.exclude": {
 		"**/.git": true,
@@ -146,8 +117,7 @@
 		"**/*.map": {
 			"when": "$(basename).map"
 		},
-		"**/node_modules": true,
-		"**/wasm_exec.js": true
+		"**/node_modules": true
 	},
 	"search.quickOpen.includeSymbols": true,
 	"search.showLineNumbers": true,
@@ -163,12 +133,16 @@
 		"editor.defaultFormatter": "esbenp.prettier-vscode"
 	},
 	"[javascriptreact]": {
-		"editor.formatOnSave": false
-	},
-	"[html]": {
+		"editor.formatOnSave": false,
 		"editor.defaultFormatter": "esbenp.prettier-vscode"
 	},
+	"[html]": {
+		"editor.defaultFormatter": "vscode.html-language-features"
+	},
 	"[jsonc]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[json]": {
 		"editor.defaultFormatter": "esbenp.prettier-vscode"
 	},
 
@@ -189,16 +163,11 @@
 
 	"eslint.enable": true,
 	"eslint.packageManager": "yarn",
-	"eslint.validate": [
-		"javascript",
-		"javascriptreact",
-		"typescript",
-		"typescriptreact"
-	],
-	"eslint.autoFixOnSave": true,
+	"eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
+
 	"eslint.run": "onSave",
 
-	"prettier.disableLanguages": [ "vue", "markdown" ],
+	"prettier.disableLanguages": ["vue", "markdown"],
 	"prettier.jsxBracketSameLine": true,
 	"prettier.quoteProps": "consistent",
 	"prettier.singleQuote": true,
@@ -241,25 +210,14 @@
 	"go.coverOnSingleTest": true,
 	"go.gotoSymbol.includeGoroot": true,
 	"go.useLanguageServer": true,
-	// "go.languageServerFlags": ["-enhance-signature-help"],
 	"go.languageServerExperimentalFeatures": {
 		"format": true,
-		"autoComplete": true,
-		"rename": true,
-		"goToDefinition": true,
-		"hover": true,
-		"signatureHelp": true,
-		"goToTypeDefinition": true,
-		"goToImplementation": true,
-		"documentSymbols": true,
-		"workspaceSymbols": true,
-		"findReferences": true,
 		"diagnostics": true,
 		"documentLink": true
 	},
 	"[go]": {
 		"editor.insertSpaces": false,
-		"editor.formatOnSave": false,
+		"editor.formatOnSave": true,
 		"editor.codeActionsOnSave": {
 			"source.organizeImports": true
 		}
@@ -267,14 +225,16 @@
 	"go.toolsEnvVars": {
 		"GOGC": "3000"
 	},
-
 	"gopls": {
+		"env": { "GOGC": "off" },
+		"experimentalDisabledAnalyses": ["ST1000", "ST1003"],
 		"usePlaceholders": true,
 		"completeUnimported": true,
 		"staticcheck": true,
-		"watchChangedFiles": true, // watch file changes outside of the editor
-		"deepComplete": true // deep completion
+		"deepCompletion": false
 	},
+
+	"rust.all_features": true,
 
 	"html.format.endWithNewline": true,
 	"html.format.maxPreserveNewLines": 1,
@@ -341,10 +301,7 @@
 		"xast",
 		"xonsh"
 	],
-	"cSpell.ignoreRegExpList": [
-		"0x[a-f0-9]+",
-		"<?[\\w.\\-+]+@\\w+(\\.\\w+)+>?"
-	],
+	"cSpell.ignoreRegExpList": ["0x[a-f0-9]+", "<?[\\w.\\-+]+@\\w+(\\.\\w+)+>?"],
 	"cSpell.ignorePaths": [
 		"**/node_modules/**",
 		"**/vscode-extension/**",
