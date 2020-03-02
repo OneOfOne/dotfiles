@@ -2,6 +2,6 @@
   "dependencies": {
     "coc-css": ">=1.2.2",
     "coc-json": ">=1.2.4",
-    "coc-tsserver": ">=1.4.4"
+    "coc-tsserver": ">=1.4.9"
   }
 }

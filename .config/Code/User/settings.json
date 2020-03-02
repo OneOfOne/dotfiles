@@ -7,22 +7,24 @@
 	"editor.insertSpaces": false,
 	"editor.quickSuggestionsDelay": 200,
 	"editor.rulers": [140],
-	"editor.wordWrapColumn": 140,
-	"editor.cursorBlinking": "solid",
 	"editor.renderWhitespace": "boundary",
 	"editor.renderLineHighlight": "all",
 	"editor.renderIndentGuides": true,
-	"editor.formatOnSaveTimeout": 10000,
-	"editor.codeActionsOnSaveTimeout": 10000,
 	"editor.dragAndDrop": false,
+
 	"editor.smoothScrolling": true,
+	"editor.cursorSmoothCaretAnimation": false,
+	"editor.cursorBlinking": "smooth",
+
+	"editor.wordWrap": "on",
+	"editor.wordWrapColumn": 140,
 
 	"editor.minimap.renderCharacters": true,
 	"editor.minimap.showSlider": "mouseover",
 	"editor.minimap.maxColumn": 140,
 	"editor.minimap.scale": 2,
 
-	"editor.snippetSuggestions": "bottom",
+	"editor.snippetSuggestions": "inline",
 	"editor.hover.delay": 200,
 	"editor.suggest.localityBonus": true,
 	"editor.suggestSelection": "recentlyUsed",
@@ -32,7 +34,8 @@
 	"editor.formatOnPaste": false,
 	"editor.formatOnType": false,
 	"editor.formatOnSave": true,
-	"editor.autoIndent": true,
+	"editor.autoIndent": "full",
+	"editor.semanticHighlighting.enabled": true,
 
 	"diffEditor.maxComputationTime": 0,
 
@@ -44,11 +47,12 @@
 	"workbench.list.multiSelectModifier": "alt",
 	"workbench.editor.highlightModifiedTabs": true,
 	"workbench.iconTheme": "material-icon-theme",
-	"workbench.colorTheme": "Material Theme Darker High Contrast",
+	"workbench.colorTheme": "Gotham",
 	"workbench.settings.editor": "json",
 	"workbench.settings.useSplitJSON": true,
 	"workbench.tree.indent": 16,
 	"workbench.tree.renderIndentGuides": "always",
+	"workbench.editor.limit.enabled": true,
 
 	"problems.showCurrentInStatus": true,
 
@@ -69,8 +73,8 @@
 	"bracketPairColorizer.showHorizontalScopeLine": false,
 	"bracketPairColorizer.consecutivePairColors": ["()", "[]", "{}", ["Gold", "Aqua", "Green"], "Red"],
 	"window.title": "VSCode${separator}${dirty}${rootName}${separator}${activeEditorShort}",
-	"window.titleBarStyle": "native",
-	"window.menuBarVisibility": "toggle",
+	"window.titleBarStyle": "custom",
+	"window.menuBarVisibility": "compact",
 	"window.openFilesInNewWindow": "on",
 	"window.newWindowDimensions": "maximized",
 	"window.restoreWindows": "none",
@@ -92,6 +96,7 @@
 	"files.maxMemoryForLargeFilesMB": 8192,
 	"files.encoding": "utf8",
 	"files.autoSave": "onFocusChange",
+	"files.defaultLanguage": "${activeEditorLanguage}",
 	"files.associations": {
 		"*.mustache": "html",
 		"*.user": "json",
@@ -119,11 +124,17 @@
 		},
 		"**/node_modules": true
 	},
-	"search.quickOpen.includeSymbols": true,
+
 	"search.showLineNumbers": true,
 	"search.smartCase": true,
+	"search.enableSearchEditorPreview": false,
+	"search.maintainFileSearchCache": true,
+	"search.quickOpen.includeSymbols": true,
+	"search.searchOnType": false,
+
 	"debug.inlineValues": true,
 	"debug.enableAllHovers": true,
+	"debug.javascript.usePreview": true,
 
 	"[css]": {
 		"editor.formatOnSave": false
@@ -152,6 +163,7 @@
 	"typescript.implementationsCodeLens.enabled": false,
 	"typescript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
 	"typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
+	"typescript.disableAutomaticTypeAcquisition": false,
 
 	"javascript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
 	"javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
@@ -316,6 +328,7 @@
 	"git.enableCommitSigning": true,
 	"git.autoRepositoryDetection": false,
 	"git.untrackedChanges": "separate",
+	"timeline.showView": true,
 
 	"gitlens.codeLens.enabled": true,
 	"gitlens.advanced.messages": {

@@ -79,7 +79,6 @@ module.exports = {
 		'jsx-a11y/no-static-element-interactions': 0,
 
 		'import/no-unresolved': 0,
-		'import/extensions': ['.ts', '.tsx'],
 		'import/prefer-default-export': 0,
 		'import/no-extraneous-dependencies': 0,
 	},
