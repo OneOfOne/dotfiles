@@ -47,7 +47,7 @@
 	"workbench.list.multiSelectModifier": "alt",
 	"workbench.editor.highlightModifiedTabs": true,
 	"workbench.iconTheme": "material-icon-theme",
-	"workbench.colorTheme": "Gotham",
+	"workbench.colorTheme": "Activate UMBRA protocol",
 	"workbench.settings.editor": "json",
 	"workbench.settings.useSplitJSON": true,
 	"workbench.tree.indent": 16,
@@ -238,12 +238,15 @@
 		"GOGC": "3000"
 	},
 	"gopls": {
-		"env": { "GOGC": "off" },
+		"env": {
+			"GOGC": "off"
+		},
 		"experimentalDisabledAnalyses": ["ST1000", "ST1003"],
 		"usePlaceholders": true,
 		"completeUnimported": true,
 		"staticcheck": true,
-		"deepCompletion": false
+		"deepCompletion": true,
+		"verboseOutput": false
 	},
 
 	"rust.all_features": true,
@@ -264,6 +267,7 @@
 	"cSpell.enabled": false,
 	"cSpell.numSuggestions": 10,
 	"cSpell.userWords": [
+		"ALPN",
 		"ASTs",
 		"CORS",
 		"Cashout",

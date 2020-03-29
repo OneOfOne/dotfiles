@@ -1,8 +1,14 @@
-export GOCACHE="/tmp/.gocache"
+# export GOCACHE="/tmp/.gocache"
 export GOPATH="$HOME/code/go"
 export GOBIN="$GOPATH/bin"
-#export GOFLAGS="-gcflags=-c=16"
+export GOFLAGS="-gcflags=-c=16"
+export GOPROXY="direct"
 #export GO111MODULE="${GO111MODULE:-off}" # off by default for now
+
+
+alias setgomod="export GO111MODULE=on; killgo"
+alias unsetgomod="export GO111MODULE=off; killgo"
+alias unsetgoflags="export GOFLAGS="
 
 path=($HOME/.config/yarn/global/node_modules/.bin $path)
 path=($GOBIN $HOME/.cargo/bin/ $path)
@@ -51,9 +57,6 @@ function setgo {
 	go clean -r -cache -testcache &>/dev/null
 	go version
 }
-
-alias setgomod="export GO111MODULE=on; killgo"
-alias unsetgomod="export GO111MODULE=off; killgo"
 
 function addgotree {
 	local v="$1"
