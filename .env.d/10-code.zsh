@@ -2,6 +2,7 @@
 export GOPATH="$HOME/code/go"
 export GOBIN="$GOPATH/bin"
 export GOFLAGS="-gcflags=-c=16"
+export GOSUMDB="off"
 export GOPROXY="direct"
 #export GO111MODULE="${GO111MODULE:-off}" # off by default for now
 
