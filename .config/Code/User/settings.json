@@ -1,6 +1,6 @@
 {
 	"editor.fontFamily": "Fira Code Medium",
-	"editor.fontSize": 14,
+	"editor.fontSize": 15,
 	"editor.fontWeight": "500",
 	"editor.fontLigatures": true,
 	"editor.tabSize": 4,
@@ -30,12 +30,13 @@
 	"editor.suggestSelection": "recentlyUsed",
 	"editor.codeActionsOnSave": {
 		"source.organizeImports": true,
+		"source.fixAll.eslint": true,
 		"source.fixAll": true
 	},
 
 	"editor.formatOnPaste": false,
 	"editor.formatOnType": false,
-	"editor.formatOnSave": true,
+	"editor.formatOnSave": false,
 	"editor.autoIndent": "full",
 	"editor.renameOnType": true,
 	"editor.semanticHighlighting.enabled": true,
@@ -50,32 +51,28 @@
 	"workbench.startupEditor": "newUntitledFile",
 	"workbench.list.multiSelectModifier": "alt",
 	"workbench.editor.highlightModifiedTabs": true,
-	"workbench.iconTheme": "material-icon-theme",
-	"workbench.colorTheme": "Gotham",
+	"workbench.iconTheme": "ayu",
+	"workbench.colorTheme": "Ayu Mirage Bordered",
 	"workbench.settings.editor": "json",
 	"workbench.settings.useSplitJSON": true,
 	"workbench.tree.indent": 16,
 	"workbench.tree.renderIndentGuides": "always",
 	"workbench.editor.limit.enabled": false,
+	"workbench.editor.scrollToSwitchTabs":true,
 
 	"problems.showCurrentInStatus": true,
 
-	"materialTheme.accent": "Red",
 	"material-icon-theme.showUpdateMessage": false,
 	"material-icon-theme.showReloadMessage": false,
 	"material-icon-theme.showWelcomeMessage": false,
 	"material-icon-theme.hidesExplorerArrows": true,
 	"material-icon-theme.activeIconPack": "react_redux",
 	"material-icon-theme.opacity": 0.5,
-	"editor.tokenColorCustomizations": {
-		"comments": "#afafaf88"
-	},
-	"workbench.colorCustomizations": {
-		"sideBar.foreground": "#fff"
-	},
+
 	"bracketPairColorizer.forceIterationColorCycle": true,
 	"bracketPairColorizer.showHorizontalScopeLine": false,
 	"bracketPairColorizer.consecutivePairColors": ["()", "[]", "{}", ["Gold", "Aqua", "Green"], "Red"],
+
 	"window.title": "VSCode${separator}${dirty}${rootName}${separator}${activeEditorShort}",
 	"window.titleBarStyle": "custom",
 	"window.menuBarVisibility": "compact",
@@ -137,6 +134,8 @@
 	"search.searchOnType": false,
 
 	"debug.inlineValues": true,
+	"debug.toolBarLocation": "floating",
+	"debug.showSubSessionsInToolBar": true,
 	"debug.enableAllHovers": true,
 	"debug.node.useV3": true,
 	"debug.chrome.useV3": true,
@@ -171,6 +170,7 @@
 	"typescript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
 	"typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
 	"typescript.disableAutomaticTypeAcquisition": false,
+	"typescript.enablePromptUseWorkspaceTsdk": true,
 
 	"javascript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
 	"javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
@@ -182,13 +182,16 @@
 
 	"eslint.enable": true,
 	"eslint.packageManager": "yarn",
+	"eslint.nodePath": "/home/oneofone/.config/yarn/global/node_modules/",
 	"eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
-
 	"eslint.run": "onSave",
 	"eslint.codeActionsOnSave.mode": "problems",
+	"eslint.lintTask.enable": true,
+	"eslint.quiet": true,
 
 	"prettier.disableLanguages": ["vue", "markdown"],
 	"prettier.jsxBracketSameLine": true,
+	"prettier.packageManager": "yarn",
 	"prettier.quoteProps": "consistent",
 	"prettier.singleQuote": true,
 	"prettier.tabWidth": 4,
@@ -200,13 +203,17 @@
 	"yaml.format.enable": true,
 	"yaml.format.printWidth": 120,
 
+	"python.linting.pylintEnabled": false,
+	"python.linting.mypyEnabled": true,
+	"python.linting.enabled": true,
+	"python.formatting.provider": "black",
+
 	"go.buildOnSave": "off",
 	"go.vetOnSave": "off",
 	"go.lintOnSave": "off",
 	"go.useCodeSnippetsOnFunctionSuggest": true,
 	"go.useCodeSnippetsOnFunctionSuggestWithoutType": true,
 	"go.autocompleteUnimportedPackages": true,
-	"go.lintTool": "staticcheck",
 	"go.editorContextMenuCommands": {
 		"toggleTestFile": true,
 		"addTags": true,
@@ -230,11 +237,6 @@
 	"go.coverOnSingleTest": true,
 	"go.gotoSymbol.includeGoroot": true,
 	"go.useLanguageServer": true,
-	"go.languageServerExperimentalFeatures": {
-		"format": true,
-		"diagnostics": true,
-		"documentLink": true
-	},
 	"go.delveConfig": {
 		"dlvLoadConfig": {
 			"followPointers": true,
@@ -248,15 +250,19 @@
 	},
 	"gopls": {
 		"env": {},
+		"staticcheck": true,
 		"analyses": {
 			"ST1000": false,
 			"ST1003": false
 		},
+		"codelens": {
+			"generate": true,
+			"upgrade.dependency": true,
+			"test": true
+		},
 		"usePlaceholders": false,
 		"completeUnimported": true,
-		"staticcheck": true,
-		"deepCompletion": true,
-		"verboseOutput": false
+		"deepCompletion": true
 	},
 
 	"rust.all_features": true,
@@ -310,6 +316,7 @@
 		"jsonp",
 		"julienschmidt",
 		"konsole",
+		"nocheckptr",
 		"nolint",
 		"oneofone",
 		"pidx",
@@ -417,9 +424,5 @@
 	"npm.fetchOnlinePackageInfo": false,
 	"telemetry.enableTelemetry": false,
 	"telemetry.enableCrashReporter": false,
-	"gitlens.advanced.telemetry.enabled": false,
-	"python.linting.pylintEnabled": false,
-	"python.linting.mypyEnabled": true,
-	"python.linting.enabled": true,
-	"python.formatting.provider": "black"
+	"gitlens.advanced.telemetry.enabled": false
 }

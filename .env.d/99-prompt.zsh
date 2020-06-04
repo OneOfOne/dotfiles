@@ -43,7 +43,7 @@ local cur_dir='${LEFT_ARCH}$FG_CYAN$(cur_dir)$FG_RESET${RIGHT_ARCH}'
 local git_status='$(git_super_status)'
 
 PROMPT="$FG_WHITE┏━ $FG_RESET$(ssh_connection)$user_host $cur_dir $git_status
-┗━$LAST_RET$FG_WHITE●$FG_RESET "
+$FG_WHITE┗━$LAST_RET$FG_WHITE●$FG_RESET "
 RPROMPT=''
 
 #dcdccc

@@ -11,28 +11,26 @@ local:
 	yarn add --dev {packages}
 */
 
-const plugins = ['typescript', 'react', 'optimize-regex', 'json'];
-
 module.exports = {
-	extends: ['eslint:recommended'],
-	plugins,
-	"parser": "babel-eslint",
-	"parserOptions": {
-		"ecmaVersion": 6,
-		"sourceType": "module",
-		"ecmaFeatures": {
-			"jsx": true,
-			"modules": true,
+	'extends': ['eslint:recommended'],
+	'plugins': ['typescript', 'react', 'optimize-regex', 'json'],
+	'parser': '/home/oneofone/.config/yarn/global/node_modules/babel-eslint',
+	'parserOptions': {
+		'ecmaVersion': 8,
+		'sourceType': 'module',
+		'ecmaFeatures': {
+			'jsx': true,
+			'modules': true,
 		}
 	},
 
-	env: {
+	'env': {
 		browser: true,
 		node: true,
 		es6: true,
 	},
 
-	rules: {
+	'rules': {
 		'no-undef': 0,
 		'no-unused-vars': 0,
 		'no-console': 0,
@@ -41,7 +39,7 @@ module.exports = {
 		'no-case-declarations': 0,
 		'curly': ['error', 'multi-line'],
 		'array-bracket-spacing': ['error', 'never'],
-		// quotes: ["error", "single"],
+		'quotes': ['error', 'single'],
 		'jsx-quotes': ['error', 'prefer-double'],
 		// 'prettier/prettier': ['error', prettierConfig],
 
@@ -83,7 +81,7 @@ module.exports = {
 		'import/no-extraneous-dependencies': 0,
 	},
 
-	overrides: [
+	'overrides': [
 		{
 			files: ['*.tsx'],
 			parser: 'typescript-eslint-parser',
