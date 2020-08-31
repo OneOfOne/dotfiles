@@ -1,12 +1,13 @@
 {
-	"editor.fontFamily": "Fira Code Medium",
+	//"editor.fontFamily": "Fira Code Medium",
+	"editor.fontFamily": "JetBrains Mono",
 	"editor.fontSize": 15,
 	"editor.fontWeight": "500",
 	"editor.fontLigatures": true,
 	"editor.tabSize": 4,
 	"editor.insertSpaces": false,
 	"editor.quickSuggestionsDelay": 200,
-	"editor.rulers": [140],
+	"editor.rulers": [160],
 	"editor.renderWhitespace": "boundary",
 	"editor.renderLineHighlight": "all",
 	"editor.renderIndentGuides": true,
@@ -17,7 +18,7 @@
 	"editor.cursorBlinking": "smooth",
 
 	"editor.wordWrap": "on",
-	"editor.wordWrapColumn": 140,
+	"editor.wordWrapColumn": 160,
 
 	"editor.minimap.renderCharacters": true,
 	"editor.minimap.showSlider": "mouseover",
@@ -29,7 +30,8 @@
 	"editor.suggest.localityBonus": true,
 	"editor.suggestSelection": "recentlyUsed",
 	"editor.codeActionsOnSave": {
-		"source.organizeImports": true,
+		"source.addMissingImports": true,
+		"source.organizeImports": false,
 		"source.fixAll.eslint": true,
 		"source.fixAll": true
 	},
@@ -42,6 +44,13 @@
 	"editor.semanticHighlighting.enabled": true,
 	"editor.parameterHints.cycle": true,
 
+	"editor.gotoLocation.multipleDeclarations": "goto",
+	"editor.gotoLocation.multipleDefinitions": "goto",
+	"editor.gotoLocation.multipleImplementations": "goto",
+	"editor.gotoLocation.multipleReferences": "goto",
+	"editor.gotoLocation.multipleTypeDefinitions": "goto",
+	"editor.multiCursorModifier": "alt",
+
 	"diffEditor.maxComputationTime": 0,
 
 	"breadcrumbs.symbolSortOrder": "name",
@@ -51,14 +60,13 @@
 	"workbench.startupEditor": "newUntitledFile",
 	"workbench.list.multiSelectModifier": "alt",
 	"workbench.editor.highlightModifiedTabs": true,
-	"workbench.iconTheme": "ayu",
-	"workbench.colorTheme": "Ayu Mirage Bordered",
+	"workbench.colorTheme": "Noctis",
 	"workbench.settings.editor": "json",
 	"workbench.settings.useSplitJSON": true,
 	"workbench.tree.indent": 16,
 	"workbench.tree.renderIndentGuides": "always",
 	"workbench.editor.limit.enabled": false,
-	"workbench.editor.scrollToSwitchTabs":true,
+	"workbench.editor.scrollToSwitchTabs": true,
 
 	"problems.showCurrentInStatus": true,
 
@@ -74,8 +82,8 @@
 	"bracketPairColorizer.consecutivePairColors": ["()", "[]", "{}", ["Gold", "Aqua", "Green"], "Red"],
 
 	"window.title": "VSCode${separator}${dirty}${rootName}${separator}${activeEditorShort}",
-	"window.titleBarStyle": "custom",
-	"window.menuBarVisibility": "compact",
+	"window.titleBarStyle": "native",
+	"window.menuBarVisibility": "toggle",
 	"window.openFilesInNewWindow": "on",
 	"window.newWindowDimensions": "maximized",
 	"window.restoreWindows": "none",
@@ -103,7 +111,8 @@
 		"*.user": "json",
 		".tslintrc": "jsonc",
 		"*.json": "jsonc",
-		"*.html": "html"
+		"*.html": "html",
+		"*.go2": "go"
 	},
 	"files.exclude": {
 		"**/.git": true,
@@ -141,15 +150,24 @@
 	"debug.chrome.useV3": true,
 	"debug.extensionHost.useV3": true,
 	"debug.javascript.usePreview": true,
+	"debug.onTaskErrors": "abort",
 
 	"[css]": {
 		"editor.formatOnSave": false
 	},
 	"[javascript]": {
 		"editor.formatOnSave": false,
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
+		"editor.defaultFormatter": "vscode.typescript-language-features"
 	},
 	"[javascriptreact]": {
+		"editor.formatOnSave": false,
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[typescriptreact]": {
+		"editor.formatOnSave": false,
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[typescript]": {
 		"editor.formatOnSave": false,
 		"editor.defaultFormatter": "esbenp.prettier-vscode"
 	},
@@ -157,7 +175,7 @@
 		"editor.defaultFormatter": "vscode.html-language-features"
 	},
 	"[jsonc]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
+		"editor.defaultFormatter": "vscode.json-language-features"
 	},
 	"[json]": {
 		"editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -176,37 +194,42 @@
 	"javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
 	"javascript.implicitProjectConfig.checkJs": true,
 	"javascript.updateImportsOnFileMove.enabled": "always",
+	"javascript.format.semicolons": "insert",
 
-	"npm.enableScriptExplorer": true,
 	"npm.packageManager": "yarn",
 
 	"eslint.enable": true,
-	"eslint.packageManager": "yarn",
-	"eslint.nodePath": "/home/oneofone/.config/yarn/global/node_modules/",
-	"eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
 	"eslint.run": "onSave",
-	"eslint.codeActionsOnSave.mode": "problems",
-	"eslint.lintTask.enable": true,
-	"eslint.quiet": true,
+	"eslint.format.enable": true,
+	"eslint.packageManager": "yarn",
+	// "eslint.nodePath": "/home/oneofone/.config/yarn/global/node_modules/",
+	"eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
+	"eslint.lintTask.enable": false,
+	"eslint.quiet": false,
 
 	"prettier.disableLanguages": ["vue", "markdown"],
 	"prettier.jsxBracketSameLine": true,
+	"prettier.singleQuote": false,
 	"prettier.packageManager": "yarn",
 	"prettier.quoteProps": "consistent",
-	"prettier.singleQuote": true,
 	"prettier.tabWidth": 4,
 	"prettier.trailingComma": "es5",
 	"prettier.useTabs": true,
 	"prettier.arrowParens": "always",
-	"prettier.printWidth": 120,
+	"prettier.printWidth": 140,
+
+	"html.format.wrapLineLength": 140,
+	"html.format.wrapAttributes": "force-expand-multiline",
 
 	"yaml.format.enable": true,
-	"yaml.format.printWidth": 120,
+	"yaml.format.printWidth": 140,
 
 	"python.linting.pylintEnabled": false,
 	"python.linting.mypyEnabled": true,
 	"python.linting.enabled": true,
 	"python.formatting.provider": "black",
+
+	"C_Cpp.clang_format_fallbackStyle": "Google",
 
 	"go.buildOnSave": "off",
 	"go.vetOnSave": "off",
@@ -214,19 +237,21 @@
 	"go.useCodeSnippetsOnFunctionSuggest": true,
 	"go.useCodeSnippetsOnFunctionSuggestWithoutType": true,
 	"go.autocompleteUnimportedPackages": true,
+	"go.testFlags": ["-v", "-count=1", "-benchtime=10s"],
 	"go.editorContextMenuCommands": {
 		"toggleTestFile": true,
 		"addTags": true,
-		"removeTags": true,
+		"removeTags": false,
 		"testAtCursor": false,
 		"testFile": false,
 		"testPackage": true,
 		"generateTestForFunction": true,
 		"generateTestForFile": false,
-		"generateTestForPackage": true,
+		"generateTestForPackage": false,
 		"addImport": false,
-		"testCoverage": true,
-		"playground": false
+		"testCoverage": false,
+		"playground": false,
+		"debugTestAtCursor": true
 	},
 	"go.addTags": {
 		"tags": "json",
@@ -234,35 +259,38 @@
 		"promptForTags": false,
 		"transform": "camelcase"
 	},
-	"go.coverOnSingleTest": true,
+	"go.coverOnSingleTest": false,
 	"go.gotoSymbol.includeGoroot": true,
 	"go.useLanguageServer": true,
-	"go.delveConfig": {
-		"dlvLoadConfig": {
-			"followPointers": true,
-			"maxVariableRecurse": 1,
-			"maxStringLen": 64,
-			"maxArrayValues": 64,
-			"maxStructFields": -1
-		},
-		"apiVersion": 2,
-		"showGlobalVariables": true
+	"go.useGoProxyToCheckForToolUpdates": false,
+	"go.enableCodeLens": {
+		"references": false,
+		"runtest": true
 	},
+	"go.toolsEnvVars": {
+		"GOFLAGS":"-tags=go2"
+	},
+	//"go.languageServerFlags": ["-rpc.trace"],
 	"gopls": {
 		"env": {},
 		"staticcheck": true,
 		"analyses": {
 			"ST1000": false,
-			"ST1003": false
+			"ST1003": false,
+			"SA5001": false,
+			"composites": false
 		},
 		"codelens": {
 			"generate": true,
 			"upgrade.dependency": true,
-			"test": true
+			"test": false,
+			"gc_details": true
 		},
-		"usePlaceholders": false,
+
+		"usePlaceholders": true,
 		"completeUnimported": true,
-		"deepCompletion": true
+		"deepCompletion": true,
+		"gofumpt": true
 	},
 
 	"rust.all_features": true,
@@ -291,6 +319,7 @@
 		"Elts",
 		"Fira",
 		"Gruvbox",
+		"IDFAs",
 		"Influencers",
 		"Injectable",
 		"JSONP",
@@ -305,6 +334,7 @@
 		"csel",
 		"dups",
 		"fatih",
+		"favicon",
 		"fname",
 		"fset",
 		"gmail",
@@ -312,6 +342,7 @@
 		"goimports",
 		"golang",
 		"gometalinter",
+		"iodb",
 		"jsbeautify",
 		"jsonp",
 		"julienschmidt",
@@ -326,6 +357,7 @@
 		"redir",
 		"retargeting",
 		"samp",
+		"signup",
 		"sqlite",
 		"struct",
 		"structs",
@@ -333,19 +365,14 @@
 		"uint",
 		"ulimit",
 		"unmarshals",
+		"uuid",
+		"wakenn",
 		"xast",
 		"xerrors",
 		"xonsh"
 	],
 	"cSpell.ignoreRegExpList": ["0x[a-f0-9]+", "<?[\\w.\\-+]+@\\w+(\\.\\w+)+>?"],
-	"cSpell.ignorePaths": [
-		"**/node_modules/**",
-		"**/vscode-extension/**",
-		"**/.git/**",
-		".vscode",
-		"typings",
-		".gitignore"
-	],
+	"cSpell.ignorePaths": ["**/node_modules/**", "**/vscode-extension/**", "**/.git/**", ".vscode", "typings", ".gitignore"],
 	"cSpell.flagWords": ["hte"],
 	"cSpell.spellCheckDelayMs": 100,
 
@@ -399,6 +426,23 @@
 	"gitlens.views.lineHistory.enabled": true,
 	"gitlens.views.lineHistory.location": "scm",
 
+	"githubPullRequests.queries": [
+		{
+			"label": "Waiting For My Review",
+			"query": "is:open review-requested:${user}"
+		},
+		{
+			"label": "Assigned To Me",
+			"query": "is:open assignee:${user}"
+		},
+		{
+			"label": "Created By Me",
+			"query": "is:open author:${user}"
+		}
+	],
+	"githubIssues.issueCompletions.enabled": false,
+	"githubIssues.userCompletions.enabled": false,
+
 	"save-runner.enabled": false,
 	"save-runner.commands": [
 		{
@@ -417,7 +461,7 @@
 
 	"bookmarks.useWorkaroundForFormatters": true,
 
-	"extensions.autoUpdate": true,
+	"extensions.autoUpdate": false,
 	"extensions.showRecommendationsOnlyOnDemand": true,
 	"workbench.settings.enableNaturalLanguageSearch": false,
 	"workbench.enableExperiments": false,

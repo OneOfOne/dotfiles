@@ -68,8 +68,18 @@
 
 	fuck = !git reset --hard && git pull
 
+	ignore = update-index --assume-unchanged
+	unignore = update-index --no-assume-unchanged
+	ignored = !git ls-files -v | grep "^[[:lower:]]"
+
 [filter "lfs"]
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
 	clean = git-lfs clean -- %f
+
+[advice]
+	detachedHead = no
+
+[pull]
+	rebase = false

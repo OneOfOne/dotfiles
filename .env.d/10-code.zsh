@@ -1,5 +1,6 @@
 # export GOCACHE="/tmp/.gocache"
 export GOPATH="$HOME/code/go"
+export GO2PATH="/usr/src/go2/src/cmd/go2go/testdata/go2path:$GOPATH"
 export GOBIN="$GOPATH/bin"
 export GOFLAGS="-gcflags=-c=16"
 export GOSUMDB="off"
@@ -22,8 +23,6 @@ done
 
 unset gv name
 
-alias code-gomod="env GO111MODULE=on code"
-
 alias gow64="env GOOS=windows GOARCH=amd64 CGO_ENABLED=1 CC=x86_64-w64-mingw32-gcc CXX=x86_64-w64-mingw32-g++ go"
 alias gow32="env GOOS=windows GOARCH=386 CGO_ENABLED=1 CC=i686-w64-mingw32-gcc CXX=i686-w64-mingw32-g++ go"
 
@@ -31,11 +30,13 @@ alias killgo="killall -9 gocode go-langserver bingo gopls &>/dev/null"
 
 hash -d gh="$GOPATH/src/github.com/"
 hash -d mygh="$GOPATH/src/github.com/OneOfOne/"
-hash -d ooo="$GOPATH/src/oneofone.net/"
+hash -d ooo="$GOPATH/src/go.oneofone.dev/"
 hash -d meteora="$GOPATH/src/github.com/missionMeteora/"
 hash -d swayops="$GOPATH/src/github.com/swayops/"
 hash -d pdna="$GOPATH/src/github.com/PathDNA/"
 hash -d pine="$GOPATH/src/github.com/wakenn/pineAPI/"
+
+alias go2go="/usr/src/go2/bin/go tool go2go"
 
 function setgo {
 	local v="$1"
@@ -120,5 +121,6 @@ function rebuildgotools {
 		github.com/sqs/goreturns \
 		honnef.co/go/tools/... 2>&1 | egrep -v 'meta tag'
 
-	env GO111MODULE=on GOGC=off go get -v -u golang.org/x/tools/gopls@master golang.org/x/tools@master
+	# env GO111MODULE=on GOGC=off go get -v -u golang.org/x/tools/gopls@master golang.org/x/tools@master
+	env GO111MODULE=on GOGC=off go get -v -u golang.org/x/tools/gopls@dev.go2go golang.org/x/tools@dev.go2go
 }
