@@ -5,6 +5,7 @@ export GOBIN="$GOPATH/bin"
 export GOFLAGS="-gcflags=-c=16"
 export GOSUMDB="off"
 export GOPROXY="direct"
+export GO111MODULE=auto
 #export GO111MODULE="${GO111MODULE:-off}" # off by default for now
 
 
@@ -41,6 +42,13 @@ alias go2go="/usr/src/go2/bin/go tool go2go"
 function setgo {
 	local v="$1"
 	if [ -z "$v" ]; then
+		go version
+		return
+	fi
+
+	if [ "$v" = "os" -o "$v" = "main" ]; then
+		rm -fv $HOME/bin/{go,gofmt}
+		go clean -r -cache -testcache &>/dev/null
 		go version
 		return
 	fi
@@ -106,14 +114,9 @@ function rebuildgotools {
 	echo using $(go version)
 	echo -------------------------------
 
-	env GO111MODULE=off GOGC=off go get -v -u $@ \
-		github.com/uudashr/gopkgs/cmd/gopkgs \
-		github.com/ramya-rao-a/go-outline \
-		github.com/acroca/go-symbols \
-		github.com/cweill/gotests/... \
+	env GO111MODULE=off GOGC=off go get -u $@ \
 		github.com/fatih/gomodifytags \
 		github.com/josharian/impl \
-		github.com/davidrjenni/reftools/cmd/fillstruct \
 		github.com/haya14busa/goplay/cmd/goplay \
 		github.com/godoctor/godoctor \
 		github.com/go-delve/delve/cmd/dlv \
@@ -122,5 +125,19 @@ function rebuildgotools {
 		honnef.co/go/tools/... 2>&1 | egrep -v 'meta tag'
 
 	# env GO111MODULE=on GOGC=off go get -v -u golang.org/x/tools/gopls@master golang.org/x/tools@master
-	env GO111MODULE=on GOGC=off go get -v -u golang.org/x/tools/gopls@dev.go2go golang.org/x/tools@dev.go2go
+	cd ~gh/../golang.org/x/tools/gopls
+	git pull && git merge-master && env GO111MODULE=on GOGC=off go install -v
+	#env GO111MODULE=on GOGC=off go get -v -u golang.org/x/tools/gopls@dev.go2go golang.org/x/tools@dev.go2go
+}
+
+function gotest {
+	local n="${1:-.}"
+	[ "$1" != "" ] && shift
+	go test -count=1 -v -run="$n" $@
+}
+
+function gobench {
+	local n="${1:-.}";
+	[ "$1" != "" ] && shift
+	go test -count=1 -v -run='^$' -benchmem -bench="$n" $@
 }

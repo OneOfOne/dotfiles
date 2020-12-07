@@ -39,10 +39,15 @@
 	"editor.formatOnPaste": false,
 	"editor.formatOnType": false,
 	"editor.formatOnSave": false,
+	"editor.formatOnSaveMode": "file",
 	"editor.autoIndent": "full",
 	"editor.renameOnType": true,
 	"editor.semanticHighlighting.enabled": true,
 	"editor.parameterHints.cycle": true,
+	"editor.suggest.showStatusBar": true,
+
+	"editor.maxTokenizationLineLength": 1000000000,
+	"files.maxMemoryForLargeFilesMB": 104096,
 
 	"editor.gotoLocation.multipleDeclarations": "goto",
 	"editor.gotoLocation.multipleDefinitions": "goto",
@@ -50,7 +55,7 @@
 	"editor.gotoLocation.multipleReferences": "goto",
 	"editor.gotoLocation.multipleTypeDefinitions": "goto",
 	"editor.multiCursorModifier": "alt",
-
+	"editor.find.cursorMoveOnType": true,
 	"diffEditor.maxComputationTime": 0,
 
 	"breadcrumbs.symbolSortOrder": "name",
@@ -60,13 +65,14 @@
 	"workbench.startupEditor": "newUntitledFile",
 	"workbench.list.multiSelectModifier": "alt",
 	"workbench.editor.highlightModifiedTabs": true,
-	"workbench.colorTheme": "Noctis",
+	"workbench.colorTheme": "Winter is Coming (Dark Blue)",
 	"workbench.settings.editor": "json",
 	"workbench.settings.useSplitJSON": true,
 	"workbench.tree.indent": 16,
 	"workbench.tree.renderIndentGuides": "always",
 	"workbench.editor.limit.enabled": false,
 	"workbench.editor.scrollToSwitchTabs": true,
+	"workbench.editor.pinnedTabSizing": "compact",
 
 	"problems.showCurrentInStatus": true,
 
@@ -102,7 +108,6 @@
 	"files.insertFinalNewline": true,
 	"files.trimTrailingWhitespace": true,
 	"files.trimFinalNewlines": true,
-	"files.maxMemoryForLargeFilesMB": 8192,
 	"files.encoding": "utf8",
 	"files.autoSave": "onFocusChange",
 	"files.defaultLanguage": "${activeEditorLanguage}",
@@ -145,10 +150,6 @@
 	"debug.inlineValues": true,
 	"debug.toolBarLocation": "floating",
 	"debug.showSubSessionsInToolBar": true,
-	"debug.enableAllHovers": true,
-	"debug.node.useV3": true,
-	"debug.chrome.useV3": true,
-	"debug.extensionHost.useV3": true,
 	"debug.javascript.usePreview": true,
 	"debug.onTaskErrors": "abort",
 
@@ -186,19 +187,22 @@
 	"typescript.referencesCodeLens.enabled": false,
 	"typescript.implementationsCodeLens.enabled": false,
 	"typescript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
-	"typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
+	"typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": false,
+	"typescript.format.insertSpaceAfterOpeningAndBeforeClosingEmptyBraces": false,
+	"typescript.preferences.quoteStyle": "double",
 	"typescript.disableAutomaticTypeAcquisition": false,
 	"typescript.enablePromptUseWorkspaceTsdk": true,
 
 	"javascript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
-	"javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
+	"javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": false,
+	"javascript.format.insertSpaceAfterOpeningAndBeforeClosingEmptyBraces": false,
+	"javascript.preferences.quoteStyle": "double",
 	"javascript.implicitProjectConfig.checkJs": true,
 	"javascript.updateImportsOnFileMove.enabled": "always",
 	"javascript.format.semicolons": "insert",
 
 	"npm.packageManager": "yarn",
 
-	"eslint.enable": true,
 	"eslint.run": "onSave",
 	"eslint.format.enable": true,
 	"eslint.packageManager": "yarn",
@@ -231,13 +235,24 @@
 
 	"C_Cpp.clang_format_fallbackStyle": "Google",
 
+	"[go]": {
+		"editor.insertSpaces": false,
+		"editor.formatOnSave": true,
+		"editor.formatOnSaveMode": "file",
+		"editor.codeActionsOnSave": {
+		  "source.organizeImports": true,
+		  "source.fixAll": true
+		}
+	},
 	"go.buildOnSave": "off",
 	"go.vetOnSave": "off",
 	"go.lintOnSave": "off",
 	"go.useCodeSnippetsOnFunctionSuggest": true,
 	"go.useCodeSnippetsOnFunctionSuggestWithoutType": true,
 	"go.autocompleteUnimportedPackages": true,
-	"go.testFlags": ["-v", "-count=1", "-benchtime=10s"],
+	"go.testFlags": ["-v", "-count=1", "-benchtime=5s"],
+	"go.coverMode": "atomic",
+	"go.coverShowCounts": true,
 	"go.editorContextMenuCommands": {
 		"toggleTestFile": true,
 		"addTags": true,
@@ -265,10 +280,22 @@
 	"go.useGoProxyToCheckForToolUpdates": false,
 	"go.enableCodeLens": {
 		"references": false,
-		"runtest": true
+		"runtest": false
 	},
 	"go.toolsEnvVars": {
+		"GO111MODULE": "auto",
 		"GOFLAGS":"-tags=go2"
+	},
+	"go.delveConfig": {
+		"dlvLoadConfig": {
+		  "followPointers": true,
+		  "maxVariableRecurse": 1,
+		  "maxStringLen": 1024,
+		  "maxArrayValues": 1024,
+		  "maxStructFields": -1
+		},
+		"apiVersion": 2,
+		"showGlobalVariables": false
 	},
 	//"go.languageServerFlags": ["-rpc.trace"],
 	"gopls": {
@@ -278,19 +305,29 @@
 			"ST1000": false,
 			"ST1003": false,
 			"SA5001": false,
-			"composites": false
+			"composites": false,
+			"unusedparams": false,
 		},
-		"codelens": {
+		"codelenses": {
 			"generate": true,
 			"upgrade.dependency": true,
-			"test": false,
+			"test": true,
 			"gc_details": true
 		},
 
-		"usePlaceholders": true,
+		"usePlaceholders": false,
 		"completeUnimported": true,
 		"deepCompletion": true,
-		"gofumpt": true
+		"importShortcut": "definition",
+		"matcher": "fuzzy",
+		"symbolMatcher": "fuzzy",
+		"symbolStyle": "dynamic",
+		"verboseWorkDoneProgress": false,
+		"gofumpt": true,
+		"semanticTokens": true,
+		"experimentalDiagnosticsDelay": "250ms",
+		"experimentalPackageCacheKey": true,
+		"completionBudget": "250ms"
 	},
 
 	"rust.all_features": true,
@@ -323,6 +360,7 @@
 		"Influencers",
 		"Injectable",
 		"JSONP",
+		"Mones",
 		"Protos",
 		"TODO",
 		"Unimported",
@@ -347,6 +385,7 @@
 		"jsonp",
 		"julienschmidt",
 		"konsole",
+		"linkedin",
 		"nocheckptr",
 		"nolint",
 		"oneofone",
@@ -421,47 +460,11 @@
 	},
 	"gitlens.mode.statusBar.enabled": false,
 	"gitlens.views.repositories.branches.layout": "list",
-	"gitlens.views.fileHistory.enabled": true,
-	"gitlens.views.fileHistory.location": "scm",
 	"gitlens.views.lineHistory.enabled": true,
-	"gitlens.views.lineHistory.location": "scm",
-
-	"githubPullRequests.queries": [
-		{
-			"label": "Waiting For My Review",
-			"query": "is:open review-requested:${user}"
-		},
-		{
-			"label": "Assigned To Me",
-			"query": "is:open assignee:${user}"
-		},
-		{
-			"label": "Created By Me",
-			"query": "is:open author:${user}"
-		}
-	],
-	"githubIssues.issueCompletions.enabled": false,
-	"githubIssues.userCompletions.enabled": false,
-
-	"save-runner.enabled": false,
-	"save-runner.commands": [
-		{
-			"enabled": false,
-			"include": "\\.[tj]sx?$",
-			"exclude": "/node_modules/",
-			"pre": "eslint_d --fix ${tmpFile}"
-		},
-		{
-			"enabled": false,
-			"include": "\\.go$",
-			"useTempFile": false,
-			"pre": "goimports"
-		}
-	],
 
 	"bookmarks.useWorkaroundForFormatters": true,
 
-	"extensions.autoUpdate": false,
+	"extensions.autoUpdate": true,
 	"extensions.showRecommendationsOnlyOnDemand": true,
 	"workbench.settings.enableNaturalLanguageSearch": false,
 	"workbench.enableExperiments": false,
