@@ -1,6 +1,9 @@
 .config/Code/
 .config/nvim/
 .config/coc/db.json
+.config/coc/mru
+.config/coc/commands
+.config/coc/extensions
 .env.d/05-work.zsh
 node_modules/
 yarn.lock

@@ -77,3 +77,5 @@ function qemu-uefi() {
 		-device virtio-9p-pci,id=fs0,fsdev=fsdev0,mount_tag=hostshare \
 		$args
 }
+
+alias vmw="sudo env HOME=$HOME vmware"

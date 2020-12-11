@@ -60,7 +60,7 @@
 
 	"breadcrumbs.symbolSortOrder": "name",
 
-	"workbench.editor.enablePreview": false,
+	"workbench.editor.enablePreview": true,
 	"workbench.editor.enablePreviewFromQuickOpen": false,
 	"workbench.startupEditor": "newUntitledFile",
 	"workbench.list.multiSelectModifier": "alt",
