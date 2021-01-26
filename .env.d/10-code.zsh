@@ -32,10 +32,6 @@ alias killgo="killall -9 gocode go-langserver bingo gopls &>/dev/null"
 hash -d gh="$GOPATH/src/github.com/"
 hash -d mygh="$GOPATH/src/github.com/OneOfOne/"
 hash -d ooo="$GOPATH/src/go.oneofone.dev/"
-hash -d meteora="$GOPATH/src/github.com/missionMeteora/"
-hash -d swayops="$GOPATH/src/github.com/swayops/"
-hash -d pdna="$GOPATH/src/github.com/PathDNA/"
-hash -d pine="$GOPATH/src/github.com/wakenn/pineAPI/"
 
 alias go2go="/usr/src/go2/bin/go tool go2go"
 
@@ -46,24 +42,20 @@ function setgo {
 		return
 	fi
 
-	if [ "$v" = "os" -o "$v" = "main" ]; then
-		rm -fv $HOME/bin/{go,gofmt}
-		go clean -r -cache -testcache &>/dev/null
-		go version
-		return
-	fi
-
 	[ "$v" = "tip" -o "$v" = "master" ] && v=""
-
 	local p="/usr/src/go$v/bin"
+
+	if [ "$v" = "os" -o "$v" = "main" ]; then
+		p="/usr/bin"
+	fi
 
 	if [ ! -d "$p" ]; then
 		_err "$p doesn't exist."
 		return 1
 	fi
 
-	ln -svf $p/{go,gofmt} $HOME/bin || return 1
 
+	ln -svf $p/{go,gofmt} $HOME/bin || return 1
 	go clean -r -cache -testcache &>/dev/null
 	go version
 }
@@ -114,7 +106,7 @@ function rebuildgotools {
 	echo using $(go version)
 	echo -------------------------------
 
-	env GO111MODULE=off GOGC=off go get -u $@ \
+	env GO111MODULE=off GOGC=off go get -u -v $@ \
 		github.com/fatih/gomodifytags \
 		github.com/josharian/impl \
 		github.com/haya14busa/goplay/cmd/goplay \

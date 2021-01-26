@@ -76,8 +76,8 @@
 
 	"problems.showCurrentInStatus": true,
 
-	"window.title": "VSCode${separator}${dirty}${rootName}${separator}${activeEditorShort}",
-	"window.titleBarStyle": "native",
+	"window.title": "${dirty}${rootName}${separator}${activeEditorShort}${separator}VSCode",
+	"window.titleBarStyle": "custom",
 	"window.menuBarVisibility": "toggle",
 	"window.openFilesInNewWindow": "on",
 	"window.newWindowDimensions": "maximized",
@@ -102,7 +102,7 @@
 	"files.defaultLanguage": "${activeEditorLanguage}",
 	"files.associations": {
 		"*.mustache": "html",
-		"*.user": "json",
+		"*.user": "jsonc",
 		".tslintrc": "jsonc",
 		"*.json": "jsonc",
 		"*.html": "html",
@@ -137,10 +137,10 @@
 	"search.searchOnType": false,
 
 	"debug.inlineValues": true,
-	"debug.toolBarLocation": "floating",
-	"debug.showSubSessionsInToolBar": true,
-	"debug.javascript.usePreview": true,
 	"debug.onTaskErrors": "abort",
+	"debug.javascript.usePreview": true,
+	"debug.showSubSessionsInToolBar": true,
+	"debug.allowBreakpointsEverywhere": true,
 
 	"[css]": {
 		"editor.formatOnSave": false
@@ -213,7 +213,7 @@
 	"prettier.printWidth": 140,
 
 	"html.format.wrapLineLength": 140,
-	"html.format.wrapAttributes": "force-expand-multiline",
+	"html.format.wrapAttributes": "auto",
 
 	"yaml.format.enable": true,
 	"yaml.format.printWidth": 140,
@@ -267,7 +267,7 @@
 	"go.coverOnSingleTest": false,
 	"go.gotoSymbol.includeGoroot": true,
 	"go.useLanguageServer": true,
-	"go.useGoProxyToCheckForToolUpdates": false,
+	"go.toolsManagement.checkForUpdates": "local",
 	"go.enableCodeLens": {
 		"references": false,
 		"runtest": false
@@ -280,17 +280,16 @@
 		"dlvLoadConfig": {
 			"followPointers": true,
 			"maxVariableRecurse": 1,
-			"maxStringLen": 1024,
-			"maxArrayValues": 1024,
+			"maxStringLen": 200,
+			"maxArrayValues": 128,
 			"maxStructFields": -1
 		},
 		"apiVersion": 2,
-		"showGlobalVariables": false
+		"showGlobalVariables": false,
+		"dlvFlags": ["--check-go-version=false", "--disable-aslr"]
 	},
 	//"go.languageServerFlags": ["-rpc.trace"],
 	"gopls": {
-		"env": {},
-		"staticcheck": true,
 		"analyses": {
 			"ST1000": false,
 			"ST1003": false,
@@ -298,27 +297,32 @@
 			"composites": false,
 			"unusedparams": false
 		},
-		"codelenses": {
+		"ui.codelenses": {
 			"generate": true,
 			"upgrade.dependency": true,
+			"regenerate_cgo": true,
 			"test": true,
+			"vendor": true,
 			"gc_details": true
 		},
+		"ui.diagnostic.annotations": {
+			"bounds": true,
+			"escape": true,
+			"inline": true,
+			"nil": true
+		},
+		"ui.diagnostic.staticcheck": true,
+		"ui.completion.usePlaceholders": true,
+		"ui.navigation.importShortcut": "Definition",
+		"ui.completion.matcher": "Fuzzy",
+		"ui.navigation.symbolMatcher": "Fuzzy",
+		"ui.navigation.symbolStyle": "Dynamic",
+		"ui.completion.completionBudget": "300ms",
+		"ui.semanticTokens": true,
+		"ui.diagnostic.experimentalDiagnosticsDelay": "200ms",
 
-		"usePlaceholders": false,
-		"completeUnimported": true,
-		"deepCompletion": true,
-		"importShortcut": "Definition",
-		"matcher": "Fuzzy",
-		"symbolMatcher": "Fuzzy",
-		"symbolStyle": "Dynamic",
-		"verboseWorkDoneProgress": false,
-		"gofumpt": true,
-		"semanticTokens": true,
-		"experimentalDiagnosticsDelay": "250ms",
-		"experimentalPackageCacheKey": true,
-		"completionBudget": "250ms",
-		"directoryFilters": [
+		"build.experimentalPackageCacheKey": true,
+		"build.directoryFilters": [
 			"-node_modules",
 			"-data"
 		]
@@ -455,11 +459,12 @@
 	"gitlens.mode.statusBar.enabled": false,
 	"gitlens.views.repositories.branches.layout": "list",
 	"gitlens.views.lineHistory.enabled": true,
+	"gitlens.fileAnnotations.command": "blame",
 
 	"bookmarks.useWorkaroundForFormatters": true,
 
 	"extensions.autoUpdate": true,
-	"extensions.showRecommendationsOnlyOnDemand": true,
+	"extensions.ignoreRecommendations": true,
 	"workbench.settings.enableNaturalLanguageSearch": false,
 	"workbench.enableExperiments": false,
 	"npm.fetchOnlinePackageInfo": false,
