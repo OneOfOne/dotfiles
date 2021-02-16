@@ -45,7 +45,6 @@
 	"editor.semanticHighlighting.enabled": true,
 	"editor.parameterHints.cycle": true,
 	"editor.suggest.showStatusBar": true,
-
 	"editor.maxTokenizationLineLength": 1000000000,
 	"files.maxMemoryForLargeFilesMB": 104096,
 
@@ -57,10 +56,11 @@
 	"editor.multiCursorModifier": "alt",
 	"editor.find.cursorMoveOnType": true,
 	"diffEditor.maxComputationTime": 0,
+	"search.experimental.searchInOpenEditors": true,
 
 	"breadcrumbs.symbolSortOrder": "name",
 
-	"workbench.editor.enablePreview": true,
+	"workbench.editor.enablePreview": false,
 	"workbench.editor.enablePreviewFromQuickOpen": false,
 	"workbench.startupEditor": "newUntitledFile",
 	"workbench.list.multiSelectModifier": "alt",

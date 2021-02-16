@@ -26,7 +26,7 @@ if [ "$1" = "update-vsc" ]; then
 fi
 
 if [ -x /usr/src/VSCode-linux-x64/bin/code-insiders ]; then
-	exec /usr/src/VSCode-linux-x64/bin/code-insiders $@
+	exec /usr/src/VSCode-linux-x64/bin/code-insiders "${@}"
 else
-	exec /usr/src/VSCode-linux-x64/bin/code $@
+	exec /usr/src/VSCode-linux-x64/bin/code "${@}"
 fi
