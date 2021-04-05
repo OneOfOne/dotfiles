@@ -12,8 +12,8 @@ if [ "$1" = "update-vsc" ]; then
 	pushd /usr/src
 	rm -rf $tmp
 	mkdir -p $tmp
-	echo curl -L https://vscode-update.azurewebsites.net/latest/linux-x64/$typ
-	curl -L https://vscode-update.azurewebsites.net/latest/linux-x64/$typ | tar -vxzC $tmp || exit 1
+	echo curl -L https://update.code.visualstudio.com/latest/linux-x64/$typ
+	curl -L https://update.code.visualstudio.com/latest/linux-x64/$typ | tar -vxzC $tmp || exit 1
 
 	rm -rf VSCode-linux-x64.previous &>/dev/null
 	mv VSCode-linux-x64 VSCode-linux-x64.previous &>/dev/null

@@ -5,5 +5,6 @@
 .config/coc/commands
 .config/coc/extensions
 .env.d/05-work.zsh
+.env.d/99-work.zsh
 node_modules/
 yarn.lock

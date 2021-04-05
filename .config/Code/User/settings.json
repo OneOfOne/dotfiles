@@ -66,6 +66,7 @@
 	"workbench.list.multiSelectModifier": "alt",
 	"workbench.editor.highlightModifiedTabs": true,
 	"workbench.colorTheme": "Material Theme Darker High Contrast",
+	"workbench.iconTheme": "eq-material-theme-icons-darker",
 	"workbench.settings.editor": "json",
 	"workbench.settings.useSplitJSON": true,
 	"workbench.tree.indent": 16,
@@ -234,13 +235,8 @@
 			"source.fixAll": true
 		}
 	},
-	"go.buildOnSave": "off",
-	"go.vetOnSave": "off",
 	"go.lintOnSave": "off",
-	"go.useCodeSnippetsOnFunctionSuggest": true,
-	"go.useCodeSnippetsOnFunctionSuggestWithoutType": true,
-	"go.autocompleteUnimportedPackages": true,
-	"go.testFlags": ["-v", "-count=1", "-benchtime=5s"],
+	"go.testFlags": ["-v", "-count=1", "-benchtime=5s", "-timeout=5m"],
 	"go.coverMode": "atomic",
 	"go.coverShowCounts": true,
 	"go.editorContextMenuCommands": {
@@ -265,9 +261,7 @@
 		"transform": "camelcase"
 	},
 	"go.coverOnSingleTest": false,
-	"go.gotoSymbol.includeGoroot": true,
-	"go.useLanguageServer": true,
-	"go.toolsManagement.checkForUpdates": "local",
+	"go.toolsManagement.checkForUpdates": "off",
 	"go.enableCodeLens": {
 		"references": false,
 		"runtest": false
@@ -280,36 +274,45 @@
 		"dlvLoadConfig": {
 			"followPointers": true,
 			"maxVariableRecurse": 1,
-			"maxStringLen": 200,
-			"maxArrayValues": 128,
+			"maxStringLen": 128,
+			"maxArrayValues": 64,
 			"maxStructFields": -1
 		},
 		"apiVersion": 2,
-		"showGlobalVariables": false,
-		"dlvFlags": ["--check-go-version=false", "--disable-aslr"]
+		"showGlobalVariables": false
+	},
+	"go.languageServerExperimentalFeatures": {
+		"diagnostics": true
 	},
 	//"go.languageServerFlags": ["-rpc.trace"],
 	"gopls": {
+		"formatting.gofumpt": true,
 		"analyses": {
 			"ST1000": false,
 			"ST1003": false,
 			"SA5001": false,
-			"composites": false,
-			"unusedparams": false
+			"nilness": true,
+			"unusedwrite": true,
+
+			// too muchnoise
+			"fieldalignment": false,
+			"shadow": false,
+			"composites": false
 		},
 		"ui.codelenses": {
 			"generate": true,
-			"upgrade.dependency": true,
 			"regenerate_cgo": true,
 			"test": true,
 			"vendor": true,
+			"tidy": true,
+			"upgrade_dependency": true,
 			"gc_details": true
 		},
 		"ui.diagnostic.annotations": {
 			"bounds": true,
-			"escape": true,
 			"inline": true,
-			"nil": true
+			"escape": false,
+			"nil": false
 		},
 		"ui.diagnostic.staticcheck": true,
 		"ui.completion.usePlaceholders": true,
@@ -317,15 +320,17 @@
 		"ui.completion.matcher": "Fuzzy",
 		"ui.navigation.symbolMatcher": "Fuzzy",
 		"ui.navigation.symbolStyle": "Dynamic",
-		"ui.completion.completionBudget": "300ms",
+		"ui.completion.completionBudget": "500ms",
 		"ui.semanticTokens": true,
-		"ui.diagnostic.experimentalDiagnosticsDelay": "200ms",
 
-		"build.experimentalPackageCacheKey": true,
 		"build.directoryFilters": [
 			"-node_modules",
 			"-data"
-		]
+		],
+
+		"build.experimentalPackageCacheKey": true,
+		"ui.diagnostic.experimentalDiagnosticsDelay": "300ms",
+		"experimentalPostfixCompletions": true
 	},
 
 	"rust.all_features": true,
@@ -429,10 +434,6 @@
 		"suppressGitVersionWarning": false,
 		"suppressLineUncommittedWarning": false,
 		"suppressNoRepositoryWarning": false,
-		"suppressResultsExplorerNotice": false,
-		"suppressShowKeyBindingsNotice": true,
-		"suppressUpdateNotice": false,
-		"suppressWelcomeNotice": false
 	},
 	"gitlens.keymap": "none",
 	"gitlens.statusBar.reduceFlicker": true,
@@ -458,7 +459,6 @@
 	},
 	"gitlens.mode.statusBar.enabled": false,
 	"gitlens.views.repositories.branches.layout": "list",
-	"gitlens.views.lineHistory.enabled": true,
 	"gitlens.fileAnnotations.command": "blame",
 
 	"bookmarks.useWorkaroundForFormatters": true,
@@ -470,6 +470,6 @@
 	"npm.fetchOnlinePackageInfo": false,
 	"telemetry.enableTelemetry": false,
 	"telemetry.enableCrashReporter": false,
-	"gitlens.advanced.telemetry.enabled": false,
-	"workbench.iconTheme": "eq-material-theme-icons-darker"
+	"editor.largeFileOptimizations": false,
+	"gitlens.views.commits.files.layout": "tree"
 }
