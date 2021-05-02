@@ -12,19 +12,15 @@
 	"editor.renderLineHighlight": "all",
 	"editor.renderIndentGuides": true,
 	"editor.dragAndDrop": false,
-
 	"editor.smoothScrolling": true,
 	"editor.cursorSmoothCaretAnimation": false,
 	"editor.cursorBlinking": "smooth",
-
 	"editor.wordWrap": "on",
 	"editor.wordWrapColumn": 160,
-
 	"editor.minimap.renderCharacters": true,
 	"editor.minimap.showSlider": "mouseover",
 	"editor.minimap.maxColumn": 140,
 	"editor.minimap.scale": 1,
-
 	"editor.snippetSuggestions": "inline",
 	"editor.hover.delay": 200,
 	"editor.suggest.localityBonus": true,
@@ -35,7 +31,6 @@
 		"source.fixAll.eslint": true,
 		"source.fixAll": true
 	},
-
 	"editor.formatOnPaste": false,
 	"editor.formatOnType": false,
 	"editor.formatOnSave": false,
@@ -47,7 +42,6 @@
 	"editor.suggest.showStatusBar": true,
 	"editor.maxTokenizationLineLength": 1000000000,
 	"files.maxMemoryForLargeFilesMB": 104096,
-
 	"editor.gotoLocation.multipleDeclarations": "goto",
 	"editor.gotoLocation.multipleDefinitions": "goto",
 	"editor.gotoLocation.multipleImplementations": "goto",
@@ -57,9 +51,7 @@
 	"editor.find.cursorMoveOnType": true,
 	"diffEditor.maxComputationTime": 0,
 	"search.experimental.searchInOpenEditors": true,
-
 	"breadcrumbs.symbolSortOrder": "name",
-
 	"workbench.editor.enablePreview": false,
 	"workbench.editor.enablePreviewFromQuickOpen": false,
 	"workbench.startupEditor": "newUntitledFile",
@@ -74,9 +66,7 @@
 	"workbench.editor.limit.enabled": false,
 	"workbench.editor.scrollToSwitchTabs": true,
 	"workbench.editor.pinnedTabSizing": "compact",
-
 	"problems.showCurrentInStatus": true,
-
 	"window.title": "${dirty}${rootName}${separator}${activeEditorShort}${separator}VSCode",
 	"window.titleBarStyle": "custom",
 	"window.menuBarVisibility": "toggle",
@@ -87,14 +77,12 @@
 	"window.zoomLevel": 0,
 	"window.customMenuBarAltFocus": false,
 	"explorer.confirmDelete": false,
-
 	"terminal.integrated.shell.linux": "/bin/zsh",
 	"terminal.external.linuxExec": "konsole",
 	"terminal.integrated.copyOnSelection": true,
 	"terminal.integrated.experimentalUseTitleEvent": true,
 	"terminal.integrated.enableBell": true,
 	"terminal.integrated.rendererType": "experimentalWebgl",
-
 	"files.insertFinalNewline": true,
 	"files.trimTrailingWhitespace": true,
 	"files.trimFinalNewlines": true,
@@ -129,49 +117,45 @@
 		},
 		"**/node_modules": true
 	},
-
 	"search.showLineNumbers": true,
 	"search.smartCase": true,
 	"search.maintainFileSearchCache": true,
 	"search.quickOpen.includeSymbols": true,
 	"search.quickOpen.history.filterSortOrder": "recency",
 	"search.searchOnType": false,
-
 	"debug.inlineValues": true,
 	"debug.onTaskErrors": "abort",
 	"debug.javascript.usePreview": true,
 	"debug.showSubSessionsInToolBar": true,
 	"debug.allowBreakpointsEverywhere": true,
-
 	"[css]": {
 		"editor.formatOnSave": false
 	},
 	"[javascript]": {
 		"editor.formatOnSave": false,
-		"editor.defaultFormatter": "vscode.typescript-language-features"
+		"editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
 	},
 	"[javascriptreact]": {
 		"editor.formatOnSave": false,
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
+		"editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
 	},
 	"[typescriptreact]": {
 		"editor.formatOnSave": false,
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
+		"editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
 	},
 	"[typescript]": {
 		"editor.formatOnSave": false,
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
+		"editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
 	},
 	"[html]": {
 		"editor.defaultFormatter": "vscode.html-language-features"
 	},
 	"[jsonc]": {
-		"editor.defaultFormatter": "vscode.json-language-features"
+		"editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
 	},
 	"[json]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
+		"editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
 	},
-
 	"typescript.suggest.completeFunctionCalls": true,
 	"typescript.updateImportsOnFileMove.enabled": "always",
 	"typescript.referencesCodeLens.enabled": false,
@@ -182,18 +166,14 @@
 	"typescript.preferences.quoteStyle": "double",
 	"typescript.disableAutomaticTypeAcquisition": false,
 	"typescript.enablePromptUseWorkspaceTsdk": true,
-
 	"javascript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
 	"javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": false,
 	"javascript.format.insertSpaceAfterOpeningAndBeforeClosingEmptyBraces": false,
 	"javascript.preferences.quoteStyle": "double",
 	"javascript.updateImportsOnFileMove.enabled": "always",
 	"javascript.format.semicolons": "insert",
-
 	"js/ts.implicitProjectConfig.checkJs": true,
-
 	"npm.packageManager": "yarn",
-
 	"eslint.run": "onSave",
 	"eslint.format.enable": true,
 	"eslint.packageManager": "yarn",
@@ -201,31 +181,24 @@
 	"eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
 	"eslint.lintTask.enable": false,
 	"eslint.quiet": false,
-
-	"prettier.disableLanguages": ["vue", "markdown"],
 	"prettier.jsxBracketSameLine": true,
 	"prettier.singleQuote": false,
-	"prettier.packageManager": "yarn",
 	"prettier.quoteProps": "consistent",
 	"prettier.tabWidth": 4,
 	"prettier.trailingComma": "es5",
 	"prettier.useTabs": true,
 	"prettier.arrowParens": "always",
+	"prettier.htmlWhitespaceSensitivity": "ignore",
 	"prettier.printWidth": 140,
-
 	"html.format.wrapLineLength": 140,
 	"html.format.wrapAttributes": "auto",
-
 	"yaml.format.enable": true,
 	"yaml.format.printWidth": 140,
-
 	"python.linting.pylintEnabled": false,
 	"python.linting.mypyEnabled": true,
 	"python.linting.enabled": true,
 	"python.formatting.provider": "black",
-
 	"C_Cpp.clang_format_fallbackStyle": "Google",
-
 	"[go]": {
 		"editor.insertSpaces": false,
 		"editor.formatOnSave": true,
@@ -234,6 +207,9 @@
 			"source.organizeImports": true,
 			"source.fixAll": true
 		}
+	},
+	"go.alternateTools": {
+		"dlv-dap": "dlv"
 	},
 	"go.lintOnSave": "off",
 	"go.testFlags": ["-v", "-count=1", "-benchtime=5s", "-timeout=5m"],
@@ -293,7 +269,6 @@
 			"SA5001": false,
 			"nilness": true,
 			"unusedwrite": true,
-
 			// too muchnoise
 			"fieldalignment": false,
 			"shadow": false,
@@ -322,19 +297,12 @@
 		"ui.navigation.symbolStyle": "Dynamic",
 		"ui.completion.completionBudget": "500ms",
 		"ui.semanticTokens": true,
-
-		"build.directoryFilters": [
-			"-node_modules",
-			"-data"
-		],
-
+		"build.directoryFilters": ["-node_modules", "-data"],
 		"build.experimentalPackageCacheKey": true,
 		"ui.diagnostic.experimentalDiagnosticsDelay": "300ms",
-		"experimentalPostfixCompletions": true
+		"ui.completion.experimentalPostfixCompletions": true
 	},
-
 	"rust.all_features": true,
-
 	"html.format.endWithNewline": true,
 	"html.format.maxPreserveNewLines": 1,
 	"html.format.extraLiners": "-",
@@ -346,7 +314,6 @@
 	},
 	"emmet.showSuggestionsAsSnippets": true,
 	"php.suggest.basic": false,
-
 	"cSpell.allowCompoundWords": true,
 	"cSpell.enabled": false,
 	"cSpell.numSuggestions": 10,
@@ -417,7 +384,6 @@
 	"cSpell.ignorePaths": ["**/node_modules/**", "**/vscode-extension/**", "**/.git/**", ".vscode", "typings", ".gitignore"],
 	"cSpell.flagWords": ["hte"],
 	"cSpell.spellCheckDelayMs": 100,
-
 	"git.autofetch": true,
 	"git.confirmSync": false,
 	"git.enableSmartCommit": true,
@@ -425,7 +391,6 @@
 	"git.autoRepositoryDetection": false,
 	"git.untrackedChanges": "separate",
 	"timeline.showView": true,
-
 	"gitlens.codeLens.enabled": true,
 	"gitlens.advanced.messages": {
 		"suppressCommitHasNoPreviousCommitWarning": false,
@@ -433,7 +398,7 @@
 		"suppressFileNotUnderSourceControlWarning": false,
 		"suppressGitVersionWarning": false,
 		"suppressLineUncommittedWarning": false,
-		"suppressNoRepositoryWarning": false,
+		"suppressNoRepositoryWarning": false
 	},
 	"gitlens.keymap": "none",
 	"gitlens.statusBar.reduceFlicker": true,
@@ -460,9 +425,7 @@
 	"gitlens.mode.statusBar.enabled": false,
 	"gitlens.views.repositories.branches.layout": "list",
 	"gitlens.fileAnnotations.command": "blame",
-
 	"bookmarks.useWorkaroundForFormatters": true,
-
 	"extensions.autoUpdate": true,
 	"extensions.ignoreRecommendations": true,
 	"workbench.settings.enableNaturalLanguageSearch": false,
@@ -471,5 +434,16 @@
 	"telemetry.enableTelemetry": false,
 	"telemetry.enableCrashReporter": false,
 	"editor.largeFileOptimizations": false,
-	"gitlens.views.commits.files.layout": "tree"
+	"gitlens.views.commits.files.layout": "tree",
+	"json.maxItemsComputed": 50000,
+	"json.schemas": [
+		{
+			"name": "vscode-expo-manifest",
+			"url": "file:///home/oneofone/.config/Code/User/globalStorage/bycedric.vscode-expo/manifest-41.0.0.json",
+			"fileMatch": [
+				"app.json",
+				"app.config.json"
+			]
+		}
+	]
 }

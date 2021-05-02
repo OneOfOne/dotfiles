@@ -8,9 +8,13 @@ local RIGHT_ARCH="$FG_WHITE❱$FG_RESET"
 
 local LAST_RET="%(?..$LEFT_ARCH$FG_RED%?$RIGHT_ARCH━)"
 
-function ssh_connection() {
+function other_conn() {
 	if [[ -n $SSH_CONNECTION ]]; then
 		echo "$FG_RED(ssh)$FG_WHITE:"
+	fi
+
+	if grep -q 'vpnns /sys' /proc/self/mounts; then
+		echo "$FG_CYAN(vpn)$FG_WHITE:"
 	fi
 }
 
@@ -27,6 +31,7 @@ function cur_dir() {
 	# https://unix.stackexchange.com/a/247008/2759
 	echo $pwd | sed 's!\([^/]\)[^/]*/!\1/!g'
 }
+
 ZSH_THEME_GIT_PROMPT_PREFIX="$LEFT_ARCH"
 ZSH_THEME_GIT_PROMPT_SUFFIX="$RIGHT_ARCH"
 ZSH_THEME_GIT_PROMPT_BRANCH="%{$fg_bold[yellow]%}"
@@ -42,9 +47,9 @@ fi
 local cur_dir='${LEFT_ARCH}$FG_CYAN$(cur_dir)$FG_RESET${RIGHT_ARCH}'
 local git_status='$(git_super_status)'
 
-PROMPT="$FG_WHITE┏━ $FG_RESET$(ssh_connection)$user_host $cur_dir $git_status
+PROMPT="$FG_WHITE┏━ $FG_RESET$(other_conn)$user_host $cur_dir $git_status
 $FG_WHITE┗━$LAST_RET$FG_WHITE●$FG_RESET "
-RPROMPT=''
+RPROMPT="$FG_WHITE$(date)$FG_RESET"
 
 #dcdccc
 #2c2c2c
