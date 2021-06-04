@@ -10,3 +10,6 @@
 [submodule ".env.d/oh-my-zsh.custom/plugins/resty"]
 	path = .env.d/oh-my-zsh.custom/plugins/resty
 	url = https://github.com/OneOfOne/resty
+[submodule ".env.d/oh-my-zsh.custom/themes/powerlevel10k"]
+	path = .env.d/oh-my-zsh.custom/themes/powerlevel10k
+	url = https://github.com/romkatv/powerlevel10k.git

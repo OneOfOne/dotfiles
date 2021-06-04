@@ -1,3 +1,10 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 export ENV_FILES="$HOME/.dotfiles/.env.d"
 export ZSH="$ENV_FILES/oh-my-zsh"
 
@@ -19,6 +26,10 @@ plugins=(
 	zsh-syntax-highlighting
 	resty
 )
+
+ZSH_THEME="powerlevel10k/powerlevel10k"
+P10K_PATH="$ZSH_CUSTOM/p10k.zsh"
+[[ -f $P10K_PATH ]] && source $P10K_PATH
 
 source $ZSH/oh-my-zsh.sh
 
