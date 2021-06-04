@@ -17,8 +17,8 @@ plugins=(
 	systemd
 	git-prompt
 	zsh-syntax-highlighting
+	resty
 )
-
 
 source $ZSH/oh-my-zsh.sh
 

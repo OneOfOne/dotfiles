@@ -2,16 +2,9 @@
 export GOPATH="$HOME/code/go"
 export GO2PATH="/usr/src/go2/src/cmd/go2go/testdata/go2path:$GOPATH"
 export GOBIN="$GOPATH/bin"
-export GOFLAGS="-gcflags=-c=16"
 export GOSUMDB="off"
 export GOPROXY="direct"
 export GO111MODULE=auto
-#export GO111MODULE="${GO111MODULE:-off}" # off by default for now
-
-
-alias setgomod="export GO111MODULE=on; killgo"
-alias unsetgomod="export GO111MODULE=off; killgo"
-alias unsetgoflags="export GOFLAGS="
 
 path=($HOME/.config/yarn/global/node_modules/.bin $path)
 path=($GOBIN $HOME/.cargo/bin/ $path)
@@ -56,7 +49,7 @@ function setgo {
 
 
 	ln -svf $p/{go,gofmt} $HOME/bin || return 1
-	go clean -r -cache -testcache &>/dev/null
+	# go clean -r -cache -testcache &>/dev/null
 	go version
 }
 
@@ -90,8 +83,7 @@ function rebuildgo {
 	env GOROOT_BOOTSTRAP=/usr/lib/go CC=gcc GOGC=off bash make.bash || return 1
 
 	if [ "$v" != "" ]; then
-		../bin/go clean -r -cache -testcache &>/dev/null
-		ln -s $PWD/../bin/go ~/bin/go$v
+		ln -fs $PWD/../bin/go ~/bin/go$v
 	fi
 
 	echo -------------------------------
@@ -100,26 +92,39 @@ function rebuildgo {
 }
 
 function rebuildgotools {
-	killgo
-
 	echo -------------------------------
 	echo using $(go version)
 	echo -------------------------------
 
-	env GO111MODULE=off GOGC=off go get -u -v $@ \
-		github.com/fatih/gomodifytags \
-		github.com/josharian/impl \
-		github.com/haya14busa/goplay/cmd/goplay \
-		github.com/godoctor/godoctor \
-		github.com/go-delve/delve/cmd/dlv \
-		github.com/rogpeppe/godef \
-		github.com/sqs/goreturns \
-		honnef.co/go/tools/... 2>&1 | egrep -v 'meta tag'
+	# env GO111MODULE=off GOGC=off go get -u -v $@ \
+	# 	github.com/fatih/gomodifytags \
+	# 	github.com/josharian/impl \
+	# 	github.com/haya14busa/goplay/cmd/goplay \
+	# 	github.com/godoctor/godoctor \
+	# 	github.com/rogpeppe/godef \
+	# 	github.com/sqs/goreturns \
+	# 	honnef.co/go/tools/... 2>&1 | egrep -v 'meta tag'
 
-	# env GO111MODULE=on GOGC=off go get -v -u golang.org/x/tools/gopls@master golang.org/x/tools@master
+	cd ~gh/go-delve/delve/
+	git reset --hard
+	git pull || return 1
+	go get -u ./...
+	go mod tidy
+	go mod vendor
+	make install && rm -rf vendor
+
 	cd ~gh/../golang.org/x/tools/gopls
-	git pull && git merge-master && env GO111MODULE=on GOGC=off go install -v
-	#env GO111MODULE=on GOGC=off go get -v -u golang.org/x/tools/gopls@dev.go2go golang.org/x/tools@dev.go2go
+	git reset --hard && git pull || return 1
+	env GO111MODULE=on GOGC=off go install -v
+
+	cd ~/code/vscode/vscode-go
+	git reset --hard
+	git pull || return 1
+	npm install || return 1
+	vsce package -o /tmp/gocode.vsix || return 1
+	code --install-extension /tmp/gocode.vsix --force || return 1
+
+	killgo
 }
 
 function gotest {
@@ -132,4 +137,13 @@ function gobench {
 	local n="${1:-.}";
 	[ "$1" != "" ] && shift
 	go test -count=1 -v -run='^$' -benchmem -bench="$n" $@
+}
+
+function gobump {
+	rebuildgo || return 1
+	rebuildgotools || return 1
+}
+
+function go2 {
+
 }

@@ -1,7 +1,7 @@
 {
 	//"editor.fontFamily": "Fira Code Medium",
 	"editor.fontFamily": "JetBrains Mono",
-	"editor.fontSize": 15,
+	"editor.fontSize": 16,
 	"editor.fontWeight": "500",
 	"editor.fontLigatures": true,
 	"editor.tabSize": 4,
@@ -50,14 +50,13 @@
 	"editor.multiCursorModifier": "alt",
 	"editor.find.cursorMoveOnType": true,
 	"diffEditor.maxComputationTime": 0,
-	"search.experimental.searchInOpenEditors": true,
 	"breadcrumbs.symbolSortOrder": "name",
 	"workbench.editor.enablePreview": false,
 	"workbench.editor.enablePreviewFromQuickOpen": false,
 	"workbench.startupEditor": "newUntitledFile",
 	"workbench.list.multiSelectModifier": "alt",
 	"workbench.editor.highlightModifiedTabs": true,
-	"workbench.colorTheme": "Material Theme Darker High Contrast",
+	"workbench.colorTheme": "Winter is Coming (Dark Blue - No Italics)",
 	"workbench.iconTheme": "eq-material-theme-icons-darker",
 	"workbench.settings.editor": "json",
 	"workbench.settings.useSplitJSON": true,
@@ -70,14 +69,18 @@
 	"window.title": "${dirty}${rootName}${separator}${activeEditorShort}${separator}VSCode",
 	"window.titleBarStyle": "custom",
 	"window.menuBarVisibility": "toggle",
-	"window.openFilesInNewWindow": "on",
 	"window.newWindowDimensions": "maximized",
 	"window.restoreWindows": "none",
 	"window.closeWhenEmpty": true,
 	"window.zoomLevel": 0,
 	"window.customMenuBarAltFocus": false,
 	"explorer.confirmDelete": false,
-	"terminal.integrated.shell.linux": "/bin/zsh",
+	"terminal.integrated.profiles.linux": {
+		"zsh": {
+			"path": "zsh",
+			"default": true
+		},
+	},
 	"terminal.external.linuxExec": "konsole",
 	"terminal.integrated.copyOnSelection": true,
 	"terminal.integrated.experimentalUseTitleEvent": true,
@@ -133,25 +136,25 @@
 	},
 	"[javascript]": {
 		"editor.formatOnSave": false,
-		"editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+		"editor.defaultFormatter": "dbaeumer.vscode-eslint"
 	},
 	"[javascriptreact]": {
 		"editor.formatOnSave": false,
-		"editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+		"editor.defaultFormatter": "dbaeumer.vscode-eslint"
 	},
 	"[typescriptreact]": {
 		"editor.formatOnSave": false,
-		"editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+		"editor.defaultFormatter": "dbaeumer.vscode-eslint"
 	},
 	"[typescript]": {
 		"editor.formatOnSave": false,
-		"editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+		"editor.defaultFormatter": "dbaeumer.vscode-eslint"
 	},
 	"[html]": {
 		"editor.defaultFormatter": "vscode.html-language-features"
 	},
 	"[jsonc]": {
-		"editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+		"editor.defaultFormatter": "dbaeumer.vscode-eslint"
 	},
 	"[json]": {
 		"editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
@@ -174,6 +177,7 @@
 	"javascript.format.semicolons": "insert",
 	"js/ts.implicitProjectConfig.checkJs": true,
 	"npm.packageManager": "yarn",
+
 	"eslint.run": "onSave",
 	"eslint.format.enable": true,
 	"eslint.packageManager": "yarn",
@@ -181,6 +185,7 @@
 	"eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
 	"eslint.lintTask.enable": false,
 	"eslint.quiet": false,
+
 	"prettier.jsxBracketSameLine": true,
 	"prettier.singleQuote": false,
 	"prettier.quoteProps": "consistent",
@@ -198,7 +203,9 @@
 	"python.linting.mypyEnabled": true,
 	"python.linting.enabled": true,
 	"python.formatting.provider": "black",
+
 	"C_Cpp.clang_format_fallbackStyle": "Google",
+
 	"[go]": {
 		"editor.insertSpaces": false,
 		"editor.formatOnSave": true,
@@ -212,6 +219,7 @@
 		"dlv-dap": "dlv"
 	},
 	"go.lintOnSave": "off",
+	"go.buildFlags": ["-tags", "typeparams"],
 	"go.testFlags": ["-v", "-count=1", "-benchtime=5s", "-timeout=5m"],
 	"go.coverMode": "atomic",
 	"go.coverShowCounts": true,
@@ -242,10 +250,6 @@
 		"references": false,
 		"runtest": false
 	},
-	"go.toolsEnvVars": {
-		"GO111MODULE": "auto",
-		"GOFLAGS": "-tags=go2"
-	},
 	"go.delveConfig": {
 		"dlvLoadConfig": {
 			"followPointers": true,
@@ -263,7 +267,8 @@
 	//"go.languageServerFlags": ["-rpc.trace"],
 	"gopls": {
 		"formatting.gofumpt": true,
-		"analyses": {
+		"ui.diagnostic.staticcheck": true,
+		"ui.diagnostic.analyses": {
 			"ST1000": false,
 			"ST1003": false,
 			"SA5001": false,
@@ -286,21 +291,22 @@
 		"ui.diagnostic.annotations": {
 			"bounds": true,
 			"inline": true,
-			"escape": false,
-			"nil": false
+			"escape": true,
+			"nil": true
 		},
-		"ui.diagnostic.staticcheck": true,
+
 		"ui.completion.usePlaceholders": true,
 		"ui.navigation.importShortcut": "Definition",
-		"ui.completion.matcher": "Fuzzy",
-		"ui.navigation.symbolMatcher": "Fuzzy",
-		"ui.navigation.symbolStyle": "Dynamic",
 		"ui.completion.completionBudget": "500ms",
-		"ui.semanticTokens": true,
-		"build.directoryFilters": ["-node_modules", "-data"],
+
 		"build.experimentalPackageCacheKey": true,
 		"ui.diagnostic.experimentalDiagnosticsDelay": "300ms",
-		"ui.completion.experimentalPostfixCompletions": true
+		"build.allowImplicitNetworkAccess": true,
+
+		"ui.completion.experimentalPostfixCompletions": true,
+		"experimentalTemplateSupport": true,
+
+		"build.directoryFilters": ["-node_modules", "-data"]
 	},
 	"rust.all_features": true,
 	"html.format.endWithNewline": true,
@@ -423,7 +429,6 @@
 		}
 	},
 	"gitlens.mode.statusBar.enabled": false,
-	"gitlens.views.repositories.branches.layout": "list",
 	"gitlens.fileAnnotations.command": "blame",
 	"bookmarks.useWorkaroundForFormatters": true,
 	"extensions.autoUpdate": true,
@@ -445,5 +450,8 @@
 				"app.config.json"
 			]
 		}
-	]
+	],
+	"gitlens.views.repositories.includeWorkingTree": true,
+	"gitlens.views.repositories.files.layout": "tree",
+	"gitlens.views.branches.files.layout": "tree"
 }

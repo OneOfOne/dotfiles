@@ -3,8 +3,8 @@ local FG_WHITE="%{$fg_bold[white]%}"
 local FG_YELLOW="%{$fg_bold[yellow]%}"
 local FG_CYAN="%{$fg_bold[cyan]%}"
 local FG_RESET="%{$reset_color%}"
-local LEFT_ARCH="$FG_WHITE❰$FG_RESET"
-local RIGHT_ARCH="$FG_WHITE❱$FG_RESET"
+local LEFT_ARCH="$FG_WHITE❨$FG_RESET"
+local RIGHT_ARCH="$FG_WHITE❩$FG_RESET"
 
 local LAST_RET="%(?..$LEFT_ARCH$FG_RED%?$RIGHT_ARCH━)"
 
@@ -13,7 +13,7 @@ function other_conn() {
 		echo "$FG_RED(ssh)$FG_WHITE:"
 	fi
 
-	if grep -q 'vpnns /sys' /proc/self/mounts; then
+	if grep -q 'vpnns /sys' /proc/self/mounts &>/dev/null; then
 		echo "$FG_CYAN(vpn)$FG_WHITE:"
 	fi
 }
@@ -29,7 +29,7 @@ function cur_dir() {
 	fi
 
 	# https://unix.stackexchange.com/a/247008/2759
-	echo $pwd | sed 's!\([^/]\)[^/]*/!\1/!g'
+	echo "${(j:/:)${(@r:1:)${(@s:/:)${pwd:h}}}}/${pwd:t}"
 }
 
 ZSH_THEME_GIT_PROMPT_PREFIX="$LEFT_ARCH"
@@ -47,9 +47,10 @@ fi
 local cur_dir='${LEFT_ARCH}$FG_CYAN$(cur_dir)$FG_RESET${RIGHT_ARCH}'
 local git_status='$(git_super_status)'
 
-PROMPT="$FG_WHITE┏━ $FG_RESET$(other_conn)$user_host $cur_dir $git_status
-$FG_WHITE┗━$LAST_RET$FG_WHITE●$FG_RESET "
-RPROMPT="$FG_WHITE$(date)$FG_RESET"
+PROMPT="$FG_WHITE┌──$FG_RESET$(other_conn)$user_host $cur_dir $git_status
+$FG_WHITE└──$LAST_RET$FG_WHITE➤$FG_RESET "
+RPROMPT=""
+#"$FG_WHITE$(date)$FG_RESET"
 
 #dcdccc
 #2c2c2c

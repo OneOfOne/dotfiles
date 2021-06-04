@@ -1,105 +1,75 @@
-/*
-used packages:
-	eslint eslint-config-airbnb eslint-plugin-import eslint-plugin-json eslint-plugin-jsx-a11y eslint-plugin-optimize-regex \
-	eslint-plugin-react eslint-plugin-typescript typescript-eslint-parser
-
-global:
-	# add ~/.config/yarn/global/node_modules/.bin to your $PATH or use sudo to install it to /usr/local/bin
-	yarn global add {packages}
-
-local:
-	yarn add --dev {packages}
-*/
-
-module.exports = {
-	'extends': ['eslint:recommended'],
-	'plugins': ['typescript', 'react', 'optimize-regex', 'json'],
-	'parser': '/home/oneofone/.config/yarn/global/node_modules/babel-eslint',
-	'parserOptions': {
-		'ecmaVersion': 8,
-		'sourceType': 'module',
-		'ecmaFeatures': {
-			'jsx': true,
-			'modules': true,
-		}
+/* eslint-disable no-constant-condition */
+const base = {
+	root: true,
+	parser: '@babel/eslint-parser',
+	plugins: [ '@typescript-eslint', 'react', 'import' ],
+	settings: { react: { version: 'detect' }},
+	parserOptions: {
+		ecmaFeatures: { jsx: true },
+		ecmaVersion: 12,
+		requireConfigFile: true
 	},
-
-	'env': {
-		browser: true,
+	env: {
 		node: true,
-		es6: true,
-	},
+		browser: true,
+		es2021: true
+	}
+};
 
-	'rules': {
-		'no-undef': 0,
-		'no-unused-vars': 0,
-		'no-console': 0,
-		'react/no-unescaped-entities': 0,
-		'react/display-name': 0,
-		'no-case-declarations': 0,
-		'curly': ['error', 'multi-line'],
-		'array-bracket-spacing': ['error', 'never'],
-		'quotes': ['error', 'single'],
-		'jsx-quotes': ['error', 'prefer-double'],
-		// 'prettier/prettier': ['error', prettierConfig],
+module.exports = (process.env.NODE_ENV) ? base : {
+	...base,
 
-		// shit for airbnb
-		'radix': ['error', 'as-needed'],
-		'no-tabs': 0,
-		'no-multi-str': 0,
-		'no-restricted-globals': 0,
-		'max-len': ['warn', { 'code': 160, 'tabWidth': 4, 'ignoreUrls': true }],
-		'prefer-template': 0,
-		'arrow-parens': ['error', 'always'],
-		'no-restricted-syntax': 0,
-		'one-var': 0,
-		'prefer-const': ['error', { destructuring: 'all' }],
-		'quote-props': ['error', 'consistent'],
-		'class-methods-use-this': 0,
-		'no-continue': 0,
-		'no-script-url': 0,
-		'default-case': 0,
-		'no-multiple-empty-lines': ['error', { max: 1, maxEOF: 0, maxBOF: 0 }],
-		'indent': ['error', 'tab', { SwitchCase: 1, VariableDeclarator: 1 }],
-		'object-curly-newline': ['error', { multiline: true }],
-		'no-plusplus': 0,
-
-		'react/sort-comp': 0,
-		'react/jsx-indent': ['error', 'tab'],
-		'react/jsx-indent-props': ['error', 'tab'],
-		'react/jsx-filename-extension': [1, { extensions: ['.ts', '.tsx'] }],
-		'react/no-did-mount-set-state': 0,
-		'react/no-array-index-key': 0,
-		'react/no-multi-comp': 0,
-		'react/jsx-max-props-per-line': [1, { maximum: 10, when: 'multiline' }],
-		'jsx-a11y/anchor-is-valid': 0,
-		'jsx-a11y/click-events-have-key-events': 0,
-		'jsx-a11y/no-static-element-interactions': 0,
-
-		'import/no-unresolved': 0,
-		'import/prefer-default-export': 0,
-		'import/no-extraneous-dependencies': 0,
-	},
-
-	'overrides': [
-		{
-			files: ['*.tsx'],
-			parser: 'typescript-eslint-parser',
-			parserOptions: { ecmaFeatures: { jsx: true } },
-		},
-		{
-			files: ['*.ts'],
-			parser: 'typescript-eslint-parser',
-			parserOptions: { ecmaFeatures: { jsx: false } },
-		},
-		{
-			files: ['*.css', '*.less', '*.scss'],
-			rules: {
-				'prettier/prettier': [
-					'error',
-					{ singleQuote: false },
-				],
-			},
-		},
+	extends: [
+		'eslint:recommended',
+		'plugin:@typescript-eslint/eslint-recommended',
+		'plugin:@typescript-eslint/recommended',
+		'plugin:react/recommended',
+		'google'
 	],
+
+	rules: {
+		'no-tabs': [ 'error', { allowIndentationTabs: true }],
+		'indent': [ 'error', 'tab' ],
+		'quotes': [ 'error', 'single', { avoidEscape: true }],
+		'semi': [ 'error', 'always' ],
+		'max-len': [ 'warn', { code: 160, tabWidth: 4, ignoreUrls: true }],
+
+		'prefer-const': 'off',
+		'react/no-unescaped-entities': 'off',
+		'react/prop-types': 'off',
+		'react/display-name': 'off',
+		'one-var': 'off',
+		'no-unused-vars': 'warn',
+		'require-jsdoc': 'off',
+		'no-invalid-this': 'off',
+		'comma-dangle': [ 'error', 'never' ],
+		'no-multiple-empty-lines': [ 'error', { max: 1, maxEOF: 0, maxBOF: 0 }],
+		'brace-style': [ 'error', '1tbs', { allowSingleLine: true }],
+
+		'array-bracket-spacing': [ 'error', 'always', { objectsInArrays: false, arraysInArrays: false, singleValue: false }],
+		'object-curly-spacing': [ 'error', 'always', { objectsInObjects: false, arraysInObjects: false }],
+
+		'object-curly-newline': [
+			'error',
+			{
+				ObjectExpression: { minProperties: 9999, consistent: false, multiline: true },
+				ObjectPattern: { minProperties: 9999, consistent: false, multiline: true },
+				ImportDeclaration: { minProperties: 9999, consistent: false, multiline: false },
+				ExportDeclaration: { minProperties: 9999, consistent: false, multiline: true }
+			}
+		],
+		'import/order': [ 'error', { 'newlines-between': 'always-and-inside-groups' }],
+		'@typescript-eslint/no-explicit-any': 'off'
+	},
+
+	overrides: [
+		{
+			files: [ '*.js', '*.jsx' ],
+			rules: {
+				'@typescript-eslint/explicit-module-boundary-types': 'off',
+				'@typescript-eslint/no-unused-vars': 'off',
+				'@typescript-eslint/no-var-requires': 'off'
+			}
+		}
+	]
 };
