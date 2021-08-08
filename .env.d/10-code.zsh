@@ -5,6 +5,7 @@ export GOBIN="$GOPATH/bin"
 export GOSUMDB="off"
 export GOPROXY="direct"
 export GO111MODULE=auto
+#export GOEXPERIMENT=unified
 
 path=($HOME/.config/yarn/global/node_modules/.bin $path)
 path=($GOBIN $HOME/.cargo/bin/ $path)
@@ -51,6 +52,11 @@ function setgo {
 	ln -svf $p/{go,gofmt} $HOME/bin || return 1
 	# go clean -r -cache -testcache &>/dev/null
 	go version
+	if [ "$v" = "1.18" ]; then
+		go env -w GOEXPERIMENT="unified"
+	else
+		go env -u GOEXPERIMENT
+	fi
 }
 
 function addgotree {
@@ -108,14 +114,13 @@ function rebuildgotools {
 	cd ~gh/go-delve/delve/
 	git reset --hard
 	git pull || return 1
-	go get -u ./...
-	go mod tidy
-	go mod vendor
-	make install && rm -rf vendor
+	go mod vendor || return 1
+	# go mod tidy || return 1
+	make install || return 1
 
 	cd ~gh/../golang.org/x/tools/gopls
 	git reset --hard && git pull || return 1
-	env GO111MODULE=on GOGC=off go install -v
+	env GO111MODULE=on GOGC=off go install -v || return 1
 
 	cd ~/code/vscode/vscode-go
 	git reset --hard
@@ -140,10 +145,11 @@ function gobench {
 }
 
 function gobump {
-	rebuildgo || return 1
+	rebuildgo $1 || return 1
+	setgo $1 || return 1
 	rebuildgotools || return 1
 }
 
-function go2 {
-
+function gots {
+	node -p "new Date($1 * 1000)"
 }

@@ -1,0 +1,54 @@
+{
+	"clients": {
+		"gopls": {
+			"enabled": true,
+			"settings": {
+				"formatting.gofumpt": true,
+				"ui.diagnostic.staticcheck": true,
+				"ui.diagnostic.analyses": {
+					"ST1000": false,
+					"ST1003": false,
+					"SA5001": false,
+					"nilness": false,
+					// too noisy
+					"unusedwrite": false,
+					"unusedparams": false,
+					"fieldalignment": false,
+					"shadow": false,
+					"composites": false
+				},
+				"ui.codelenses": {
+					"generate": true,
+					"regenerate_cgo": true,
+					"test": true,
+					"vendor": true,
+					"tidy": true,
+					"upgrade_dependency": true,
+					"gc_details": true
+				},
+				"ui.diagnostic.annotations": {
+					"bounds": true,
+					"inline": true,
+					"escape": true,
+					"nil": true
+				},
+				"ui.completion.usePlaceholders": true,
+				"ui.navigation.importShortcut": "Definition",
+				"ui.completion.completionBudget": "500ms",
+				"ui.diagnostic.diagnosticsDelay": "300ms",
+				"build.allowImplicitNetworkAccess": true,
+				"build.directoryFilters": [
+					"-node_modules",
+					"-data"
+				],
+				"ui.completion.experimentalPostfixCompletions": true,
+				"build.experimentalTemplateSupport": true,
+				"build.experimentalPackageCacheKey": true
+			}
+		}
+	},
+	"show_references_in_quick_panel": true,
+	"log_debug": true,
+	"inhibit_snippet_completions": true,
+	"inhibit_word_completions": true
+}

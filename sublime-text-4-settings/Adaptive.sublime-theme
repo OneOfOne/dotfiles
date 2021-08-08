@@ -1,0 +1,9 @@
+// Documentation at https://www.sublimetext.com/docs/themes.html
+{
+	"variables": {
+		"font_size_sm": 13,
+		"font_size": 15,
+		"font_size_lg": 17,
+		"font_size_title": 24
+	}
+}

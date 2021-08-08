@@ -44,5 +44,12 @@ autoload -U compinit && compinit
 ttyctl -f # fix annoying apps that don't exit right
 
 alias .git="git -C $HOME/.dotfiles/"
-alias .gitup=".git pull"
+alias .gitup=".git pull --recurse-submodules"
 alias .reload="source ~/.zshrc"
+
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/home/oneofone/google-cloud-sdk/path.zsh.inc' ]; then . '/home/oneofone/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/home/oneofone/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/oneofone/google-cloud-sdk/completion.zsh.inc'; fi

@@ -1560,11 +1560,13 @@
 	function prompt_sdir() {
 		local pwd=$PWD
 		local gosrc="$GOPATH/src"
-		pwd=${pwd//$gosrc/✪}
-		pwd=${pwd//$HOME\/code/☯}
-		pwd=${pwd//$HOME/~}
+		pwd=${pwd//$gosrc/'✪'}
+		pwd=${pwd//$HOME\/code/'☯'}
+		pwd=${pwd//$HOME/'~'}
+		[ "$pwd" = "~" ] || pwd="${(j:/:)${(@r:1:)${(@s:/:)${pwd:h}}}}/${pwd:t}"
+
 		# https://unix.stackexchange.com/a/247008/2759
-		p10k segment -f $POWERLEVEL9K_DIR_FOREGROUND -t "${(j:/:)${(@r:1:)${(@s:/:)${pwd:h}}}}/${pwd:t}"
+		p10k segment -f $POWERLEVEL9K_DIR_FOREGROUND -t $pwd
 	}
 
 	# User-defined prompt segments may optionally provide an instant_prompt_* function. Its job

@@ -1,6 +1,7 @@
 {
 	//"editor.fontFamily": "Fira Code Medium",
 	"editor.fontFamily": "JetBrains Mono",
+	"editor.inlayHints.fontFamily": "JetBrains Mono",
 	"editor.fontSize": 16,
 	"editor.fontWeight": "500",
 	"editor.fontLigatures": true,
@@ -17,14 +18,16 @@
 	"editor.cursorBlinking": "smooth",
 	"editor.wordWrap": "on",
 	"editor.wordWrapColumn": 160,
-	"editor.minimap.renderCharacters": true,
-	"editor.minimap.showSlider": "mouseover",
-	"editor.minimap.maxColumn": 140,
-	"editor.minimap.scale": 1,
+	"editor.minimap.enabled": false,
+	// "editor.minimap.renderCharacters": true,
+	// "editor.minimap.showSlider": "mouseover",
+	// "editor.minimap.maxColumn": 140,
+	// "editor.minimap.scale": 1,
 	"editor.snippetSuggestions": "inline",
 	"editor.hover.delay": 200,
 	"editor.suggest.localityBonus": true,
-	"editor.suggestSelection": "recentlyUsed",
+	"editor.suggest.preview": true,
+	"editor.suggestSelection": "recentlyUsedByPrefix",
 	"editor.codeActionsOnSave": {
 		"source.addMissingImports": true,
 		"source.organizeImports": false,
@@ -49,7 +52,10 @@
 	"editor.gotoLocation.multipleTypeDefinitions": "goto",
 	"editor.multiCursorModifier": "alt",
 	"editor.find.cursorMoveOnType": true,
+	"editor.scrollbar.verticalScrollbarSize": 24,
+
 	"diffEditor.maxComputationTime": 0,
+
 	"breadcrumbs.symbolSortOrder": "name",
 	"workbench.editor.enablePreview": false,
 	"workbench.editor.enablePreviewFromQuickOpen": false,
@@ -68,7 +74,6 @@
 	"problems.showCurrentInStatus": true,
 	"window.title": "${dirty}${rootName}${separator}${activeEditorShort}${separator}VSCode",
 	"window.titleBarStyle": "custom",
-	"window.menuBarVisibility": "toggle",
 	"window.newWindowDimensions": "maximized",
 	"window.restoreWindows": "none",
 	"window.closeWhenEmpty": true,
@@ -83,9 +88,8 @@
 	},
 	"terminal.external.linuxExec": "konsole",
 	"terminal.integrated.copyOnSelection": true,
-	"terminal.integrated.experimentalUseTitleEvent": true,
+	"terminal.integrated.tabs.enabled": false,
 	"terminal.integrated.enableBell": true,
-	"terminal.integrated.rendererType": "experimentalWebgl",
 	"files.insertFinalNewline": true,
 	"files.trimTrailingWhitespace": true,
 	"files.trimFinalNewlines": true,
@@ -220,7 +224,7 @@
 	},
 	"go.lintOnSave": "off",
 	"go.buildFlags": ["-tags", "typeparams"],
-	"go.testFlags": ["-v", "-count=1", "-benchtime=5s", "-timeout=5m"],
+	"go.testFlags": ["-v", "-count=1", "-benchtime=5s", "-timeout=5m", "-vet=off"],
 	"go.coverMode": "atomic",
 	"go.coverShowCounts": true,
 	"go.editorContextMenuCommands": {
@@ -244,7 +248,7 @@
 		"promptForTags": false,
 		"transform": "camelcase"
 	},
-	"go.coverOnSingleTest": false,
+	"go.coverOnSingleTest": true,
 	"go.toolsManagement.checkForUpdates": "off",
 	"go.enableCodeLens": {
 		"references": false,
@@ -256,8 +260,9 @@
 			"maxVariableRecurse": 1,
 			"maxStringLen": 128,
 			"maxArrayValues": 64,
-			"maxStructFields": -1
+			"maxStructFields": -1,
 		},
+		"only-same-user":false,
 		"apiVersion": 2,
 		"showGlobalVariables": false
 	},
@@ -272,9 +277,10 @@
 			"ST1000": false,
 			"ST1003": false,
 			"SA5001": false,
-			"nilness": true,
-			"unusedwrite": true,
-			// too muchnoise
+			"nilness": false,
+			"unusedwrite": false,
+			"unusedparams": false,
+			// too much noise
 			"fieldalignment": false,
 			"shadow": false,
 			"composites": false
@@ -298,15 +304,15 @@
 		"ui.completion.usePlaceholders": true,
 		"ui.navigation.importShortcut": "Definition",
 		"ui.completion.completionBudget": "500ms",
+		"ui.diagnostic.diagnosticsDelay": "300ms",
 
-		"build.experimentalPackageCacheKey": true,
-		"ui.diagnostic.experimentalDiagnosticsDelay": "300ms",
 		"build.allowImplicitNetworkAccess": true,
+		"build.directoryFilters": ["-node_modules", "-data"],
 
 		"ui.completion.experimentalPostfixCompletions": true,
-		"experimentalTemplateSupport": true,
+		"build.experimentalTemplateSupport": true,
+		"build.experimentalPackageCacheKey": true
 
-		"build.directoryFilters": ["-node_modules", "-data"]
 	},
 	"rust.all_features": true,
 	"html.format.endWithNewline": true,
@@ -320,6 +326,54 @@
 	},
 	"emmet.showSuggestionsAsSnippets": true,
 	"php.suggest.basic": false,
+
+	"csv-edit.initiallyHideComments": true,
+	"csv-edit.readOption_hasHeader": "true",
+	"csv-edit.writeOption_hasHeader": "true",
+
+	"git.autofetch": true,
+	"git.confirmSync": false,
+	"git.enableSmartCommit": true,
+	"git.enableCommitSigning": true,
+	"git.autoRepositoryDetection": false,
+	"git.untrackedChanges": "separate",
+	"gitlens.views.repositories.includeWorkingTree": true,
+	"gitlens.views.repositories.files.layout": "tree",
+	"gitlens.views.branches.files.layout": "tree",
+	"gitlens.codeLens.enabled": true,
+	"gitlens.advanced.messages": {
+		"suppressCommitHasNoPreviousCommitWarning": false,
+		"suppressCommitNotFoundWarning": false,
+		"suppressFileNotUnderSourceControlWarning": false,
+		"suppressGitVersionWarning": false,
+		"suppressLineUncommittedWarning": false,
+		"suppressNoRepositoryWarning": false
+	},
+	"gitlens.keymap": "none",
+	"gitlens.statusBar.reduceFlicker": true,
+	"gitlens.mode.active": "review",
+	"gitlens.menus": {
+		"editor": false,
+		"editorGroup": {
+			"blame": true,
+			"compare": true,
+			"history": false,
+			"remote": false
+		},
+		"editorTab": {
+			"compare": false,
+			"history": true,
+			"remote": true
+		},
+		"explorer": {
+			"compare": true,
+			"history": true,
+			"remote": true
+		}
+	},
+	"gitlens.mode.statusBar.enabled": false,
+	"gitlens.fileAnnotations.command": "blame",
+	"gitlens.views.commits.files.layout": "tree",
 	"cSpell.allowCompoundWords": true,
 	"cSpell.enabled": false,
 	"cSpell.numSuggestions": 10,
@@ -390,47 +444,7 @@
 	"cSpell.ignorePaths": ["**/node_modules/**", "**/vscode-extension/**", "**/.git/**", ".vscode", "typings", ".gitignore"],
 	"cSpell.flagWords": ["hte"],
 	"cSpell.spellCheckDelayMs": 100,
-	"git.autofetch": true,
-	"git.confirmSync": false,
-	"git.enableSmartCommit": true,
-	"git.enableCommitSigning": true,
-	"git.autoRepositoryDetection": false,
-	"git.untrackedChanges": "separate",
-	"timeline.showView": true,
-	"gitlens.codeLens.enabled": true,
-	"gitlens.advanced.messages": {
-		"suppressCommitHasNoPreviousCommitWarning": false,
-		"suppressCommitNotFoundWarning": false,
-		"suppressFileNotUnderSourceControlWarning": false,
-		"suppressGitVersionWarning": false,
-		"suppressLineUncommittedWarning": false,
-		"suppressNoRepositoryWarning": false
-	},
-	"gitlens.keymap": "none",
-	"gitlens.statusBar.reduceFlicker": true,
-	"gitlens.mode.active": "review",
-	"gitlens.menus": {
-		"editor": false,
-		"editorGroup": {
-			"blame": true,
-			"compare": true,
-			"history": false,
-			"remote": false
-		},
-		"editorTab": {
-			"compare": false,
-			"history": true,
-			"remote": true
-		},
-		"explorer": {
-			"compare": true,
-			"history": true,
-			"remote": true
-		}
-	},
-	"gitlens.mode.statusBar.enabled": false,
-	"gitlens.fileAnnotations.command": "blame",
-	"bookmarks.useWorkaroundForFormatters": true,
+
 	"extensions.autoUpdate": true,
 	"extensions.ignoreRecommendations": true,
 	"workbench.settings.enableNaturalLanguageSearch": false,
@@ -439,19 +453,16 @@
 	"telemetry.enableTelemetry": false,
 	"telemetry.enableCrashReporter": false,
 	"editor.largeFileOptimizations": false,
-	"gitlens.views.commits.files.layout": "tree",
 	"json.maxItemsComputed": 50000,
 	"json.schemas": [
 		{
 			"name": "vscode-expo-manifest",
-			"url": "file:///home/oneofone/.config/Code/User/globalStorage/bycedric.vscode-expo/manifest-41.0.0.json",
+			"url": "file:///home/oneofone/.config/Code/User/globalStorage/bycedric.vscode-expo/manifest-42.0.0.json",
 			"fileMatch": [
 				"app.json",
 				"app.config.json"
 			]
 		}
 	],
-	"gitlens.views.repositories.includeWorkingTree": true,
-	"gitlens.views.repositories.files.layout": "tree",
-	"gitlens.views.branches.files.layout": "tree"
+
 }
