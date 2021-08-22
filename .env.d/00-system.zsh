@@ -28,22 +28,22 @@ zstyle ':completion:*' special-dirs false
 alias ..="cd .."
 alias ...="cd ../.."
 alias pcd="popd"
-
-alias ls="ls -hF --group-directories-first --color"
-alias ll="ls -l --time-style='+%Y-%m-%d %H:%M'"
-alias cp="cp --reflink=auto --sparse=always -ia"
+if [[ `uname -s` == 'Linux' ]]; then
+	alias ls="ls -hF --group-directories-first --color"
+	alias ll="ls -l --time-style='+%Y-%m-%d %H:%M'"
+	alias cp="cp --reflink=auto --sparse=always -ia"
+	alias ports="sudo ss -nl -tup"
+	alias pss="ps -Ao pid:5,state:1,user,cmd | grep -v grep | egrep"
+	alias df="df -Th --total"
+	alias duh="du -ach | sort -h"
+fi
 
 alias mkdir="mkdir -pv"
-alias df="df -Th --total"
-alias duh="du -ach | sort -h"
 alias myip="curl -s -S https://icanhazip.com"
 
 alias grep="grep --color"
 alias egrep="egrep --color"
 alias fgrep="fgrep --color"
-
-alias ports="sudo ss -nl -tup"
-alias pss="ps -Ao pid:5,state:1,user,cmd | grep -v grep | egrep"
 
 path=($HOME/.dotfiles/bin $path)
 path=($HOME/bin $path)
@@ -69,7 +69,7 @@ function _err {
 export LESS='--tabs=4 --no-init --LONG-PROMPT --ignore-case --quit-if-one-screen --RAW-CONTROL-CHARS'
 
 function androidenv {
-	export ANDROID_HOME=$HOME/.cache/android-sdk
+	export ANDROID_HOME=$HOME/sdk/android
 	export PATH=$PATH:$ANDROID_HOME/emulator
 	export PATH=$PATH:$ANDROID_HOME/tools
 	export PATH=$PATH:$ANDROID_HOME/tools/bin
