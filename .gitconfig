@@ -1,8 +1,29 @@
 [hub]
 	protocol = https
+[core]
+	compression = 9
+	loosecompression = 9
+	quotepath = true
+	legacyheaders = false
+	preloadindex = true
+	#whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol,trailing
+	fsyncobjectfiles = false
+
+	autocrlf = false
+	safecrlf = false
+
+[pack]
+	compression = 9
+	threads = 0
 
 [user]
+	name = OneOfOne
+	email = oneofone@gmail.com
+	rname = Ahmed W.
 	signingkey = 760B7805
+
+[help]
+	format = man
 
 [commit]
 	gpgsign = true
@@ -39,6 +60,15 @@
 	helper = store
 
 [alias]
+	ll = log --stat --abbrev-commit --abbrev=8 --pretty='format:%Cgreen*%Creset Commit (%G?): %Cblue%h%Creset (%Cred%H%Creset)%n    %CgreenAuthor:%Creset %an (%ae)%n    %CgreenDate:%Creset %ad%n    %CgreenSubject: %Creset%s%n%b' --show-signature
+	l1 = log --abbrev-commit --abbrev=8 --pretty='format:%Cgreen%h%Creset [ %ad ] %s'
+	l2 = log --color --abbrev-commit --abbrev=8 --pretty='format:%Cred*%Creset %Cgreen%h%Creset [ %s ]'
+	raw = log -r --root --raw --no-abbrev --pretty='format:%h~%an~%ad~'
+	changes = diff --name-status -r
+
+	rp = repack -a -d --depth=250 --window=250 -f
+	co = checkout
+
 	st = status --short --untracked-files=no
 
 	d = diff -p -b -w --ignore-space-at-eol --src-prefix=old/ --dst-prefix=new/
@@ -47,14 +77,12 @@
 	hdiff = !git d HEAD
 
 	master = !git checkout master && git pull
+	main = !git checkout main && git pull
 	merge-master = !git fetch origin master && git merge origin/master -m 'master sync'
-	stash-and-merge = !git stash && git merge-master && git stash pop
+	merge-main = !git fetch origin main && git merge origin/main -m 'master sync'
 	stash-and-pull = !git stash && git pull && git stash pop
-	stash-and-pull-master = !git stash && git master && git stash pop
 	new-branch = "!f() { git stash &>/dev/null ; git checkout -b $@ && git stash pop &>/dev/null; }; f"
-	sam = !git stash-and-merge
 	sap = !git stash-and-pull
-	sapm = !git stash-and-pull-master
 	nb = !git new-branch
 
 	grep-all = "!f() { git grep -ni $@ `git for-each-ref --format='%(refname)' refs/` | perl -pe 's@refs/[^/]+/@@g'; }; f"
@@ -74,6 +102,12 @@
 	gc-all = !git -c gc.reflogExpire=0 -c gc.reflogExpireUnreachable=0 -c gc.rerereresolved=0 -c gc.rerereunresolved=0 -c gc.pruneExpire=now gc --aggressive
 	undo-last = reset --soft HEAD~1
 
+	clean-old = "!f() { git delete-merged-branches; du -h --max-depth=0 .git && git reflog expire --all --expire=now && git gc --prune=now --aggressive; du -h --max-depth=0 .git; }; f"
+
+	list-old-branches = !git branch --merged | egrep -v '^\\*|master|main|dev'
+
+	fuckit = !git reset --hard && git pull
+
 [filter "lfs"]
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
@@ -85,5 +119,9 @@
 
 [pull]
 	rebase = false
+
 [init]
 	defaultBranch = main
+
+[credential]
+	helper = cache

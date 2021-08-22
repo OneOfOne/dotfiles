@@ -1,50 +1,49 @@
-setopt globdots
-setopt ignoreeof
-setopt autocontinue
+# Switching directories for lazy people
+setopt autocd
+# See: http://zsh.sourceforge.net/Intro/intro_6.html
+setopt autopushd pushdminus pushdsilent pushdtohome pushdignoredups
+# Don't kill background jobs when I logout
+setopt nohup
+# See: http://zsh.sourceforge.net/Intro/intro_2.html
 setopt extendedglob
-setopt rmstarsilent
+# Do not require a leading '.' in a filename to be matched explicitly
+setopt globdots
+# Try to make the completion list smaller (occupying less lines) by printing
+# the matches in columns with different widths
+setopt listpacked
+setopt longlistjobs             # Display PID when using jobs
+#setopt ignoreeof
+#setopt autocontinue
+# setopt rmstarsilent
 
-setopt histreduceblanks
-setopt histignorespace
-setopt histignorealldups
+setopt histreduceblanks histignorespace histignorealldups
 
-autoload -U regexp-replace
+#autoload -U regexp-replace
 setopt re_match_pcre
 
 zstyle ':completion:*' rehash true
-zstyle ':completion:*' completer _complete _ignored _files
+zstyle ':completion:*' completer _expand _complete _ignored _approximate
+zstyle ':completion:*' special-dirs false
 
-alias which="type -a"
 alias ..="cd .."
 alias ...="cd ../.."
+alias pcd="popd"
 
 alias ls="ls -hF --group-directories-first --color"
 alias ll="ls -l --time-style='+%Y-%m-%d %H:%M'"
-alias rm="rm -i"
-alias mv="mv -i"
 alias cp="cp --reflink=auto --sparse=always -ia"
 
 alias mkdir="mkdir -pv"
 alias df="df -Th --total"
 alias duh="du -ach | sort -h"
-alias duh1="du -ach --max-depth=1 | sort -h"
 alias myip="curl -s -S https://icanhazip.com"
 
 alias grep="grep --color"
 alias egrep="egrep --color"
 alias fgrep="fgrep --color"
 
-alias sudo="sudo "
-
 alias ports="sudo ss -nl -tup"
 alias pss="ps -Ao pid:5,state:1,user,cmd | grep -v grep | egrep"
-alias psg="ps aux | grep -v grep | grep -i -e VSZ -e"
-
-alias psmem='ps -e -orss=,args= | sort -b -k1,1n'
-alias psmem10='ps -e -orss=,args= | sort -b -k1,1n| head -10'
-# get top process eating cpu if not work try excute : export LC_ALL='C'
-alias pscpu='ps -e -o pcpu,cpu,nice,state,cputime,args|sort -k1 -nr'
-alias pscpu10='ps -e -o pcpu,cpu,nice,state,cputime,args|sort -k1 -nr | head -10'
 
 path=($HOME/.dotfiles/bin $path)
 path=($HOME/bin $path)
@@ -57,10 +56,10 @@ function mkgit {
 	mkcd $1 && git init
 }
 
-if [ -x /usr/bin/nvim ]; then
+if [ -x /bin/nvim ]; then
 	export VTE_VERSION=100
-	export EDITOR="/usr/bin/nvim"
-	alias vim="/usr/bin/nvim"
+	export EDITOR="/bin/nvim"
+	export GIT_EDITOR="/bin/nvim"
 fi
 
 function _err {

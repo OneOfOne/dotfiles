@@ -1,9 +1,10 @@
 {
 	//"editor.fontFamily": "Fira Code Medium",
-	"editor.fontFamily": "JetBrains Mono",
-	"editor.inlayHints.fontFamily": "JetBrains Mono",
-	"editor.fontSize": 16,
-	"editor.fontWeight": "500",
+	//"editor.fontFamily": "JetBrains Mono",
+	"editor.fontFamily": "SFMono Nerd Font Mono",
+	"editor.inlayHints.fontFamily": "SFMono Nerd Font Mono",
+	"editor.fontSize": 15,
+	"editor.fontWeight": "600",
 	"editor.fontLigatures": true,
 	"editor.tabSize": 4,
 	"editor.insertSpaces": false,
@@ -62,7 +63,7 @@
 	"workbench.startupEditor": "newUntitledFile",
 	"workbench.list.multiSelectModifier": "alt",
 	"workbench.editor.highlightModifiedTabs": true,
-	"workbench.colorTheme": "Winter is Coming (Dark Blue - No Italics)",
+	"workbench.colorTheme": "Ayu Mirage",
 	"workbench.iconTheme": "eq-material-theme-icons-darker",
 	"workbench.settings.editor": "json",
 	"workbench.settings.useSplitJSON": true,
@@ -464,5 +465,7 @@
 			]
 		}
 	],
+	"update.mode": "manual",
+	"security.workspace.trust.untrustedFiles": "open"
 
 }

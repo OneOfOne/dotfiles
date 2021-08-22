@@ -1,10 +1,10 @@
 # export GOCACHE="/tmp/.gocache"
 export GOPATH="$HOME/code/go"
-export GO2PATH="/usr/src/go2/src/cmd/go2go/testdata/go2path:$GOPATH"
 export GOBIN="$GOPATH/bin"
 export GOSUMDB="off"
 export GOPROXY="direct"
 export GO111MODULE=auto
+export GOTIPROOT="$HOME/sdk/go"
 #export GOEXPERIMENT=unified
 
 path=($HOME/.config/yarn/global/node_modules/.bin $path)
@@ -27,8 +27,6 @@ hash -d gh="$GOPATH/src/github.com/"
 hash -d mygh="$GOPATH/src/github.com/OneOfOne/"
 hash -d ooo="$GOPATH/src/go.oneofone.dev/"
 
-alias go2go="/usr/src/go2/bin/go tool go2go"
-
 function setgo {
 	local v="$1"
 	if [ -z "$v" ]; then
@@ -37,7 +35,7 @@ function setgo {
 	fi
 
 	[ "$v" = "tip" -o "$v" = "master" ] && v=""
-	local p="/usr/src/go$v/bin"
+	local p="${GOTIPROOT}$v/bin"
 
 	if [ "$v" = "os" -o "$v" = "main" ]; then
 		p="/usr/bin"
@@ -52,16 +50,12 @@ function setgo {
 	ln -svf $p/{go,gofmt} $HOME/bin || return 1
 	# go clean -r -cache -testcache &>/dev/null
 	go version
-	if [ "$v" = "1.18" ]; then
-		go env -w GOEXPERIMENT="unified"
-	else
-		go env -u GOEXPERIMENT
-	fi
 }
 
 function addgotree {
+	set -o localoptions -o localtraps
 	local v="$1"
-	pushd /usr/src/go >/dev/null && trap "popd >/dev/null" EXIT
+	pushd ${GOTIPROOT} >/dev/null && trap "popd >/dev/null" EXIT
 	git pull --all || return 1
 	git worktree remove ../go$v
 	git branch -d go$v &>/dev/null
@@ -70,16 +64,18 @@ function addgotree {
 }
 
 function removegotree {
+	set -o localoptions -o localtraps
 	local v="$1"
-	pushd /usr/src/go >/dev/null && trap "popd >/dev/null" EXIT
+	pushd ${GOTIPROOT} >/dev/null && trap "popd >/dev/null" EXIT
 	git worktree remove ../go$v
 	git branch -d go$v &>/dev/null
 	rm -v ~/bin/go$v
 }
 
 function rebuildgo {
+	set -o localoptions -o localtraps
 	local v="$1"
-	pushd "/usr/src/go$v/src" >/dev/null && trap "popd >/dev/null" EXIT
+	pushd "${GOTIPROOT}$v/src" >/dev/null && trap "popd >/dev/null" EXIT
 	rm -rf ../pkg ../bin $GOPATH/pkg &>/dev/null
 
 	git reset --hard || return 1
@@ -98,6 +94,7 @@ function rebuildgo {
 }
 
 function rebuildgotools {
+	set -o localoptions -o localtraps
 	echo -------------------------------
 	echo using $(go version)
 	echo -------------------------------
@@ -111,23 +108,26 @@ function rebuildgotools {
 	# 	github.com/sqs/goreturns \
 	# 	honnef.co/go/tools/... 2>&1 | egrep -v 'meta tag'
 
-	cd ~gh/go-delve/delve/
+	pushd ~gh/go-delve/delve/
 	git reset --hard
 	git pull || return 1
 	go mod vendor || return 1
 	# go mod tidy || return 1
 	make install || return 1
+	popd &> /dev/null
 
-	cd ~gh/../golang.org/x/tools/gopls
+	pushd ~gh/../golang.org/x/tools/gopls && trap "popd >/dev/null" EXIT
 	git reset --hard && git pull || return 1
 	env GO111MODULE=on GOGC=off go install -v || return 1
+	popd &> /dev/null
 
-	cd ~/code/vscode/vscode-go
+	pushd ~/code/vscode/vscode-go && trap "popd >/dev/null" EXIT
 	git reset --hard
 	git pull || return 1
 	npm install || return 1
 	vsce package -o /tmp/gocode.vsix || return 1
 	code --install-extension /tmp/gocode.vsix --force || return 1
+	popd &> /dev/null
 
 	killgo
 }
