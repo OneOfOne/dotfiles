@@ -1,4 +1,5 @@
 # export GOCACHE="/tmp/.gocache"
+export SDKBASE="$HOME/sdk"
 export GOPATH="$HOME/code/go"
 export GOBIN="$GOPATH/bin"
 export GOSUMDB="off"
@@ -10,10 +11,10 @@ export GOTIPROOT="$HOME/sdk/go"
 path=($HOME/.config/yarn/global/node_modules/.bin $path)
 path=($GOBIN $HOME/.cargo/bin/ $path)
 
-for gv in $(command ls /usr/src/ | egrep '^go'); do
+for gv in $(command ls "$SDKBASE/" 2>&1 | egrep '^go'); do
 	name="${gv/./}"
 	[ "$name" = "go" ] && name="gotip"
-	alias $name="/usr/src/$gv/bin/go"
+	alias $name="$SDKBASE/$gv/bin/go"
 done
 
 unset gv name
