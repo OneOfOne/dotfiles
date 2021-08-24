@@ -74,7 +74,7 @@
 	"workbench.editor.pinnedTabSizing": "compact",
 	"problems.showCurrentInStatus": true,
 	"window.title": "${dirty}${rootName}${separator}${activeEditorShort}${separator}VSCode",
-	"window.titleBarStyle": "custom",
+	"window.titleBarStyle": "native",
 	"window.newWindowDimensions": "maximized",
 	"window.restoreWindows": "none",
 	"window.closeWhenEmpty": true,
@@ -304,8 +304,8 @@
 
 		"ui.completion.usePlaceholders": true,
 		"ui.navigation.importShortcut": "Definition",
-		"ui.completion.completionBudget": "500ms",
-		"ui.diagnostic.diagnosticsDelay": "300ms",
+		"ui.completion.completionBudget": "200ms",
+		"ui.diagnostic.diagnosticsDelay": "100ms",
 
 		"build.allowImplicitNetworkAccess": true,
 		"build.directoryFilters": ["-node_modules", "-data"],
@@ -467,5 +467,4 @@
 	],
 	"update.mode": "manual",
 	"security.workspace.trust.untrustedFiles": "open"
-
 }
