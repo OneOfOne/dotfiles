@@ -55,10 +55,10 @@ done
 
 ttyctl -f # fix annoying apps that don't exit right
 
-alias .git="git -C $HOME/.dotfiles/"
-alias .gitup=".git pull --recurse-submodules && .reload"
+DOTS="$HOME/.dotfiles"
+alias .git="git --git-dir=$DOTS/.git --work-tree=$DOTS"
+alias .gitup=".git pull --recurse-submodules && .git submodule update --init --force && .reload"
 alias .reload="source ~/.zshrc"
-
 
 # ensure path includes only unique pathes
 typeset -aU path

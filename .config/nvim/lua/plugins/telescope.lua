@@ -6,6 +6,7 @@ local conf = require('telescope.config')
 local utils = require('utils')
 local m = utils.map
 
+local dropdown = require('telescope.themes').get_dropdown();
 telescope.setup{
 	defaults = {
 		-- prompt_prefix = "λ -> ",
@@ -21,6 +22,10 @@ telescope.setup{
 	},
 	pickers = {
 		file_browser = {
+			theme = "dropdown",
+			previewer = false
+		},
+		find_files = {
 			theme = "dropdown",
 			previewer = false
 		},
@@ -46,13 +51,6 @@ telescope.setup{
 			override_generic_sorter = false,
 			override_file_sorter = true,
 		},
-		extensions = {
-			lsp_handlers = {
-				code_action = {
-					telescope = require('telescope.themes').get_cursor({}),
-				},
-			},
-		},
 	}
 }
 
@@ -62,7 +60,8 @@ telescope.setup{
 --telescope.load_extension('fzy_native')
 -- telescope.load_extension('ultisnips')
 -- telescope.load_extension('project')
-telescope.load_extension('lsp_handlers')
+-- telescope.load_extension('lsp_handlers')
+telescope.load_extension('coc')
 
 -- Implement delta as previewer for diffs
 
@@ -112,20 +111,4 @@ M.project_files = function()
 	if not ok then builtin.find_files(opts) end
 end
 
-
-M.open = function(init)
-	local dir = vim.v.argv[2]
-	if not dir or vim.fn.isdirectory(dir) == 0 then
-		if init then
-			return
-		end
-		dir = vim.fn.expand('%:p:h')
-	end
-	if dir and vim.fn.isdirectory(dir) == 1 then
-		print(dir)
-		builtin.file_browser({cwd = dir, hidden = true})
-	end
-end
-
-m('n', '<C-b>',[[<cmd>:lua require('plugins/telescope').open()<CR>]])
 return M

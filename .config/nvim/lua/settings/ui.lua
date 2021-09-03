@@ -8,14 +8,31 @@ g.everforest_background = 'soft'
 
 cmd('colorscheme ' .. theme);
 
+local tabline = require('tabline');
+tabline.setup();
+
 require('lualine').setup{
-	options = { theme = theme },
+	options = {
+		theme = theme,
+		icons_enabled = true,
+	},
 	sections = {
 		lualine_a = {'mode'},
-		lualine_b = {'FugitiveHead'},
-		lualine_c = {{ 'diagnostics', sources = { 'nvim_lsp' } }},
+		lualine_b = { {'FugitiveHead', icon = '' }, { 'diff' } },
+		lualine_c = { {'filename', file_status = true, path = 1 } },
+		--lualine_c = { tabline.tabline_buffers },
+		lualine_x = { {'diff'} },
 	},
-	extensions = { 'quickfix', 'nvim-tree', 'fugitive' }
+	inactive_sections = {
+		lualine_a = {  },
+		-- lualine_b = {  },
+		lualine_b = { {'branch', icon = ''} },
+		lualine_c = { {'filename', file_status = true, path = 1 } },
+		lualine_x = {  },
+		lualine_y = {  },
+		lualine_z = {  }
+	},
+	extensions = { 'quickfix', 'fugitive' }
 }
 
 g.nvim_tree_ignore = {'.git', 'node_modules', '.cache', 'data'}

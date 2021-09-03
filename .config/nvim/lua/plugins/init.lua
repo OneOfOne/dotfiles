@@ -4,7 +4,7 @@ local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
 if fn.empty(fn.glob(install_path)) > 0 then
 	fn.system({'git', 'clone', 'https://github.com/wbthomason/packer.nvim', install_path})
 	vim.cmd 'packadd packer.nvim'
-	vim.cmd 'autocmd BufWritePost plugins.lua PackerCompile' -- Auto compile when there are changes in plugins.lua
+	vim.cmd 'autocmd BufWritePost plugins/init.lua PackerCompile'
 end
 
 local packer = require('packer')
@@ -14,31 +14,30 @@ packer.startup(function()
 	-- libs
 	use { 'nvim-lua/popup.nvim' }
 	use { 'nvim-lua/plenary.nvim' }
-	use { 'simnalamburt/vim-mundo' }
-	use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
-
-	-- prettification
-	use { 'junegunn/vim-easy-align' }
-	use { 'mhartington/formatter.nvim' }
-
-
-
+	-- use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
 	-- icons
 	use { 'kyazdani42/nvim-web-devicons' }
 	use { 'ryanoasis/vim-devicons' }
 
 	-- lsp
-	use { 'neovim/nvim-lspconfig' }
-	use { 'onsails/lspkind-nvim' }
-	use { 'nvim-lua/lsp_extensions.nvim' }
-	use { 'ms-jpq/coq_nvim', branch = 'coq' }
-	use { 'ms-jpq/coq.artifacts', branch = 'artifacts'}
+	-- use { 'neovim/nvim-lspconfig' }
+	-- use { 'onsails/lspkind-nvim' }
+	-- use { 'nvim-lua/lsp_extensions.nvim' }
+	-- use { 'nvim-lua/completion-nvim' }
+	-- use { 'RishabhRD/popfix' }
+	-- use { 'RishabhRD/nvim-lsputils' }
+	-- use { 'ms-jpq/coq_nvim', branch = 'coq' }
+	-- use { 'ms-jpq/coq.artifacts', branch = 'artifacts'}
+
+	use {'neoclide/coc.nvim', branch = 'release'}
+	use { 'sudormrfbin/cheatsheet.nvim' }
 
 	-- telescope
 	use { 'nvim-telescope/telescope.nvim' }
 	-- use { 'nvim-telescope/telescope-fzy-native.nvim' }
 	-- use { 'nvim-telescope/telescope-project.nvim' }
-	use { 'gbrlsnchs/telescope-lsp-handlers.nvim' }
+	-- use { 'gbrlsnchs/telescope-lsp-handlers.nvim' }
+	use { 'fannheyward/telescope-coc.nvim' }
 
 	-- Debugger
 	use { 'mfussenegger/nvim-dap' }
@@ -46,21 +45,18 @@ packer.startup(function()
 	use { 'theHamsta/nvim-dap-virtual-text' }
 	use { 'nvim-telescope/telescope-dap.nvim' }
 
-	-- Tim Pope docet
+	-- -- Tim Pope docet
 	use { 'tpope/vim-sensible' }
-	-- use { 'tpope/vim-rails' }
-	use { 'tpope/vim-abolish' }
-	use { 'tpope/vim-surround' }
-	use { 'tpope/vim-bundler' }
-	-- use { 'tpope/vim-capslock' }
-	use { 'tpope/vim-repeat' }
-	use { 'tpope/vim-endwise' }
-	-- use { 'tpope/vim-rvm' }
-	use { 'tpope/vim-dispatch' }
-	use { 'tpope/vim-dadbod' }
-	use { 'tpope/vim-jdaddy' }
+	-- use { 'tpope/vim-abolish' }
+	-- use { 'tpope/vim-surround' }
+	-- use { 'tpope/vim-bundler' }
+	-- use { 'tpope/vim-repeat' }
+	-- use { 'tpope/vim-endwise' }
+	-- use { 'tpope/vim-dispatch' }
+	-- use { 'tpope/vim-dadbod' }
+	-- use { 'tpope/vim-jdaddy' }
 	use { 'tpope/vim-fugitive' }
-	use { 'tpope/vim-commentary' }
+	-- use { 'tpope/vim-commentary' }
 
 	use { 'kyazdani42/nvim-tree.lua' }
 	-- 	requires = 'kyazdani42/nvim-web-devicons',
@@ -76,8 +72,9 @@ packer.startup(function()
 	-- use { 'nathanaelkane/vim-indent-guides' }
 
 	-- other
-	use { 'romgrk/barbar.nvim' }
+	-- use { 'romgrk/barbar.nvim' }
 	use { 'hoob3rt/lualine.nvim' }
+	use { 'kdheepak/tabline.nvim' }
 end)
 packer.clean()
 packer.install()

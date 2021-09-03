@@ -29,6 +29,7 @@
 	"editor.suggest.localityBonus": true,
 	"editor.suggest.preview": true,
 	"editor.suggestSelection": "recentlyUsedByPrefix",
+	"editor.bracketPairColorization.enabled": true,
 	"editor.codeActionsOnSave": {
 		"source.addMissingImports": true,
 		"source.organizeImports": false,
@@ -91,6 +92,7 @@
 	"terminal.integrated.copyOnSelection": true,
 	"terminal.integrated.tabs.enabled": false,
 	"terminal.integrated.enableBell": true,
+	"terminal.integrated.gpuAcceleration": "on",
 	"files.insertFinalNewline": true,
 	"files.trimTrailingWhitespace": true,
 	"files.trimFinalNewlines": true,
@@ -313,7 +315,6 @@
 		"ui.completion.experimentalPostfixCompletions": true,
 		"build.experimentalTemplateSupport": true,
 		"build.experimentalPackageCacheKey": true
-
 	},
 	"rust.all_features": true,
 	"html.format.endWithNewline": true,

@@ -7,7 +7,7 @@ setopt nohup
 # See: http://zsh.sourceforge.net/Intro/intro_2.html
 setopt extendedglob
 # Do not require a leading '.' in a filename to be matched explicitly
-setopt globdots
+#setopt globdots
 # Try to make the completion list smaller (occupying less lines) by printing
 # the matches in columns with different widths
 setopt listpacked
@@ -21,13 +21,18 @@ setopt histreduceblanks histignorespace histignorealldups
 #autoload -U regexp-replace
 setopt re_match_pcre
 
+autoload zmv
+
 zstyle ':completion:*' rehash true
 zstyle ':completion:*' completer _expand _complete _ignored _approximate
 zstyle ':completion:*' special-dirs false
 
+export PATH=$PATH:$HOME/.dotfiles/bin
+
 alias ..="cd .."
 alias ...="cd ../.."
 alias pcd="popd"
+
 if [[ `uname -s` == 'Linux' ]]; then
 	alias ls="ls -hF --group-directories-first --color"
 	alias ll="ls -l --time-style='+%Y-%m-%d %H:%M'"

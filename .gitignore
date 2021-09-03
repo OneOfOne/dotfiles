@@ -1,9 +1,6 @@
 .config/Code/
 .config/nvim/
-.config/coc/db.json
-.config/coc/mru
-.config/coc/commands
-.config/coc/extensions
+.config/coc/
 .env.d/05-work.zsh
 .env.d/99-work.zsh
 node_modules/

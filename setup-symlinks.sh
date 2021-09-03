@@ -10,9 +10,7 @@ ln -vsf $DOTS/.gitconfig ~/.gitconfig
 #ln -vsf $DOTS/.eslintrc.js ~/.eslintrc.js
 
 mkdir ~/bin &>/dev/null
-ln -vsf $DOTS/bin/* ~/bin/
 
-for p in $DOTS/.config/*; do 
+for p in $DOTS/.config/*; do
 	ln -sfv "${p}" ~/.config/
 done
-
