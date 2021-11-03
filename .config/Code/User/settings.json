@@ -55,6 +55,7 @@
 	"editor.multiCursorModifier": "alt",
 	"editor.find.cursorMoveOnType": true,
 	"editor.scrollbar.verticalScrollbarSize": 24,
+	"editor.guides.bracketPairs": true,
 
 	"diffEditor.maxComputationTime": 0,
 
@@ -161,7 +162,7 @@
 		"editor.defaultFormatter": "vscode.html-language-features"
 	},
 	"[jsonc]": {
-		"editor.defaultFormatter": "dbaeumer.vscode-eslint"
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
 	},
 	"[json]": {
 		"editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
@@ -258,13 +259,6 @@
 		"runtest": false
 	},
 	"go.delveConfig": {
-		"dlvLoadConfig": {
-			"followPointers": true,
-			"maxVariableRecurse": 1,
-			"maxStringLen": 128,
-			"maxArrayValues": 64,
-			"maxStructFields": -1,
-		},
 		"only-same-user":false,
 		"apiVersion": 2,
 		"showGlobalVariables": false
@@ -459,7 +453,7 @@
 	"json.schemas": [
 		{
 			"name": "vscode-expo-manifest",
-			"url": "file:///home/oneofone/.config/Code/User/globalStorage/bycedric.vscode-expo/manifest-42.0.0.json",
+			"url": "file:///home/oneofone/.config/Code/User/globalStorage/bycedric.vscode-expo/manifest-43.0.0.json",
 			"fileMatch": [
 				"app.json",
 				"app.config.json"
@@ -467,5 +461,9 @@
 		}
 	],
 	"update.mode": "manual",
-	"security.workspace.trust.untrustedFiles": "open"
+	"security.workspace.trust.untrustedFiles": "open",
+	"diffEditor.ignoreTrimWhitespace": false,
+	"Lua.completion.callSnippet": "Both",
+	"Lua.diagnostics.enable": true,
+	"Lua.hint.enable": true,
 }

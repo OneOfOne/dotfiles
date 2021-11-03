@@ -1,20 +1,20 @@
-require('plugins')
+require("plugins")
 -- require('plugins/treesetter')
-require('plugins/telescope')
-require('plugins/dap')
+require("plugins/telescope")
+require("plugins/dap")
 
-require('settings')
-require('settings/ui')
-require('settings/git')
+require("settings")
+require("settings/ui")
+require("settings/git")
 
 -- require('lsp')
 -- require('lsp/gopls')
 
-require('keymap')
+require("keymap")
 
 function _G.wait_for_plugins()
-	local dir = require('utils').real_cwd()
-	if dir then vim.cmd('cd ' .. dir) end
+	local dir = require("utils").real_cwd()
+	if dir then vim.cmd("cd " .. dir) end
 end
 
 -- run after all plugins are loaded / unloaded
