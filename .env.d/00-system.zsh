@@ -38,6 +38,7 @@ path=($HOME/bin $path)
 
 # macos utils are horrid
 if [[ `uname -s` == 'Darwin' ]]; then
+	export HOMEBREW_NO_ENV_HINTS=1
 	path=($(find /opt/homebrew/Cellar -name gnubin) /opt/homebrew/bin $path)
 fi
 
