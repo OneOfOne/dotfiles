@@ -37,7 +37,7 @@ path=($HOME/.dotfiles/bin $path)
 path=($HOME/bin $path)
 
 # macos utils are horrid
-if [[ `uname -s` == 'Darwin ']]; then
+if [[ `uname -s` == 'Darwin' ]]; then
 	path=($(find /opt/homebrew/Cellar -name gnubin) /opt/homebrew/bin $path)
 fi
 
