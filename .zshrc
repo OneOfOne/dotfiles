@@ -45,6 +45,7 @@ esac
 
 ZSH_THEME="powerlevel10k/powerlevel10k"
 P10K_PATH="$ZSH_CUSTOM/p10k.zsh"
+
 [[ -f $P10K_PATH ]] && source $P10K_PATH
 
 source $ZSH/oh-my-zsh.sh
