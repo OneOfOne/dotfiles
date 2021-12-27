@@ -6,6 +6,7 @@ export GOSUMDB="off"
 export GOPROXY="direct"
 export GO111MODULE=auto
 export GOTIPROOT="$HOME/sdk/go"
+export CLOUDSDK_PYTHON=/bin/python2
 #export GOEXPERIMENT=unified
 
 path=($HOME/.config/yarn/global/node_modules/.bin $path)

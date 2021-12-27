@@ -261,7 +261,8 @@
 	"go.delveConfig": {
 		"only-same-user":false,
 		"apiVersion": 2,
-		"showGlobalVariables": false
+		"showGlobalVariables": false,
+		"hideSystemGoroutines": true
 	},
 	"go.languageServerExperimentalFeatures": {
 		"diagnostics": true
@@ -278,7 +279,7 @@
 			"unusedwrite": false,
 			"unusedparams": false,
 			// too much noise
-			"fieldalignment": false,
+			"fieldalignment": true,
 			"shadow": false,
 			"composites": false
 		},
@@ -307,7 +308,6 @@
 		"build.directoryFilters": ["-node_modules", "-data"],
 
 		"ui.completion.experimentalPostfixCompletions": true,
-		"build.experimentalTemplateSupport": true,
 		"build.experimentalPackageCacheKey": true
 	},
 	"rust.all_features": true,
@@ -446,14 +446,13 @@
 	"workbench.settings.enableNaturalLanguageSearch": false,
 	"workbench.enableExperiments": false,
 	"npm.fetchOnlinePackageInfo": false,
-	"telemetry.enableTelemetry": false,
-	"telemetry.enableCrashReporter": false,
+	"telemetry.telemetryLevel": "off",
 	"editor.largeFileOptimizations": false,
 	"json.maxItemsComputed": 50000,
 	"json.schemas": [
 		{
 			"name": "vscode-expo-manifest",
-			"url": "file:///home/oneofone/.config/Code/User/globalStorage/bycedric.vscode-expo/manifest-43.0.0.json",
+			"url": "file:///home/oneofone/.config/Code/User/globalStorage/bycedric.vscode-expo/manifest-44.0.0.json",
 			"fileMatch": [
 				"app.json",
 				"app.config.json"

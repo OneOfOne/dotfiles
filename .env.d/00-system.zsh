@@ -33,15 +33,19 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias pcd="popd"
 
-if [[ `uname -s` == 'Linux' ]]; then
-	alias ls="ls -hF --group-directories-first --color"
-	alias ll="ls -l --time-style='+%Y-%m-%d %H:%M'"
-	alias cp="cp --reflink=auto --sparse=always -ia"
-	alias ports="sudo ss -nl -tup"
-	alias pss="ps -Ao pid:5,state:1,user,cmd | grep -v grep | egrep"
-	alias df="df -Th --total"
-	alias duh="du -ach | sort -h"
-fi
+path=($HOME/.dotfiles/bin $path)
+path=($HOME/bin $path)
+
+# macos utils are horrid
+[[ `uname -s` != 'Linux' ]] && path=($(find /opt/homebrew/Cellar -name gnubin) $path)
+
+alias ls="ls -hF --group-directories-first --color"
+alias ll="ls -l --time-style='+%Y-%m-%d %H:%M'"
+alias cp="cp --reflink=auto --sparse=always -ia"
+alias ports="sudo ss -nl -tup"
+alias pss="ps -Ao pid:5,state:1,user,cmd | grep -v grep | egrep"
+alias df="df -Th --total"
+alias duh="du -ach | sort -h"
 
 alias mkdir="mkdir -pv"
 alias myip="curl -s -S https://icanhazip.com"
@@ -49,9 +53,6 @@ alias myip="curl -s -S https://icanhazip.com"
 alias grep="grep --color"
 alias egrep="egrep --color"
 alias fgrep="fgrep --color"
-
-path=($HOME/.dotfiles/bin $path)
-path=($HOME/bin $path)
 
 function mkcd {
 	command mkdir -p $1 && pushd $1 >/dev/null
