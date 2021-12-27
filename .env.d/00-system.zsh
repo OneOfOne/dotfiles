@@ -37,7 +37,9 @@ path=($HOME/.dotfiles/bin $path)
 path=($HOME/bin $path)
 
 # macos utils are horrid
-[[ `uname -s` != 'Linux' ]] && path=($(find /opt/homebrew/Cellar -name gnubin) $path)
+if [[ `uname -s` == 'Darwin ']]; then
+	path=($(find /opt/homebrew/Cellar -name gnubin) /opt/homebrew/bin $path)
+fi
 
 alias ls="ls -hF --group-directories-first --color"
 alias ll="ls -l --time-style='+%Y-%m-%d %H:%M'"
