@@ -40,7 +40,7 @@ case "$(uname -s)" in
 	Linux)
 		plugins+=(systemd);;
 	Darwin)
-		plugins+=(osx brew);;
+		plugins+=(macos brew);;
 esac
 
 ZSH_THEME="powerlevel10k/powerlevel10k"
