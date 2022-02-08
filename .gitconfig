@@ -76,10 +76,11 @@
 	cdiff = !git d --cached
 	hdiff = !git d HEAD
 
-	master = !git checkout master && git pull
-	main = !git checkout main && git pull
-	merge-master = !git fetch origin master && git merge origin/master -m 'master sync'
-	merge-main = !git fetch origin main && git merge origin/main -m 'master sync'
+	default-branch = !git remote show origin | sed -n '/HEAD branch/s/.*: //p'
+
+	main = !sh -c 'git checkout $(git default-branch) && git pull'
+	merge-main = !sh -c 'git fetch origin $(git default-branch) && git merge origin/$(git default-branch) -m \"main sync\"'
+
 	stash-and-pull = !git stash && git pull && git stash pop
 	new-branch = "!f() { git stash &>/dev/null ; git checkout -b $@ && git stash pop &>/dev/null; }; f"
 	sap = !git stash-and-pull
@@ -87,14 +88,6 @@
 
 	grep-all = "!f() { git grep -ni $@ `git for-each-ref --format='%(refname)' refs/` | perl -pe 's@refs/[^/]+/@@g'; }; f"
 	g = grep --break --heading --line-number
-
-	list-old-branches = "!git branch --merged | perl -ne 's/^\\*\\s+//g; print unless /master|dev/'"
-
-	delete-merged-branches = "!git branch -d $(git list-old-branches) && git remote prune origin"
-
-	clean-old = "!f() { git delete-merged-branches; du -h --max-depth=0 .git && git reflog expire --all --expire=now && git gc --prune=now --aggressive; du -h --max-depth=0 .git; }; f"
-
-	fuck = !git reset --hard && git pull
 
 	ignore = update-index --assume-unchanged
 	unignore = update-index --no-assume-unchanged
@@ -105,6 +98,9 @@
 	clean-old = "!f() { git delete-merged-branches; du -h --max-depth=0 .git && git reflog expire --all --expire=now && git gc --prune=now --aggressive; du -h --max-depth=0 .git; }; f"
 
 	list-old-branches = !git branch --merged | egrep -v '^\\*|master|main|dev'
+	delete-merged-branches = "!git branch -d $(git list-old-branches) && git remote prune origin"
+	clean-old = "!f() { git delete-merged-branches; du -h --max-depth=0 .git && git reflog expire --all --expire=now && git gc --prune=now --aggressive; du -h --max-depth=0 .git; }; f"
+
 
 	fuckit = !git reset --hard && git pull
 

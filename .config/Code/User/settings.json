@@ -1,7 +1,7 @@
 {
 	//"editor.fontFamily": "Fira Code Medium",
 	//"editor.fontFamily": "JetBrains Mono",
-	"editor.fontFamily": "SFMono Nerd Font Mono",
+	"editor.fontFamily": "SFMono Nerd Font Mono, Fira Code Medium, JetBrains Mono",
 	"editor.inlayHints.fontFamily": "SFMono Nerd Font Mono",
 	"editor.fontSize": 15,
 	"editor.fontWeight": "600",
@@ -66,7 +66,7 @@
 	"workbench.list.multiSelectModifier": "alt",
 	"workbench.editor.highlightModifiedTabs": true,
 	"workbench.colorTheme": "Ayu Mirage",
-	"workbench.iconTheme": "eq-material-theme-icons-darker",
+	"workbench.iconTheme": "ayu",
 	"workbench.settings.editor": "json",
 	"workbench.settings.useSplitJSON": true,
 	"workbench.tree.indent": 16,
@@ -78,11 +78,13 @@
 	"window.title": "${dirty}${rootName}${separator}${activeEditorShort}${separator}VSCode",
 	"window.titleBarStyle": "native",
 	"window.newWindowDimensions": "maximized",
+	"window.menuBarVisibility": "toggle",
 	"window.restoreWindows": "none",
 	"window.closeWhenEmpty": true,
 	"window.zoomLevel": 0,
 	"window.customMenuBarAltFocus": false,
 	"explorer.confirmDelete": false,
+
 	"terminal.integrated.profiles.linux": {
 		"zsh": {
 			"path": "zsh",
@@ -94,6 +96,8 @@
 	"terminal.integrated.tabs.enabled": false,
 	"terminal.integrated.enableBell": true,
 	"terminal.integrated.gpuAcceleration": "on",
+	"terminal.integrated.enablePersistentSessions": false,
+
 	"files.insertFinalNewline": true,
 	"files.trimTrailingWhitespace": true,
 	"files.trimFinalNewlines": true,
@@ -130,7 +134,6 @@
 	},
 	"search.showLineNumbers": true,
 	"search.smartCase": true,
-	"search.maintainFileSearchCache": true,
 	"search.quickOpen.includeSymbols": true,
 	"search.quickOpen.history.filterSortOrder": "recency",
 	"search.searchOnType": false,
@@ -152,11 +155,11 @@
 	},
 	"[typescriptreact]": {
 		"editor.formatOnSave": false,
-		"editor.defaultFormatter": "dbaeumer.vscode-eslint"
+		"editor.defaultFormatter": "vscode.typescript-language-features"
 	},
 	"[typescript]": {
 		"editor.formatOnSave": false,
-		"editor.defaultFormatter": "dbaeumer.vscode-eslint"
+		"editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
 	},
 	"[html]": {
 		"editor.defaultFormatter": "vscode.html-language-features"
@@ -223,13 +226,11 @@
 			"source.fixAll": true
 		}
 	},
-	"go.alternateTools": {
-		"dlv-dap": "dlv"
-	},
+
 	"go.lintOnSave": "off",
 	"go.buildFlags": ["-tags", "typeparams"],
 	"go.testFlags": ["-v", "-count=1", "-benchtime=5s", "-timeout=5m", "-vet=off"],
-	"go.coverMode": "atomic",
+	"go.coverMode": "default",
 	"go.coverShowCounts": true,
 	"go.editorContextMenuCommands": {
 		"toggleTestFile": true,
@@ -281,7 +282,7 @@
 			// too much noise
 			"fieldalignment": true,
 			"shadow": false,
-			"composites": false
+			"composites": true
 		},
 		"ui.codelenses": {
 			"generate": true,
@@ -299,7 +300,7 @@
 			"nil": true
 		},
 
-		"ui.completion.usePlaceholders": true,
+		"ui.completion.usePlaceholders": false,
 		"ui.navigation.importShortcut": "Definition",
 		"ui.completion.completionBudget": "200ms",
 		"ui.diagnostic.diagnosticsDelay": "100ms",
@@ -465,4 +466,7 @@
 	"Lua.completion.callSnippet": "Both",
 	"Lua.diagnostics.enable": true,
 	"Lua.hint.enable": true,
+	"[scss]": {
+		"editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+	},
 }

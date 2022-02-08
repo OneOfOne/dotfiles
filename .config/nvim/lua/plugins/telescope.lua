@@ -1,4 +1,7 @@
-local telescope = require('telescope')
+local present, telescope = pcall(require, 'telescope')
+if not present then
+	return false
+end
 local actions = require('telescope.actions')
 local previewers = require('telescope.previewers')
 local builtin = require('telescope.builtin')

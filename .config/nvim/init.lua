@@ -2,6 +2,7 @@ require("plugins")
 -- require('plugins/treesetter')
 require("plugins/telescope")
 require("plugins/dap")
+require("plugins/nvimtree")
 
 require("settings")
 require("settings/ui")

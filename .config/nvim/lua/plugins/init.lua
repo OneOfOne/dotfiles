@@ -1,8 +1,4 @@
-local present, packer = pcall(require, "plugins.packerInit")
-
-if not present then
-	return false
-end
+local packer = require("plugins.packerinit")
 
 local use = packer.use
 

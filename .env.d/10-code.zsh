@@ -50,7 +50,6 @@ function setgo {
 
 
 	ln -svf $p/{go,gofmt} $HOME/bin || return 1
-	# go clean -r -cache -testcache &>/dev/null
 	go version
 }
 
