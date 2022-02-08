@@ -38,6 +38,7 @@
 		vcs                     # git status
 		# =========================[ Line #2 ]=========================
 		newline                 # \n
+		context                 # user@hostname
 		prompt_char           # prompt symbol
 	)
 
@@ -83,7 +84,7 @@
 		# azure                   # azure account name (https://docs.microsoft.com/en-us/cli/azure)
 		# gcloud                  # google cloud cli account and project (https://cloud.google.com/)
 		# google_app_cred         # google application credentials (https://cloud.google.com/docs/authentication/production)
-		context                 # user@hostname
+		# context                 # user@hostname
 		#nordvpn                 # nordvpn connection status, linux only (https://nordvpn.com/)
 		#ranger                  # ranger shell (https://github.com/ranger/ranger)
 		#nnn                     # nnn shell (https://github.com/jarun/nnn)
@@ -100,11 +101,12 @@
 		#timewarrior             # timewarrior tracking status (https://timewarrior.net/)
 		#taskwarrior             # taskwarrior task count (https://taskwarrior.org/)
 		time                    # current time
+		ip
 		# =========================[ Line #2 ]=========================
-		newline                 # \n
+		# newline                 # \n
 		#load                  # CPU load
 		#ram                   # free RAM
-		ip                    # ip address and bandwidth usage for a specified network interface
+		# ip                    # ip address and bandwidth usage for a specified network interface
 		# public_ip             # public IP address
 		# proxy                 # system-wide http/https/ftp proxy
 		# battery               # internal battery
