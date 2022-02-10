@@ -143,7 +143,12 @@
 	"debug.showSubSessionsInToolBar": true,
 	"debug.allowBreakpointsEverywhere": true,
 	"[css]": {
-		"editor.formatOnSave": false
+		"editor.formatOnSave": false,
+		"editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+	},
+	"[scss]": {
+		"editor.formatOnSave": true,
+		"editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
 	},
 	"[javascript]": {
 		"editor.formatOnSave": false,
@@ -334,6 +339,7 @@
 	"git.enableCommitSigning": true,
 	"git.autoRepositoryDetection": false,
 	"git.untrackedChanges": "separate",
+	"git.closeDiffOnOperation": true,
 	"gitlens.views.repositories.includeWorkingTree": true,
 	"gitlens.views.repositories.files.layout": "tree",
 	"gitlens.views.branches.files.layout": "tree",
@@ -466,7 +472,5 @@
 	"Lua.completion.callSnippet": "Both",
 	"Lua.diagnostics.enable": true,
 	"Lua.hint.enable": true,
-	"[scss]": {
-		"editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
-	},
+	"editor.cursorStyle": "block"
 }

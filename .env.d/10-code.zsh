@@ -6,7 +6,8 @@ export GOSUMDB="off"
 export GOPROXY="direct"
 export GO111MODULE=auto
 export GOTIPROOT="$HOME/sdk/go"
-export CLOUDSDK_PYTHON=python2
+# export CLOUDSDK_PYTHON=python2
+export GOAMD64=v3
 #export GOEXPERIMENT=unified
 
 path=($HOME/.config/yarn/global/node_modules/.bin $path)
@@ -22,8 +23,6 @@ unset gv name
 
 alias gow64="env GOOS=windows GOARCH=amd64 CGO_ENABLED=1 CC=x86_64-w64-mingw32-gcc CXX=x86_64-w64-mingw32-g++ go"
 alias gow32="env GOOS=windows GOARCH=386 CGO_ENABLED=1 CC=i686-w64-mingw32-gcc CXX=i686-w64-mingw32-g++ go"
-
-alias killgo="killall -9 gocode go-langserver bingo gopls &>/dev/null"
 
 hash -d gh="$GOPATH/src/github.com/"
 hash -d mygh="$GOPATH/src/github.com/OneOfOne/"
@@ -77,7 +76,7 @@ function rebuildgo {
 	set -o localoptions -o localtraps
 	local v="$1"
 	pushd "${GOTIPROOT}$v/src" >/dev/null && trap "popd >/dev/null" EXIT
-	rm -rf ../pkg ../bin $GOPATH/pkg &>/dev/null
+	rm -rf ../pkg ../bin &>/dev/null
 
 	git reset --hard || return 1
 	git clean -fdx || return 1
@@ -109,7 +108,7 @@ function rebuildgotools {
 	# 	github.com/sqs/goreturns \
 	# 	honnef.co/go/tools/... 2>&1 | egrep -v 'meta tag'
 
-	pushd ~gh/go-delve/delve/
+	pushd ~gh/go-delve/delve/ && trap "popd >/dev/null" EXIT
 	git reset --hard
 	git pull || return 1
 	go mod vendor || return 1
@@ -120,7 +119,6 @@ function rebuildgotools {
 	pushd ~gh/../golang.org/x/tools/gopls && trap "popd >/dev/null" EXIT
 	git reset --hard && git pull || return 1
 	env GO111MODULE=on GOGC=off go install -v || return 1
-	popd &> /dev/null
 
 	pushd ~/code/vscode/vscode-go && trap "popd >/dev/null" EXIT
 	git reset --hard
@@ -128,9 +126,8 @@ function rebuildgotools {
 	npm install || return 1
 	vsce package -o /tmp/gocode.vsix || return 1
 	code --install-extension /tmp/gocode.vsix --force || return 1
-	popd &> /dev/null
 
-	killgo
+	pkill -9 gopls &>/dev/null
 }
 
 function gotest {
