@@ -1,7 +1,7 @@
 {
 	//"editor.fontFamily": "Fira Code Medium",
 	//"editor.fontFamily": "JetBrains Mono",
-	"editor.fontFamily": "SFMono Nerd Font Mono, Fira Code Medium, JetBrains Mono",
+	"editor.fontFamily": "Fira Code Medium, SFMono Nerd Font Mono, JetBrains Mono",
 	"editor.inlayHints.fontFamily": "SFMono Nerd Font Mono",
 	"editor.fontSize": 15,
 	"editor.fontWeight": "600",
@@ -459,7 +459,7 @@
 	"json.schemas": [
 		{
 			"name": "vscode-expo-manifest",
-			"url": "file:///home/oneofone/.config/Code/User/globalStorage/bycedric.vscode-expo/manifest-44.0.0.json",
+			"url": "file:///home/oneofone/.config/Code%20-%20Insiders/User/globalStorage/bycedric.vscode-expo/manifest-44.0.0.json",
 			"fileMatch": [
 				"app.json",
 				"app.config.json"
@@ -472,5 +472,7 @@
 	"Lua.completion.callSnippet": "Both",
 	"Lua.diagnostics.enable": true,
 	"Lua.hint.enable": true,
-	"editor.cursorStyle": "block"
+	"editor.cursorStyle": "block",
+	"python.insidersChannel": "weekly",
+	"redhat.telemetry.enabled": true
 }

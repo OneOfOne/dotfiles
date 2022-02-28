@@ -22,7 +22,7 @@ CLOUDSDK_HOME="$HOME/sdk/google-cloud/"
 
 plugins=(
 	common-aliases # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/common-aliases
-	copydir
+	copypath
 	copyfile
 	command-not-found
 	direnv
