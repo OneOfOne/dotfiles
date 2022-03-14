@@ -459,7 +459,7 @@
 	"json.schemas": [
 		{
 			"name": "vscode-expo-manifest",
-			"url": "file:///home/oneofone/.config/Code%20-%20Insiders/User/globalStorage/bycedric.vscode-expo/manifest-44.0.0.json",
+			"url": "file:///home/oneofone/.config/Code/User/globalStorage/bycedric.vscode-expo/manifest-44.0.0.json",
 			"fileMatch": [
 				"app.json",
 				"app.config.json"
