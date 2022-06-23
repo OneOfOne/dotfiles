@@ -79,8 +79,9 @@ export LESS='--tabs=4 --no-init --LONG-PROMPT --ignore-case --quit-if-one-screen
 
 function androidenv {
 	export ANDROID_HOME=$HOME/sdk/android
-	export PATH=$PATH:$ANDROID_HOME/emulator
-	export PATH=$PATH:$ANDROID_HOME/tools
-	export PATH=$PATH:$ANDROID_HOME/tools/bin
+	export ANDROID_NDK_HOME=$ANDROID_HOME/ndk/24.0.8215888/
+	PATH=$PATH:$ANDROID_HOME/emulator
+	PATH=$PATH:$ANDROID_HOME/tools
+	PATH=$PATH:$ANDROID_HOME/tools/bin
 	export PATH=$PATH:$ANDROID_HOME/platform-tools
 }

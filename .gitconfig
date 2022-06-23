@@ -7,7 +7,6 @@
 	legacyheaders = false
 	preloadindex = true
 	#whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol,trailing
-	fsyncobjectfiles = false
 
 	autocrlf = false
 	safecrlf = false
@@ -52,7 +51,7 @@
 	submodulesummary = true
 
 [http]
-	cookiefile = ~/.gitcookies
+	cookiefile = /home/oneofone/.gitcookies
 
 [credential]
 	helper = store

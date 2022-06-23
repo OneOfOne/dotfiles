@@ -40,7 +40,8 @@ case "$(uname -s)" in
 	Linux)
 		plugins+=(systemd);;
 	Darwin)
-		plugins+=(macos brew);;
+		plugins+=(macos brew);
+		export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
 esac
 
 ZSH_THEME="powerlevel10k/powerlevel10k"
