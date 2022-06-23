@@ -19,8 +19,8 @@ function _G._setup_keymaps()
 	m('n', '<C-l>', '<cmd>wincmd l<cr>')
 	m('n', '<C-h>', '<cmd>wincmd h<cr>')
 
-	m('c', 'w!!', [[<cmd>execute 'silent! write !sudo tee "%" >/dev/null' <bar> edit!<CR><cr>]])
-	m('n', '<leader>su', [[<cmd>execute 'silent! write !sudo tee "%" >/dev/null' <bar> edit!<CR><cr>]])
+	m('c', 'sudow', [[<cmd>execute 'silent! write !sudo tee "%" >/dev/null' <bar> edit!<CR><CR>]])
+	m('n', '<leader>su', [[<cmd>execute 'silent! write !sudo tee "%" >/dev/null' <bar> edit!<CR><CR>]])
 
 	-- qol
 	m('n', '<leader>w', '<cmd>w<cr>')

@@ -10,6 +10,12 @@ export GOTIPROOT="$HOME/sdk/go"
 export GOAMD64=v3
 #export GOEXPERIMENT=unified
 
+
+# if [ -x /bin/zig ]; then
+# 	export CC="zig cc"
+# 	export CXX="zig cxx"
+# fi
+
 path=($HOME/.config/yarn/global/node_modules/.bin $path)
 path=($GOBIN $HOME/.cargo/bin/ $path)
 
@@ -150,4 +156,8 @@ function gobump {
 
 function gots {
 	node -p "new Date($1 * 1000)"
+}
+
+function gcp-enable-log {
+	gsutil logging set on -b gs://$1 -o AccessLog gs://$1
 }
