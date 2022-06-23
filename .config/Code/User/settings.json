@@ -1,9 +1,9 @@
 {
-	//"editor.fontFamily": "Fira Code Medium",
+	"editor.fontFamily": "Andale Mono",
 	//"editor.fontFamily": "JetBrains Mono",
-	"editor.fontFamily": "Fira Code Medium, SFMono Nerd Font Mono, JetBrains Mono",
-	"editor.inlayHints.fontFamily": "SFMono Nerd Font Mono",
-	"editor.fontSize": 15,
+	//"editor.fontFamily": "Fira Code Medium, SFMono Nerd Font Mono, JetBrains Mono",
+	"editor.inlayHints.fontFamily": "Andale Mono",
+	"editor.fontSize": 16,
 	"editor.fontWeight": "600",
 	"editor.fontLigatures": true,
 	"editor.tabSize": 4,
@@ -12,7 +12,6 @@
 	"editor.rulers": [160],
 	"editor.renderWhitespace": "boundary",
 	"editor.renderLineHighlight": "all",
-	"editor.renderIndentGuides": true,
 	"editor.dragAndDrop": false,
 	"editor.smoothScrolling": true,
 	"editor.cursorSmoothCaretAnimation": false,
@@ -65,7 +64,7 @@
 	"workbench.startupEditor": "newUntitledFile",
 	"workbench.list.multiSelectModifier": "alt",
 	"workbench.editor.highlightModifiedTabs": true,
-	"workbench.colorTheme": "Ayu Mirage",
+	"workbench.colorTheme": "Solarized Dark",
 	"workbench.iconTheme": "ayu",
 	"workbench.settings.editor": "json",
 	"workbench.settings.useSplitJSON": true,
@@ -170,7 +169,7 @@
 		"editor.defaultFormatter": "vscode.html-language-features"
 	},
 	"[jsonc]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
+		"editor.defaultFormatter": "vscode.json-language-features"
 	},
 	"[json]": {
 		"editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
@@ -474,5 +473,6 @@
 	"Lua.hint.enable": true,
 	"editor.cursorStyle": "block",
 	"python.insidersChannel": "weekly",
-	"redhat.telemetry.enabled": true
+	"redhat.telemetry.enabled": true,
+	"editor.guides.indentation": true
 }
