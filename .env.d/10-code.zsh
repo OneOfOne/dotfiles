@@ -6,6 +6,7 @@ export GOSUMDB="off"
 export GOPROXY="direct"
 export GO111MODULE=auto
 export GOTIPROOT="$HOME/sdk/go"
+export GOEXPERIMENT=unified
 # export CLOUDSDK_PYTHON=python2
 export GOAMD64=v3
 #export GOEXPERIMENT=unified
@@ -82,7 +83,7 @@ function rebuildgo {
 	set -o localoptions -o localtraps
 	local v="$1"
 	pushd "${GOTIPROOT}$v/src" >/dev/null && trap "popd >/dev/null" EXIT
-	rm -rf ../pkg ../bin &>/dev/null
+	/bin/rm -rf ../pkg ../bin &>/dev/null
 
 	git reset --hard || return 1
 	git clean -fdx || return 1

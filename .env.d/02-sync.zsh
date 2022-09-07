@@ -1,5 +1,6 @@
 
 alias rcp="rsync -axHAWXS --numeric-ids --info=progress2"
+alias rcpmac="rsync -axHAWXS --numeric-ids --info=progress2 --rsync-path=/opt/homebrew/bin/rsync --exclude=.DS_Store"
 alias rmv="rcp --remove-source-files"
 
 alias rc="rclone --fast-list -x"

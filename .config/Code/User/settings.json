@@ -60,6 +60,7 @@
 	"editor.find.cursorMoveOnType": true,
 	"editor.scrollbar.verticalScrollbarSize": 24,
 	"editor.guides.bracketPairs": true,
+	"editor.stickyScroll.enabled": true,
 
 	"diffEditor.maxComputationTime": 0,
 
@@ -100,6 +101,7 @@
 	"terminal.integrated.enableBell": true,
 	"terminal.integrated.gpuAcceleration": "on",
 	"terminal.integrated.enablePersistentSessions": false,
+	"terminal.integrated.shellIntegration.enabled": true,
 
 	"files.insertFinalNewline": true,
 	"files.trimTrailingWhitespace": true,
@@ -312,7 +314,7 @@
 		"ui.completion.usePlaceholders": false,
 		"ui.navigation.importShortcut": "Definition",
 		"ui.completion.completionBudget": "200ms",
-		"ui.diagnostic.diagnosticsDelay": "100ms",
+		"ui.diagnostic.diagnosticsDelay": "500ms",
 
 		"build.allowImplicitNetworkAccess": true,
 		"build.directoryFilters": ["-node_modules", "-data"],
@@ -339,6 +341,7 @@
 
 	"git.autofetch": true,
 	"git.confirmSync": false,
+	"git.experimental.mergeEditor": true,
 	"git.enableSmartCommit": true,
 	"git.enableCommitSigning": true,
 	"git.autoRepositoryDetection": false,
@@ -385,6 +388,7 @@
 	"cSpell.enabled": true,
 	"cSpell.numSuggestions": 10,
 	"cSpell.userWords": [
+		"alpineiq",
 		"ALPN",
 		"antd",
 		"anyx",
@@ -393,9 +397,11 @@
 		"ASTs",
 		"autofetch",
 		"bbolt",
+		"biton",
 		"boltdb",
 		"Cascadia",
 		"Cashout",
+		"cmds",
 		"Cmps",
 		"cooookie",
 		"CORS",
@@ -441,6 +447,7 @@
 		"nolint",
 		"noopen",
 		"nsep",
+		"nums",
 		"oerrs",
 		"oneofone",
 		"pidx",
@@ -486,16 +493,7 @@
 	"telemetry.telemetryLevel": "off",
 	"editor.largeFileOptimizations": false,
 	"json.maxItemsComputed": 50000,
-	"json.schemas": [
-		{
-			"name": "vscode-expo-manifest",
-			"url": "file:///home/oneofone/.config/Code/User/globalStorage/bycedric.vscode-expo/manifest-45.0.0.json",
-			"fileMatch": [
-				"app.json",
-				"app.config.json"
-			]
-		}
-	],
+	"json.schemas": [],
 	"update.mode": "manual",
 	"security.workspace.trust.untrustedFiles": "open",
 	"diffEditor.ignoreTrimWhitespace": false,
@@ -505,5 +503,8 @@
 	"editor.cursorStyle": "block",
 	"python.insidersChannel": "weekly",
 	"redhat.telemetry.enabled": true,
-	"editor.guides.indentation": true
+	"editor.guides.indentation": true,
+	"editor.inlineSuggest.enabled": true,
+	"Lua.telemetry.enable": false,
+	"githubPullRequests.pullBranch": "never"
 }
