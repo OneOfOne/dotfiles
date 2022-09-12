@@ -2,7 +2,7 @@ export WINEDEBUG=-all
 export WINEDLLOVERRIDES=winemenubuilder.exe=d
 
 function dig-any {
-	command dig $@ ANY | egrep -v '^$|^;'
+	command dig $@ ANY | grep -v -E '^$|^;'
 }
 
 function certbot-add-subdomain {

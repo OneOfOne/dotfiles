@@ -46,7 +46,7 @@ alias ls="ls -hF --group-directories-first --color"
 alias ll="ls -l --time-style='+%Y-%m-%d %H:%M'"
 alias cp="cp --reflink=auto --sparse=always -ia"
 alias ports="sudo ss -nl -tup"
-alias pss="ps -Ao pid:5,state:1,user,cmd | grep -v grep | egrep"
+alias pss="ps -Ao pid:5,state:1,user,cmd | grep -v grep | grep -E"
 alias df="df -Th --total"
 alias duh="du -ach | sort -h"
 
@@ -54,8 +54,8 @@ alias mkdir="mkdir -pv"
 alias myip="curl -s -S https://icanhazip.com"
 
 alias grep="grep --color"
-alias egrep="egrep --color"
-alias fgrep="fgrep --color"
+alias egrep="grep -E --color"
+alias fgrep="grep -F --color"
 
 function mkcd {
 	command mkdir -p $1 && pushd $1 >/dev/null

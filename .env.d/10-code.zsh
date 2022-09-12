@@ -20,7 +20,7 @@ export GOAMD64=v3
 path=($HOME/.config/yarn/global/node_modules/.bin $path)
 path=($GOBIN $HOME/.cargo/bin/ $path)
 
-for gv in $(command ls "$SDKBASE/" 2>&1 | egrep '^go'); do
+for gv in $(command ls "$SDKBASE/" 2>&1 | grep -E '^go'); do
 	name="${gv/./}"
 	[ "$name" = "go" ] && name="gotip"
 	alias $name="$SDKBASE/$gv/bin/go"
