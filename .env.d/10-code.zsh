@@ -6,10 +6,8 @@ export GOSUMDB="off"
 export GOPROXY="direct"
 export GO111MODULE=auto
 export GOTIPROOT="$HOME/sdk/go"
-export GOEXPERIMENT=unified
 # export CLOUDSDK_PYTHON=python2
 export GOAMD64=v3
-#export GOEXPERIMENT=unified
 
 
 # if [ -x /bin/zig ]; then

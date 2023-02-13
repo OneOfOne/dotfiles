@@ -5,3 +5,4 @@
 .env.d/99-work.zsh
 node_modules/
 yarn.lock
+User/History

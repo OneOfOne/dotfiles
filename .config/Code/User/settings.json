@@ -19,7 +19,7 @@
 	"editor.renderLineHighlight": "all",
 	"editor.dragAndDrop": false,
 	"editor.smoothScrolling": true,
-	"editor.cursorSmoothCaretAnimation": false,
+	"editor.cursorSmoothCaretAnimation": "off",
 	"editor.cursorBlinking": "smooth",
 	"editor.wordWrap": "on",
 	"editor.wordWrapColumn": 160,
@@ -83,7 +83,6 @@
 	"window.title": "${dirty}${rootName}${separator}${activeEditorShort}${separator}VSCode",
 	"window.titleBarStyle": "native",
 	"window.newWindowDimensions": "maximized",
-	"window.menuBarVisibility": "toggle",
 	"window.restoreWindows": "none",
 	"window.closeWhenEmpty": true,
 	"window.customMenuBarAltFocus": false,
@@ -101,7 +100,7 @@
 	"terminal.integrated.enableBell": true,
 	"terminal.integrated.gpuAcceleration": "on",
 	"terminal.integrated.enablePersistentSessions": false,
-	"terminal.integrated.shellIntegration.enabled": true,
+	"terminal.integrated.shellIntegration.enabled": false,
 
 	"files.insertFinalNewline": true,
 	"files.trimTrailingWhitespace": true,
@@ -302,7 +301,8 @@
 			"vendor": true,
 			"tidy": true,
 			"upgrade_dependency": true,
-			"gc_details": true
+			"gc_details": true,
+			"run_vulncheck_exp": true
 		},
 		"ui.diagnostic.annotations": {
 			"bounds": true,
@@ -317,10 +317,12 @@
 		"ui.diagnostic.diagnosticsDelay": "500ms",
 
 		"build.allowImplicitNetworkAccess": true,
-		"build.directoryFilters": ["-node_modules", "-data"],
+		"build.directoryFilters": ["-**/node_modules", "-**/data"],
 
 		"ui.completion.experimentalPostfixCompletions": true,
-		"build.experimentalPackageCacheKey": true
+		"build.experimentalPackageCacheKey": true,
+
+		"newDiff": "new"
 	},
 	"rust.all_features": true,
 	"html.format.endWithNewline": true,
@@ -390,6 +392,7 @@
 	"cSpell.userWords": [
 		"alpineiq",
 		"ALPN",
+		"Ameritrade",
 		"antd",
 		"anyx",
 		"apiserv",
@@ -418,16 +421,19 @@
 		"fset",
 		"genh",
 		"gmail",
+		"godoc",
 		"gogetdoc",
 		"goimports",
 		"golang",
 		"gometalinter",
 		"Gruvbox",
 		"gserv",
+		"gsets",
 		"gzonce",
 		"gzpools",
 		"HSTS",
 		"IDFAs",
+		"iface",
 		"Influencers",
 		"Injectable",
 		"inplace",
@@ -440,8 +446,11 @@
 		"linkedin",
 		"mbbolt",
 		"mkey",
+		"Modalize",
 		"Mones",
 		"MSGP",
+		"msgpcode",
+		"nlevel",
 		"nocheckptr",
 		"noindex",
 		"nolint",
@@ -506,5 +515,15 @@
 	"editor.guides.indentation": true,
 	"editor.inlineSuggest.enabled": true,
 	"Lua.telemetry.enable": false,
-	"githubPullRequests.pullBranch": "never"
+	"githubPullRequests.pullBranch": "never",
+	"github.copilot.enable": {
+		"*": true,
+		"yaml": false,
+		"plaintext": false,
+		"markdown": true,
+		"jsonc": false
+	},
+	"[python]": {
+		"editor.defaultFormatter": "ms-python.python"
+	}
 }

@@ -118,3 +118,5 @@
 
 [credential]
 	helper = cache
+[protocol "file"]
+	allow = always
