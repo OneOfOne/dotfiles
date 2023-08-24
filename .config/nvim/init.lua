@@ -12,3 +12,13 @@ end
 if dir ~= '' then
 	vim.cmd('cd ' .. dir)
 end
+
+vim.cmd [[
+		set autoindent
+		set smartindent
+		set noexpandtab
+		set softtabstop=0
+		set shiftwidth=4
+		set tabstop=4
+		set list listchars=tab:»·,trail:·,nbsp:·,eol:¬
+]]
