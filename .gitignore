@@ -1,5 +1,4 @@
 .config/Code/
-.config/nvim/
 .config/coc/
 .env.d/05-work.zsh
 .env.d/99-work.zsh
