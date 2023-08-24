@@ -8,13 +8,10 @@
 	"editor.fontLigatures": true,
 	"editor.tabSize": 4,
 	"editor.insertSpaces": false,
-	"editor.quickSuggestions": {
-		"other": "on",
-		"comments": "on",
-		"strings": "on"
-	},
 	// "editor.quickSuggestionsDelay": 200,
-	"editor.rulers": [160],
+	"editor.rulers": [
+		160
+	],
 	"editor.renderWhitespace": "boundary",
 	"editor.renderLineHighlight": "all",
 	"editor.dragAndDrop": false,
@@ -28,17 +25,26 @@
 	// "editor.minimap.showSlider": "mouseover",
 	// "editor.minimap.maxColumn": 140,
 	// "editor.minimap.scale": 1,
+	"editor.quickSuggestions": {
+		"other": "on",
+		"comments": "on",
+		"strings": "on"
+	},
 	"editor.snippetSuggestions": "bottom",
 	"editor.hover.delay": 200,
 	"editor.suggest.localityBonus": true,
 	"editor.suggest.preview": true,
 	"editor.suggestSelection": "recentlyUsedByPrefix",
 	"editor.bracketPairColorization.enabled": true,
+	// "editor.tabCompletion": "on",
+	"editor.acceptSuggestionOnEnter": "on",
 	"editor.codeActionsOnSave": {
-		"source.addMissingImports": true,
+
+		"source.addMissingImports": false,
 		"source.organizeImports": false,
-		"source.fixAll.eslint": true,
-		"source.fixAll": true
+		"source.organizeImports.rome": true,
+		"source.fixAll.rome": true,
+		"source.fixAll": false
 	},
 	"editor.formatOnPaste": false,
 	"editor.formatOnType": false,
@@ -50,7 +56,6 @@
 	"editor.parameterHints.cycle": true,
 	"editor.suggest.showStatusBar": true,
 	"editor.maxTokenizationLineLength": 1000000000,
-	"files.maxMemoryForLargeFilesMB": 104096,
 	"editor.gotoLocation.multipleDeclarations": "goto",
 	"editor.gotoLocation.multipleDefinitions": "goto",
 	"editor.gotoLocation.multipleImplementations": "goto",
@@ -61,9 +66,8 @@
 	"editor.scrollbar.verticalScrollbarSize": 24,
 	"editor.guides.bracketPairs": true,
 	"editor.stickyScroll.enabled": true,
-
+	"editor.experimental.asyncTokenization": true,
 	"diffEditor.maxComputationTime": 0,
-
 	"breadcrumbs.symbolSortOrder": "name",
 	"workbench.editor.enablePreview": false,
 	"workbench.editor.enablePreviewFromQuickOpen": false,
@@ -71,7 +75,6 @@
 	"workbench.list.multiSelectModifier": "alt",
 	"workbench.editor.highlightModifiedTabs": true,
 	"workbench.colorTheme": "Cobalt2",
-	"workbench.iconTheme": "ayu",
 	"workbench.settings.editor": "json",
 	"workbench.settings.useSplitJSON": true,
 	"workbench.tree.indent": 16,
@@ -87,7 +90,6 @@
 	"window.closeWhenEmpty": true,
 	"window.customMenuBarAltFocus": false,
 	"explorer.confirmDelete": false,
-
 	"terminal.integrated.profiles.linux": {
 		"zsh": {
 			"path": "zsh",
@@ -101,7 +103,6 @@
 	"terminal.integrated.gpuAcceleration": "on",
 	"terminal.integrated.enablePersistentSessions": false,
 	"terminal.integrated.shellIntegration.enabled": false,
-
 	"files.insertFinalNewline": true,
 	"files.trimTrailingWhitespace": true,
 	"files.trimFinalNewlines": true,
@@ -111,10 +112,8 @@
 	"files.associations": {
 		"*.mustache": "html",
 		"*.user": "jsonc",
-		".tslintrc": "jsonc",
 		"*.json": "jsonc",
-		"*.html": "html",
-		"*.go2": "go"
+		"*.html": "html"
 	},
 	"files.exclude": {
 		"**/.git": true,
@@ -122,7 +121,6 @@
 		"**/.hg": true,
 		"**/CVS": true,
 		"**/.DS_Store": true,
-		"**/*.pprof": true,
 		"**/*.prof": true,
 		"**/*.test": true,
 		"**/*.db": true,
@@ -143,7 +141,6 @@
 	"search.searchOnType": false,
 	"debug.inlineValues": "on",
 	"debug.onTaskErrors": "abort",
-	"debug.javascript.usePreview": true,
 	"debug.showSubSessionsInToolBar": true,
 	"debug.allowBreakpointsEverywhere": true,
 	"[css]": {
@@ -156,19 +153,19 @@
 	},
 	"[javascript]": {
 		"editor.formatOnSave": false,
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
+		"editor.defaultFormatter": "rome.rome"
 	},
 	"[javascriptreact]": {
 		"editor.formatOnSave": false,
-		"editor.defaultFormatter": "dbaeumer.vscode-eslint"
+		"editor.defaultFormatter": "rome.rome"
 	},
 	"[typescriptreact]": {
-		"editor.formatOnSave": false,
-		"editor.defaultFormatter": "vscode.typescript-language-features"
+		"editor.formatOnSave": true,
+		"editor.defaultFormatter": "rome.rome"
 	},
 	"[typescript]": {
-		"editor.formatOnSave": false,
-		"editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+		"editor.formatOnSave": true,
+		"editor.defaultFormatter": "rome.rome"
 	},
 	"[html]": {
 		"editor.defaultFormatter": "vscode.html-language-features"
@@ -177,7 +174,10 @@
 		"editor.defaultFormatter": "vscode.json-language-features"
 	},
 	"[json]": {
-		"editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+		"editor.defaultFormatter": "vscode.json-language-features"
+	},
+	"[python]": {
+		"editor.defaultFormatter": "ms-python.python"
 	},
 	"typescript.suggest.completeFunctionCalls": true,
 	"typescript.updateImportsOnFileMove.enabled": "always",
@@ -196,16 +196,19 @@
 	"javascript.updateImportsOnFileMove.enabled": "always",
 	"javascript.format.semicolons": "insert",
 	"js/ts.implicitProjectConfig.checkJs": true,
-	"npm.packageManager": "yarn",
-
+	"npm.packageManager": "pnpm",
 	"eslint.run": "onSave",
 	"eslint.format.enable": true,
 	"eslint.packageManager": "yarn",
 	// "eslint.nodePath": "/home/oneofone/.config/yarn/global/node_modules/",
-	"eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
+	"eslint.validate": [
+		"javascript",
+		"javascriptreact",
+		"typescript",
+		"typescriptreact"
+	],
 	"eslint.lintTask.enable": false,
 	"eslint.quiet": false,
-
 	"prettier.jsxBracketSameLine": true,
 	"prettier.singleQuote": false,
 	"prettier.quoteProps": "consistent",
@@ -223,9 +226,7 @@
 	"python.linting.mypyEnabled": true,
 	"python.linting.enabled": true,
 	"python.formatting.provider": "black",
-
 	"C_Cpp.clang_format_fallbackStyle": "Google",
-
 	"[go]": {
 		"editor.insertSpaces": false,
 		"editor.formatOnSave": true,
@@ -235,10 +236,18 @@
 			"source.fixAll": true
 		}
 	},
-
 	"go.lintOnSave": "off",
-	"go.buildFlags": ["-tags", "typeparams"],
-	"go.testFlags": ["-v", "-count=1", "-benchtime=5s", "-timeout=5m", "-vet=off"],
+	"go.buildFlags": [
+		"-tags",
+		"typeparams"
+	],
+	"go.testFlags": [
+		"-v",
+		"-count=1",
+		"-benchtime=5s",
+		"-timeout=5m",
+		"-vet=off"
+	],
 	"go.coverMode": "default",
 	"go.coverShowCounts": true,
 	"go.editorContextMenuCommands": {
@@ -269,7 +278,7 @@
 		"runtest": false
 	},
 	"go.delveConfig": {
-		"only-same-user":false,
+		"only-same-user": false,
 		"apiVersion": 2,
 		"showGlobalVariables": false,
 		"hideSystemGoroutines": true
@@ -286,6 +295,7 @@
 			"ST1003": false,
 			"SA5001": false,
 			"SA1026": false,
+			"SA1011": false,
 			"nilness": false,
 			"unusedwrite": false,
 			"unusedparams": false,
@@ -310,22 +320,18 @@
 			"escape": true,
 			"nil": true
 		},
-
 		"ui.completion.usePlaceholders": false,
 		"ui.navigation.importShortcut": "Definition",
 		"ui.completion.completionBudget": "200ms",
 		"ui.diagnostic.diagnosticsDelay": "500ms",
-
 		"build.allowImplicitNetworkAccess": true,
-		"build.directoryFilters": ["-**/node_modules", "-**/data"],
-
+		"build.directoryFilters": [
+			"-**/node_modules",
+			"-**/data"
+		],
 		"ui.completion.experimentalPostfixCompletions": true,
-		"build.experimentalPackageCacheKey": true,
-
 		"newDiff": "new"
 	},
-	"rust.all_features": true,
-	"html.format.endWithNewline": true,
 	"html.format.maxPreserveNewLines": 1,
 	"html.format.extraLiners": "-",
 	"markdownlint.config": {
@@ -336,14 +342,11 @@
 	},
 	"emmet.showSuggestionsAsSnippets": true,
 	"php.suggest.basic": false,
-
 	"csv-edit.initiallyHideComments": true,
 	"csv-edit.readOption_hasHeader": "true",
 	"csv-edit.writeOption_hasHeader": "true",
-
 	"git.autofetch": true,
 	"git.confirmSync": false,
-	"git.experimental.mergeEditor": true,
 	"git.enableSmartCommit": true,
 	"git.enableCommitSigning": true,
 	"git.autoRepositoryDetection": false,
@@ -422,10 +425,13 @@
 		"genh",
 		"gmail",
 		"godoc",
+		"gofumpt",
 		"gogetdoc",
 		"goimports",
 		"golang",
 		"gometalinter",
+		"gopls",
+		"Goroutines",
 		"Gruvbox",
 		"gserv",
 		"gsets",
@@ -450,6 +456,7 @@
 		"Mones",
 		"MSGP",
 		"msgpcode",
+		"mypy",
 		"nlevel",
 		"nocheckptr",
 		"noindex",
@@ -464,10 +471,12 @@
 		"Protos",
 		"prox",
 		"Ptrs",
+		"pylint",
 		"rbuf",
 		"redir",
 		"reqs",
 		"retargeting",
+		"rvest",
 		"samp",
 		"signup",
 		"sqlite",
@@ -479,21 +488,34 @@
 		"uids",
 		"uint",
 		"ulimit",
+		"Uncompress",
 		"Unimported",
 		"unmarshals",
+		"Untar",
+		"unusedparams",
 		"uuid",
 		"vals",
 		"vmihailenco",
+		"vulncheck",
 		"wakenn",
 		"xast",
 		"xerrors",
 		"xonsh"
 	],
-	"cSpell.ignoreRegExpList": ["0x[a-f0-9]+", "<?[\\w.\\-+]+@\\w+(\\.\\w+)+>?"],
-	"cSpell.ignorePaths": ["**/node_modules/**", "**/vscode-extension/**", "**/.git/**", ".vscode", "typings", ".gitignore"],
-	"cSpell.flagWords": ["hte"],
+	"cSpell.ignoreRegExpList": [
+		"0x[a-f0-9]+",
+		"<?[\\w.\\-+]+@\\w+(\\.\\w+)+>?"
+	],
+	"cSpell.ignorePaths": [
+		"**/node_modules/**",
+		"**/vscode-extension/**",
+		"**/.git/**",
+		".vscode",
+		"typings",
+		".gitignore",
+		"**/dist/**"
+	],
 	"cSpell.spellCheckDelayMs": 100,
-
 	"extensions.autoUpdate": true,
 	"extensions.ignoreRecommendations": true,
 	"workbench.settings.enableNaturalLanguageSearch": false,
@@ -510,20 +532,21 @@
 	"Lua.diagnostics.enable": true,
 	"Lua.hint.enable": true,
 	"editor.cursorStyle": "block",
-	"python.insidersChannel": "weekly",
 	"redhat.telemetry.enabled": true,
 	"editor.guides.indentation": true,
 	"editor.inlineSuggest.enabled": true,
-	"Lua.telemetry.enable": false,
 	"githubPullRequests.pullBranch": "never",
 	"github.copilot.enable": {
 		"*": true,
 		"yaml": false,
 		"plaintext": false,
 		"markdown": true,
-		"jsonc": false
+		"jsonc": true
 	},
-	"[python]": {
-		"editor.defaultFormatter": "ms-python.python"
-	}
+	"github.copilot-labs.showBrushesLenses": false,
+	"github.copilot-labs.showTestGenerationLenses": true,
+	"workbench.editorAssociations": {
+		"*.pprof": "easyview.view"
+	},
+	"git.openRepositoryInParentFolders": "never",
 }

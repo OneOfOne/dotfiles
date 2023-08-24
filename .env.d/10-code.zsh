@@ -5,7 +5,7 @@ export GOBIN="$GOPATH/bin"
 export GOSUMDB="off"
 export GOPROXY="direct"
 export GO111MODULE=auto
-export GOTIPROOT="$HOME/sdk/go"
+export GOROOT="$HOME/sdk/go"
 # export CLOUDSDK_PYTHON=python2
 export GOAMD64=v3
 
@@ -41,7 +41,7 @@ function setgo {
 	fi
 
 	[ "$v" = "tip" -o "$v" = "master" ] && v=""
-	local p="${GOTIPROOT}$v/bin"
+	local p="${GOROOT}$v/bin"
 
 	if [ "$v" = "os" -o "$v" = "main" ]; then
 		p="/usr/bin"
@@ -60,7 +60,7 @@ function setgo {
 function addgotree {
 	set -o localoptions -o localtraps
 	local v="$1"
-	pushd ${GOTIPROOT} >/dev/null && trap "popd >/dev/null" EXIT
+	pushd ${GOROOT} >/dev/null && trap "popd >/dev/null" EXIT
 	git pull --all || return 1
 	git worktree remove ../go$v
 	git branch -d go$v &>/dev/null
@@ -71,7 +71,7 @@ function addgotree {
 function removegotree {
 	set -o localoptions -o localtraps
 	local v="$1"
-	pushd ${GOTIPROOT} >/dev/null && trap "popd >/dev/null" EXIT
+	pushd ${GOROOT} >/dev/null && trap "popd >/dev/null" EXIT
 	git worktree remove ../go$v
 	git branch -d go$v &>/dev/null
 	rm -v ~/bin/go$v
@@ -80,7 +80,7 @@ function removegotree {
 function rebuildgo {
 	set -o localoptions -o localtraps
 	local v="$1"
-	pushd "${GOTIPROOT}$v/src" >/dev/null && trap "popd >/dev/null" EXIT
+	pushd "${GOROOT}$v/src" >/dev/null && trap "popd >/dev/null" EXIT
 	/bin/rm -rf ../pkg ../bin &>/dev/null
 
 	git reset --hard || return 1

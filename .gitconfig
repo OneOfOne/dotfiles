@@ -92,9 +92,7 @@
 	gc-all = !git -c gc.reflogExpire=0 -c gc.reflogExpireUnreachable=0 -c gc.rerereresolved=0 -c gc.rerereunresolved=0 -c gc.pruneExpire=now gc --aggressive
 	undo-last = reset --soft HEAD~1
 
-	clean-old = "!f() { git delete-merged-branches; du -h --max-depth=0 .git && git reflog expire --all --expire=now && git gc --prune=now --aggressive; du -h --max-depth=0 .git; }; f"
-
-	list-old-branches = !git branch --merged | grep -Ev '^\\*|master|main|dev'
+	list-old-branches = !git branch --merged | grep -Ev 'master|main|dev'
 	delete-merged-branches = "!git branch -d $(git list-old-branches) && git remote prune origin"
 	clean-old = "!f() { git delete-merged-branches; du -h --max-depth=0 .git && git reflog expire --all --expire=now && git gc --prune=now --aggressive; du -h --max-depth=0 .git; }; f"
 
