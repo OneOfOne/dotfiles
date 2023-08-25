@@ -160,3 +160,5 @@ function gots {
 function gcp-enable-log {
 	gsutil logging set on -b gs://$1 -o AccessLog gs://$1
 }
+
+alias vimx="neovide --multigrid"

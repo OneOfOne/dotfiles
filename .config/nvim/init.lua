@@ -14,11 +14,22 @@ if dir ~= '' then
 end
 
 vim.cmd [[
-		set autoindent
-		set smartindent
-		set noexpandtab
-		set softtabstop=0
-		set shiftwidth=4
-		set tabstop=4
-		set list listchars=tab:»·,trail:·,nbsp:·,eol:¬
+	set autoindent
+	set smartindent
+	set noexpandtab
+	set softtabstop=0
+	set shiftwidth=4
+	set tabstop=4
+
+	set iskeyword+=-
+	set norelativenumber
+
+	set list listchars=tab:▶‒,nbsp:∙,trail:∙,extends:▶,precedes:◀,space:·
+	match ErrorMsg '\s\+$'
+
+	set title
+
+	set noundofile
+
+	au BufLeave * silent! wall
 ]]
