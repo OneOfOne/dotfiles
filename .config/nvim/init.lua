@@ -23,6 +23,8 @@ vim.cmd [[
 
 	set iskeyword+=-
 	set norelativenumber
+	set wrap
+	set breakindent
 
 	set list listchars=tab:▶‒,nbsp:∙,trail:∙,extends:▶,precedes:◀,space:·
 	match ErrorMsg '\s\+$'

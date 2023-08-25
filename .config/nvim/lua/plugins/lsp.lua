@@ -3,11 +3,11 @@ vim.api.nvim_create_autocmd(
 	{
 		pattern = { "*.tsx,*.ts,*.jsx,*.js,*.vue" },
 		callback = function()
-		vim.lsp.buf.format({
-			async = false,
-			-- only use null-ls
-			filter = function(client) return client.name == "null-ls" end
-		})
+			vim.lsp.buf.format({
+				async = false,
+				-- only use null-ls
+				filter = function(client) return client.name == "null-ls" end
+			})
 		end
 	}
 )
@@ -18,7 +18,9 @@ return {
 		opts = {
 			-- format_notify = true,
 			format = {
-				filter = function(client) return client.name ~= "tsserver" end
+				filter = function(client)
+					return client.name ~= "tsserver"
+				end
 			},
 		},
 	},
