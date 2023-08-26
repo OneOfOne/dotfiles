@@ -1,9 +1,9 @@
 return {
 	"nvim-neo-tree/neo-tree.nvim",
 	opts = {
+		open_files_do_not_replace_types = { "terminal", "Trouble", "qf", "edgy" },
 		filesystem = {
 			filtered_items = {
-				visible = true,
 				hide_gitignored = true,
 				hide_by_name = {
 					'.git',
@@ -17,5 +17,6 @@ return {
 				},
 			},
 		},
+		use_libuv_file_watcher = true,
 	},
 }

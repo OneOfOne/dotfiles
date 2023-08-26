@@ -11,9 +11,42 @@ end
 
 if dir ~= '' then
 	vim.cmd('cd ' .. dir)
+	if vim.fn.filereadable('.lastsession') ~= 0 then
+		vim.schedule(function ()
+			vim.cmd [[
+				source .lastsession
+				sleep 100ms
+				blast
+			]]
+		end)
+	end
+end
+
+function save_open_files(only_if_exists)
+	" only save if nvim was opened with a dir
+	if dir == '' then
+		return
+	end
+	if dir == '' or only_if_exists and vim.fn.filereadable('.lastsession') == 0 then
+		return
+	end
+
+	local file = io.open(".lastsession", "w")
+	for i, h in ipairs(vim.api.nvim_list_bufs()) do
+		if vim.api.nvim_buf_is_loaded(h) then
+			local bname = vim.api.nvim_buf_get_name(h)
+			local name = '.' .. bname:sub(vim.fs.normalize(dir):len() + 1)
+			if vim.fn.filereadable(name) ~= 0 then
+				found = true
+				file:write('e ' .. name .. "\n")
+			end
+		end
+	end
+	file:close()
 end
 
 vim.cmd [[
+	" using spaces as tabs is evil, and you should be ashmed of yourself
 	set autoindent
 	set smartindent
 	set noexpandtab
@@ -33,5 +66,12 @@ vim.cmd [[
 
 	set noundofile
 
+	" autosave
+	set autowriteall
 	au BufLeave * silent! wall
+	au Vimleave * lua save_open_files(true)
+
+	" old habits die hard
+	imap <c-v> <esc>pi
+	imap <c-a> <esc>ggVG
 ]]

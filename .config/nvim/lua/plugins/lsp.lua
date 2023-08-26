@@ -1,7 +1,7 @@
 vim.api.nvim_create_autocmd(
 	"BufWritePre",
 	{
-		pattern = { "*.tsx,*.ts,*.jsx,*.js,*.vue" },
+		pattern = { "*.tsx,*.ts,*.mts,*.jsx,*.js,*.mjs,*.cjs,*.vue" },
 		callback = function()
 			vim.lsp.buf.format({
 				async = false,
