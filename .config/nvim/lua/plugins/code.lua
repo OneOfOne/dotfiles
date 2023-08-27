@@ -32,6 +32,5 @@ return {
 				nls.builtins.formatting.rome,
 			})
 		end
-	}
-
+	},
 }

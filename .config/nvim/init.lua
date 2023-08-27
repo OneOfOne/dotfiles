@@ -23,7 +23,6 @@ if dir ~= '' then
 end
 
 function save_open_files(only_if_exists)
-	" only save if nvim was opened with a dir
 	if dir == '' then
 		return
 	end
@@ -46,7 +45,7 @@ function save_open_files(only_if_exists)
 end
 
 vim.cmd [[
-	" using spaces as tabs is evil, and you should be ashmed of yourself
+	" using spaces as tabs is evil, and you should be ashamed of yourself
 	set autoindent
 	set smartindent
 	set noexpandtab
@@ -65,6 +64,8 @@ vim.cmd [[
 	set title
 
 	set noundofile
+
+	set completeopt+=noinsert
 
 	" autosave
 	set autowriteall

@@ -85,3 +85,7 @@ function androidenv {
 	PATH=$PATH:$ANDROID_HOME/tools/bin
 	export PATH=$PATH:$ANDROID_HOME/platform-tools
 }
+
+alias vimx="neovide --multigrid --notabs"
+alias visu="sudo -E nvim"
+alias tmuxx="tmux new-session \; split-window -h \;"
