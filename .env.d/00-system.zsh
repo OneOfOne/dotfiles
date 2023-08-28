@@ -87,5 +87,14 @@ function androidenv {
 }
 
 alias vimx="neovide --multigrid --notabs"
+
+function wvim {
+	cwd="$1"
+	if [ ! -d "$1" ]; then
+		cwd="$PWD"
+	fi
+	wezterm --config-file ~/.dotfiles/wezterm-nvim.lua start --always-new-process --no-auto-connect --cwd $cwd -- nvim $@ &
+}
+
 alias visu="sudo -E nvim"
 alias tmuxx="tmux new-session \; split-window -h \;"

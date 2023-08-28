@@ -14,12 +14,17 @@ local sessionFile = dir .. '/.git/lastsession.lua'
 if dir ~= '' then
 	vim.cmd('cd ' .. dir)
 	if vim.fn.filereadable(sessionFile) ~= 0 then
-		vim.schedule(function ()
+		vim.schedule(function()
 			-- can't require, it's effy
 			vim.cmd('luafile ' .. sessionFile)
 		end)
 	end
-	vim.cmd('au Vimleave * lua save_open_files(false)')
+
+	vim.cmd [[
+		au Vimleave * silent! !wezterm cli kill-pane --pane-id=0
+		au Vimleave * silent! !wezterm cli kill-pane --pane-id=1
+		au Vimleave * lua save_open_files(false)
+	]]
 end
 
 function save_open_files(only_if_exists)
@@ -45,13 +50,13 @@ function save_open_files(only_if_exists)
 	file:close()
 end
 
-function tprint (tbl, indent)
+function tprint(tbl, indent)
 	if not indent then indent = 0 end
 	for k, v in pairs(tbl) do
 		formatting = string.rep("\t", indent) .. k .. ": "
 		if type(v) == "table" then
 			print(formatting)
-			tprint(v, indent+1)
+			tprint(v, indent + 1)
 		elseif type(v) == 'boolean' then
 			print(formatting .. tostring(v))
 		else
@@ -97,8 +102,3 @@ vim.cmd [[
 	imap <c-v> <esc>pi
 	imap <c-a> <esc>ggVG
 ]]
-
--- local wt = require('wezterm');
--- wt.split_pane.vertical({ percent = 20 });
--- vim.cmd('sleep 100ms')
--- wt.split_pane.horizontal({ pane = 1 });

@@ -26,8 +26,4 @@ return {
 			require('ufo').setup(opts)
 		end,
 	},
-	{
-		'willothy/wezterm.nvim',
-		config = true,
-	}
 }
