@@ -23,6 +23,14 @@ return {
 				end
 			},
 		},
+		config = function(_, opts)
+			local capabilities = vim.lsp.protocol.make_client_capabilities()
+			capabilities.textDocument.foldingRange = {
+				dynamicRegistration = false,
+				lineFoldingOnly = true
+			}
+			return opts
+		end
 	},
 	{
 		"jose-elias-alvarez/null-ls.nvim",

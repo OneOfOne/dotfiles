@@ -62,8 +62,10 @@ vim.cmd [[
 	match ErrorMsg '\s\+$'
 
 	set title
-
 	set noundofile
+
+	set spell
+	set spelloptions+=camel
 
 	set completeopt+=noinsert
 
@@ -72,7 +74,15 @@ vim.cmd [[
 	au BufLeave * silent! wall
 	au Vimleave * lua save_open_files(true)
 
+	" fix selection with mouse
+	vmap <LeftRelease> "*ygv
+
 	" old habits die hard
 	imap <c-v> <esc>pi
 	imap <c-a> <esc>ggVG
 ]]
+
+local wt = require('wezterm');
+wt.split_pane.vertical({ percent = 20 });
+vim.cmd('sleep 100ms')
+wt.split_pane.horizontal({ pane = 1 });

@@ -2,6 +2,9 @@ return {
 	"folke/edgy.nvim",
 	opts = function()
 		local opts = {
+			animate = {
+				enabled = false,
+			},
 			bottom = {
 				{
 					ft = "toggleterm",
