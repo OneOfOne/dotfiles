@@ -22,15 +22,23 @@ return {
 					return client.name ~= "tsserver"
 				end
 			},
+			inlay_hints = {
+				enabled = true,
+			},
+			capabilities = {
+				textDocument = {
+					foldingRange = {
+						dynamicRegistration = false,
+						lineFoldingOnly = true
+					},
+					completion = {
+						completionItem = {
+							snippetSupport = true,
+						},
+					},
+				}
+			},
 		},
-		config = function(_, opts)
-			local capabilities = vim.lsp.protocol.make_client_capabilities()
-			capabilities.textDocument.foldingRange = {
-				dynamicRegistration = false,
-				lineFoldingOnly = true
-			}
-			return opts
-		end
 	},
 	{
 		"jose-elias-alvarez/null-ls.nvim",
