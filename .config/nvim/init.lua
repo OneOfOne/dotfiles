@@ -28,14 +28,15 @@ if dir ~= '' then
 	if vim.env.WEZTERM_PANE ~= '' then
 		local wezpane = tonumber(vim.env.WEZTERM_PANE)
 
-		vim.cmd('silent! !wezterm cli split-pane --bottom --percent 25')
+		vim.cmd('silent! !wezterm cli split-pane --bottom --percent 20')
 		vim.cmd('silent! !wezterm cli split-pane --right --pane-id ' .. wezpane + 1)
 		vim.cmd('silent! !wezterm cli  activate-pane --pane-id ' .. wezpane)
 
-		vim.cmd [[
-			au Vimleave * silent! !wezterm cli kill-pane --pane-id=1
-			au Vimleave * silent! !wezterm cli kill-pane --pane-id=2
-		]]
+		vim.cmd('au Vimleave * silent! !wezterm cli kill-pane --pane-id ' .. wezpane + 1)
+		vim.cmd('au Vimleave * silent! !wezterm cli kill-pane --pane-id ' .. wezpane + 2)
+		if wezpane ~= 0 then
+			vim.cmd('au Vimleave * silent! !wezterm cli  activate-pane --pane-id ' .. wezpane - 2)
+		end
 	end
 end
 
@@ -84,8 +85,8 @@ vim.cmd [[
 	set smartindent
 	set noexpandtab
 	set softtabstop=0
-	set shiftwidth=4
-	set tabstop=4
+	set shiftwidth=2
+	set tabstop=2
 
 	set iskeyword+=-
 	set norelativenumber

@@ -14,6 +14,10 @@ cfg.keys = {
 	{ key = 'k', mods = 'SUPER', action = act.ActivatePaneDirection 'Up' },
 	{ key = 'l', mods = 'SUPER', action = act.ActivatePaneDirection 'Right' },
 }
+
+cfg.font = wezterm.font('Cascadia Code PL')
+cfg.font_size = 13
+
 -- cfg.enable_tab_bar = false
 -- cfg.window_close_confirmation = 'NeverPrompt'
 
