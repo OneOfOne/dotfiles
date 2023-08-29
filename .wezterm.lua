@@ -13,6 +13,8 @@ cfg.keys = {
 	{ key = 'j', mods = 'SUPER', action = act.ActivatePaneDirection 'Down' },
 	{ key = 'k', mods = 'SUPER', action = act.ActivatePaneDirection 'Up' },
 	{ key = 'l', mods = 'SUPER', action = act.ActivatePaneDirection 'Right' },
+	{ key = 'Tab', mods = 'CTRL', action = 'DisableDefaultAssignment' },
+	{ key = 'Tab', mods = 'CTRL|SHIFT', action = 'DisableDefaultAssignment' },
 }
 
 cfg.font = wezterm.font('Cascadia Code PL', { weight = 600 })

@@ -26,4 +26,11 @@ return {
 			require('ufo').setup(opts)
 		end,
 	},
+	{
+		"gbprod/yanky.nvim",
+		dependencies = { { "kkharji/sqlite.lua", enabled = false } },
+		opts = function(_, opts)
+			opts.ring.storage = 'memory'
+		end,
+	}
 }

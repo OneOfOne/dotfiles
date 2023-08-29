@@ -25,17 +25,18 @@ if dir ~= '' then
 	]]
 
 
-	if vim.env.WEZTERM_PANE ~= '' then
+	if vim.env.WEZTERM_PANE ~= nil then
+		print(vim.env.WEZTERM_PANE)
 		local wezpane = tonumber(vim.env.WEZTERM_PANE)
 
 		vim.cmd('silent! !wezterm cli split-pane --bottom --percent 20')
 		vim.cmd('silent! !wezterm cli split-pane --right --pane-id ' .. wezpane + 1)
-		vim.cmd('silent! !wezterm cli  activate-pane --pane-id ' .. wezpane)
+		vim.cmd('silent! !wezterm cli activate-pane --pane-id ' .. wezpane)
 
 		vim.cmd('au Vimleave * silent! !wezterm cli kill-pane --pane-id ' .. wezpane + 1)
 		vim.cmd('au Vimleave * silent! !wezterm cli kill-pane --pane-id ' .. wezpane + 2)
 		if wezpane ~= 0 then
-			vim.cmd('au Vimleave * silent! !wezterm cli  activate-pane --pane-id ' .. wezpane - 2)
+			vim.cmd('au Vimleave * silent! !wezterm cli activate-pane --pane-id ' .. wezpane - 2)
 		end
 	end
 end
@@ -99,7 +100,8 @@ vim.cmd [[
 	set title
 	set noundofile
 
-	" set spell
+	" use cspell, because neovim's spell stupid
+	set nospell
 	set spelloptions+=camel
 
 	set completeopt+=noinsert
@@ -116,4 +118,5 @@ vim.cmd [[
 	imap <c-a> <esc>ggVG
 
 	nmap <leader>gl <cmd>OpenInGHFileLines<cr>
+	nmap <leader>qw <cmd>bd<cr>
 ]]

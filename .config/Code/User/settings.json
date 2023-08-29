@@ -160,11 +160,11 @@
 		"editor.defaultFormatter": "rome.rome"
 	},
 	"[typescriptreact]": {
-		"editor.formatOnSave": true,
+		"editor.formatOnSave": false,
 		"editor.defaultFormatter": "rome.rome"
 	},
 	"[typescript]": {
-		"editor.formatOnSave": true,
+		"editor.formatOnSave": false,
 		"editor.defaultFormatter": "rome.rome"
 	},
 	"[html]": {
