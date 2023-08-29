@@ -15,7 +15,7 @@ cfg.keys = {
 	{ key = 'l', mods = 'SUPER', action = act.ActivatePaneDirection 'Right' },
 }
 
-cfg.font = wezterm.font('Cascadia Code PL')
+cfg.font = wezterm.font('Cascadia Code PL', { weight = 600 })
 cfg.font_size = 13
 
 -- cfg.enable_tab_bar = false

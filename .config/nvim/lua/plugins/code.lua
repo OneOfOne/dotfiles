@@ -42,10 +42,21 @@ return {
 	},
 	{
 		"jose-elias-alvarez/null-ls.nvim",
+		dependencies = {
+			"davidmh/cspell.nvim",
+		},
 		opts = function(_, opts)
 			local nls = require("null-ls")
+			local cspell = require("cspell")
+			local cscfg = {
+				find_json = function()
+					return vim.fn.stdpath("config") .. "/spell/cspell.json"
+				end,
+			}
 			vim.list_extend(opts.sources, {
 				nls.builtins.formatting.rome,
+				cspell.diagnostics.with({ config = cscfg }),
+				cspell.code_actions.with({ config = cscfg }),
 			})
 		end
 	},

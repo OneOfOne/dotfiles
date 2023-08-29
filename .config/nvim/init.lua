@@ -99,7 +99,7 @@ vim.cmd [[
 	set title
 	set noundofile
 
-	set spell
+	" set spell
 	set spelloptions+=camel
 
 	set completeopt+=noinsert
@@ -114,4 +114,6 @@ vim.cmd [[
 	" old habits die hard
 	imap <c-v> <esc>pi
 	imap <c-a> <esc>ggVG
+
+	nmap <leader>gl <cmd>OpenInGHFileLines<cr>
 ]]
