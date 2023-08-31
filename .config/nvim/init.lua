@@ -10,25 +10,26 @@ for i = 1, vim.fn.argc() do
 	end
 end
 
-local sessionFile = dir .. '/.git/lastsession.lua'
+local nvimDir = dir .. '/.nvim/'
 if dir ~= '' then
 	vim.cmd('cd ' .. dir)
-	if vim.fn.filereadable(sessionFile) ~= 0 then
-		vim.schedule(function()
-			-- can't require, it's effy
-			vim.cmd('luafile ' .. sessionFile)
-		end)
-	end
 
-	vim.cmd [[
-		au Vimleave * lua save_open_files(false)
-	]]
+	vim.defer_fn(function()
+		-- can't require, it's effy
+		if vim.fn.filereadable(nvimDir .. 'session.lua') ~= 0 then
+			vim.cmd('luafile ' .. nvimDir .. 'session.lua')
+		end
+		if vim.fn.filereadable(nvimDir .. 'init.lua') ~= 0 then
+			vim.cmd('luafile ' .. nvimDir .. 'init.lua')
+		end
+		vim.cmd('au Vimleave * lua save_open_files(false)')
+	end, 150)
+
+
 
 
 	if vim.env.WEZTERM_PANE ~= nil then
-		print(vim.env.WEZTERM_PANE)
 		local wezpane = tonumber(vim.env.WEZTERM_PANE)
-
 		vim.cmd('silent! !wezterm cli split-pane --bottom --percent 20')
 		vim.cmd('silent! !wezterm cli split-pane --right --pane-id ' .. wezpane + 1)
 		vim.cmd('silent! !wezterm cli activate-pane --pane-id ' .. wezpane)
@@ -36,7 +37,7 @@ if dir ~= '' then
 		vim.cmd('au Vimleave * silent! !wezterm cli kill-pane --pane-id ' .. wezpane + 1)
 		vim.cmd('au Vimleave * silent! !wezterm cli kill-pane --pane-id ' .. wezpane + 2)
 		if wezpane ~= 0 then
-			vim.cmd('au Vimleave * silent! !wezterm cli activate-pane --pane-id ' .. wezpane - 2)
+			vim.cmd('au Vimleave * silent! !wezterm cli activate-pane --pane-id ' .. wezpane - 3)
 		end
 	end
 end
@@ -45,11 +46,15 @@ function save_open_files(only_if_exists)
 	if dir == '' then
 		return
 	end
-	if dir == '' or only_if_exists and vim.fn.filereadable(sessionFile) == 0 then
+	if dir == '' or only_if_exists and vim.fn.filereadable(nvimDir) == 0 then
 		return
 	end
 
-	local file = io.open(sessionFile, "w")
+	if vim.fn.isdirectory(nvimDir) == 0 then
+		vim.fn.mkdir(nvimDir, 'p')
+	end
+
+	local file = io.open(nvimDir .. 'session.lua', 'w')
 	file:write('local utils = require("neo-tree.utils");\n');
 	for i, h in ipairs(vim.api.nvim_list_bufs()) do
 		if vim.api.nvim_buf_is_loaded(h) then
@@ -64,30 +69,15 @@ function save_open_files(only_if_exists)
 	file:close()
 end
 
-function tprint(tbl, indent)
-	if not indent then indent = 0 end
-	for k, v in pairs(tbl) do
-		formatting = string.rep("\t", indent) .. k .. ": "
-		if type(v) == "table" then
-			print(formatting)
-			tprint(v, indent + 1)
-		elseif type(v) == 'boolean' then
-			print(formatting .. tostring(v))
-		else
-			print(formatting .. v)
-		end
-	end
-end
-
--- probably should use lua, but oh well
+-- probably should move this into the different config files
 vim.cmd [[
 	" using spaces as tabs is evil, and you should be ashamed of yourself
 	set autoindent
 	set smartindent
 	set noexpandtab
 	set softtabstop=0
-	set shiftwidth=2
-	set tabstop=2
+	set shiftwidth=4
+	set tabstop=4
 
 	set iskeyword+=-
 	set norelativenumber
@@ -118,5 +108,9 @@ vim.cmd [[
 	imap <c-a> <esc>ggVG
 
 	nmap <leader>gl <cmd>OpenInGHFileLines<cr>
-	nmap <leader>qw <cmd>bd<cr>
+	nmap <leader>qw <leader>bd
+	nmap <leader>b<tab> <cmd>Telescope buffers theme=dropdown previewer=false<cr>
+	nmap <c-tab> <leader>b<tab>
+	nmap J 25gj
+	nmap k 25gk
 ]]

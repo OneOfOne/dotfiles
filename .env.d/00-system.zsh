@@ -89,11 +89,13 @@ function androidenv {
 alias vimx="neovide --multigrid --notabs"
 
 function wvim {
-	cwd="${1:-$PWD}"
+	local cwd="${1:-$PWD}"
+	local p="${1}"
 	if [ "$WEZTERM_PANE" != "" ]; then
-		wezterm cli spawn --cwd $cwd -- nvim $@
+		[ -d "$cwd/$p" ] && p="$cwd/$p"
+		wezterm cli spawn --cwd $cwd -- nvim $p
 	else
-		wezterm start --cwd $cwd -- nvim $@
+		wezterm start --cwd $cwd -- nvim $p
 	fi
 }
 
