@@ -1,3 +1,4 @@
--- Autocmds are automatically loaded on the VeryLazy event
--- Default autocmds that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/autocmds.lua
--- Add any additional autocmds here
+local function au(type, opts)
+	vim.api.nvim_create_autocmd(type, opts);
+end
+au("FileType", { pattern = "json", command = [[setlocal conceallevel=0]] })

@@ -23,7 +23,7 @@ if dir ~= '' then
 			vim.cmd('luafile ' .. nvimDir .. 'init.lua')
 		end
 		vim.cmd('au Vimleave * lua save_open_files(false)')
-	end, 150)
+	end, 100)
 
 
 
@@ -31,7 +31,7 @@ if dir ~= '' then
 	if vim.env.WEZTERM_PANE ~= nil then
 		local wezpane = tonumber(vim.env.WEZTERM_PANE)
 		vim.cmd('silent! !wezterm cli split-pane --bottom --percent 20')
-		vim.cmd('silent! !wezterm cli split-pane --right --pane-id ' .. wezpane + 1)
+		vim.cmd('silent! !wezterm cli split-pane --right --percent 65 --pane-id ' .. wezpane + 1)
 		vim.cmd('silent! !wezterm cli activate-pane --pane-id ' .. wezpane)
 
 		vim.cmd('au Vimleave * silent! !wezterm cli kill-pane --pane-id ' .. wezpane + 1)
@@ -70,47 +70,3 @@ function save_open_files(only_if_exists)
 end
 
 -- probably should move this into the different config files
-vim.cmd [[
-	" using spaces as tabs is evil, and you should be ashamed of yourself
-	set autoindent
-	set smartindent
-	set noexpandtab
-	set softtabstop=0
-	set shiftwidth=4
-	set tabstop=4
-
-	set iskeyword+=-
-	set norelativenumber
-	set wrap
-	set breakindent
-
-	set list listchars=tab:▶‒,nbsp:∙,trail:∙,extends:▶,precedes:◀,space:·
-	match ErrorMsg '\s\+$'
-
-	set title
-	set noundofile
-
-	" use cspell, because neovim's spell stupid
-	set nospell
-	set spelloptions+=camel
-
-	set completeopt+=noinsert
-
-	" autosave
-	set autowriteall
-	au BufLeave * silent! wall
-
-	" fix selection with mouse
-	vmap <LeftRelease> "*ygv
-
-	" old habits die hard
-	imap <c-v> <esc>pi
-	imap <c-a> <esc>ggVG
-
-	nmap <leader>gl <cmd>OpenInGHFileLines<cr>
-	nmap <leader>qw <leader>bd
-	nmap <leader>b<tab> <cmd>Telescope buffers theme=dropdown previewer=false<cr>
-	nmap <c-tab> <leader>b<tab>
-	nmap J 25gj
-	nmap k 25gk
-]]

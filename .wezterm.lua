@@ -17,8 +17,9 @@ cfg.keys = {
 	{ key = 'Tab', mods = 'CTRL|SHIFT', action = 'DisableDefaultAssignment' },
 }
 
-cfg.font = wezterm.font('Cascadia Code PL', { weight = 600 })
-cfg.font_size = 13
+cfg.font = wezterm.font { family = 'Fira Code', weight = 500 }
+cfg.font_size = 12
+cfg.underline_position ='200%'
 
 -- cfg.enable_tab_bar = false
 -- cfg.window_close_confirmation = 'NeverPrompt'

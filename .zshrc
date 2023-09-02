@@ -22,16 +22,16 @@ CLOUDSDK_HOME="$HOME/sdk/google-cloud/"
 
 plugins=(
 	common-aliases # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/common-aliases
+	copybuffer
 	copypath
 	copyfile
+	cp # cpv -> rsync
 	command-not-found
-	direnv
-	docker-compose
 	dotenv
 	isodate
-	zsh-syntax-highlighting
 	ripgrep
-	sudo # press esc twice
+	zsh-syntax-highlighting
+	zsh-interactive-cd
 )
 
 [[ -d "${CLOUDSDK_HOME}" ]] && plugins+=(gcloud kubectl)
@@ -64,7 +64,3 @@ alias .reload="source ~/.zshrc"
 # ensure path includes only unique pathes
 typeset -aU path
 autoload -U compinit && compinit
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

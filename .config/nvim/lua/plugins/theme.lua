@@ -20,4 +20,26 @@ return {
 			colorscheme = "catppuccin",
 		},
 	},
+	{
+		'akinsho/bufferline.nvim',
+		opts = {
+			options = {
+				always_show_bufferline = true,
+				themable = true,
+				separator_style = 'slope',
+			},
+		}
+	},
+	{
+		"nvim-lualine/lualine.nvim",
+		opts = {
+			sections = {
+				lualine_y = {
+					{ "searchcount", separator = " ", padding = { left = 1, right = 0 } },
+					{ "selectioncount", separator = " ", padding = { left = 1, right = 0 } },
+					{ "location", padding = { left = 0, right = 1 } },
+				},
+			}
+		}
+	}
 }

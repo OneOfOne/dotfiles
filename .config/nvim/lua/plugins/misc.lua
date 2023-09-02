@@ -1,36 +1,50 @@
-vim.o.foldcolumn = '0' -- '0' is not bad
-vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
-vim.o.foldlevelstart = 99
-vim.o.foldenable = true
+
 
 return {
 	{
-		'kevinhwang91/nvim-ufo',
-		dependencies = { 'kevinhwang91/promise-async' },
+		'mrjones2014/legendary.nvim',
+		priority = 10000,
+		lazy = false,
 		opts = {
-			filetype_exclude = { 'help', 'alpha', 'dashboard', 'neo-tree', 'Trouble', 'lazy', 'mason' },
-			provider_selector = function(bufnr, filetype, buftype)
-				return {'treesitter', 'indent'}
-			end
-		},
-		config = function(_, opts)
-			vim.api.nvim_create_autocmd('FileType', {
-				group = vim.api.nvim_create_augroup('local_detach_ufo', { clear = true }),
-				pattern = opts.filetype_exclude,
-				callback = function()
-					require('ufo').detach()
-				end,
-			})
-
-			vim.opt.foldlevelstart = 99
-			require('ufo').setup(opts)
-		end,
+			lazy_nvim = {
+				auto_register = true,
+			},
+			which_key = {
+				auto_register = true,
+			},
+			extensions = {
+				nvim_tree = true,
+			},
+		}
 	},
 	{
-		"gbprod/yanky.nvim",
-		dependencies = { { "kkharji/sqlite.lua", enabled = false } },
+		'lukas-reineke/indent-blankline.nvim',
+		-- enabled = false,
 		opts = function(_, opts)
-			opts.ring.storage = 'memory'
-		end,
+			vim.cmd [[
+				highlight IndentBlanklineIndent1 guifg=#14e0d9 gui=nocombine
+				highlight IndentBlanklineIndent2 guifg=#E5C07B gui=nocombine
+				highlight IndentBlanklineIndent3 guifg=#98C379 gui=nocombine
+				highlight IndentBlanklineIndent4 guifg=#56B6C2 gui=nocombine
+				highlight IndentBlanklineIndent5 guifg=#61AFEF gui=nocombine
+				highlight IndentBlanklineIndent6 guifg=#C678DD gui=nocombine
+			]]
+
+			opts.char_highlight_list = {
+				'IndentBlanklineIndent1',
+				'IndentBlanklineIndent2',
+				'IndentBlanklineIndent3',
+				'IndentBlanklineIndent4',
+				'IndentBlanklineIndent5',
+				'IndentBlanklineIndent6',
+			}
+			opts.show_trailing_blankline_indent = false
+			opts.char_priority = 12
+			opts.show_foldtext = false
+			opts.use_treesitter = true
+			opts.space_char_blankline = ' '
+			opts.show_current_context = true
+			opts.show_current_context_start = true
+		end
 	}
 }

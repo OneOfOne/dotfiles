@@ -4,11 +4,12 @@ setopt GLOB_DOTS
 
 DOTS="$HOME/.dotfiles"
 git --git-dir=$DOTS/.git --work-tree=$DOTS submodule update --init --force
+git --git-dir=$DOTS/.git --work-tree=$DOTS git submodule foreach git pull origin master
 
 ln -vsf $DOTS/.zshrc ~/
 ln -vsf $DOTS/.gitconfig ~/
 ln -vsf $DOTS/.wezterm.lua ~/
-#ln -vsf $DOTS/.eslintrc.js ~/.eslintrc.js
+
 
 mkdir ~/bin &>/dev/null
 

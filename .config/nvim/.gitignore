@@ -8,3 +8,4 @@ foo.*
 data
 lazy-lock.json
 spell/
+.neoconf.json
