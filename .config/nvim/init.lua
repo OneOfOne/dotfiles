@@ -1,5 +1,6 @@
 -- bootstrap lazy.nvim, LazyVim and your plugins
 require("config.lazy")
+require("config.abbr")
 
 local dir = ''
 
@@ -42,6 +43,10 @@ function SaveOpenFiles(only_if_exists)
 
 	local file = io.open(dir .. '.nvim/session.lua', 'w')
 
+	if not file then
+		return
+	end
+
 	file:write('return {\n');
 	for _, h in ipairs(vim.api.nvim_list_bufs()) do
 		if vim.api.nvim_buf_is_loaded(h) then
@@ -54,6 +59,12 @@ function SaveOpenFiles(only_if_exists)
 	end
 	file:write('}\n')
 	file:close()
+end
+
+function DeleteOpenFiles()
+	if vim.fn.filereadable(dir .. '.nvim/session.lua') then
+		os.remove(dir .. '.nvim/session.lua')
+	end
 end
 
 

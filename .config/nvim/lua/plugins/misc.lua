@@ -2,20 +2,21 @@
 
 return {
 	{
-		'mrjones2014/legendary.nvim',
-		priority = 10000,
-		lazy = false,
+		"folke/trouble.nvim",
 		opts = {
-			lazy_nvim = {
-				auto_register = true,
-			},
-			which_key = {
-				auto_register = true,
-			},
-			extensions = {
-				nvim_tree = true,
-			},
-		}
+			auto_open = true,
+			auto_close = true,
+			use_diagnostic_signs = true,
+		},
+	},
+	{
+		'chentoast/marks.nvim',
+		event = "BufReadPre",
+		opts = {
+			default_mappings = true,
+			force_write_shada = false,
+			refresh_interval = 250,
+		},
 	},
 	{
 		'lukas-reineke/indent-blankline.nvim',
