@@ -61,6 +61,6 @@ DOTS="$HOME/.dotfiles"
 alias .gitup="pushd $DOTS; git pull --recurse-submodules && .git submodule update --init --force && .reload; popd .dotfiles"
 alias .reload="source ~/.zshrc"
 
-# ensure path includes only unique pathes
+# ensure path includes only unique paths
 typeset -aU path
 autoload -U compinit && compinit

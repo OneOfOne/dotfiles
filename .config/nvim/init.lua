@@ -31,7 +31,7 @@ local function writefile(fn, text)
 end
 
 function SaveOpenFiles(only_if_exists)
-	if dir == '' or only_if_exists and vim.fn.filereadable(dir) == 0 then
+	if dir == '' or only_if_exists and vim.fn.filereadable(dir .. '.nvim/session.lua') == 0 then
 		return
 	end
 
@@ -73,7 +73,7 @@ if dir ~= '' then
 				OpenFile(fn)
 			end
 		end
-		vim.cmd('au Vimleave * lua SaveOpenFiles(false)')
+		vim.cmd('au Vimleave * lua SaveOpenFiles(true)')
 	end, 150)
 
 	if not opts.noterm then

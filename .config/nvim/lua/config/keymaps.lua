@@ -9,7 +9,7 @@ map("n", "i", function()
 		return "i"
 	end
 end, { expr = true })
-
+-- https://vonheikemen.github.io/devlog/tools/how-to-survive-without-multiple-cursors-in-vim/
 vim.cmd [[
 	" fix selection with mouse
 	vmap <LeftRelease> "*ygv
@@ -34,4 +34,6 @@ vim.cmd [[
 	nmap sds :.s/\v
 	nmap sg :%g/\v
 	nmap sdg :.g/\v
+
+	nmap <leader>j *``cgn
 ]]

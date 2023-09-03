@@ -4,7 +4,9 @@ return {
 		open_files_do_not_replace_types = { "terminal", "Trouble", "qf", "edgy" },
 		filesystem = {
 			filtered_items = {
-				hide_gitignored = true,
+				visible = true,
+				hide_dotfiles = false,
+				hide_gitignored = false,
 				hide_by_name = {
 					'.git',
 					'.DS_Store',
