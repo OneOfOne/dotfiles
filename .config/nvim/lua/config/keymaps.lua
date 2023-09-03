@@ -31,7 +31,7 @@ vim.cmd [[
 
 	nmap / /\v
 	nmap ss :%s/\v
-	nmap .s :.s/\v
+	nmap sds :.s/\v
 	nmap sg :%g/\v
-	nmap .g :.g/\v
+	nmap sdg :.g/\v
 ]]

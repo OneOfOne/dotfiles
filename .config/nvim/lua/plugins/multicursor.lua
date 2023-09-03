@@ -3,6 +3,6 @@ return {
 	branch = "master",
 	event = "VeryLazy",
 	init = function()
-		vim.keymap.set('', '<C-d>', '<Plug>(VM-Find-Under)', { noremap = false })
+		vim.keymap.set('', '<c-d>', '<Plug>(VM-Find-Under)', { remap = true })
 	end,
 }
