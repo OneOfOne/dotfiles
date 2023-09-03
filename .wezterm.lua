@@ -21,7 +21,6 @@ cfg.font = wezterm.font_with_fallback({
 	{ family = "Liga SFMono Nerd Font", weight = 600 },
 	"Noto Color Emoji",
 	"Noto Sans Symbols",
-	-- "Symbols Nerd Font Mono",
 })
 
 cfg.font_size = 12

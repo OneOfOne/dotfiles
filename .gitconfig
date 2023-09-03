@@ -1,12 +1,12 @@
 [hub]
 	protocol = https
+
 [core]
 	compression = 9
 	loosecompression = 9
 	quotepath = true
 	legacyheaders = false
 	preloadindex = true
-	#whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol,trailing
 
 	autocrlf = false
 	safecrlf = false
@@ -23,7 +23,6 @@
 
 [help]
 	format = man
-
 
 [branch]
 	autosetupmerge = true
@@ -55,6 +54,9 @@
 
 [credential]
 	helper = store
+
+[commit]
+	gpgsign = true
 
 [alias]
 	ll = log --stat --abbrev-commit --abbrev=8 --pretty='format:%Cgreen*%Creset Commit (%G?): %Cblue%h%Creset (%Cred%H%Creset)%n    %CgreenAuthor:%Creset %an (%ae)%n    %CgreenDate:%Creset %ad%n    %CgreenSubject: %Creset%s%n%b' --show-signature
@@ -116,5 +118,6 @@
 
 [credential]
 	helper = cache
+
 [protocol "file"]
 	allow = always

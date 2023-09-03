@@ -20,20 +20,23 @@ vim.cmd [[
 	imap <c-v> <esc>pi
 	imap <c-a> <esc>ggVG
 
-	nmap <leader>gl <cmd>OpenInGHFileLines<cr>
-	nmap <leader>cw <leader>bd
-	nmap <c-tab> <cmd>Telescope buffers theme=dropdown previewer=false<cr>
+	map <leader>gl <cmd>OpenInGHFileLines<cr>
+	map <leader>cw <leader>bd
+	map <c-tab> <cmd>Telescope buffers theme=dropdown previewer=false<cr>
 	nmap <c-p> <cmd>Legendary<cr>
 
 	" movement
-	nmap K 15k
-	nmap J 15j
+	map K 15k
+	map J 15j
 
-	nmap / /\v
+	map / /\v
 	nmap ss :%s/\v
 	nmap sds :.s/\v
 	nmap sg :%g/\v
 	nmap sdg :.g/\v
 
 	nmap <leader>j *``cgn
+
+	" remap toggle spell
+	nmap <leader>us <cmd>setlocal spell!<cr>
 ]]

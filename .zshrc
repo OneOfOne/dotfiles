@@ -25,8 +25,6 @@ plugins=(
 	copybuffer
 	copypath
 	copyfile
-	cp # cpv -> rsync
-	command-not-found
 	dotenv
 	isodate
 	ripgrep
