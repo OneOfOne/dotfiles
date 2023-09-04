@@ -1,4 +1,5 @@
-local function au(type, opts)
-	vim.api.nvim_create_autocmd(type, opts);
+local function au(type, pattern, command)
+	vim.api.nvim_create_autocmd(type, { pattern = pattern, command = command });
 end
-au("FileType", { pattern = "json", command = [[setlocal conceallevel=0]] })
+au("FileType", "json", [[setlocal conceallevel=0]])
+au("BufWritePre", "*", [[:%s/\s\+$//e]])

@@ -20,6 +20,7 @@ vim.cmd [[match ErrorMsg '\s\+$']]
 o.title = true
 
 o.undofile = false
+o.shada = '!,\'50,<50,s10,h,r/tmp'
 o.shadafile = 'NONE'
 
 o.spell = true

@@ -1,9 +1,15 @@
 return {
 	"folke/edgy.nvim",
+	dependencies = {
+		-- {
+		-- 	"simrat39/symbols-outline.nvim",
+		-- 	config = true,
+		-- },
+	},
 	opts = function()
 		local opts = {
 			animate = {
-				enabled = false,
+				enabled = true,
 			},
 			bottom = {
 				{
@@ -66,16 +72,14 @@ return {
 				},
 				"neo-tree",
 			},
+			right = {
+				{
+					ft = "Outline",
+					pinned = true,
+					open = "SymbolsOutlineOpen",
+				},
+			},
 		}
-		local Util = require("lazyvim.util")
-		if Util.has("symbols-outline.nvim") then
-			table.insert(opts.left, {
-				title = "Outline",
-				ft = "Outline",
-				pinned = true,
-				open = "SymbolsOutline",
-			})
-		end
 		return opts
 	end
 }

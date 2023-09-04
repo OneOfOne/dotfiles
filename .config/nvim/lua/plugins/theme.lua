@@ -4,20 +4,24 @@
 
 return {
 	{
-		"catppuccin/nvim",
-		lazy = false,
-		name = "catppuccin",
-		priority = 1000,
+		"rebelot/kanagawa.nvim",
 		opts = {
-			flavour = "mocha",
-			show_end_of_buffer = true,
-			term_colors = true,
+			compile = true,             -- enable compiling the colorscheme
+			undercurl = true,            -- enable undercurls
+			commentStyle = { italic = true },
+			functionStyle = {},
+			keywordStyle = { italic = true},
+			statementStyle = { bold = true },
+			transparent = false,
+			dimInactive = true,
+			terminalColors = true,
+			theme = "wave",
 		},
 	},
 	{
 		"LazyVim/LazyVim",
 		opts = {
-			colorscheme = "catppuccin",
+			colorscheme = "kanagawa",
 		},
 	},
 	{

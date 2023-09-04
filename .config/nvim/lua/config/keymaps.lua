@@ -11,7 +11,9 @@ nmap('<a-p>', '"*p', 'paste from selection')
 nmap('<a-P>', '"*P', 'paste from selection')
 
 nmap('<leader>gl', '<cmd>OpenInGHFileLines<cr>', 'open current file/line in github')
+
 nmap('<c-tab>', '<cmd>Telescope buffers theme=dropdown previewer=false<cr>', 'simple buffer selector')
+nmap('z=', '<cmd>Telescope spell_suggest theme=get_cursor previewer=false<cr>', 'override spelling list')
 
 -- sane regexp defaults
 nmap('/', '/\\v')

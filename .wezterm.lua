@@ -7,7 +7,7 @@ if wezterm.config_builder then
 	cfg = wezterm.config_builder()
 end
 
-cfg.color_scheme = "Catppuccin Mocha"
+cfg.color_scheme = "Kanagawa (Gogh)"
 cfg.keys = {
 	{ key = "h", mods = "SUPER", action = act.ActivatePaneDirection("Left") },
 	{ key = "j", mods = "SUPER", action = act.ActivatePaneDirection("Down") },
@@ -18,7 +18,7 @@ cfg.keys = {
 }
 
 cfg.font = wezterm.font_with_fallback({
-	{ family = "Liga SFMono Nerd Font", weight = 600 },
+	{ family = "Liga SFMono Nerd Font", weight = 500 },
 	"Noto Color Emoji",
 	"Noto Sans Symbols",
 })

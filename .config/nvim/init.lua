@@ -14,13 +14,14 @@ end
 
 if dir ~= '' then
 	dir = require('plenary.path'):new(dir):absolute()
-	dir = dir .. '/'
+	dir = string.gsub(dir, '/$', '') .. '/'
 end
 
 function OpenFile(fn)
-	require("neo-tree.utils").open_file({}, fn)
+	if vim.fn.filereadable(fn) ~= 0 then
+		require("neo-tree.utils").open_file({}, fn)
+	end
 end
-
 
 local function writefile(fn, text)
 	local file = io.open(fn, 'w')
@@ -31,14 +32,19 @@ local function writefile(fn, text)
 	file:close()
 end
 
-function SaveOpenFiles(only_if_exists)
+function SaveSession(only_if_exists)
 	if dir == '' or only_if_exists and vim.fn.filereadable(dir .. '.nvim/session.lua') == 0 then
 		return
 	end
 
 	if vim.fn.isdirectory(dir .. '.nvim/') == 0 then
 		vim.fn.mkdir(dir .. '.nvim/', 'p')
-		writefile(dir .. '.nvim/.gitignore', 'session.lua\n')
+		writefile(dir .. '.nvim/.gitignore', 'session.lua\nshada\n')
+	end
+
+	if vim.fn.filereadable(dir .. '.nvim/init.lua') == 0 then
+		writefile(dir .. '.nvim/init.lua', 'vim.opt.shadafile = "./.nvim/shada"\nvim.cmd("rshada")\nreturn {}\n')
+		writefile(dir .. '.nvim/shada', '')
 	end
 
 	local file = io.open(dir .. '.nvim/session.lua', 'w')
@@ -61,7 +67,7 @@ function SaveOpenFiles(only_if_exists)
 	file:close()
 end
 
-function DeleteOpenFiles()
+function DeleteSession()
 	if vim.fn.filereadable(dir .. '.nvim/session.lua') then
 		os.remove(dir .. '.nvim/session.lua')
 	end
@@ -84,7 +90,7 @@ if dir ~= '' then
 				OpenFile(fn)
 			end
 		end
-		vim.cmd('au Vimleave * lua SaveOpenFiles(true)')
+		vim.cmd('au Vimleave * lua SaveSession(true)')
 	end, 150)
 
 	if not opts.noterm then
@@ -102,3 +108,4 @@ if dir ~= '' then
 		end
 	end
 end
+
