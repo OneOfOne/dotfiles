@@ -24,7 +24,7 @@ end
 
 local function writefile(fn, text)
 	local file = io.open(fn, 'w')
-	if file == nil then
+	if not file then
 		return
 	end
 	file:write(text)

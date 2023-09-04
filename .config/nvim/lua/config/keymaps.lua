@@ -1,44 +1,37 @@
 -- https://medium.com/@alpha2phi/modern-neovim-configuration-hacks-93b13283969f#6ab4
 local map = vim.keymap.set
+local nmap = function(keys, fn, desc)
+	map('n', keys, fn, { desc = desc, noremap = true })
+end
+local imap = function(keys, fn, desc)
+	map('i', keys, fn, { desc = desc, noremap = true })
+end
 
--- Auto Indent the Current Empty Line
-map("n", "i", function()
-	if #vim.fn.getline "." == 0 then
-		return [["_cc]]
-	else
-		return "i"
-	end
-end, { expr = true, noremap = true })
+nmap('<a-p>', '"*p', 'paste from selection')
+nmap('<a-P>', '"*P', 'paste from selection')
+
+nmap('<leader>gl', '<cmd>OpenInGHFileLines<cr>', 'open current file/line in github')
+nmap('<c-tab>', '<cmd>Telescope buffers theme=dropdown previewer=false<cr>', 'simple buffer selector')
+
+-- sane regexp defaults
+nmap('/', '/\\v')
+nmap('?', '?\\v')
+nmap('ss', ':%s/\\v')
+nmap('sds', ':.s/\\v')
+nmap('sg', ':%g/\\v')
+nmap('sdg', ':.g/\\v')
 
 -- https://vonheikemen.github.io/devlog/tools/how-to-survive-without-multiple-cursors-in-vim/
-vim.cmd [[
-	" fix selection with mouse
-	snoremap <LeftRelease> "*ygv
-	nnoremap <a-p> "*p
-	nnoremap <a-P> "*P
+nmap('<leader>j', '*``cgn', 'ghetto multi cursors')
 
-	" old habits die hard
-	inoremap <c-v> <esc>pi
-	inoremap <c-a> <esc>ggVG
+nmap('vv', ':normal! v<cr>', 'map vv to v because lazyvim overrides that')
 
-	nnoremap <leader>gl <cmd>OpenInGHFileLines<cr>
-	nnoremap <leader>cw <leader>bd
-	nnoremap <c-tab> <cmd>Telescope buffers theme=dropdown previewer=false<cr>
+nmap('<leader>us', '<cmd>setlocal spell!<cr>', 'disable spell checking per buffer')
 
-	" movement
-	nnoremap K 15k
-	nnoremap J 15j
+-- old habits die hard
+imap('<c-v>', '<esc>pi', 'paste in insert mode')
+imap('<c-a>', '<esc>ggVG', 'select all in insert mode')
 
-	nnoremap / /\v
-	nnoremap ss :%s/\/
-	nnoremap sds :.s/\v
-	nnoremap sg :%g/\v
-	nnoremap sdg :.g/\v
+map('v', '<LeftRelease>', '"*ygv', { noremap = true, desc = 'auto yank on mouse selection' })
 
-	nnoremap <leader>j *``cgn
 
-	nnoremap vv :normal! v<cr>
-
-	" remap toggle spell
-	nnoremap <leader>us <cmd>setlocal spell!<cr>
-]]

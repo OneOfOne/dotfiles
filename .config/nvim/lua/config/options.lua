@@ -17,7 +17,6 @@ o.listchars:append({ tab = '▶‒', nbsp = '∙', trail = '∙', extends = '▶
 o.fillchars:append({ fold = ' ' })
 vim.cmd [[match ErrorMsg '\s\+$']]
 
-
 o.title = true
 
 o.undofile = false

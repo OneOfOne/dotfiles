@@ -43,6 +43,7 @@ return {
 			opts.char_priority = 12
 			opts.show_foldtext = false
 			opts.use_treesitter = true
+			opts.use_treesitter_scope = true
 			opts.space_char_blankline = ' '
 			opts.show_current_context = true
 			opts.show_current_context_start = true
