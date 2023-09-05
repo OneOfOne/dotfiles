@@ -13,11 +13,14 @@ o.wrap = true
 o.breakindent = true
 
 o.list = true
-o.listchars:append({ tab = '▶‒', nbsp = '∙', trail = '∙', extends = '▶', precedes = '◀', space = '·'}) -- , eol = '↴'
+o.listchars:append({ tab = '│‒', nbsp = '∙', trail = '∙', extends = '▶', precedes = '◀', space = '·'}) -- , eol = '↴'
 o.fillchars:append({ fold = ' ' })
 vim.cmd [[match ErrorMsg '\s\+$']]
 
 o.title = true
+
+o.paste = false
+o.clipboard:append('unnamed')
 
 o.undofile = false
 o.shada = '!,\'50,<50,s10,h,r/tmp'

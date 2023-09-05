@@ -4,11 +4,25 @@ local nmap = function(keys, fn, desc)
 	map('n', keys, fn, { desc = desc, noremap = true })
 end
 local imap = function(keys, fn, desc)
-	map('i', keys, fn, { desc = desc, noremap = true })
+	map({ 'i', 'c' }, keys, fn, { desc = desc, noremap = true })
+end
+local vmap = function(keys, fn, desc)
+	map('v', keys, fn, { desc = desc, noremap = true })
 end
 
-nmap('<a-p>', '"*p', 'paste from selection')
-nmap('<a-P>', '"*P', 'paste from selection')
+-- qol
+nmap('<a-p>', '"*p', 'paste selection')
+nmap('<a-P>', '"*P', 'paste selection (before)')
+imap('<c-v>', '<c-r>+', 'paste clipboard')
+imap('<c-V>', '<c-r>*', 'paste selection')
+-- this breaks ctrl-z in the terminal, but honestly, who uses that with nvim?
+imap('<c-z>', '<c-o>u', 'undo')
+imap('<c-z>', '<c-o><c-r>', 'redo')
+
+vmap('<LeftRelease>', '"*ygv', 'yank on mouse selection')
+
+-- old habits die hard
+imap('<c-a>', '<esc>ggVG', 'select all in insert mode')
 
 nmap('<leader>gl', '<cmd>OpenInGHFileLines<cr>', 'open current file/line in github')
 
@@ -16,8 +30,6 @@ nmap('<c-tab>', '<cmd>Telescope buffers theme=dropdown previewer=false<cr>', 'si
 nmap('z=', '<cmd>Telescope spell_suggest theme=get_cursor previewer=false<cr>', 'override spelling list')
 
 -- sane regexp defaults
-nmap('/', '/\\v')
-nmap('?', '?\\v')
 nmap('ss', ':%s/\\v')
 nmap('sds', ':.s/\\v')
 nmap('sg', ':%g/\\v')
@@ -29,11 +41,4 @@ nmap('<leader>j', '*``cgn', 'ghetto multi cursors')
 nmap('vv', ':normal! v<cr>', 'map vv to v because lazyvim overrides that')
 
 nmap('<leader>us', '<cmd>setlocal spell!<cr>', 'disable spell checking per buffer')
-
--- old habits die hard
-imap('<c-v>', '<esc>pi', 'paste in insert mode')
-imap('<c-a>', '<esc>ggVG', 'select all in insert mode')
-
-map('v', '<LeftRelease>', '"*ygv', { noremap = true, desc = 'auto yank on mouse selection' })
-
 

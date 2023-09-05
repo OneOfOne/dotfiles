@@ -72,13 +72,7 @@ return {
 				},
 				"neo-tree",
 			},
-			right = {
-				{
-					ft = "Outline",
-					pinned = true,
-					open = "SymbolsOutlineOpen",
-				},
-			},
+			right = {},
 		}
 		return opts
 	end

@@ -1,4 +1,7 @@
--- bootstrap lazy.nvim, LazyVim and your plugins
+if not vim.uv then
+	vim.uv = vim.loop
+end
+
 require("config.lazy")
 require("config.abbr")
 

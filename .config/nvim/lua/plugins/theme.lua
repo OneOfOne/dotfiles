@@ -12,7 +12,7 @@ return {
 			functionStyle = {},
 			keywordStyle = { italic = true},
 			statementStyle = { bold = true },
-			transparent = false,
+			transparent = true,
 			dimInactive = true,
 			terminalColors = true,
 			theme = "wave",
