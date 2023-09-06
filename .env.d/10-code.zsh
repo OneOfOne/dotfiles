@@ -16,7 +16,7 @@ export GOAMD64=v3
 # fi
 
 path=($HOME/.config/yarn/global/node_modules/.bin $path)
-path=($GOBIN $HOME/.cargo/bin/ $path)
+path=($GOBIN $HOME/.cargo/bin $path)
 
 for gv in $(command ls "$SDKBASE/" 2>&1 | grep -E '^go'); do
 	name="${gv/./}"

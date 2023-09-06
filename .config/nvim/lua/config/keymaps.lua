@@ -1,12 +1,12 @@
 -- https://medium.com/@alpha2phi/modern-neovim-configuration-hacks-93b13283969f#6ab4
 local map = vim.keymap.set
-local nmap = function(keys, fn, desc)
+local function nmap(keys, fn, desc)
 	map('n', keys, fn, { desc = desc, noremap = true })
 end
-local imap = function(keys, fn, desc)
+local function imap(keys, fn, desc)
 	map({ 'i', 'c' }, keys, fn, { desc = desc, noremap = true })
 end
-local vmap = function(keys, fn, desc)
+local function vmap(keys, fn, desc)
 	map('v', keys, fn, { desc = desc, noremap = true })
 end
 
@@ -42,3 +42,4 @@ nmap('vv', ':normal! v<cr>', 'map vv to v because lazyvim overrides that')
 
 nmap('<leader>us', '<cmd>setlocal spell!<cr>', 'disable spell checking per buffer')
 
+-- overrides

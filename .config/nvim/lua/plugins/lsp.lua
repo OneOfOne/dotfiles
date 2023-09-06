@@ -27,14 +27,27 @@ return {
 			flags = {
 				debounce_text_changes = 100,
 			},
+			formatting = {
+				disabled = {
+					"tsserver",
+				},
+			},
 			servers = {
 				tsserver = {
-					format = {
-						enable = false,
-					},
+					 on_attach = function(client, bufnr)
+						client.server_capabilities.documentFormattingProvider = false
+					end,
 				},
 				rome = {},
 				marksman = {},
+			},
+		},
+	},
+	{
+		"jose-elias-alvarez/null-ls.nvim",
+		opts = {
+			sources = {
+				require("null-ls").builtins.formatting.rome
 			},
 		},
 	},

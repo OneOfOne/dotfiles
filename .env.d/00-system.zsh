@@ -88,16 +88,4 @@ function androidenv {
 
 alias vimx="neovide --multigrid --notabs"
 
-function wvim {
-	local cwd="${1:-$PWD}"
-	local p="${1}"
-	if [ "$WEZTERM_PANE" != "" ]; then
-		[ -d "$cwd/$p" ] && p="$cwd/$p"
-		wezterm cli spawn --cwd $cwd -- nvim $p
-	else
-		wezterm start --cwd $cwd -- nvim $p
-	fi
-}
-
 alias visu="sudo -E nvim"
-alias tmuxx="tmux new-session \; split-window -h \;"
