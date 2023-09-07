@@ -2,7 +2,7 @@
 update_info=kwinrules.upd:replace-placement-string-to-enum,kwinrules.upd:use-virtual-desktop-ids,kwinrules.upd:remove-placement-cascade
 
 [1]
-Description=Application settings for steam_app_1716740
+Description=Starfield
 blockcompositing=true
 clientmachine=localhost
 ignoregeometry=true
@@ -32,7 +32,7 @@ wmclass=overwatch.exe
 wmclassmatch=1
 
 [13]
-Description=chrome
+Description=Chrome
 below=true
 clientmachine=localhost
 ignoregeometry=true
@@ -51,7 +51,7 @@ wmclasscomplete=true
 wmclassmatch=1
 
 [14]
-Description=konsole
+Description=Konsole
 below=true
 clientmachine=localhost
 maxsize=2560,1440
@@ -69,25 +69,8 @@ wmclass=konsole konsole
 wmclasscomplete=true
 wmclassmatch=1
 
-[15]
-Description=yakyak
-below=true
-clientmachine=localhost
-maxsize=2560,1440
-noborder=true
-noborderrule=3
-position=3840,0
-positionrule=2
-size=640,720
-sizerule=2
-skiptaskbar=true
-types=1
-windowrole=messages
-wmclass=yakyak
-wmclassmatch=1
-
 [16]
-Description=gajim
+Description=Gajim
 below=true
 belowrule=3
 clientmachine=localhost
@@ -105,7 +88,7 @@ wmclass=gajim
 wmclassmatch=1
 
 [17]
-Description=slack
+Description=Slack
 clientmachine=localhost
 maxsize=2560,1440
 noborder=true
@@ -121,7 +104,7 @@ wmclass=slack
 wmclassmatch=1
 
 [18]
-Description=discord
+Description=Discord
 clientmachine=localhost
 maxsize=2560,1440
 noborder=true
@@ -137,7 +120,7 @@ wmclass=discord
 wmclassmatch=1
 
 [19]
-Description=all
+Description=All
 clientmachine=localhost
 maxsize=2560,1440
 maxsizerule=2
@@ -161,7 +144,7 @@ wmclass=org.wezfurlong.wezterm
 wmclassmatch=1
 
 [3]
-Description=Application settings for zoom
+Description=Zoom
 blockcompositing=true
 clientmachine=localhost
 ignoregeometry=true
@@ -175,16 +158,9 @@ wmclass=zoom
 wmclasscomplete=true
 wmclassmatch=1
 
-[308b214b-893c-4a56-b436-2c3368345ca8]
-Description=Application settings for explorer.exe
-clientmachine=localhost
-noborder=true
-noborderrule=2
-wmclass=explorer.exe
-wmclassmatch=1
 
 [30ae713d-0482-4fc5-8d99-f717486d1e9a]
-Description=chrome-slack
+Description=Chrome-slack
 noborder=true
 noborderrule=3
 position=0,720
@@ -197,66 +173,15 @@ wmclass=crx_kbfiajfedekjelkibmdphnikobmeikcc google-chrome
 wmclasscomplete=true
 wmclassmatch=1
 
-[3a15087d-739f-42c7-89f4-1cb94e52b558]
-Description=Application settings for gamescope
-blockcompositing=true
-blockcompositingrule=2
-clientmachine=localhost
-wmclass=gamescope
-wmclassmatch=1
-
-[45a8b48f-f64e-4dcd-ad9a-dbacb143d575]
-Description=Explorer.exe
-blockcompositing=true
-blockcompositingrule=2
-clientmachine=localhost
-ignoregeometry=true
-ignoregeometryrule=3
-maxsize=2560,1440
-maxsizerule=2
-noborder=true
-noborderrule=2
-position=1280,0
-size=2560,1440
-sizerule=2
-wmclass=explorer.exe
-wmclassmatch=1
-
-[4b2c3dab-0aba-4ae9-a1cd-3f4e48901235]
-Description=Application settings for zoom
-clientmachine=localhost
-ignoregeometry=true
-ignoregeometryrule=2
-maxsize=2560,1440
-maxsizerule=2
-wmclass=zoom
-wmclasscomplete=true
-wmclassmatch=1
-
-[635f57bc-b6ac-45ea-b903-b0766405f865]
-Description=Application settings for org.kde.konsole
-wmclass=konsole org.kde.konsole
-wmclasscomplete=true
-wmclassmatch=1
-
-[68f1100e-ca2c-495f-b7a1-49627fd52a9b]
-Description=Application settings for wowclassic.exe
-clientmachine=localhost
-noborder=true
-noborderrule=2
-wmclass=wowclassic.exe
-wmclassmatch=1
-
-[6d9671ec-3651-4aa3-91c1-a576df9cb42c]
-Description=Application settings for steam_proton
-clientmachine=localhost
-noborder=true
-noborderrule=2
-wmclass=steam_proton
+[60053b8f-4451-4ee6-bc40-c000cfdabb1d]
+Description=Scrcpy
+position=3840,0
+positionrule=3
+wmclass=scrcpy
 wmclassmatch=1
 
 [7]
-Description=Application settings for gw2-64.exe
+Description=GW2
 below=true
 blockcompositing=true
 clientmachine=localhost
@@ -283,15 +208,6 @@ sizerule=3
 wmclass=zoom
 wmclassmatch=1
 
-[7c669686-0efb-443c-bf57-8ed2f264dd84]
-Description=Application settings for java-lang-thread
-clientmachine=localhost
-size=2560,1440
-sizerule=2
-types=1
-wmclass=java-lang-thread
-wmclassmatch=1
-
 [8]
 Description=WoW
 below=true
@@ -311,92 +227,8 @@ windowrole=messages
 wmclass=wow.exe
 wmclassmatch=1
 
-[8625fbe2-0ce1-49c1-bf4d-b5e2aeb9ee70]
-Description=WoW
-clientmachine=localhost
-maxsize=5120,1440
-maxsizerule=2
-noborder=true
-noborderrule=2
-size=5120,1440
-sizerule=2
-wmclass=wow.exe
-wmclassmatch=1
-
-[91624437-c006-4bec-bfad-807b14ab7029]
-Description=Copy of WoW
-blockcompositing=true
-blockcompositingrule=2
-clientmachine=localhost
-ignoregeometry=true
-ignoregeometryrule=3
-maxsize=2560,1440
-maxsizerule=2
-noborder=true
-noborderrule=2
-position=1280,0
-size=2560,1440
-sizerule=2
-wmclass=wowclassic.exe
-wmclassmatch=1
 
 [General]
 count=14
-rules=1,2,3,7,8,11,13,14,15,16,17,18,19,30ae713d-0482-4fc5-8d99-f717486d1e9a
+rules=1,2,3,7,8,11,13,14,16,17,18,19,30ae713d-0482-4fc5-8d99-f717486d1e9a,60053b8f-4451-4ee6-bc40-c000cfdabb1d
 
-[ab7af414-2f1e-425e-8276-c55407b0deb5]
-Description=wezterm
-clientmachine=localhost
-maximizehoriz=true
-maximizehorizrule=3
-maximizevert=true
-maximizevertrule=3
-wmclass=org.wezfurlong.wezterm
-wmclassmatch=1
-
-[b220b406-f5f3-47c4-a4aa-d3b5377e7070]
-Description=WoW Classic
-blockcompositing=true
-blockcompositingrule=2
-clientmachine=localhost
-ignoregeometry=true
-ignoregeometryrule=3
-maxsize=2560,1440
-maxsizerule=2
-noborder=true
-noborderrule=2
-position=1280,0
-size=2560,1440
-sizerule=2
-wmclass=wowclassic.exe
-wmclassmatch=1
-
-[cb71de5c-a6e2-4d43-8c5f-199752a075ea]
-Description=Application settings for gw2-64.exe
-clientmachine=localhost
-noborder=true
-noborderrule=2
-size=2560,1440
-sizerule=2
-wmclass=gw2-64.exe
-wmclassmatch=1
-
-[d3cd5c81-a438-478d-a1d3-2cee5568a056]
-Description=Application settings for konsole
-clientmachine=localhost
-wmclass=konsole
-wmclassmatch=1
-
-[ec300c12-f00c-4a9c-920d-84645ac64bd7]
-Description=Application settings for steam_app_1716740
-clientmachine=localhost
-noborder=true
-noborderrule=2
-wmclass=steam_app_1716740
-wmclassmatch=1
-
-[fedd39a2-6519-4e1e-a8e0-b78a1b35e6e9]
-Description=Application settings for konsole
-clientmachine=localhost
-wmclass=konsole
-wmclassmatch=1

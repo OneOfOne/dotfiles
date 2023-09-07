@@ -1,13 +1,7 @@
 return {
-		{
+	{
 		'nvim-telescope/telescope.nvim',
 		dependencies = {
-			{
-				"nvim-telescope/telescope-ui-select.nvim",
-				config = function()
-					require("telescope").load_extension("ui-select")
-				end
-			},
 			{
 				"nvim-telescope/telescope-fzf-native.nvim",
 				build = "make",
@@ -17,7 +11,7 @@ return {
 			},
 		},
 		opts = {
-			 defaults = {
+			defaults = {
 				mappings = {
 					i = {
 						["<esc>"] = require("telescope.actions").close,

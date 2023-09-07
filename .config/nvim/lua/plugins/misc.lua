@@ -40,7 +40,7 @@ return {
 			opts.char_highlight_list = hl
 			opts.scope = {
 				enabled = true,
-				show_start = false,
+				show_start = true,
 				highlight = hl
 			}
 			-- opts.indent = { highlight = hl }
