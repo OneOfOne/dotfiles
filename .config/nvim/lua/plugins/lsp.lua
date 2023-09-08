@@ -34,7 +34,7 @@ return {
 			},
 			servers = {
 				tsserver = {
-					on_attach = function(client, bufnr)
+					on_attach = function(client)
 						client.server_capabilities.documentFormattingProvider = false
 					end,
 				},

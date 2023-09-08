@@ -67,15 +67,14 @@ function qemu-uefi() {
 
 	set -x
 
-	QEMU_AUDIO_DRV=pa qemu-system-x86_64 -enable-kvm -m 16G \
-		-machine q35,accel=kvm -cpu host,kvm=off -smp 8 \
-		-device virtio-balloon \
+	QEMU_AUDIO_DRV=pa sudo qemu-system-x86_64 -enable-kvm -m 16G \
+		-machine q35,accel=kvm -cpu host -smp 8 \
+		-device virtio-balloon -vga virtio \
 		-object rng-random,id=rng0,filename=/dev/urandom -device virtio-rng-pci,rng=rng0 \
-		-drive if=pflash,format=raw,readonly,file=/usr/share/ovmf/x64/OVMF_CODE.fd \
+		-drive if=pflash,format=raw,readonly=on,file=/usr/share/ovmf/x64/OVMF_CODE.fd \
 		-drive if=pflash,format=raw,file=$bios \
 		-fsdev local,security_model=passthrough,id=fsdev0,path=qemu-shared \
 		-device virtio-9p-pci,id=fs0,fsdev=fsdev0,mount_tag=hostshare \
 		$args
 }
 
-alias vmw="sudo env HOME=$HOME vmware"
