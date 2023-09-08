@@ -1,4 +1,6 @@
+[sort_requires]
+enabled = true
+
 indent_type = "Tab"
 indent_width = 4
 column_width = 120
-

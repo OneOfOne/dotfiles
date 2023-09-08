@@ -1,3 +1,5 @@
+-- some settings from https://github.com/Aumnescio/dotfiles/blob/main/nvim/init.lua
+
 local o = vim.opt
 
 o.autoindent = true
@@ -8,6 +10,7 @@ o.shiftwidth = 4
 o.tabstop = 4
 
 o.iskeyword:append("-")
+-- o.iskeyword:append(".")
 o.relativenumber = true
 o.wrap = true
 o.breakindent = true
@@ -17,9 +20,14 @@ o.listchars:append({ tab = '│‒', nbsp = '∙', trail = '∙', extends = '▶
 o.fillchars:append({ fold = ' ' })
 vim.cmd [[match ErrorMsg '\s\+$']]
 
-o.title = true
+o.title          = true
 
-o.paste = false
+o.copyindent     = true
+o.breakindent    = true
+o.breakindentopt = "sbr"
+o.showbreak      = "❯ "
+
+o.paste          = false
 o.clipboard:append('unnamed')
 
 o.undofile = false
@@ -33,6 +41,9 @@ o.completeopt:append('noinsert')
 
 o.grepprg = "rg --hidden --vimgrep"
 
+o.ttimeout = false
+o.updatetime = 26
+--
 o.foldcolumn = '1'
 o.foldlevel = 99
 o.foldlevelstart = -1
@@ -40,6 +51,7 @@ o.foldenable = true
 o.foldmethod = 'expr'
 o.foldexpr = 'nvim_treesitter#foldexpr()'
 o.foldtext = 'v:lua.SmartFold()'
+
 function SmartFold()
 	local indent = vim.fn.indent(vim.v.foldstart) or 0
 	local ichar = string.rep('.', indent)

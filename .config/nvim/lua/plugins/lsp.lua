@@ -25,7 +25,7 @@ return {
 				}
 			},
 			flags = {
-				debounce_text_changes = 100,
+				debounce_text_changes = 150,
 			},
 			formatting = {
 				disabled = {
@@ -34,7 +34,7 @@ return {
 			},
 			servers = {
 				tsserver = {
-					 on_attach = function(client, bufnr)
+					on_attach = function(client, bufnr)
 						client.server_capabilities.documentFormattingProvider = false
 					end,
 				},
@@ -52,4 +52,3 @@ return {
 		},
 	},
 }
-

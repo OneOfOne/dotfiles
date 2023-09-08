@@ -41,10 +41,14 @@ map('sdg', ':.g/\\v')
 
 -- https://vonheikemen.github.io/devlog/tools/how-to-survive-without-multiple-cursors-in-vim/
 map('<leader>j', '*``cgn', 'ghetto multi cursors')
-
+-- * in visual searches for the selection
+--
 nmap('vv', ':normal! v<cr>', 'map vv to v because lazyvim overrides that')
 vmap('i', '<esc>i', 'insert from visual')
 
 nmap('<leader>us', '<cmd>setlocal spell!<cr>', 'disable spell checking per buffer')
 
+map('<leader>sudo', '<cmd>w !sudo tee "%" >/dev/null<cr><cmd>edit!<cr>', 'sudo')
+
 -- overrides
+vmap('<cr>', '<esc>o', 'make enter insert a new line')

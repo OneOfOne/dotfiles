@@ -16,3 +16,5 @@ mkdir ~/bin &>/dev/null
 for p in $DOTS/.config/*; do
 	ln -sfv "${p}" ~/.config/
 done
+
+source ~/.zshrc
