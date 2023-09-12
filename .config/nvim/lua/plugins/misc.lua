@@ -1,4 +1,5 @@
 return {
+	{ "spm.nvim", dir = "~/code/nvim/spm.nvim", dev = true, config = true },
 	{
 		"folke/trouble.nvim",
 		opts = {

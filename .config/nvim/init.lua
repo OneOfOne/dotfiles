@@ -80,24 +80,24 @@ function DeleteSession()
 	end
 end
 
-if dir ~= '' then
+if false and dir ~= '' then
 	vim.cmd('cd ' .. dir)
 
 	local opts = {};
-	vim.defer_fn(function()
-		if vim.fn.filereadable(nvimDir .. 'init.lua') ~= 0 then
-			local data = dofile(nvimDir .. 'init.lua')
-			if data ~= nil then
-				vim.tbl_extend('force', opts, data)
-			end
-		end
-		if vim.fn.filereadable(nvimDir .. 'session.lua') ~= 0 then
-			for _, fn in ipairs(dofile(nvimDir .. 'session.lua')) do
-				OpenFile(fn)
-			end
-		end
-		vim.cmd('au Vimleave * lua SaveSession(true)')
-	end, 150)
+	-- vim.defer_fn(function()
+	-- 	if vim.fn.filereadable(nvimDir .. 'init.lua') ~= 0 then
+	-- 		local data = dofile(nvimDir .. 'init.lua')
+	-- 		if data ~= nil then
+	-- 			vim.tbl_extend('force', opts, data)
+	-- 		end
+	-- 	end
+	-- 	if vim.fn.filereadable(nvimDir .. 'session.lua') ~= 0 then
+	-- 		for _, fn in ipairs(dofile(nvimDir .. 'session.lua')) do
+	-- 			OpenFile(fn)
+	-- 		end
+	-- 	end
+	-- 	vim.cmd('au Vimleave * lua SaveSession(true)')
+	-- end, 150)
 
 	if not opts.noterm then
 		if vim.env.WEZTERM_PANE ~= nil then

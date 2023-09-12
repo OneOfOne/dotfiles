@@ -1,9 +1,12 @@
 #!/bin/zsh
 
-local cwd="${1:-$PWD}"
-local p="${1}"; shift
+local cwd="$PWD"
+local p="$1"; shift
+if [ -d "$p" ]; then
+	p="$(realpath $p)"
+	cwd="$p"
+fi
 if [ "$WEZTERM_PANE" != "" ]; then
-	[ -d "$cwd/$p" ] && p="$cwd/$p"
 	wezterm cli spawn --cwd $cwd -- nvim $p $*
 else
 	wezterm start --cwd $cwd -- nvim $p $*

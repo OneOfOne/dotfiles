@@ -38,17 +38,20 @@ return {
 						client.server_capabilities.documentFormattingProvider = false
 					end,
 				},
-				rome = {},
+				biome = {},
 				marksman = {},
 			},
 		},
 	},
 	{
 		"jose-elias-alvarez/null-ls.nvim",
-		opts = {
-			sources = {
-				require("null-ls").builtins.formatting.rome
-			},
-		},
+		opts = function(_, opts)
+			local biome = require("null-ls").builtins.formatting.rome.with({
+				command = "biome",
+			})
+			opts.sources = vim.list_extend(opts.sources or {}, {
+				biome
+			})
+		end,
 	},
 }
