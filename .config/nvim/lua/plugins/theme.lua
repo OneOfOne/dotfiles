@@ -5,6 +5,8 @@
 return {
 	{
 		"rebelot/kanagawa.nvim",
+		priority = 1000,
+		enabled = false,
 		opts = {
 			compile = true, -- enable compiling the colorscheme
 			undercurl = true, -- enable undercurls
@@ -12,16 +14,58 @@ return {
 			functionStyle = {},
 			keywordStyle = { italic = true },
 			statementStyle = { bold = true },
-			transparent = true,
+			transparent = false,
 			dimInactive = true,
 			terminalColors = true,
 			theme = "wave",
 		},
 	},
 	{
+		"ellisonleao/gruvbox.nvim",
+		priority = 1000,
+		enabbled = false,
+		opts = {
+			undercurl = true,
+			underline = true,
+			bold = true,
+			italic = {
+				strings = true,
+				comments = true,
+				operators = false,
+				folds = true,
+			},
+			strikethrough = true,
+			invert_selection = false,
+			invert_signs = false,
+			invert_tabline = false,
+			invert_intend_guides = false,
+			inverse = false, -- invert background for search, diffs, statuslines and errors
+			contrast = "hard", -- can be "hard", "soft" or empty string
+			palette_overrides = {},
+			overrides = {},
+			dim_inactive = false,
+			transparent_mode = false,
+		}
+	},
+	{
+		'sainnhe/gruvbox-material',
+		lazy = false,
+		priority = 1000,
+		config = function()
+			vim.g.gruvbox_material_background = 'hard'
+			vim.g.gruvbox_material_foreground = 'mix'
+			vim.g.gruvbox_material_statusline_style = 'mix'
+			vim.g.gruvbox_material_enable_italic = 1
+			vim.g.gruvbox_material_diagnostic_text_highlight = 1
+			-- vim.g.gruvbox_material_ui_contrast = 'high'
+			-- vim.g.gruvbox_material_transparent_background = 2
+			-- vim.cmd 'colorscheme gruvbox-material'
+		end,
+	},
+	{
 		"LazyVim/LazyVim",
 		opts = {
-			colorscheme = "kanagawa",
+			colorscheme = "gruvbox-material",
 		},
 	},
 	{
@@ -45,5 +89,50 @@ return {
 				},
 			}
 		}
+	},
+	{
+		'lukas-reineke/indent-blankline.nvim',
+		branch = "v3",
+		-- enabled = false,
+		opts = function(_, opts)
+			local highlight = {
+				"Grey",
+				-- "RainbowRed",
+				-- "RainbowYellow",
+				-- "RainbowBlue",
+				-- "RainbowOrange",
+				-- "RainbowGreen",
+				-- "RainbowViolet",
+				-- "RainbowCyan",
+			}
+
+			local hooks = require "ibl.hooks"
+			-- create the highlight groups in the highlight setup hook, so they are reset
+			-- every time the colorscheme changes
+			hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
+				vim.api.nvim_set_hl(0, "RainbowRed", { fg = "#3f201e" })
+				vim.api.nvim_set_hl(0, "RainbowYellow", { fg = "#E5C07B" })
+				vim.api.nvim_set_hl(0, "RainbowBlue", { fg = "#61AFEF" })
+				vim.api.nvim_set_hl(0, "RainbowOrange", { fg = "#D19A66" })
+				vim.api.nvim_set_hl(0, "RainbowGreen", { fg = "#98C379" })
+				vim.api.nvim_set_hl(0, "RainbowViolet", { fg = "#C678DD" })
+				vim.api.nvim_set_hl(0, "RainbowCyan", { fg = "#56B6C2" })
+			end)
+			-- opts.char_highlight_list = highlight
+			opts.char = "│"
+			opts.scope = {
+				enabled = true,
+				char = "│",
+				show_start = false,
+				highlight = { "RainbowCyan" }
+			}
+			opts.indent = { highlight = highlight }
+		end,
+		config = function(_, opts)
+			require('ibl').setup(opts)
+			local hooks = require("ibl.hooks")
+			hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
+		end
 	}
+
 }

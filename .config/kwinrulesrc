@@ -308,5 +308,26 @@ wmclass=gajim
 wmclassmatch=1
 
 [General]
-count=14
-rules=1,2,3,4,5,6,7,8,9,10,11,12,13,14
+count=15
+rules=1,2,3,4,5,6,7,8,b5b41013-6db0-477e-8d84-6a69e654e46d,9,10,11,12,13,14
+
+[b5b41013-6db0-477e-8d84-6a69e654e46d]
+Description=Konsole (WL)
+below=true
+blockcompositing=true
+clientmachine=localhost
+ignoregeometry=true
+maxsize=2560,1440
+noborder=true
+noborderrule=3
+position=3840,720
+positionrule=3
+size=1280,720
+sizerule=3
+skiptaskbar=true
+skiptaskbarrule=2
+types=1
+windowrole=messages
+wmclass=konsole org.kde.konsole
+wmclasscomplete=true
+wmclassmatch=1

@@ -35,7 +35,9 @@ return {
 					end,
 				},
 				"Trouble",
-				{ ft = "qf",                title = "QuickFix" },
+
+				{ ft = "qf", title = "QuickFix" },
+
 				{
 					ft = "help",
 					size = { height = 20 },
@@ -47,6 +49,7 @@ return {
 				{ ft = "spectre_panel",     size = { height = 0.4 } },
 				{ title = "Neotest Output", ft = "neotest-output-panel", size = { height = 15 } },
 			},
+
 			left = {
 				{
 					title = "Files",

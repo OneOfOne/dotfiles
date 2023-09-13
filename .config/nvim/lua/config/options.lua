@@ -9,14 +9,18 @@ o.softtabstop = 0
 o.shiftwidth = 4
 o.tabstop = 4
 
-o.iskeyword:append("-")
--- o.iskeyword:append(".")
+o.guifont = "Liga SFMono Nerd Font,Noto Color Emoji,Noto Sans Symbols,Noto Sans Symbols 2:h10"
+o.guifontwide = "Liga SFMono Nerd Font"
+
+o.iskeyword:append('-')
+-- o.iskeyword:append('.')
 o.relativenumber = true
 o.wrap = true
 o.breakindent = true
 
 o.list = true
-o.listchars:append({ tab = '│‒', nbsp = '∙', trail = '∙', extends = '▶', precedes = '◀', space = '·' }) -- , eol = '↴'
+-- o.listchars:append({ tab = '│‒', nbsp = '∙', trail = '∙', extends = '▶', precedes = '◀', space = '·' }) -- , eol = '↴'
+o.listchars:append({ tab = '│ ', nbsp = '∙', trail = '∙', extends = '▶', precedes = '◀', space = '·' }) -- , eol = '↴'
 o.fillchars:append({ fold = ' ' })
 vim.cmd [[match ErrorMsg '\s\+$']]
 
@@ -24,8 +28,8 @@ o.title          = true
 
 o.copyindent     = true
 o.breakindent    = true
-o.breakindentopt = "sbr"
-o.showbreak      = "❯ "
+o.breakindentopt = 'sbr'
+o.showbreak      = '❯ '
 
 o.paste          = false
 o.clipboard:append('unnamed')
@@ -39,11 +43,17 @@ o.spelloptions:append('camel')
 
 o.completeopt:append('noinsert')
 
-o.grepprg = "rg --hidden --vimgrep"
+o.grepprg = 'rg --hidden --vimgrep'
 
 o.ttimeout = false
 o.updatetime = 26
---
+
+-- better selection
+o.selection = 'inclusive'
+o.selectmode = 'mouse,key'
+o.mousemodel = 'extend'
+
+-- fold stuff
 o.foldcolumn = '1'
 o.foldlevel = 99
 o.foldlevelstart = -1
@@ -56,5 +66,5 @@ function SmartFold()
 	local indent = vim.fn.indent(vim.v.foldstart) or 0
 	local ichar = string.rep('.', indent)
 	---@diagnostic disable-next-line: param-type-mismatch
-	return ichar .. vim.fn.getline(vim.v.foldstart) .. ' ... ' .. vim.fn.getline(vim.v.foldend):gsub("^%s*", "")
+	return ichar .. vim.fn.getline(vim.v.foldstart) .. ' ... ' .. vim.fn.getline(vim.v.foldend):gsub('^%s*', '')
 end

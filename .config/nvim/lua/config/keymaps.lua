@@ -13,7 +13,9 @@ end
 local function vmap(keys, fn, desc)
 	kmset('v', keys, fn, { desc = desc, noremap = true })
 end
-
+local function tmap(keys, fn, desc)
+	kmset('t', keys, fn, { desc = desc, noremap = true })
+end
 -- qol
 nmap('<a-p>', '"*p', 'paste selection')
 nmap('<a-P>', '"*P', 'paste selection (before)')
@@ -52,3 +54,5 @@ map('<leader>sudo', '<cmd>w !sudo tee "%" >/dev/null<cr><cmd>edit!<cr>', 'sudo')
 
 -- overrides
 vmap('<cr>', '<esc>o', 'make enter insert a new line')
+
+tmap('<MouseDown>', 'i', 'auto insert when clicking the terminal')

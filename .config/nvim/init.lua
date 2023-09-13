@@ -80,7 +80,7 @@ function DeleteSession()
 	end
 end
 
-if false and dir ~= '' then
+if dir ~= '' then
 	vim.cmd('cd ' .. dir)
 
 	local opts = {};
