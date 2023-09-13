@@ -1,18 +1,18 @@
 return {
 	{
-		"L3MON4D3/LuaSnip",
+		'L3MON4D3/LuaSnip',
 		keys = function()
 			return {}
 		end,
 	},
 	{
-		"hrsh7th/nvim-cmp",
+		'hrsh7th/nvim-cmp',
 		dependencies = {
-			"hrsh7th/cmp-emoji",
+			'hrsh7th/cmp-emoji',
 		},
 		opts = function(_, opts)
-			local luasnip = require("luasnip")
-			local cmp = require("cmp")
+			local luasnip = require('luasnip')
+			local cmp = require('cmp')
 
 			opts.preselect = cmp.PreselectMode.None
 
@@ -43,16 +43,16 @@ return {
 				}
 			}
 			opts.sources = cmp.config.sources({
-				{ name = "copilot" },
-				{ name = "nvim_lsp" },
-				{ name = "luasnip" },
-				{ name = "crates" },
-				{ name = "buffer" },
-				{ name = "path" },
-				{ name = "emoji" },
+				{ name = 'copilot' },
+				{ name = 'nvim_lsp' },
+				{ name = 'luasnip' },
+				{ name = 'crates' },
+				{ name = 'buffer' },
+				{ name = 'path' },
+				{ name = 'emoji' },
 			})
 
-			opts.mapping = vim.tbl_extend("force", opts.mapping, {
+			opts.mapping = vim.tbl_extend('force', opts.mapping, {
 				['<Up>'] = cmp.mapping.select_prev_item(),
 				['<Down>'] = cmp.mapping.select_next_item(),
 				['<C-p>'] = cmp.mapping.select_prev_item(),
@@ -60,7 +60,7 @@ return {
 				['<C-d>'] = cmp.mapping.scroll_docs(-4),
 				['<C-f>'] = cmp.mapping.scroll_docs(4),
 				['<C-Space>'] = cmp.mapping.complete(),
-				["<CR>"] = cmp.mapping({
+				['<CR>'] = cmp.mapping({
 					-- i = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
 					i = function(fallback)
 						if cmp.visible() then
@@ -77,8 +77,8 @@ return {
 						end
 					end
 				}),
-				["<esc>"] = cmp.mapping.abort(),
-				["<Tab>"] = cmp.mapping(function(fallback)
+				['<esc>'] = cmp.mapping.abort(),
+				['<Tab>'] = cmp.mapping(function(fallback)
 					if cmp.visible() then
 						cmp.select_next_item()
 					elseif luasnip.expand_or_locally_jumpable() then
@@ -86,8 +86,8 @@ return {
 					else
 						fallback()
 					end
-				end, { "i" }),
-				["<S-Tab>"] = cmp.mapping(function(fallback)
+				end, { 'i' }),
+				['<S-Tab>'] = cmp.mapping(function(fallback)
 					if cmp.visible() then
 						cmp.select_prev_item()
 					elseif luasnip.jumpable(-1) then
@@ -95,10 +95,10 @@ return {
 					else
 						fallback()
 					end
-				end, { "i" }),
+				end, { 'i' }),
 			})
 
-			local cmp_window = require("cmp.config.window")
+			local cmp_window = require('cmp.config.window')
 			opts.window = {
 				completion = cmp_window.bordered(),
 				documentation = cmp_window.bordered(),

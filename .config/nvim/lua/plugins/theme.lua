@@ -1,10 +1,10 @@
--- local float = { focusable = true, style = "minimal", border = "rounded", }
--- vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, float)
--- vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, float)
+-- local float = { focusable = true, style = 'minimal', border = 'rounded', }
+-- vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, float)
+-- vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, float)
 
 return {
 	{
-		"rebelot/kanagawa.nvim",
+		'rebelot/kanagawa.nvim',
 		priority = 1000,
 		enabled = false,
 		opts = {
@@ -17,11 +17,11 @@ return {
 			transparent = false,
 			dimInactive = true,
 			terminalColors = true,
-			theme = "wave",
+			theme = 'wave',
 		},
 	},
 	{
-		"ellisonleao/gruvbox.nvim",
+		'ellisonleao/gruvbox.nvim',
 		priority = 1000,
 		enabbled = false,
 		opts = {
@@ -40,7 +40,7 @@ return {
 			invert_tabline = false,
 			invert_intend_guides = false,
 			inverse = false, -- invert background for search, diffs, statuslines and errors
-			contrast = "hard", -- can be "hard", "soft" or empty string
+			contrast = 'hard', -- can be 'hard', 'soft' or empty string
 			palette_overrides = {},
 			overrides = {},
 			dim_inactive = false,
@@ -63,9 +63,9 @@ return {
 		end,
 	},
 	{
-		"LazyVim/LazyVim",
+		'LazyVim/LazyVim',
 		opts = {
-			colorscheme = "gruvbox-material",
+			colorscheme = 'gruvbox-material',
 		},
 	},
 	{
@@ -79,60 +79,38 @@ return {
 		}
 	},
 	{
-		"nvim-lualine/lualine.nvim",
+		'nvim-lualine/lualine.nvim',
 		opts = {
 			sections = {
 				lualine_y = {
-					{ "searchcount",    separator = " ",                  padding = { left = 1, right = 0 } },
-					{ "selectioncount", separator = " ",                  padding = { left = 1, right = 0 } },
-					{ "location",       padding = { left = 0, right = 1 } },
+					{ 'searchcount',    separator = ' ',                  padding = { left = 1, right = 0 } },
+					{ 'selectioncount', separator = ' ',                  padding = { left = 1, right = 0 } },
+					{ 'location',       padding = { left = 0, right = 1 } },
 				},
 			}
 		}
 	},
 	{
 		'lukas-reineke/indent-blankline.nvim',
-		branch = "v3",
-		-- enabled = false,
+		branch = 'v3',
 		opts = function(_, opts)
-			local highlight = {
-				"Grey",
-				-- "RainbowRed",
-				-- "RainbowYellow",
-				-- "RainbowBlue",
-				-- "RainbowOrange",
-				-- "RainbowGreen",
-				-- "RainbowViolet",
-				-- "RainbowCyan",
-			}
-
-			local hooks = require "ibl.hooks"
-			-- create the highlight groups in the highlight setup hook, so they are reset
-			-- every time the colorscheme changes
+			local hooks = require('ibl.hooks')
 			hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
-				vim.api.nvim_set_hl(0, "RainbowRed", { fg = "#3f201e" })
-				vim.api.nvim_set_hl(0, "RainbowYellow", { fg = "#E5C07B" })
-				vim.api.nvim_set_hl(0, "RainbowBlue", { fg = "#61AFEF" })
-				vim.api.nvim_set_hl(0, "RainbowOrange", { fg = "#D19A66" })
-				vim.api.nvim_set_hl(0, "RainbowGreen", { fg = "#98C379" })
-				vim.api.nvim_set_hl(0, "RainbowViolet", { fg = "#C678DD" })
-				vim.api.nvim_set_hl(0, "RainbowCyan", { fg = "#56B6C2" })
+				vim.api.nvim_set_hl(0, 'RainbowOrange', { fg = '#D19A66' })
 			end)
-			-- opts.char_highlight_list = highlight
-			opts.char = "│"
 			opts.scope = {
 				enabled = true,
-				char = "│",
+				char = '│',
 				show_start = false,
-				highlight = { "RainbowCyan" }
+				highlight = { 'RainbowOrange' }
 			}
-			opts.indent = { highlight = highlight }
+			opts.indent = { highlight = { 'NeoTreeIndentMarker' } }
 		end,
 		config = function(_, opts)
+			local hooks = require('ibl.hooks')
 			require('ibl').setup(opts)
-			local hooks = require("ibl.hooks")
 			hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
-		end
+		end,
 	}
 
 }

@@ -2,8 +2,8 @@ if not vim.uv then
 	vim.uv = vim.loop
 end
 
-require("config.lazy")
-require("config.abbr")
+require('config.lazy')
+require('config.abbr')
 
 local dir = ''
 local nvimDir = ''
@@ -26,7 +26,7 @@ end
 
 function OpenFile(fn)
 	if vim.fn.filereadable(fn) ~= 0 then
-		require("neo-tree.utils").open_file({}, fn)
+		require('neo-tree.utils').open_file({}, fn)
 	end
 end
 
@@ -82,35 +82,16 @@ end
 
 if dir ~= '' then
 	vim.cmd('cd ' .. dir)
+	if vim.env.WEZTERM_PANE ~= nil then
+		local wezpane = tonumber(vim.env.WEZTERM_PANE)
+		vim.cmd('silent! !wezterm cli split-pane --bottom --percent 15')
+		vim.cmd('silent! !wezterm cli split-pane --right --percent 65 --pane-id ' .. wezpane + 1)
+		vim.cmd('silent! !wezterm cli activate-pane --pane-id ' .. wezpane)
 
-	local opts = {};
-	-- vim.defer_fn(function()
-	-- 	if vim.fn.filereadable(nvimDir .. 'init.lua') ~= 0 then
-	-- 		local data = dofile(nvimDir .. 'init.lua')
-	-- 		if data ~= nil then
-	-- 			vim.tbl_extend('force', opts, data)
-	-- 		end
-	-- 	end
-	-- 	if vim.fn.filereadable(nvimDir .. 'session.lua') ~= 0 then
-	-- 		for _, fn in ipairs(dofile(nvimDir .. 'session.lua')) do
-	-- 			OpenFile(fn)
-	-- 		end
-	-- 	end
-	-- 	vim.cmd('au Vimleave * lua SaveSession(true)')
-	-- end, 150)
-
-	if not opts.noterm then
-		if vim.env.WEZTERM_PANE ~= nil then
-			local wezpane = tonumber(vim.env.WEZTERM_PANE)
-			vim.cmd('silent! !wezterm cli split-pane --bottom --percent 20')
-			vim.cmd('silent! !wezterm cli split-pane --right --percent 65 --pane-id ' .. wezpane + 1)
-			vim.cmd('silent! !wezterm cli activate-pane --pane-id ' .. wezpane)
-
-			vim.cmd('au Vimleave * silent! !wezterm cli kill-pane --pane-id ' .. wezpane + 1)
-			vim.cmd('au Vimleave * silent! !wezterm cli kill-pane --pane-id ' .. wezpane + 2)
-			if wezpane ~= 0 then
-				vim.cmd('au Vimleave * silent! !wezterm cli activate-pane --pane-id ' .. wezpane - 3)
-			end
+		vim.cmd('au Vimleave * silent! !wezterm cli kill-pane --pane-id ' .. wezpane + 1)
+		vim.cmd('au Vimleave * silent! !wezterm cli kill-pane --pane-id ' .. wezpane + 2)
+		if wezpane ~= 0 then
+			vim.cmd('au Vimleave * silent! !wezterm cli activate-pane --pane-id ' .. wezpane - 3)
 		end
 	end
 end

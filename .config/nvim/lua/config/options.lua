@@ -9,8 +9,8 @@ o.softtabstop = 0
 o.shiftwidth = 4
 o.tabstop = 4
 
-o.guifont = "Liga SFMono Nerd Font,Noto Color Emoji,Noto Sans Symbols,Noto Sans Symbols 2:h10"
-o.guifontwide = "Liga SFMono Nerd Font"
+o.guifont = 'Liga SFMono Nerd Font,Noto Color Emoji,Noto Sans Symbols,Noto Sans Symbols 2:h10'
+o.guifontwide = 'Liga SFMono Nerd Font'
 
 o.iskeyword:append('-')
 -- o.iskeyword:append('.')
@@ -50,7 +50,8 @@ o.updatetime = 26
 
 -- better selection
 o.selection = 'inclusive'
-o.selectmode = 'mouse,key'
+o.virtualedit = 'insert,onemore'
+-- o.selectmode = 'mouse,key'
 o.mousemodel = 'extend'
 
 -- fold stuff

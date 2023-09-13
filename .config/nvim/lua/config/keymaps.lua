@@ -19,16 +19,13 @@ end
 -- qol
 nmap('<a-p>', '"*p', 'paste selection')
 nmap('<a-P>', '"*P', 'paste selection (before)')
-imap('<c-v>', '<c-r>+', 'paste clipboard')
-imap('<c-V>', '<c-r>*', 'paste selection')
+imap('<c-v>', '<c-o>"+p', 'paste clipboard')
+imap('<c-V>', '<c-o>"*p', 'paste selection')
 -- this breaks ctrl-z in the terminal, but honestly, who uses that with nvim?
 imap('<c-z>', '<c-o>u', 'undo')
 imap('<c-r>', '<c-o><c-r>', 'redo')
 
 vmap('<LeftRelease>', '"*ygv', 'yank on mouse selection')
-
--- old habits die hard
-imap('<c-a>', '<esc>ggVG', 'select all in insert mode')
 
 map('<leader>gl', '<cmd>OpenInGHFileLines<cr>', 'open current file/line in github')
 
@@ -41,16 +38,15 @@ map('sds', ':.s/\\v')
 map('sg', ':%g/\\v')
 map('sdg', ':.g/\\v')
 
--- https://vonheikemen.github.io/devlog/tools/how-to-survive-without-multiple-cursors-in-vim/
 map('<leader>j', '*``cgn', 'ghetto multi cursors')
--- * in visual searches for the selection
+
 --
 nmap('vv', ':normal! v<cr>', 'map vv to v because lazyvim overrides that')
 vmap('i', '<esc>i', 'insert from visual')
 
 nmap('<leader>us', '<cmd>setlocal spell!<cr>', 'disable spell checking per buffer')
 
-map('<leader>sudo', '<cmd>w !sudo tee "%" >/dev/null<cr><cmd>edit!<cr>', 'sudo')
+map('<leader>sudo', '<cmd>w !sudo tee "%" >/dev/null<cr><cmd>edit!<cr>', 'sudo write')
 
 -- overrides
 vmap('<cr>', '<esc>o', 'make enter insert a new line')
