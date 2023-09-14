@@ -4,7 +4,7 @@ return {
 		opts = {
 			-- format_notify = true,
 			inlay_hints = {
-				enabled = true,
+				enabled = false,
 			},
 			capabilities = {
 				textDocument = {

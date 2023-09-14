@@ -16,6 +16,7 @@ end
 local function tmap(keys, fn, desc)
 	kmset('t', keys, fn, { desc = desc, noremap = true })
 end
+
 -- qol
 nmap('<a-p>', '"*p', 'paste selection')
 nmap('<a-P>', '"*P', 'paste selection (before)')
@@ -33,12 +34,13 @@ map('<c-tab>', '<cmd>Telescope buffers theme=dropdown previewer=false<cr>', 'sim
 map('z=', '<cmd>Telescope spell_suggest theme=get_cursor previewer=false<cr>', 'use telescope for spelling suggestion')
 
 -- sane regexp defaults
-map('ss', ':%s/\\v')
-map('sds', ':.s/\\v')
-map('sg', ':%g/\\v')
-map('sdg', ':.g/\\v')
+nmap('ss', ':%s/\\v')
+vmap('ss', '<esc>:%s/\\M<c-r>"//gc<left><left><left>')
+nmap('sds', ':.s/\\v')
+nmap('sg', ':%g/\\v')
+nmap('sdg', ':.g/\\v')
 
-map('<leader>j', '*``cgn', 'ghetto multi cursors')
+nmap('<leader>j', '*``cgn', 'ghetto multi cursors')
 
 --
 nmap('vv', ':normal! v<cr>', 'map vv to v because lazyvim overrides that')

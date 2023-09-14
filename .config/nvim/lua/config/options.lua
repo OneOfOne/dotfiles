@@ -9,9 +9,6 @@ o.softtabstop = 0
 o.shiftwidth = 4
 o.tabstop = 4
 
-o.guifont = 'Liga SFMono Nerd Font,Noto Color Emoji,Noto Sans Symbols,Noto Sans Symbols 2:h10'
-o.guifontwide = 'Liga SFMono Nerd Font'
-
 o.iskeyword:append('-')
 -- o.iskeyword:append('.')
 o.relativenumber = true
@@ -69,3 +66,8 @@ function SmartFold()
 	---@diagnostic disable-next-line: param-type-mismatch
 	return ichar .. vim.fn.getline(vim.v.foldstart) .. ' ... ' .. vim.fn.getline(vim.v.foldend):gsub('^%s*', '')
 end
+
+if vim.g.neovide then
+	o.guifont = 'Liga_SFMono_Nerd_Font,Noto_Color_Emoji,Noto_Sans_Symbols,Noto_Sans_Symbols_2:h10'
+end
+

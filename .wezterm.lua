@@ -30,7 +30,7 @@ cfg.font_size = 11
 cfg.harfbuzz_features = { "calt=1", "clig=1", "liga=1" }
 cfg.underline_position = "200%"
 
--- cfg.enable_tab_bar = false
+cfg.enable_tab_bar = false
 -- cfg.window_close_confirmation = 'NeverPrompt'
 cfg.force_reverse_video_cursor = true
 cfg.colors = {
