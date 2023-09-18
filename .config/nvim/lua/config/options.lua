@@ -18,7 +18,7 @@ o.breakindent = true
 o.list = true
 -- o.listchars:append({ tab = '│‒', nbsp = '∙', trail = '∙', extends = '▶', precedes = '◀', space = '·' }) -- , eol = '↴'
 o.listchars:append({ tab = '│ ', nbsp = '∙', trail = '∙', extends = '▶', precedes = '◀', space = '·' }) -- , eol = '↴'
-o.fillchars:append({ fold = ' ' })
+o.fillchars:append({ fold = '‒' })
 vim.cmd [[match ErrorMsg '\s\+$']]
 
 o.title          = true
@@ -62,7 +62,7 @@ o.foldtext = 'v:lua.SmartFold()'
 
 function SmartFold()
 	local indent = vim.fn.indent(vim.v.foldstart) or 0
-	local ichar = string.rep('.', indent)
+	local ichar = string.rep('‒', indent)
 	---@diagnostic disable-next-line: param-type-mismatch
 	return ichar .. vim.fn.getline(vim.v.foldstart) .. ' ... ' .. vim.fn.getline(vim.v.foldend):gsub('^%s*', '')
 end
@@ -70,4 +70,3 @@ end
 if vim.g.neovide then
 	o.guifont = 'Liga_SFMono_Nerd_Font,Noto_Color_Emoji,Noto_Sans_Symbols,Noto_Sans_Symbols_2:h10'
 end
-

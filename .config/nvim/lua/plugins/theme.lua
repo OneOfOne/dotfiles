@@ -4,50 +4,6 @@
 
 return {
 	{
-		'rebelot/kanagawa.nvim',
-		priority = 1000,
-		enabled = false,
-		opts = {
-			compile = true, -- enable compiling the colorscheme
-			undercurl = true, -- enable undercurls
-			commentStyle = { italic = true },
-			functionStyle = {},
-			keywordStyle = { italic = true },
-			statementStyle = { bold = true },
-			transparent = false,
-			dimInactive = true,
-			terminalColors = true,
-			theme = 'wave',
-		},
-	},
-	{
-		'ellisonleao/gruvbox.nvim',
-		priority = 1000,
-		enabbled = false,
-		opts = {
-			undercurl = true,
-			underline = true,
-			bold = true,
-			italic = {
-				strings = true,
-				comments = true,
-				operators = false,
-				folds = true,
-			},
-			strikethrough = true,
-			invert_selection = false,
-			invert_signs = false,
-			invert_tabline = false,
-			invert_intend_guides = false,
-			inverse = false, -- invert background for search, diffs, statuslines and errors
-			contrast = 'hard', -- can be 'hard', 'soft' or empty string
-			palette_overrides = {},
-			overrides = {},
-			dim_inactive = false,
-			transparent_mode = false,
-		}
-	},
-	{
 		'sainnhe/gruvbox-material',
 		lazy = false,
 		priority = 1000,
@@ -55,10 +11,13 @@ return {
 			vim.g.gruvbox_material_background = 'hard'
 			vim.g.gruvbox_material_foreground = 'mix'
 			vim.g.gruvbox_material_statusline_style = 'mix'
+			vim.g.gruvbox_material_disable_italic_comment = 1
 			vim.g.gruvbox_material_enable_italic = 1
+			vim.g.gruvbox_material_enable_bold = 1
 			vim.g.gruvbox_material_diagnostic_text_highlight = 1
-			-- vim.g.gruvbox_material_ui_contrast = 'high'
-			-- vim.g.gruvbox_material_transparent_background = 2
+			vim.g.gruvbox_material_diagnostic_line_highlight = 1
+			vim.g.gruvbox_material_ui_contrast = 'high'
+			vim.g.gruvbox_material_transparent_background = 0
 			-- vim.cmd 'colorscheme gruvbox-material'
 		end,
 	},

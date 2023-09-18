@@ -35,7 +35,7 @@ map('z=', '<cmd>Telescope spell_suggest theme=get_cursor previewer=false<cr>', '
 
 -- sane regexp defaults
 nmap('ss', ':%s/\\v')
-vmap('ss', '<esc>:%s/\\M<c-r>"//gc<left><left><left>')
+vmap('ss', '<esc>:%s~\\M<c-r>"~~gc<left><left><left>', 'search & replace selection in visual mode')
 nmap('sds', ':.s/\\v')
 nmap('sg', ':%g/\\v')
 nmap('sdg', ':.g/\\v')

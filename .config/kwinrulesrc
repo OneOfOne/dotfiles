@@ -1,6 +1,17 @@
 [$Version]
 update_info=kwinrules.upd:replace-placement-string-to-enum,kwinrules.upd:use-virtual-desktop-ids,kwinrules.upd:remove-placement-cascade
 
+[06be668e-32eb-4575-a1e9-2d2b07a8a2ad]
+Description=Copy of wezterm
+clientmachine=localhost
+ignoregeometry=true
+ignoregeometryrule=2
+maxsize=2560,1440
+maxsizerule=2
+placementrule=2
+types=1
+windowrole=messages
+
 [1]
 Description=Starfield
 blockcompositing=true
@@ -16,30 +27,9 @@ wmclass=steam_app_1716740
 wmclassmatch=1
 
 [10]
-Description=Gajim
-below=true
-belowrule=3
-clientmachine=localhost
-noborder=true
-noborderrule=3
-position=4172,0
-positionrule=3
-size=960,720
-sizerule=3
-skiptaskbar=true
-skiptaskbarrule=2
-types=1
-windowrole=messages
-wmclass=org.gajim.gajim gajim
-wmclasscomplete=true
-wmclassmatch=1
-
-[11]
 Description=Slack
 below=true
 clientmachine=localhost
-ignoregeometry=true
-maxsize=2560,1440
 noborder=true
 noborderrule=3
 position=0,720
@@ -53,9 +43,11 @@ windowrole=messages
 wmclass=slack
 wmclassmatch=1
 
-[12]
+[11]
 Description=Discord
+below=true
 clientmachine=localhost
+ignoregeometry=true
 maxsize=2560,1440
 noborder=true
 noborderrule=3
@@ -70,25 +62,24 @@ windowrole=messages
 wmclass=discord
 wmclassmatch=1
 
-[13]
+[12]
 Description=All
-below=true
 clientmachine=localhost
-ignoregeometry=true
 maxsize=2560,1440
 maxsizerule=2
 noborder=true
-position=0,720
+position=0,0
 size=1280,720
 skiptaskbar=true
 types=289
 windowrole=messages
 wmclasscomplete=true
 
-[14]
+[13]
 Description=Chrome-slack
 below=true
 clientmachine=localhost
+ignoregeometry=true
 maxsize=2560,1440
 noborder=true
 noborderrule=3
@@ -103,32 +94,50 @@ wmclass=crx_kbfiajfedekjelkibmdphnikobmeikcc google-chrome
 wmclasscomplete=true
 wmclassmatch=1
 
-[15]
+[14]
 Description=Scrcpy
+below=true
 clientmachine=localhost
+maxsize=2560,1440
+noborder=true
 position=3840,0
 positionrule=3
+size=1280,720
+skiptaskbar=true
 windowrole=messages
 wmclass=scrcpy
 wmclassmatch=1
 
-[16]
-Description=Gajim
-below=true
-belowrule=3
+[15]
+Description=wezterm
 clientmachine=localhost
-maxsize=2560,1440
-noborder=true
-noborderrule=3
-position=4172,0
+ignoregeometry=true
+ignoregeometryrule=3
+position=1280,0
 positionrule=3
-size=960,720
+size=2560,1440
 sizerule=3
-skiptaskbar=true
-skiptaskbarrule=2
 types=1
-wmclass=gajim
+windowrole=messages
+wmclass=org.wezfurlong.wezterm org.wezfurlong.wezterm
+wmclasscomplete=true
 wmclassmatch=1
+
+[16]
+Description=Copy of wezterm
+below=true
+clientmachine=localhost
+ignoregeometry=true
+ignoregeometryrule=2
+maxsize=2560,1440
+maxsizerule=2
+noborder=true
+placementrule=2
+position=4172,0
+size=960,720
+skiptaskbar=true
+types=1
+windowrole=messages
 
 [17]
 Description=Slack
@@ -243,26 +252,6 @@ wmclasscomplete=true
 wmclassmatch=1
 
 [7]
-Description=wezterm
-below=true
-blockcompositing=true
-clientmachine=localhost
-ignoregeometry=true
-ignoregeometryrule=3
-maxsize=2560,1440
-noborder=true
-position=1280,0
-positionrule=3
-size=2560,1440
-sizerule=3
-skiptaskbar=true
-types=1
-windowrole=messages
-wmclass=org.wezfurlong.wezterm org.wezfurlong.wezterm
-wmclasscomplete=true
-wmclassmatch=1
-
-[8]
 Description=Konsole
 below=true
 blockcompositing=true
@@ -283,10 +272,13 @@ wmclass=konsole konsole
 wmclasscomplete=true
 wmclassmatch=1
 
-[9]
+[8]
 Description=Konsole (WL)
 below=true
+blockcompositing=true
 clientmachine=localhost
+ignoregeometry=true
+maxsize=2560,1440
 noborder=true
 noborderrule=3
 position=3840,720
@@ -301,7 +293,25 @@ wmclass=konsole org.kde.konsole
 wmclasscomplete=true
 wmclassmatch=1
 
-[General]
-count=15
-rules=1,2,3,4,5,6,8,9,10,11,12,13,14,15,7
+[9]
+Description=Gajim
+below=true
+belowrule=3
+clientmachine=localhost
+noborder=true
+noborderrule=3
+position=4172,0
+positionrule=3
+size=960,720
+sizerule=3
+skiptaskbar=true
+skiptaskbarrule=2
+types=1
+windowrole=messages
+wmclass=org.gajim.gajim gajim
+wmclasscomplete=true
+wmclassmatch=1
 
+[General]
+count=16
+rules=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16
