@@ -20,8 +20,8 @@ end
 -- qol
 nmap('<a-p>', '"*p', 'paste selection')
 nmap('<a-P>', '"*P', 'paste selection (before)')
-imap('<c-v>', '<c-o>"+p', 'paste clipboard')
-imap('<c-V>', '<c-o>"*p', 'paste selection')
+imap('<c-v>', '<left><c-o>"+p', 'paste clipboard')
+imap('<c-V>', '<left><c-o>"*p', 'paste selection')
 -- this breaks ctrl-z in the terminal, but honestly, who uses that with nvim?
 imap('<c-z>', '<c-o>u', 'undo')
 imap('<c-r>', '<c-o><c-r>', 'redo')
@@ -46,7 +46,7 @@ nmap('<leader>j', '*``cgn', 'ghetto multi cursors')
 nmap('vv', ':normal! v<cr>', 'map vv to v because lazyvim overrides that')
 vmap('i', '<esc>i', 'insert from visual')
 
-nmap('<leader>us', '<cmd>setlocal spell!<cr>', 'disable spell checking per buffer')
+nmap('<leader>us', '<cmd>setlocal spell!<cr>', 'toggle spell checking per buffer')
 
 map('<leader>sudo', '<cmd>w !sudo tee "%" >/dev/null<cr><cmd>edit!<cr>', 'sudo write')
 

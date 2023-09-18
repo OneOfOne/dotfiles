@@ -45,7 +45,7 @@ return {
 	},
 	{
 		'stevearc/conform.nvim',
-		enabled = false,
+		enabled = true,
 		opts = {
 			format_on_save = {
 				-- These options will be passed to conform.format()

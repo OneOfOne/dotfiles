@@ -24,63 +24,7 @@ if dir ~= '' then
 	nvimDir = dir .. '.nvim/'
 end
 
-function OpenFile(fn)
-	if vim.fn.filereadable(fn) ~= 0 then
-		require('neo-tree.utils').open_file({}, fn)
-	end
-end
-
-local function writefile(fn, text)
-	local file = io.open(fn, 'w')
-	if not file then
-		return
-	end
-	file:write(text)
-	file:close()
-end
-
-function SaveSession(only_if_exists)
-	if dir == '' or only_if_exists and vim.fn.filereadable(nvimDir .. 'session.lua') == 0 then
-		return
-	end
-
-	if vim.fn.isdirectory(nvimDir) == 0 then
-		vim.fn.mkdir(nvimDir, 'p')
-		writefile(nvimDir .. '.gitignore', 'session.lua\nshada\n')
-	end
-
-	if vim.fn.filereadable(nvimDir .. 'init.lua') == 0 then
-		writefile(nvimDir .. 'init.lua', 'vim.opt.shadafile = "./.nvim/shada"\nvim.cmd("rshada")\nreturn {}\n')
-		writefile(nvimDir .. 'shada', '')
-	end
-
-	local file = io.open(nvimDir .. 'session.lua', 'w')
-
-	if not file then
-		return
-	end
-
-	file:write('return {\n');
-	for _, h in ipairs(vim.api.nvim_list_bufs()) do
-		if vim.api.nvim_buf_is_loaded(h) then
-			local bname = vim.api.nvim_buf_get_name(h)
-			local name = '.' .. bname:sub(vim.fs.normalize(dir):len() + 1)
-			if vim.fn.filereadable(name) ~= 0 then
-				file:write('\t"' .. name .. '",\n')
-			end
-		end
-	end
-	file:write('}\n')
-	file:close()
-end
-
-function DeleteSession()
-	if vim.fn.filereadable(nvimDir .. 'session.lua') then
-		os.remove(nvimDir .. 'session.lua')
-	end
-end
-
-if dir ~= '' then
+if false and dir ~= '' then
 	vim.cmd('cd ' .. dir)
 	if vim.env.WEZTERM_PANE ~= nil then
 		local wezpane = tonumber(vim.env.WEZTERM_PANE)

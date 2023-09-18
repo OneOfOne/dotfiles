@@ -13,12 +13,11 @@ o.iskeyword:append('-')
 -- o.iskeyword:append('.')
 o.relativenumber = true
 o.wrap = true
-o.breakindent = true
 
 o.list = true
 -- o.listchars:append({ tab = '│‒', nbsp = '∙', trail = '∙', extends = '▶', precedes = '◀', space = '·' }) -- , eol = '↴'
 o.listchars:append({ tab = '│ ', nbsp = '∙', trail = '∙', extends = '▶', precedes = '◀', space = '·' }) -- , eol = '↴'
-o.fillchars:append({ fold = '‒' })
+o.fillchars:append({ fold = ' ' })
 vim.cmd [[match ErrorMsg '\s\+$']]
 
 o.title          = true
