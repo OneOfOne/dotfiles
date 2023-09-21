@@ -7,5 +7,5 @@ return {
 	-- { 'folke/flash.nvim',             enabled = false },
 	{ 'ellisonleao/gruvbox.nvim',        enabled = false },
 	-- { 'catppuccin/nvim',              name = 'catppuccin', enabled = false },
-	{ 'jose-elias-alvarez/null-ls.nvim', enabled = false }
+	{ 'jose-elias-alvarez/null-ls.nvim', enabled = false },
 }

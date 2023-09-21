@@ -1,5 +1,9 @@
 return {
-	{ 'spm.nvim',                  dir = '~/code/nvim/spm.nvim', dev = true, config = true },
+	{
+		'spm.nvim',
+		dir = '~/code/nvim/spm.nvim',
+		config = true,
+	},
 	{ 'NvChad/nvim-colorizer.lua', config = true },
 	{
 		'folke/trouble.nvim',
@@ -8,6 +12,16 @@ return {
 			auto_close = true,
 			use_diagnostic_signs = true,
 		},
+	},
+	{
+		'folke/flash.nvim',
+		opts = {
+			modes = {
+				search = {
+					enabled = false
+				},
+			}
+		}
 	},
 	{
 		'chentoast/marks.nvim',

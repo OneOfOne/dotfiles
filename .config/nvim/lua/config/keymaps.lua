@@ -53,4 +53,4 @@ map('<leader>sudo', '<cmd>w !sudo tee "%" >/dev/null<cr><cmd>edit!<cr>', 'sudo w
 -- overrides
 vmap('<cr>', '<esc>o', 'make enter insert a new line')
 
-tmap('<MouseDown>', 'i', 'auto insert when clicking the terminal')
+-- tmap('<LeftRelease>', 'i', 'auto insert when clicking the terminal')

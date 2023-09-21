@@ -14,21 +14,16 @@ windowrole=messages
 
 [1]
 Description=Starfield
-blockcompositing=true
 clientmachine=localhost
-ignoregeometry=true
-maximizehoriz=true
-maximizevert=true
-maxsize=2560,1440
 noborder=true
 noborderrule=2
-size=2560,1440
+title=NVIM
+windowrole=messages
 wmclass=steam_app_1716740
 wmclassmatch=1
 
 [10]
 Description=Slack
-below=true
 clientmachine=localhost
 noborder=true
 noborderrule=3
@@ -65,12 +60,15 @@ wmclassmatch=1
 [12]
 Description=All
 clientmachine=localhost
+ignoregeometry=true
+ignoregeometryrule=2
 maxsize=2560,1440
 maxsizerule=2
 noborder=true
 position=0,0
 size=1280,720
 skiptaskbar=true
+strictgeometryrule=2
 types=289
 windowrole=messages
 wmclasscomplete=true
@@ -82,7 +80,7 @@ clientmachine=localhost
 ignoregeometry=true
 maxsize=2560,1440
 noborder=true
-noborderrule=3
+noborderrule=2
 position=0,720
 positionrule=2
 size=1280,720
@@ -90,7 +88,7 @@ sizerule=2
 skiptaskbar=true
 skiptaskbarrule=2
 windowrole=messages
-wmclass=crx_kbfiajfedekjelkibmdphnikobmeikcc google-chrome
+wmclass=chrome chrome-kbfiajfedekjelkibmdphnikobmeikcc-Default
 wmclasscomplete=true
 wmclassmatch=1
 
@@ -112,6 +110,41 @@ wmclassmatch=1
 Description=wezterm
 clientmachine=localhost
 ignoregeometry=true
+ignoregeometryrule=2
+maxsize=2400,1400
+maxsizerule=2
+position=1280,0
+positionrule=3
+strictgeometryrule=2
+types=1
+windowrole=messages
+wmclass=wezterm-gui org.wezfurlong.wezterm
+wmclasscomplete=true
+wmclassmatch=1
+
+[16]
+Description=neovide
+below=true
+clientmachine=localhost
+ignoregeometry=true
+ignoregeometryrule=3
+maxsize=2560,1440
+noborder=true
+position=1280,0
+positionrule=3
+size=2560,1440
+sizerule=3
+skiptaskbar=true
+types=1
+windowrole=messages
+wmclass=neovide neovide
+wmclasscomplete=true
+wmclassmatch=1
+
+[17]
+Description=neovim-qt
+clientmachine=localhost
+ignoregeometry=true
 ignoregeometryrule=3
 position=1280,0
 positionrule=3
@@ -119,40 +152,8 @@ size=2560,1440
 sizerule=3
 types=1
 windowrole=messages
-wmclass=org.wezfurlong.wezterm org.wezfurlong.wezterm
+wmclass=nvim-qt nvim-qt
 wmclasscomplete=true
-wmclassmatch=1
-
-[16]
-Description=Copy of wezterm
-below=true
-clientmachine=localhost
-ignoregeometry=true
-ignoregeometryrule=2
-maxsize=2560,1440
-maxsizerule=2
-noborder=true
-placementrule=2
-position=4172,0
-size=960,720
-skiptaskbar=true
-types=1
-windowrole=messages
-
-[17]
-Description=Slack
-clientmachine=localhost
-maxsize=2560,1440
-noborder=true
-noborderrule=3
-position=0,720
-positionrule=3
-size=1280,720
-sizerule=3
-skiptaskbar=true
-skiptaskbarrule=2
-types=1
-wmclass=slack
 wmclassmatch=1
 
 [18]
@@ -185,7 +186,29 @@ ignoregeometry=true
 ignoregeometryrule=2
 maxsize=2560,1440
 maxsizerule=2
+noborder=true
+title=NVIM
+windowrole=messages
 wmclass=zoom
+wmclasscomplete=true
+wmclassmatch=1
+
+[2e1ac029-e0f3-4401-8c67-08c321546cae]
+Description=neovim-qt
+below=true
+clientmachine=localhost
+ignoregeometry=true
+ignoregeometryrule=3
+maxsize=2560,1440
+noborder=true
+position=1280,0
+positionrule=3
+size=2560,1440
+sizerule=3
+skiptaskbar=true
+types=1
+windowrole=messages
+wmclass=nvim-qt nvim-qt
 wmclasscomplete=true
 wmclassmatch=1
 
@@ -272,6 +295,15 @@ wmclass=konsole konsole
 wmclasscomplete=true
 wmclassmatch=1
 
+[7c567684-1517-4114-9af2-f090ff69bf57]
+Description=Application settings for neovide
+clientmachine=localhost
+maxsize=1024,1024
+maxsizerule=2
+title=NVIM
+titlematch=2
+wmclass=neovide
+
 [8]
 Description=Konsole (WL)
 below=true
@@ -293,25 +325,53 @@ wmclass=konsole org.kde.konsole
 wmclasscomplete=true
 wmclassmatch=1
 
+[848f5a64-7319-4845-9260-64e4ea1fa86e]
+Description=neovide
+below=true
+clientmachine=localhost
+ignoregeometry=true
+ignoregeometryrule=3
+maxsize=2560,1440
+noborder=true
+position=1280,0
+positionrule=3
+size=2560,1440
+sizerule=3
+skiptaskbar=true
+types=1
+windowrole=messages
+wmclass=neovide neovide
+wmclasscomplete=true
+wmclassmatch=1
+
 [9]
 Description=Gajim
 below=true
-belowrule=3
 clientmachine=localhost
+ignoregeometryrule=2
 noborder=true
-noborderrule=3
+noborderrule=2
 position=4172,0
-positionrule=3
+positionrule=2
 size=960,720
-sizerule=3
+sizerule=2
 skiptaskbar=true
 skiptaskbarrule=2
+strictgeometryrule=2
 types=1
 windowrole=messages
-wmclass=org.gajim.gajim gajim
+wmclass=python3.11 org.gajim.Gajim
 wmclasscomplete=true
 wmclassmatch=1
 
 [General]
-count=16
-rules=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16
+count=17
+rules=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17
+
+[a547da2f-cc61-4153-b3fd-27131f5d9881]
+Description=Application settings for neovide
+clientmachine=localhost
+maxsize=800,633
+maxsizerule=2
+wmclass=neovide
+wmclassmatch=1

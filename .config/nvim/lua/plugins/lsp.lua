@@ -38,40 +38,28 @@ return {
 						client.server_capabilities.documentFormattingProvider = false
 					end,
 				},
+				rust_analyzer = {},
 				biome = {},
 				marksman = {},
 			},
 		},
 	},
 	{
-		'stevearc/conform.nvim',
-		enabled = true,
-		opts = {
-			format_on_save = {
-				-- These options will be passed to conform.format()
-				timeout_ms = 500,
-				lsp_fallback = true,
-			},
-			formatters_by_ft = {
-				lua = { 'stylua' },
-				sh = { 'shfmt' },
-				javascript = { 'biome' },
-				javascriptreact = { 'biome' },
-				typescript = { 'biome' },
-				typescriptreact = { 'biome' },
-			},
-		},
-	},
-	{
-		'jose-elias-alvarez/null-ls.nvim',
-		enabled = false,
+		'nvimtools/none-ls.nvim',
 		opts = function(_, opts)
-			local biome = require('null-ls').builtins.formatting.rome.with({
-				command = 'biome',
+			local nls = require('null-ls')
+			opts.sources = opts.sources or {}
+			vim.list_extend(opts.sources, {
+				-- nls.builtins.completion.luasnip,
+				nls.builtins.code_actions.gitsigns,
+				-- go
+				nls.builtins.code_actions.gomodifytags,
+				nls.builtins.code_actions.impl,
+				-- ts
+				nls.builtins.formatting.biome,
+				require("typescript.extensions.null-ls.code-actions")
 			})
-			opts.sources = vim.list_extend(opts.sources or {}, {
-				biome,
-			})
+			return opts
 		end,
 	},
 }

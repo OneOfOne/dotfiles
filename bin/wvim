@@ -1,13 +1,16 @@
 #!/bin/zsh
 
 local cwd="$PWD"
-local p="$1"; shift
+local p="$1"
+[ "$1" != "" ] && shift
 if [ -d "$p" ]; then
 	p="$(realpath $p)"
 	cwd="$p"
 fi
-if [ "$WEZTERM_PANE" != "" ]; then
-	wezterm cli spawn --cwd $cwd -- nvim $p $*
-else
-	wezterm start --cwd $cwd -- nvim $p $*
-fi
+
+# neovide --notabs --multigrid $p $@
+# if [ "$WEZTERM_PANE" != "" ]; then
+# 	wezterm cli spawn --cwd $cwd -- nvim $p $*
+# else
+wezterm start --cwd $cwd -- nvim $p $*
+# fi

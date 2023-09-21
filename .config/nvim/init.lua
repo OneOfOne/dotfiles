@@ -24,7 +24,7 @@ if dir ~= '' then
 	nvimDir = dir .. '.nvim/'
 end
 
-if false and dir ~= '' then
+if dir ~= '' then
 	vim.cmd('cd ' .. dir)
 	if vim.env.WEZTERM_PANE ~= nil then
 		local wezpane = tonumber(vim.env.WEZTERM_PANE)

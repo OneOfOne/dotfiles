@@ -5,7 +5,7 @@ export GOBIN="$GOPATH/bin"
 export GOSUMDB="off"
 export GOPROXY="direct"
 export GO111MODULE=auto
-export GOROOT="$HOME/sdk/go"
+
 # export CLOUDSDK_PYTHON=python2
 export GOAMD64=v3
 
@@ -41,7 +41,7 @@ function setgo {
 	fi
 
 	[ "$v" = "tip" -o "$v" = "master" ] && v=""
-	local p="${GOROOT}$v/bin"
+	local p="$SDKBASE/go$v/bin"
 
 	if [ "$v" = "os" -o "$v" = "main" ]; then
 		p="/usr/bin"
@@ -79,8 +79,7 @@ function removegotree {
 
 function rebuildgo {
 	set -o localoptions -o localtraps
-	local v="$1"
-	pushd "${GOROOT}$v/src" >/dev/null && trap "popd >/dev/null" EXIT
+	pushd "$SDKBASE/go/src" >/dev/null && trap "popd >/dev/null" EXIT
 	/bin/rm -rf ../pkg ../bin &>/dev/null
 
 	git reset --hard || return 1

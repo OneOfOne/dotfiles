@@ -46,7 +46,7 @@ o.updatetime = 26
 
 -- better selection
 o.selection = 'inclusive'
-o.virtualedit = 'insert,onemore'
+o.virtualedit = 'onemore'
 -- o.selectmode = 'mouse,key'
 o.mousemodel = 'extend'
 
@@ -66,6 +66,6 @@ function SmartFold()
 	return ichar .. vim.fn.getline(vim.v.foldstart) .. ' ... ' .. vim.fn.getline(vim.v.foldend):gsub('^%s*', '')
 end
 
-if vim.g.neovide then
-	o.guifont = 'Liga_SFMono_Nerd_Font,Noto_Color_Emoji,Noto_Sans_Symbols,Noto_Sans_Symbols_2:h10'
-end
+-- o.guifont = 'Liga SFMono Nerd Font,Noto Color Emoji,Noto Sans Symbols,Noto Sans Symbols 2:h10'
+o.guifont = 'Liga SFMono Nerd Font:h10'
+o.linespace = -1

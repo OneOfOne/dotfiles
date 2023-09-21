@@ -48,4 +48,7 @@ cfg.color_schemes = {
 		brights = { "#eddeb5", "#ea6962", "#a9b665", "#d8a657", "#7daea3", "#d3869b", "#89b482", "#d4be98" },
 	},
 }
+
+cfg.initial_rows = 77
+cfg.initial_cols = 284
 return cfg
