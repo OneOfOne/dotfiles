@@ -13,15 +13,16 @@ end
 local function vmap(keys, fn, desc)
 	kmset('v', keys, fn, { desc = desc, noremap = true })
 end
+
 local function tmap(keys, fn, desc)
 	kmset('t', keys, fn, { desc = desc, noremap = true })
 end
 
 -- qol
 nmap('<a-p>', '"*p', 'paste selection')
-nmap('<a-P>', '"*P', 'paste selection (before)')
+nmap('<a-s-p>', '"*P', 'paste selection (before)')
 imap('<c-v>', '<left><c-o>"+p', 'paste clipboard')
-imap('<c-V>', '<left><c-o>"*p', 'paste selection')
+imap('<c-s-v>', '<left><c-o>"*p', 'paste selection')
 -- this breaks ctrl-z in the terminal, but honestly, who uses that with nvim?
 imap('<c-z>', '<c-o>u', 'undo')
 imap('<c-r>', '<c-o><c-r>', 'redo')
@@ -52,5 +53,8 @@ map('<leader>sudo', '<cmd>w !sudo tee "%" >/dev/null<cr><cmd>edit!<cr>', 'sudo w
 
 -- overrides
 vmap('<cr>', '<esc>o', 'make enter insert a new line')
+map('DD', 'dd', 'delete to clipboard')
+map('dd', '"_dd', 'keep deleted lines from the clipboard')
+map('x', '"_x', 'keep deleted chars from the clipboard')
 
--- tmap('<LeftRelease>', 'i', 'auto insert when clicking the terminal')
+tmap('<LeftRelease>', '<cmd>norm,', 'auto insert when clicking the terminal')

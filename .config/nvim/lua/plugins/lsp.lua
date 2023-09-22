@@ -2,10 +2,11 @@ return {
 	{
 		'neovim/nvim-lspconfig',
 		opts = {
-			-- format_notify = true,
+			format_notify = true,
 			inlay_hints = {
 				enabled = false,
 			},
+			diagnostics = { virtual_text = { prefix = "icons" } },
 			capabilities = {
 				textDocument = {
 					foldingRange = {
@@ -38,7 +39,29 @@ return {
 						client.server_capabilities.documentFormattingProvider = false
 					end,
 				},
-				rust_analyzer = {},
+
+				rust_analyzer = {
+					settings = {
+						["rust-analyzer"] = {
+							procMacro = { enable = true },
+							cargo = { allFeatures = true },
+							checkOnSave = {
+								command = "clippy",
+								extraArgs = { "--no-deps" },
+							},
+						},
+					},
+				},
+
+				yamlls = {
+					settings = {
+						yaml = {
+							keyOrdering = false,
+						},
+					},
+				},
+
+				html = {},
 				biome = {},
 				marksman = {},
 			},
@@ -48,8 +71,8 @@ return {
 		'nvimtools/none-ls.nvim',
 		opts = function(_, opts)
 			local nls = require('null-ls')
-			opts.sources = opts.sources or {}
-			vim.list_extend(opts.sources, {
+			opts.sources = vim.list_extend(opts.sources or {}, {
+				-- nls.builtins.diagnostics.markdownlint,
 				-- nls.builtins.completion.luasnip,
 				nls.builtins.code_actions.gitsigns,
 				-- go

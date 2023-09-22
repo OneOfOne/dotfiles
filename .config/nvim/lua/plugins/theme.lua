@@ -62,8 +62,8 @@ return {
 		opts = {
 			sections = {
 				lualine_y = {
-					{ 'searchcount',    separator = ' ',                  padding = { left = 1, right = 0 } },
-					{ 'selectioncount', separator = ' ',                  padding = { left = 1, right = 0 } },
+					{ 'searchcount',    padding = { left = 1, right = 0 }, separator = ' ' },
+					{ 'selectioncount', padding = { left = 1, right = 0 }, separator = ' ' },
 					{ 'location',       padding = { left = 0, right = 1 } },
 				},
 			}
@@ -72,6 +72,7 @@ return {
 	{
 		'lukas-reineke/indent-blankline.nvim',
 		branch = 'v3',
+		enabled = false,
 		opts = function(_, opts)
 			local hooks = require('ibl.hooks')
 			hooks.register(hooks.type.HIGHLIGHT_SETUP, function()

@@ -8,9 +8,12 @@ local function au(typ, pattern, cmdOrFn)
 	end
 end
 
-au('FileType', 'json', [[setlocal conceallevel=0]])
-au({ 'BufWinEnter', 'WinEnter', 'FocusGained' }, 'term://*', 'norm! i')
+au({ "FileType" }, { "json", "jsonc" }, function()
+	vim.wo.spell = false
+	vim.wo.conceallevel = 0
+end)
 
+-- au({ 'BufWinEnter', 'WinEnter' }, 'term://*', 'norm! i')
 au({ 'BufWritePre' }, { '*' }, function()
 	local cur = vim.fn.getpos('.')
 	vim.cmd([[%s/\s\+$//e]])

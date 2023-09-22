@@ -13,6 +13,8 @@ o.iskeyword:append('-')
 -- o.iskeyword:append('.')
 o.relativenumber = true
 o.wrap = true
+o.scrolloff = 0
+o.smoothscroll = true
 
 o.list = true
 -- o.listchars:append({ tab = '│‒', nbsp = '∙', trail = '∙', extends = '▶', precedes = '◀', space = '·' }) -- , eol = '↴'
@@ -31,6 +33,7 @@ o.paste          = false
 o.clipboard:append('unnamed')
 
 o.undofile = false
+o.swapfile = false
 o.shada = '!,\'50,<50,s10,h,r/tmp'
 o.shadafile = 'NONE'
 
@@ -50,6 +53,7 @@ o.virtualedit = 'onemore'
 -- o.selectmode = 'mouse,key'
 o.mousemodel = 'extend'
 
+o.indentexpr = 'nvim_treesitter#indent()'
 -- fold stuff
 o.foldcolumn = '1'
 o.foldlevel = 99
