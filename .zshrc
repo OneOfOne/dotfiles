@@ -56,9 +56,12 @@ done
 ttyctl -f # fix annoying apps that don't exit right
 
 DOTS="$HOME/.dotfiles"
-alias .gitup="pushd $DOTS; git pull --recurse-submodules && git submodule update --init --force && .reload; popd"
+alias .gitup="pushd $DOTS; git pull --recurse-submodules && git submodule update --init --force && git submodule foreach --recursive git main && .reload; popd"
 alias .reload="source ~/.zshrc"
 
 # ensure path includes only unique paths
 typeset -aU path
 autoload -U compinit && compinit
+
+# To customize prompt, run `p10k configure` or edit ~/.dotfiles/.env.d/oh-my-zsh.custom/p10k.zsh.
+[[ ! -f ~/.dotfiles/.env.d/oh-my-zsh.custom/p10k.zsh ]] || source ~/.dotfiles/.env.d/oh-my-zsh.custom/p10k.zsh

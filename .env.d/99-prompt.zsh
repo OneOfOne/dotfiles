@@ -1,4 +1,6 @@
+[[ ! -f ~/.dotfiles/.env.d/oh-my-zsh.custom/p10k.zsh ]] || source ~/.dotfiles/.env.d/oh-my-zsh.custom/p10k.zsh
 [ -n "$ZSH_THEME" ] && return
+
 local FG_RED="%{$fg_bold[red]%}"
 local FG_WHITE="%{$fg_bold[white]%}"
 local FG_YELLOW="%{$fg_bold[yellow]%}"
@@ -51,7 +53,6 @@ local git_status='$(git_super_status)'
 PROMPT="$FG_WHITE┌──$FG_RESET$(other_conn)$user_host $cur_dir $git_status
 $FG_WHITE└──$LAST_RET$FG_WHITE➤$FG_RESET "
 RPROMPT=""
-echo blah
 #"$FG_WHITE$(date)$FG_RESET"
 
 #dcdccc
