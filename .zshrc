@@ -56,7 +56,7 @@ done
 ttyctl -f # fix annoying apps that don't exit right
 
 DOTS="$HOME/.dotfiles"
-alias .gitup="pushd $DOTS; git pull --recurse-submodules && git submodule update --init --force && .reload; popd .dotfiles"
+alias .gitup="pushd $DOTS; git pull --recurse-submodules && git submodule update --init --force && .reload; popd"
 alias .reload="source ~/.zshrc"
 
 # ensure path includes only unique paths

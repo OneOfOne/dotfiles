@@ -27,7 +27,6 @@ zstyle ':completion:*' rehash true
 zstyle ':completion:*' completer _expand _complete _ignored _approximate
 zstyle ':completion:*' special-dirs false
 
-export PATH=$PATH:$HOME/.dotfiles/bin
 
 alias ..="cd .."
 alias ...="cd ../.."
@@ -86,6 +85,7 @@ function androidenv {
 	export PATH=$PATH:$ANDROID_HOME/platform-tools
 }
 
-alias vimx="neovide --multigrid --notabs"
-
 alias visu="sudo -E nvim"
+
+# set term tab size
+[[ $- == *i* ]] && tabs -4

@@ -1,0 +1,11 @@
+{
+	"name": "dotfiles",
+	"version": "1.0.0",
+	"private": true,
+	"description": "global pnpm packages",
+	"author": "OneOfOne",
+	"license": "MIT",
+	"dependencies": {
+		"@biomejs/biome": "^1.2.2"
+	}
+}

@@ -34,7 +34,7 @@
 				"noExplicitAny": "off"
 			},
 			"nursery": {
-				"noSelfAssign": "error"
+				"all": false
 			}
 		}
 	}

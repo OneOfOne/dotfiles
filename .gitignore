@@ -4,5 +4,6 @@
 .env.d/99-work.zsh
 node_modules/
 yarn.lock
+pnpm-lock.yaml
 User/History
 .nvim/
