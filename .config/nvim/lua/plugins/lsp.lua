@@ -60,7 +60,13 @@ return {
 						},
 					},
 				},
-
+				gopls = {
+					analyses = {
+						unusedparams = true,
+					},
+					staticcheck = true,
+					gofumpt = true,
+				},
 				html = {},
 				biome = {},
 				marksman = {},
@@ -78,6 +84,7 @@ return {
 				-- go
 				nls.builtins.code_actions.gomodifytags,
 				nls.builtins.code_actions.impl,
+				nls.builtins.diagnostics.golangci_lint,
 				-- ts
 				nls.builtins.formatting.biome,
 				require("typescript.extensions.null-ls.code-actions")

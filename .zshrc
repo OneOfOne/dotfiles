@@ -63,5 +63,3 @@ alias .reload="source ~/.zshrc"
 typeset -aU path
 autoload -U compinit && compinit
 
-# To customize prompt, run `p10k configure` or edit ~/.dotfiles/.env.d/oh-my-zsh.custom/p10k.zsh.
-[[ ! -f ~/.dotfiles/.env.d/oh-my-zsh.custom/p10k.zsh ]] || source ~/.dotfiles/.env.d/oh-my-zsh.custom/p10k.zsh
