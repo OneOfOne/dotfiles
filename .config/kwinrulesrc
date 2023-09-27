@@ -98,28 +98,47 @@ wmclasscomplete=true
 wmclassmatch=1
 
 [14]
-Description=Scrcpy
+Description=Chrome-grafana
 below=true
 clientmachine=localhost
 maxsize=2560,1440
 noborder=true
-position=3840,0
+noborderrule=2
+position=0,0
 positionrule=3
 size=1280,720
+sizerule=3
 skiptaskbar=true
+skiptaskbarrule=2
+windowrole=messages
+wmclass=chrome chrome-bcffodegbapcpcbnpdniphdppfkmpelc-Default
+wmclasscomplete=true
+wmclassmatch=1
+
+[15]
+Description=Scrcpy
+clientmachine=localhost
+ignoregeometry=true
+maxsize=2400,1400
+position=3840,0
+positionrule=3
 windowrole=messages
 wmclass=scrcpy
 wmclassmatch=1
 
-[15]
+[16]
 Description=wezterm
+below=true
 clientmachine=localhost
 ignoregeometry=true
 ignoregeometryrule=2
 maxsize=2400,1400
 maxsizerule=2
+noborder=true
 position=1280,0
 positionrule=3
+size=2560,1440
+skiptaskbar=true
 strictgeometryrule=2
 types=1
 windowrole=messages
@@ -127,54 +146,37 @@ wmclass=wezterm-gui org.wezfurlong.wezterm
 wmclasscomplete=true
 wmclassmatch=1
 
-[16]
+[17]
 Description=neovide
-below=true
 clientmachine=localhost
 ignoregeometry=true
 ignoregeometryrule=3
-maxsize=2560,1440
-noborder=true
 position=1280,0
 positionrule=3
 size=2560,1440
 sizerule=3
-skiptaskbar=true
 types=1
 windowrole=messages
 wmclass=neovide neovide
 wmclasscomplete=true
 wmclassmatch=1
 
-[17]
+[18]
 Description=neovim-qt
 clientmachine=localhost
 ignoregeometry=true
 ignoregeometryrule=3
+maxsize=2560,1440
+noborder=true
 position=1280,0
 positionrule=3
 size=2560,1440
 sizerule=3
+skiptaskbar=true
 types=1
 windowrole=messages
 wmclass=nvim-qt nvim-qt
 wmclasscomplete=true
-wmclassmatch=1
-
-[18]
-Description=Discord
-clientmachine=localhost
-maxsize=2560,1440
-noborder=true
-noborderrule=3
-position=0,0
-positionrule=3
-size=1280,720
-sizerule=3
-skiptaskbar=true
-skiptaskbarrule=2
-types=1
-wmclass=discord
 wmclassmatch=1
 
 [19]
@@ -365,7 +367,7 @@ wmclassmatch=1
 
 [General]
 count=18
-rules=1,2,3,4,5,6,7,8,9,10,11,12,13,af1cb9dd-d19f-4c94-990e-95c012e9977d,14,15,16,17
+rules=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18
 
 [a0a253d2-9a34-4b95-9240-7a3e990f81c1]
 Description=All

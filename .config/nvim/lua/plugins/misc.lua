@@ -1,5 +1,6 @@
 return {
-	{ "dstein64/nvim-scrollview",  config = true },
+	{ 'almo7aya/openingh.nvim' },
+	{ 'dstein64/nvim-scrollview', config = true },
 	{
 		'spm.nvim',
 		dir = '~/code/nvim/spm.nvim',

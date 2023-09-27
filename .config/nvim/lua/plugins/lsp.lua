@@ -1,13 +1,18 @@
 return {
 	{
 		'neovim/nvim-lspconfig',
+		dependencies = {
+			'hrsh7th/nvim-cmp',
+		},
 		opts = {
 			format_notify = true,
 			inlay_hints = {
 				enabled = false,
 			},
-			diagnostics = { virtual_text = { prefix = "icons" } },
-			capabilities = {
+
+			diagnostics = { virtual_text = { prefix = 'icons' } },
+
+			capabilities = vim.tbl_extend('force', {
 				textDocument = {
 					foldingRange = {
 						dynamicRegistration = false,
@@ -19,7 +24,8 @@ return {
 						},
 					},
 				},
-			},
+			}, require('cmp_nvim_lsp').default_capabilities()),
+
 			showMessage = {
 				messageActionItem = {
 					additionalPropertiesSupport = true,
@@ -42,12 +48,12 @@ return {
 
 				rust_analyzer = {
 					settings = {
-						["rust-analyzer"] = {
+						['rust-analyzer'] = {
 							procMacro = { enable = true },
 							cargo = { allFeatures = true },
 							checkOnSave = {
-								command = "clippy",
-								extraArgs = { "--no-deps" },
+								command = 'clippy',
+								extraArgs = { '--no-deps' },
 							},
 						},
 					},
@@ -87,7 +93,7 @@ return {
 				nls.builtins.diagnostics.golangci_lint,
 				-- ts
 				nls.builtins.formatting.biome,
-				require("typescript.extensions.null-ls.code-actions")
+				require('typescript.extensions.null-ls.code-actions')
 			})
 			return opts
 		end,
