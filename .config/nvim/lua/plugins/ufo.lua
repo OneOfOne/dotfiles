@@ -3,6 +3,7 @@ return {
 	dependencies = {
 		'kevinhwang91/promise-async',
 	},
+	-- enabled = false,
 	opts = {
 		filetype_exclude = { 'help', 'alpha', 'dashboard', 'neo-tree', 'Trouble', 'lazy', 'mason' },
 	},
@@ -20,7 +21,7 @@ return {
 		end
 
 		opts.fold_virt_text_handler = function(virt_text, lnum, end_lnum, width, truncate)
-			local result = { { "+", 'Folded' } }
+			local result = { { '▸', 'Folded' } }
 			local _end = end_lnum - 1
 			local final_text = vim.trim(vim.api.nvim_buf_get_text(0, _end, 0, _end, -1, {})[1])
 			local suffix = final_text:format(end_lnum - lnum - 1)
@@ -38,7 +39,6 @@ return {
 					chunk_text = truncate(chunk_text, target_width - cur_width)
 					table.insert(result, { chunk_text, hl_group })
 					chunk_width = vim.fn.strdisplaywidth(chunk_text)
-					-- str width returned from truncate() may less than 2nd argument, need padding
 					if cur_width + chunk_width < target_width then
 						suffix = suffix .. (' '):rep(target_width - cur_width - chunk_width)
 					end

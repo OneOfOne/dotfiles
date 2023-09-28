@@ -49,6 +49,7 @@ return {
 	},
 	{
 		'akinsho/bufferline.nvim',
+		enabled = false,
 		opts = {
 			options = {
 				always_show_bufferline = true,
@@ -56,6 +57,39 @@ return {
 				separator_style = 'slope',
 			},
 		}
+	},
+	{
+		"romgrk/barbar.nvim",
+		dependencies = {
+			"lewis6991/gitsigns.nvim",
+			"nvim-tree/nvim-web-devicons",
+		},
+		init = function()
+			vim.g.barbar_auto_setup = false
+		end,
+		opts = function()
+			return {
+				animation = true,
+				focus_on_close = 'previous',
+				maximum_padding = 2,
+				sidebar_filetypes = {
+					['neo-tree'] = { event = 'BufWipeout' },
+					Outline = { event = 'BufWinLeave', text = 'symbols-outline' },
+				},
+				icons = {
+					gitsigns = {
+						changed = { enabled = true, icon = '~' },
+					},
+					diagnostics = {
+						[vim.diagnostic.severity.ERROR] = { enabled = true },
+						[vim.diagnostic.severity.WARN] = { enabled = false },
+						[vim.diagnostic.severity.INFO] = { enabled = false },
+						[vim.diagnostic.severity.HINT] = { enabled = true },
+					},
+					pinned = { button = '', filename = true },
+				}
+			}
+		end,
 	},
 	{
 		'nvim-lualine/lualine.nvim',
@@ -69,28 +103,4 @@ return {
 			}
 		}
 	},
-	{
-		'lukas-reineke/indent-blankline.nvim',
-		branch = 'v3',
-		enabled = false,
-		opts = function(_, opts)
-			local hooks = require('ibl.hooks')
-			hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
-				vim.api.nvim_set_hl(0, 'RainbowOrange', { fg = '#D19A66' })
-			end)
-			opts.scope = {
-				enabled = true,
-				char = '│',
-				show_start = false,
-				highlight = { 'RainbowOrange' }
-			}
-			opts.indent = { highlight = { 'NeoTreeIndentMarker' } }
-		end,
-		config = function(_, opts)
-			local hooks = require('ibl.hooks')
-			require('ibl').setup(opts)
-			hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
-		end,
-	}
-
 }

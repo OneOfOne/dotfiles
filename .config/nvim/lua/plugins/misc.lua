@@ -1,12 +1,12 @@
 return {
-	{ 'almo7aya/openingh.nvim' },
-	{ 'dstein64/nvim-scrollview', config = true },
+	{ 'almo7aya/openingh.nvim',    config = true },
+	{ 'dstein64/nvim-scrollview',  config = true },
+	{ 'NvChad/nvim-colorizer.lua', config = true },
 	{
 		'spm.nvim',
 		dir = '~/code/nvim/spm.nvim',
 		config = true,
 	},
-	{ 'NvChad/nvim-colorizer.lua', config = true },
 	{
 		'folke/trouble.nvim',
 		opts = {
