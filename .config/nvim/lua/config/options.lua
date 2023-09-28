@@ -20,21 +20,21 @@ o.list = true
 -- o.listchars:append({ tab = '│‒', nbsp = '∙', trail = '∙', extends = '▶', precedes = '◀', space = '·' }) -- , eol = '↴'
 o.listchars:append({ tab = '│ ', nbsp = '∙', trail = '∙', extends = '▶', precedes = '◀', space = '·' }) -- , eol = '↴'
 o.fillchars:append({ fold = ' ' })
-vim.cmd [[match ErrorMsg '\s\+$']]
+vim.cmd([[match ErrorMsg '\s\+$']])
 
-o.title          = true
+o.title = true
 
-o.copyindent     = true
-o.breakindent    = true
+o.copyindent = true
+o.breakindent = true
 o.breakindentopt = 'sbr'
-o.showbreak      = '❯ '
+o.showbreak = '❯ '
 
-o.paste          = false
+o.paste = false
 o.clipboard:append('unnamed')
 
 o.undofile = false
 o.swapfile = false
-o.shada = '!,\'50,<50,s10,h,r/tmp'
+o.shada = "!,'50,<50,s10,h,r/tmp"
 o.shadafile = 'NONE'
 
 o.spell = true
@@ -55,20 +55,21 @@ o.mousemodel = 'extend'
 
 o.indentexpr = 'nvim_treesitter#indent()'
 -- fold stuff
--- o.foldcolumn = '1'
--- o.foldlevel = 99
--- o.foldlevelstart = -1
--- o.foldenable = true
--- o.foldmethod = 'expr'
--- o.foldexpr = 'nvim_treesitter#foldexpr()'
--- o.foldtext = 'v:lua.SmartFold()'
---
--- function SmartFold()
--- 	local indent = vim.fn.indent(vim.v.foldstart) or 0
--- 	local ichar = string.rep('‒', indent)
--- 	---@diagnostic disable-next-line: param-type-mismatch
--- 	return ichar .. vim.fn.getline(vim.v.foldstart) .. ' ... ' .. vim.fn.getline(vim.v.foldend):gsub('^%s*', '')
--- end
+o.foldcolumn = '1'
+o.foldlevel = 99
+o.foldlevelstart = -1
+o.foldenable = true
+o.foldmethod = 'expr'
+o.foldexpr = 'nvim_treesitter#foldexpr()'
+o.foldtext = 'v:lua.SmartFold()'
+
+function SmartFold()
+	return '▶'
+		.. vim.fn.getline(vim.v.foldstart)
+		.. ' ... '
+		---@diagnostic disable-next-line: param-type-mismatch
+		.. vim.fn.getline(vim.v.foldend):gsub('^%s*', '')
+end
 --
 -- o.guifont = 'Liga SFMono Nerd Font,Noto Color Emoji,Noto Sans Symbols,Noto Sans Symbols 2:h10'
 o.guifont = 'Liga SFMono Nerd Font:h10'

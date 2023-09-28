@@ -1,15 +1,15 @@
 return {
 	{
-		"nvim-neotest/neotest",
+		'nvim-neotest/neotest',
 		dependencies = {
-			"rouge8/neotest-rust",
+			'rouge8/neotest-rust',
 		},
 		opts = {
 			adapters = {
-				["neotest-rust"] = {
-					args = { "--no-capture" },
+				['neotest-rust'] = {
+					args = { '--no-capture' },
 				},
 			},
 		},
-	}
+	},
 }

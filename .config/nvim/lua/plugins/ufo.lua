@@ -7,13 +7,15 @@ return {
 	opts = {
 		filetype_exclude = { 'help', 'alpha', 'dashboard', 'neo-tree', 'Trouble', 'lazy', 'mason' },
 	},
-	event = "BufReadPost",
+	event = 'BufReadPost',
 	config = function(_, opts)
 		local ufo = require('ufo')
 		vim.api.nvim_create_autocmd('FileType', {
 			group = vim.api.nvim_create_augroup('local_detach_ufo', { clear = true }),
 			pattern = opts.filetype_exclude,
-			callback = function() ufo.detach() end
+			callback = function()
+				ufo.detach()
+			end,
 		})
 
 		opts.provider_selector = function()

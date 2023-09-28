@@ -1,11 +1,13 @@
 return {
-	{ 'almo7aya/openingh.nvim',    config = true },
-	{ 'dstein64/nvim-scrollview',  config = true },
+	{ 'almo7aya/openingh.nvim', config = true },
+	{ 'dstein64/nvim-scrollview', config = true },
 	{ 'NvChad/nvim-colorizer.lua', config = true },
 	{
 		'spm.nvim',
 		dir = '~/code/nvim/spm.nvim',
 		config = true,
+		event = 'VeryLazy',
+		--enabled = false,
 	},
 	{
 		'folke/trouble.nvim',
@@ -20,10 +22,10 @@ return {
 		opts = {
 			modes = {
 				search = {
-					enabled = false
+					enabled = false,
 				},
-			}
-		}
+			},
+		},
 	},
 	{
 		'chentoast/marks.nvim',
@@ -32,6 +34,14 @@ return {
 			default_mappings = true,
 			force_write_shada = false,
 			refresh_interval = 250,
+		},
+	},
+	{
+		'gbprod/yanky.nvim',
+		dependencies = { { 'kkharji/sqlite.lua', enabled = false } },
+		opts = {
+			highlight = { timer = 250 },
+			ring = { storage = 'shada' },
 		},
 	},
 }

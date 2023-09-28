@@ -284,7 +284,7 @@ below=true
 blockcompositing=true
 clientmachine=localhost
 ignoregeometry=true
-ignoregeometryrule=3
+ignoregeometryrule=2
 maxsize=2560,1440
 noborder=true
 position=2560,0
@@ -294,7 +294,7 @@ sizerule=3
 skiptaskbar=true
 types=1
 windowrole=messages
-wmclass=google-chrome google-chrome
+wmclass=chrome google-chrome
 wmclasscomplete=true
 wmclassmatch=1
 
@@ -365,9 +365,20 @@ wmclass=konsole org.kde.konsole
 wmclasscomplete=true
 wmclassmatch=1
 
+[9135f958-e9fd-4837-aba5-d9c2f9c894a8]
+Description=CS2
+clientmachine=localhost
+noborder=true
+noborderrule=2
+position=2560,0
+positionrule=2
+wmclass=cs2 cs2
+wmclasscomplete=true
+wmclassmatch=1
+
 [General]
-count=18
-rules=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18
+count=19
+rules=9135f958-e9fd-4837-aba5-d9c2f9c894a8,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18
 
 [a0a253d2-9a34-4b95-9240-7a3e990f81c1]
 Description=All

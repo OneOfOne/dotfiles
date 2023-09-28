@@ -19,8 +19,6 @@ local function tmap(keys, fn, desc)
 end
 
 -- qol
-nmap('<a-p>', '"*p', 'paste selection')
-nmap('<a-s-p>', '"*P', 'paste selection (before)')
 imap('<c-v>', '<left><c-o>"+p', 'paste clipboard')
 imap('<c-s-v>', '<left><c-o>"*p', 'paste selection')
 -- this breaks ctrl-z in the terminal, but honestly, who uses that with nvim?
@@ -36,7 +34,7 @@ map('z=', '<cmd>Telescope spell_suggest theme=get_cursor previewer=false<cr>', '
 
 -- sane regexp defaults
 nmap('ss', ':%s/\\v')
-vmap('ss', '<esc>:%s~\\M<c-r>"~~gc<left><left><left>', 'search & replace selection in visual mode')
+vmap('ss', '"zy<ESC>:%s~\\M<c-r>z~~gc<left><left><left>', 'search & replace selection in visual mode')
 nmap('sds', ':.s/\\v')
 nmap('sg', ':%g/\\v')
 nmap('sdg', ':.g/\\v')

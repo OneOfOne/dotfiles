@@ -1,15 +1,15 @@
 return {
 	{
 		'echasnovski/mini.ai',
-		enabled = false
+		-- enabled = false,
 	},
 	{
 		'echasnovski/mini.pairs',
-		enabled = false
+		enabled = false,
 	},
 	{
 		'echasnovski/mini.surround',
-		enabled = false
+		enabled = false,
 	},
 	{
 		'echasnovski/mini.bufremove',
@@ -17,23 +17,23 @@ return {
 	},
 	{
 		'folke/tokyonight.nvim',
-		enabled = false
+		enabled = false,
 	},
 	{
 		'folke/persistence.nvim',
-		enabled = false
+		enabled = false,
 	},
 	{
 		'folke/todo-comments.nvim',
-		enabled = false
+		enabled = false,
 	},
 	{
 		'ellisonleao/gruvbox.nvim',
-		enabled = false
+		enabled = false,
 	},
 	{
 		'jose-elias-alvarez/null-ls.nvim',
-		enabled = false
+		enabled = false,
 	},
 	{
 		'nvim-pack/nvim-spectre',
@@ -43,8 +43,4 @@ return {
 		'goolord/alpha-nvim',
 		enabled = false,
 	},
-	{
-		'lukas-reineke/indent-blankline.nvim',
-		enabled = false,
-	}
 }
