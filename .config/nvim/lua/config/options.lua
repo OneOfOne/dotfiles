@@ -18,7 +18,7 @@ o.smoothscroll = true
 
 o.list = true
 -- o.listchars:append({ tab = '│‒', nbsp = '∙', trail = '∙', extends = '▶', precedes = '◀', space = '·' }) -- , eol = '↴'
-o.listchars:append({ tab = '│ ', nbsp = '∙', trail = '∙', extends = '▶', precedes = '◀', space = '·' }) -- , eol = '↴'
+o.listchars:append({ tab = '▎ ', nbsp = '∙', trail = '∙', extends = '▶', precedes = '◀', space = '·' }) -- , eol = '↴'
 o.fillchars:append({ fold = ' ' })
 vim.cmd([[match ErrorMsg '\s\+$']])
 
@@ -54,22 +54,6 @@ o.virtualedit = 'onemore'
 o.mousemodel = 'extend'
 
 o.indentexpr = 'nvim_treesitter#indent()'
--- fold stuff
-o.foldcolumn = '1'
-o.foldlevel = 99
-o.foldlevelstart = -1
-o.foldenable = true
-o.foldmethod = 'expr'
-o.foldexpr = 'nvim_treesitter#foldexpr()'
-o.foldtext = 'v:lua.SmartFold()'
 
-function SmartFold()
-	return '▶'
-		.. vim.fn.getline(vim.v.foldstart)
-		.. ' ... '
-		---@diagnostic disable-next-line: param-type-mismatch
-		.. vim.fn.getline(vim.v.foldend):gsub('^%s*', '')
-end
---
 -- o.guifont = 'Liga SFMono Nerd Font,Noto Color Emoji,Noto Sans Symbols,Noto Sans Symbols 2:h10'
 o.guifont = 'Liga SFMono Nerd Font:h10'

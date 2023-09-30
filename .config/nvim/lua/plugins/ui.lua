@@ -53,7 +53,7 @@ return {
 	},
 	{
 		'akinsho/bufferline.nvim',
-		enabled = false,
+		-- enabled = false,
 		opts = {
 			options = {
 				always_show_bufferline = true,
@@ -61,39 +61,6 @@ return {
 				separator_style = 'slope',
 			},
 		},
-	},
-	{
-		'romgrk/barbar.nvim',
-		dependencies = {
-			'lewis6991/gitsigns.nvim',
-			'nvim-tree/nvim-web-devicons',
-		},
-		init = function()
-			vim.g.barbar_auto_setup = false
-		end,
-		opts = function()
-			return {
-				animation = true,
-				focus_on_close = 'previous',
-				maximum_padding = 2,
-				sidebar_filetypes = {
-					['neo-tree'] = { event = 'BufWipeout' },
-					Outline = { event = 'BufWinLeave', text = 'symbols-outline' },
-				},
-				icons = {
-					gitsigns = {
-						changed = { enabled = true, icon = '~' },
-					},
-					diagnostics = {
-						[vim.diagnostic.severity.ERROR] = { enabled = true },
-						[vim.diagnostic.severity.WARN] = { enabled = false },
-						[vim.diagnostic.severity.INFO] = { enabled = false },
-						[vim.diagnostic.severity.HINT] = { enabled = true },
-					},
-					pinned = { button = '', filename = true },
-				},
-			}
-		end,
 	},
 	{
 		'nvim-lualine/lualine.nvim',
@@ -136,8 +103,20 @@ return {
 		cmd = 'SymbolsOutline',
 		keys = { { '<leader>cs', '<cmd>SymbolsOutline<cr>', desc = 'Symbols Outline' } },
 		opts = {
-			-- add your options that should be passed to the setup() function here
 			position = 'right',
+		},
+	},
+	{
+		'lukas-reineke/indent-blankline.nvim',
+		opts = {
+			scope = {
+				enabled = true,
+				show_start = false,
+				-- highlight = 'Function',
+				include = {
+					node_type = { ['*'] = { '*' } },
+				},
+			},
 		},
 	},
 }

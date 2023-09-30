@@ -6,15 +6,12 @@ export GOSUMDB="off"
 export GOPROXY="direct"
 export GO111MODULE=auto
 
-# export CLOUDSDK_PYTHON=python2
 export GOAMD64=v3
-
 
 # if [ -x /bin/zig ]; then
 # 	export CC="zig cc"
 # 	export CXX="zig cxx"
 # fi
-
 
 path=($HOME/.dotfiles/node_modules/.bin $path)
 path=($GOBIN $HOME/.cargo/bin $path)
@@ -52,7 +49,6 @@ function setgo {
 		_err "$p doesn't exist."
 		return 1
 	fi
-
 
 	ln -svf $p/{go,gofmt} $HOME/bin || return 1
 	go version
@@ -119,7 +115,7 @@ function rebuildgotools {
 	go mod vendor || return 1
 	# go mod tidy || return 1
 	make install || return 1
-	popd &> /dev/null
+	popd &>/dev/null
 
 	pushd ~gh/../golang.org/x/tools/gopls && trap "popd >/dev/null" EXIT
 	git reset --hard && git pull || return 1
@@ -142,7 +138,7 @@ function gotest {
 }
 
 function gobench {
-	local n="${1:-.}";
+	local n="${1:-.}"
 	[ "$1" != "" ] && shift
 	go test -count=1 -v -run='^$' -benchmem -bench="$n" $@
 }

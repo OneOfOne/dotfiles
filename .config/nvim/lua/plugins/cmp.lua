@@ -17,7 +17,6 @@ return {
 		opts = {
 			check_ts = true,
 		},
-
 	},
 	{ 'windwp/nvim-ts-autotag', config = true },
 	{
@@ -52,12 +51,12 @@ return {
 			opts.formatting = {
 				format = lspkind.cmp_format({
 					mode = 'symbol_text',
-					menu = ({
+					menu = {
 						buffer = '[Buf]',
 						nvim_lsp = '[LSP]',
 						luasnip = '[Snip]',
 						treesitter = '[TS]',
-					})
+					},
 				}),
 			}
 
@@ -100,17 +99,17 @@ return {
 			})
 
 			opts.mapping = vim.tbl_extend('force', opts.mapping, {
-				['<Up>'] = cmp.mapping.select_prev_item(),
-				['<Down>'] = cmp.mapping.select_next_item(),
+				-- ['<Up>'] = cmp.mapping.select_prev_item(),
+				-- ['<Down>'] = cmp.mapping.select_next_item(),
 				['<C-d>'] = cmp.mapping.scroll_docs(-4),
 				['<C-f>'] = cmp.mapping.scroll_docs(4),
 				--['<esc>'] = cmp.mapping.abort(),
 				['<C-Space>'] = cmp.mapping.complete(),
-				['<C-e>'] = cmp.mapping {
+				['<C-e>'] = cmp.mapping({
 					i = cmp.mapping.abort(),
 					c = cmp.mapping.close(),
-				},
-				['<CR>'] = cmp.mapping.confirm { select = false },
+				}),
+				['<CR>'] = cmp.mapping.confirm({ select = false }),
 				['<Tab>'] = cmp.mapping(function(fallback)
 					if cmp.visible() then
 						cmp.select_next_item()
@@ -134,7 +133,6 @@ return {
 						fallback()
 					end
 				end, { 'i', 's' }),
-
 			})
 
 			local cmp_window = require('cmp.config.window')
@@ -146,5 +144,5 @@ return {
 			local cmp_autopairs = require('nvim-autopairs.completion.cmp')
 			cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
 		end,
-	}
+	},
 }

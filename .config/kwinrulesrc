@@ -13,21 +13,43 @@ types=1
 windowrole=messages
 
 [1]
-Description=All
+Description=CS2
 clientmachine=localhost
 ignoregeometry=true
-ignoregeometryrule=2
 maxsize=2560,1440
-maxsizerule=2
 noborder=true
-strictgeometryrule=2
+noborderrule=2
+position=2560,0
+positionrule=2
 title=NVIM
 windowrole=messages
+wmclass=cs2 cs2
+wmclasscomplete=true
+wmclassmatch=1
 
 [10]
+Description=Konsole (WL)
+clientmachine=localhost
+noborder=true
+noborderrule=3
+position=3840,720
+positionrule=3
+size=1280,720
+sizerule=3
+skiptaskbar=true
+skiptaskbarrule=2
+types=1
+windowrole=messages
+wmclass=konsole org.kde.konsole
+wmclasscomplete=true
+wmclassmatch=1
+
+[11]
 Description=Gajim
+below=true
 clientmachine=localhost
 ignoregeometryrule=2
+maxsize=2560,1440
 noborder=true
 noborderrule=2
 position=4172,0
@@ -43,12 +65,9 @@ wmclass=python3.11 org.gajim.Gajim
 wmclasscomplete=true
 wmclassmatch=1
 
-[11]
+[12]
 Description=Slack
-below=true
 clientmachine=localhost
-ignoregeometry=true
-maxsize=2560,1440
 noborder=true
 noborderrule=3
 position=0,720
@@ -62,9 +81,12 @@ windowrole=messages
 wmclass=slack
 wmclassmatch=1
 
-[12]
+[13]
 Description=Discord
+below=true
 clientmachine=localhost
+ignoregeometry=true
+maxsize=2560,1440
 noborder=true
 noborderrule=3
 position=0,0
@@ -78,11 +100,10 @@ windowrole=messages
 wmclass=discord
 wmclassmatch=1
 
-[13]
+[14]
 Description=Chrome-slack
 below=true
 clientmachine=localhost
-ignoregeometry=true
 maxsize=2560,1440
 noborder=true
 noborderrule=2
@@ -97,11 +118,11 @@ wmclass=chrome chrome-kbfiajfedekjelkibmdphnikobmeikcc-Default
 wmclasscomplete=true
 wmclassmatch=1
 
-[14]
+[15]
 Description=Chrome-grafana
-below=true
 clientmachine=localhost
-maxsize=2560,1440
+ignoregeometry=true
+maxsize=2400,1400
 noborder=true
 noborderrule=2
 position=0,0
@@ -115,30 +136,31 @@ wmclass=chrome chrome-bcffodegbapcpcbnpdniphdppfkmpelc-Default
 wmclasscomplete=true
 wmclassmatch=1
 
-[15]
+[16]
 Description=Scrcpy
+below=true
 clientmachine=localhost
 ignoregeometry=true
 maxsize=2400,1400
+noborder=true
 position=3840,0
 positionrule=3
+size=2560,1440
+skiptaskbar=true
 windowrole=messages
 wmclass=scrcpy
 wmclassmatch=1
 
-[16]
+[17]
 Description=wezterm
-below=true
 clientmachine=localhost
 ignoregeometry=true
 ignoregeometryrule=2
 maxsize=2400,1400
 maxsizerule=2
-noborder=true
 position=1280,0
 positionrule=3
 size=2560,1440
-skiptaskbar=true
 strictgeometryrule=2
 types=1
 windowrole=messages
@@ -146,23 +168,8 @@ wmclass=wezterm-gui org.wezfurlong.wezterm
 wmclasscomplete=true
 wmclassmatch=1
 
-[17]
-Description=neovide
-clientmachine=localhost
-ignoregeometry=true
-ignoregeometryrule=3
-position=1280,0
-positionrule=3
-size=2560,1440
-sizerule=3
-types=1
-windowrole=messages
-wmclass=neovide neovide
-wmclasscomplete=true
-wmclassmatch=1
-
 [18]
-Description=neovim-qt
+Description=neovide
 clientmachine=localhost
 ignoregeometry=true
 ignoregeometryrule=3
@@ -175,28 +182,37 @@ sizerule=3
 skiptaskbar=true
 types=1
 windowrole=messages
-wmclass=nvim-qt nvim-qt
+wmclass=neovide neovide
 wmclasscomplete=true
 wmclassmatch=1
 
 [19]
-Description=All
-clientmachine=localhost
-maxsize=2560,1440
-maxsizerule=2
-types=65981
-
-[2]
-Description=Starfield
+Description=neovim-qt
 clientmachine=localhost
 ignoregeometry=true
+ignoregeometryrule=3
 maxsize=2560,1440
+position=1280,0
+positionrule=3
+size=2560,1440
+sizerule=3
+types=1
+windowrole=messages
+wmclass=nvim-qt nvim-qt
+wmclasscomplete=true
+wmclassmatch=1
+
+[2]
+Description=All
+clientmachine=localhost
+ignoregeometry=true
+ignoregeometryrule=2
+maxsize=2560,1440
+maxsizerule=2
 noborder=true
-noborderrule=2
+strictgeometryrule=2
 title=NVIM
 windowrole=messages
-wmclass=steam_app_1716740
-wmclassmatch=1
 
 [2e1ac029-e0f3-4401-8c67-08c321546cae]
 Description=neovim-qt
@@ -218,6 +234,21 @@ wmclasscomplete=true
 wmclassmatch=1
 
 [3]
+Description=Starfield
+blockcompositing=true
+clientmachine=localhost
+ignoregeometry=true
+maxsize=2560,1440
+noborder=true
+noborderrule=2
+position=1280,0
+size=2560,1440
+title=NVIM
+windowrole=messages
+wmclass=steam_app_1716740
+wmclassmatch=1
+
+[4]
 Description=Zoom
 blockcompositing=true
 clientmachine=localhost
@@ -226,7 +257,6 @@ ignoregeometryrule=2
 maxsize=2560,1440
 maxsizerule=2
 noborder=true
-position=1280,0
 size=2560,1440
 title=NVIM
 windowrole=messages
@@ -234,7 +264,7 @@ wmclass=zoom
 wmclasscomplete=true
 wmclassmatch=1
 
-[4]
+[5]
 Description=GW2
 blockcompositing=true
 clientmachine=localhost
@@ -248,7 +278,7 @@ windowrole=messages
 wmclass=gw2-64.exe
 wmclassmatch=1
 
-[5]
+[6]
 Description=WoW
 blockcompositing=true
 blockcompositingrule=2
@@ -259,26 +289,40 @@ maxsize=2560,1440
 maxsizerule=2
 noborder=true
 noborderrule=2
+position=2560,0
 size=2560,1440
 sizerule=2
 windowrole=messages
 wmclass=wow.exe
 wmclassmatch=1
 
-[6]
+[7]
 Description=Overwatch
+below=true
+blockcompositing=true
 clientmachine=localhost
 ignoregeometry=true
+maxsize=2560,1440
 noborder=true
 noborderrule=2
 position=2560,0
 size=2560,1440
 sizerule=2
+skiptaskbar=true
 windowrole=messages
 wmclass=overwatch.exe
 wmclassmatch=1
 
-[7]
+[7c567684-1517-4114-9af2-f090ff69bf57]
+Description=Application settings for neovide
+clientmachine=localhost
+maxsize=1024,1024
+maxsizerule=2
+title=NVIM
+titlematch=2
+wmclass=neovide
+
+[8]
 Description=Chrome
 below=true
 blockcompositing=true
@@ -295,36 +339,6 @@ skiptaskbar=true
 types=1
 windowrole=messages
 wmclass=chrome google-chrome
-wmclasscomplete=true
-wmclassmatch=1
-
-[7c567684-1517-4114-9af2-f090ff69bf57]
-Description=Application settings for neovide
-clientmachine=localhost
-maxsize=1024,1024
-maxsizerule=2
-title=NVIM
-titlematch=2
-wmclass=neovide
-
-[8]
-Description=Konsole
-below=true
-blockcompositing=true
-clientmachine=localhost
-ignoregeometry=true
-maxsize=2560,1440
-noborder=true
-noborderrule=3
-position=3840,720
-positionrule=3
-size=1280,720
-sizerule=3
-skiptaskbar=true
-skiptaskbarrule=2
-types=1
-windowrole=messages
-wmclass=konsole konsole
 wmclasscomplete=true
 wmclassmatch=1
 
@@ -348,7 +362,7 @@ wmclasscomplete=true
 wmclassmatch=1
 
 [9]
-Description=Konsole (WL)
+Description=Konsole
 below=true
 clientmachine=localhost
 noborder=true
@@ -361,7 +375,7 @@ skiptaskbar=true
 skiptaskbarrule=2
 types=1
 windowrole=messages
-wmclass=konsole org.kde.konsole
+wmclass=konsole konsole
 wmclasscomplete=true
 wmclassmatch=1
 
@@ -377,8 +391,8 @@ wmclasscomplete=true
 wmclassmatch=1
 
 [General]
-count=19
-rules=9135f958-e9fd-4837-aba5-d9c2f9c894a8,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18
+count=20
+rules=b81ff699-18dc-4552-aec6-b58e97700668,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19
 
 [a0a253d2-9a34-4b95-9240-7a3e990f81c1]
 Description=All
@@ -412,5 +426,14 @@ skiptaskbar=true
 skiptaskbarrule=2
 windowrole=messages
 wmclass=chrome chrome-bcffodegbapcpcbnpdniphdppfkmpelc-Default
+wmclasscomplete=true
+wmclassmatch=1
+
+[b81ff699-18dc-4552-aec6-b58e97700668]
+Description=Application settings for steam_app_0
+clientmachine=localhost
+noborder=true
+noborderrule=2
+wmclass=steam_app_0 steam_app_0
 wmclasscomplete=true
 wmclassmatch=1

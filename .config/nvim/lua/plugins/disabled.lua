@@ -9,10 +9,14 @@ return {
 	},
 	{
 		'echasnovski/mini.surround',
-		enabled = false,
+		-- enabled = false,
 	},
 	{
 		'echasnovski/mini.bufremove',
+		-- enabled = false,
+	},
+	{
+		'echasnovski/mini.indentscope',
 		enabled = false,
 	},
 	{
@@ -29,10 +33,6 @@ return {
 	},
 	{
 		'ellisonleao/gruvbox.nvim',
-		enabled = false,
-	},
-	{
-		'jose-elias-alvarez/null-ls.nvim',
 		enabled = false,
 	},
 	{

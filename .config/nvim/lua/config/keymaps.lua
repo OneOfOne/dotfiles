@@ -56,10 +56,3 @@ map('dd', '"_dd', 'keep deleted lines from the clipboard')
 map('x', '"_x', 'keep deleted chars from the clipboard')
 
 tmap('<LeftRelease>', '<cmd>norm! i<cr>', 'auto insert when clicking the terminal')
-
--- barbar
-
-nmap('<leader>bd', '<cmd>BufferClose<cr>', 'close buffer')
-nmap('<leader>bD', '<cmd>BufferWipeout<cr>', 'destroy buffer')
-nmap('<leader>bp', '<cmd>BufferPin<cr>', 'close all except pinned buffers')
-nmap('<leader>bP', '<cmd>BufferCloseAllButPinned<cr>', 'close all except pinned buffers')
