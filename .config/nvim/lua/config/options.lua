@@ -5,9 +5,9 @@ local o = vim.opt
 o.autoindent = true
 o.smartindent = true
 o.expandtab = false
-o.softtabstop = 0
-o.shiftwidth = 4
-o.tabstop = 4
+o.softtabstop = 3
+o.shiftwidth = 3
+o.tabstop = 3
 
 o.iskeyword:append('-')
 -- o.iskeyword:append('.')
@@ -45,7 +45,7 @@ o.completeopt:append('noinsert')
 o.grepprg = 'rg --hidden --vimgrep'
 
 o.ttimeout = false
-o.updatetime = 26
+o.updatetime = 50
 
 -- better selection
 o.selection = 'inclusive'
@@ -53,7 +53,7 @@ o.virtualedit = 'onemore'
 -- o.selectmode = 'mouse,key'
 o.mousemodel = 'extend'
 
-o.indentexpr = 'nvim_treesitter#indent()'
+-- o.indentexpr = 'nvim_treesitter#indent()'
 
 -- o.guifont = 'Liga SFMono Nerd Font,Noto Color Emoji,Noto Sans Symbols,Noto Sans Symbols 2:h10'
 o.guifont = 'Liga SFMono Nerd Font:h10'

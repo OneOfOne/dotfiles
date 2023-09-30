@@ -43,4 +43,14 @@ return {
 		'goolord/alpha-nvim',
 		enabled = false,
 	},
+
+	-- disabled to be able to use system binaries
+	{
+		'jay-babu/mason-nvim-dap.nvim',
+		enabled = false,
+	},
+	{
+		'williamboman/mason-lspconfig.nvim',
+		enabled = false,
+	},
 }

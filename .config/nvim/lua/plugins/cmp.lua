@@ -4,6 +4,17 @@ local has_words_before = function()
 	return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match('%s') == nil
 end
 
+local function cmp_snippts_last(entry1, entry2)
+	local types = require('cmp.types')
+	-- https://www.reddit.com/r/neovim/comments/woih9n/comment/ikbd6iy/?utm_source=reddit&utm_medium=web2x&context=3
+	if entry1:get_kind() == types.lsp.CompletionItemKind.Snippet then
+		return false
+	end
+	if entry2:get_kind() == types.lsp.CompletionItemKind.Snippet then
+		return true
+	end
+end
+
 return {
 	{
 		'L3MON4D3/LuaSnip',
@@ -18,7 +29,6 @@ return {
 			check_ts = true,
 		},
 	},
-	{ 'windwp/nvim-ts-autotag', config = true },
 	{
 		'hrsh7th/nvim-cmp',
 
@@ -30,7 +40,6 @@ return {
 		opts = function(_, opts)
 			local cmp = require('cmp')
 			local luasnip = require('luasnip')
-			local types = require('cmp.types')
 			local lspkind = require('lspkind')
 
 			opts.preselect = cmp.PreselectMode.None
@@ -41,7 +50,7 @@ return {
 				fetching_timeout = 500,
 				confirm_resolve_timeout = 80,
 				async_budget = 1,
-				max_view_entries = 200,
+				max_view_entries = 100,
 			}
 
 			opts.completion = {
@@ -63,22 +72,10 @@ return {
 			opts.sorting = {
 				priority_weight = 2,
 				comparators = {
-					function(entry1, entry2)
-						local kind1 = entry1:get_kind()
-						kind1 = kind1 == types.lsp.CompletionItemKind.Text and 100 or kind1
-						local kind2 = entry2:get_kind()
-						kind2 = kind2 == types.lsp.CompletionItemKind.Text and 100 or kind2
-						if kind1 ~= kind2 then
-							if kind1 == types.lsp.CompletionItemKind.Snippet then
-								return false
-							end
-							if kind2 == types.lsp.CompletionItemKind.Snippet then
-								return true
-							end
-							local diff = kind1 - kind2
-							return diff < 0
-						end
-					end,
+					cmp_snippts_last,
+					cmp.config.compare.score,
+					cmp.config.compare.offset,
+					cmp.config.compare.exact,
 					-- cmp.config.compare.offset,
 					-- cmp.config.compare.exact,
 					-- cmp.config.compare.score,
@@ -93,6 +90,7 @@ return {
 				{ name = 'copilot' },
 				{ name = 'crates' },
 				{ name = 'luasnip' },
+			}, {
 				{ name = 'buffer' },
 				{ name = 'path' },
 				{ name = 'emoji' },

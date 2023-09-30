@@ -1,3 +1,7 @@
+vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+	update_in_insert = true,
+})
+
 local function disableFmtProvider(client)
 	client.server_capabilities.documentFormattingProvider = false
 end
@@ -43,6 +47,13 @@ return {
 					on_attach = disableFmtProvider,
 				},
 
+				gopls = {
+					settings = {
+						gopls = {
+							semanticTokens = false,
+						},
+					},
+				},
 				yamlls = {
 					settings = {
 						yaml = {
@@ -61,7 +72,6 @@ return {
 		'nvimtools/none-ls.nvim',
 		opts = function(_, opts)
 			local nls = require('null-ls')
-			-- print(vim.inspect(opts))
 			opts.sources = { --override lazyvim's default sources
 				nls.builtins.code_actions.gitsigns,
 				-- go
@@ -69,7 +79,22 @@ return {
 				nls.builtins.code_actions.impl,
 				-- nls.builtins.diagnostics.golangci_lint,
 				-- ts
-				nls.builtins.formatting.biome,
+				nls.builtins.formatting.biome.with({
+					args = {
+						'check',
+						'--apply-unsafe',
+						'--formatter-enabled=true',
+						'--organize-imports-enabled=true',
+						'--skip-errors',
+						'$FILENAME',
+					},
+					ignore_stdout = true,
+					ignore_stderr = true,
+					to_temp_file = false,
+				}),
+				on_output = function(_, done)
+					done()
+				end,
 				-- other
 				nls.builtins.formatting.stylua,
 				nls.builtins.formatting.shfmt.with({
@@ -82,7 +107,6 @@ return {
 	{
 		'nvim-treesitter/nvim-treesitter',
 		event = { 'BufReadPost', 'BufNewFile' },
-		main = 'ibl',
 		opts = {
 			highlight = {
 				enable = true,

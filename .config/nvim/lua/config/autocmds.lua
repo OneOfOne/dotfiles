@@ -8,9 +8,15 @@ local function au(typ, pattern, cmdOrFn)
 	end
 end
 
-au({ "FileType" }, { "json", "jsonc" }, function()
+au({ 'FileType' }, { 'json', 'jsonc', 'Outline' }, function()
 	vim.wo.spell = false
 	vim.wo.conceallevel = 0
+end)
+
+au({ 'FileType' }, { 'typescript', 'typescriptreact' }, function()
+	vim.g.editorconfig = false
+	vim.opt_local.tabstop = 3
+	vim.opt_local.shiftwidth = 3
 end)
 
 -- au({ 'BufWinEnter', 'WinEnter' }, 'term://*', 'norm! i')
