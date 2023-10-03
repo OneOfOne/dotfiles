@@ -4,14 +4,14 @@ return {
 		open_files_do_not_replace_types = { 'terminal', 'Trouble', 'qf', 'edgy' },
 		filesystem = {
 			filtered_items = {
-				visible = true,
+				-- visible = true,
 				hide_dotfiles = false,
-				hide_gitignored = false,
+				hide_gitignored = true,
 				hide_by_name = {
 					'.git',
 					'.DS_Store',
 					'thumbs.db',
-					'node_modules'
+					'node_modules',
 				},
 				follow_current_file = {
 					enabled = true,

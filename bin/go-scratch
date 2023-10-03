@@ -1,0 +1,72 @@
+#!/bin/zsh
+set -e
+EDITOR="wvim"
+GOPATH="$(go env GOPATH)"
+BASE="$GOPATH/src/tmp/"
+
+ARG=${1:-go}
+
+if [ $ARG = "-d" ]; then
+	echo -n "delete '$BASE'? " && read Y
+	[ "$Y" = "y" ] && rm -vrf "$BASE"
+	exit 0
+fi
+
+if [ "$ARG" != "go" -a "$ARG" != "go2" -a "$ARG" != "-d" ]; then
+	echo "usage: $0 [go|go2] -d (delete all tmp folders)" >/dev/stderr
+	exit 1
+fi
+
+mkdir -p "$BASE"
+D="$(mktemp -d -p "$BASE" go-scratch.XXX)"
+
+echo "package main
+
+import (
+	\"log\"
+)
+
+func main() {
+
+}
+
+func init() {
+	log.SetFlags(log.Lshortfile)
+}
+
+var (
+	pln = log.Println
+	pf = log.Printf
+)
+
+func dieIf(err error) {
+	if err != nil {
+		log.Output(2, err.Error())
+		panic(err.Error())
+	}
+}
+" >"${D}/main.$ARG"
+
+echo "package main
+
+import (
+	\"testing\"
+)
+
+func TestMain(t *testing.T) {
+	t.Log(\".\")
+}
+
+func BenchmarkMain(b *testing.B) {
+	b.ReportAllocs()
+	b.RunParallel(func(pb *testing.PB) {
+		for pb.Next() {
+			//
+		}
+	})
+}" >"${D}/main_test.$ARG"
+
+$EDITOR "$D"
+
+echo -n "delete '$D'? " && read Y
+[ "$Y" = "y" ] && rm -vrf "$D"

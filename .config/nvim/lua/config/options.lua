@@ -3,7 +3,9 @@
 local o = vim.opt
 
 o.autoindent = true
-o.smartindent = true
+o.smartindent = false
+o.indentexpr = 'nvim_treesitter#indent()'
+
 o.expandtab = false
 o.softtabstop = 3
 o.shiftwidth = 3
@@ -53,7 +55,16 @@ o.virtualedit = 'onemore'
 -- o.selectmode = 'mouse,key'
 o.mousemodel = 'extend'
 
--- o.indentexpr = 'nvim_treesitter#indent()'
-
 -- o.guifont = 'Liga SFMono Nerd Font,Noto Color Emoji,Noto Sans Symbols,Noto Sans Symbols 2:h10'
 o.guifont = 'Liga SFMono Nerd Font:h10'
+
+function FoldWithNlines()
+	local text = vim.treesitter.foldtext()
+	local n_lines = vim.v.foldend - vim.v.foldstart
+
+	---@diagnostic disable-next-line: param-type-mismatch
+	table.insert(text, { (' 󰁂 %d '):format(n_lines), { 'Folded' } })
+	return text
+end
+
+vim.opt.foldtext = 'v:lua.FoldWithNlines()'

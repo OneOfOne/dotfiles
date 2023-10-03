@@ -1,5 +1,9 @@
-vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-	update_in_insert = true,
+vim.diagnostic.config({
+	virtual_text = true,
+	signs = true,
+	underline = true,
+	update_in_insert = false,
+	severity_sort = true,
 })
 
 local function disableFmtProvider(client)
@@ -13,7 +17,7 @@ return {
 			'hrsh7th/nvim-cmp',
 		},
 		opts = {
-			-- format_notify = true,
+			format_notify = true,
 			inlay_hints = {
 				enabled = false,
 			},
@@ -39,7 +43,7 @@ return {
 			},
 
 			flags = {
-				debounce_text_changes = 150,
+				debounce_text_changes = 250,
 			},
 
 			servers = {
@@ -51,13 +55,29 @@ return {
 					settings = {
 						gopls = {
 							semanticTokens = false,
-						},
-					},
-				},
-				yamlls = {
-					settings = {
-						yaml = {
-							keyOrdering = false,
+							vulncheck = 'Imports',
+							gofumpt = true,
+							staticcheck = true,
+							analyses = {
+								ST1000 = false,
+								ST1003 = false,
+								SA5001 = false,
+								nilness = true,
+								unusedparams = false,
+								unusuedwrite = true,
+								useany = true,
+								fieldalignment = true,
+								shadow = false,
+								composites = true,
+							},
+
+							usePlaceholders = false,
+
+							allowImplicitNetworkAccess = true,
+							directoryFilters = { '-node_modules', '-data' },
+
+							experimentalPostfixCompletions = true,
+							experimentalPackageCacheKey = true,
 						},
 					},
 				},
@@ -71,15 +91,16 @@ return {
 	{
 		'nvimtools/none-ls.nvim',
 		opts = function(_, opts)
-			local nls = require('null-ls')
+			local nls = require('null-ls').builtins
 			opts.sources = { --override lazyvim's default sources
-				nls.builtins.code_actions.gitsigns,
+				nls.code_actions.gitsigns,
 				-- go
-				nls.builtins.code_actions.gomodifytags,
-				nls.builtins.code_actions.impl,
-				-- nls.builtins.diagnostics.golangci_lint,
+				nls.code_actions.gomodifytags,
+				nls.code_actions.impl,
+				nls.formatting.goimports,
+				-- nls.diagnostics.golangci_lint,
 				-- ts
-				nls.builtins.formatting.biome.with({
+				nls.formatting.biome.with({
 					args = {
 						'check',
 						'--apply-unsafe',
@@ -88,16 +109,10 @@ return {
 						'--skip-errors',
 						'$FILENAME',
 					},
-					ignore_stdout = true,
-					ignore_stderr = true,
-					to_temp_file = false,
 				}),
-				on_output = function(_, done)
-					done()
-				end,
 				-- other
-				nls.builtins.formatting.stylua,
-				nls.builtins.formatting.shfmt.with({
+				nls.formatting.stylua,
+				nls.formatting.shfmt.with({
 					filetypes = { 'sh', 'zsh' },
 				}),
 			}
@@ -120,6 +135,17 @@ return {
 					node_incremental = '<BS>',
 					scope_incremental = '<C-BS>',
 					node_decremental = '<A-BS>',
+				},
+			},
+			textobjects = {
+				swap = {
+					enable = true,
+					swap_next = {
+						['<leader>a'] = '@parameter.inner',
+					},
+					swap_previous = {
+						['<leader>A'] = '@parameter.inner',
+					},
 				},
 			},
 		},

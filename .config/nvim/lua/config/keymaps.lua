@@ -1,9 +1,9 @@
 -- https://medium.com/@alpha2phi/modern-neovim-configuration-hacks-93b13283969f#6ab4
 local kmset = vim.keymap.set
-local function map(keys, fn, desc, opts)
-	kmset('', keys, fn, vim.tbl_extend('force', { desc = desc, noremap = true }, opts or {}))
-end
-
+-- local function map(keys, fn, desc, opts)
+-- 	kmset('', keys, fn, vim.tbl_extend('force', { desc = desc, noremap = true }, opts or {}))
+-- end
+--
 local function nmap(keys, fn, desc)
 	kmset('n', keys, fn, { desc = desc, noremap = true })
 end
@@ -14,9 +14,9 @@ local function vmap(keys, fn, desc)
 	kmset('v', keys, fn, { desc = desc, noremap = true })
 end
 
-local function tmap(keys, fn, desc)
-	kmset('t', keys, fn, { desc = desc, noremap = true })
-end
+-- local function tmap(keys, fn, desc)
+-- 	kmset('t', keys, fn, { desc = desc, noremap = true })
+-- end
 
 -- qol
 imap('<c-v>', '<left><c-o>"+p', 'paste clipboard')
@@ -27,10 +27,10 @@ imap('<c-r>', '<c-o><c-r>', 'redo')
 
 vmap('<LeftRelease>', '"*ygv', 'yank on mouse selection')
 
-map('<leader>gl', '<cmd>OpenInGHFileLines<cr>', 'open current file/line in github')
+nmap('<leader>gl', '<cmd>OpenInGHFileLines<cr>', 'open current file/line in github')
 
-map('<c-tab>', '<cmd>Telescope buffers theme=dropdown previewer=false<cr>', 'simple buffer selector')
-map('z=', '<cmd>Telescope spell_suggest theme=get_cursor previewer=false<cr>', 'use telescope for spelling suggestion')
+nmap('<leader>gC', '<cmd>Telescope git_bcommits<cr>', 'show commit history for file')
+nmap('z=', '<cmd>Telescope spell_suggest theme=get_cursor previewer=false<cr>', 'use telescope for spelling suggestion')
 
 -- sane regexp defaults
 nmap('ss', ':%s/\\v')
@@ -47,12 +47,10 @@ vmap('i', '<esc>i', 'insert from visual')
 
 nmap('<leader>us', '<cmd>setlocal spell!<cr>', 'toggle spell checking per buffer')
 
-map('<leader>sudo', '<cmd>w !sudo tee "%" >/dev/null<cr><cmd>edit!<cr>', 'sudo write')
+nmap('<leader>sudo', '<cmd>w !sudo tee "%" >/dev/null<cr><cmd>edit!<cr>', 'sudo write')
 
 -- overrides
 vmap('<cr>', '<esc>o', 'make enter insert a new line')
-map('DD', 'dd', 'delete to clipboard')
-map('dd', '"_dd', 'keep deleted lines from the clipboard')
-map('x', '"_x', 'keep deleted chars from the clipboard')
-
-tmap('<LeftRelease>', '<cmd>norm! i<cr>', 'auto insert when clicking the terminal')
+nmap('DD', 'dd', 'delete to clipboard')
+nmap('dd', '"_dd', 'keep deleted lines from the clipboard')
+nmap('x', '"_x', 'keep deleted chars from the clipboard')

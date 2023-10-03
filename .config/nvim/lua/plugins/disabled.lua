@@ -53,4 +53,16 @@ return {
 		'williamboman/mason-lspconfig.nvim',
 		enabled = false,
 	},
+	{
+		'saadparwaiz1/cmp_luasnip',
+		enabled = false,
+	},
+	{
+		'L3MON4D3/LuaSnip',
+		eanbled = false,
+	},
+	{
+		'rafamadriz/friendly-snippets',
+		enabled = false,
+	},
 }
