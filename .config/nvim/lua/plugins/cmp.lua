@@ -39,7 +39,7 @@ return {
 
 		opts = function(_, opts)
 			local cmp = require('cmp')
-			local luasnip = require('luasnip')
+			-- local luasnip = require('luasnip')
 			local lspkind = require('lspkind')
 
 			opts.preselect = cmp.PreselectMode.None
@@ -97,13 +97,12 @@ return {
 				['<C-d>'] = cmp.mapping.scroll_docs(-4),
 				['<C-f>'] = cmp.mapping.scroll_docs(4),
 				--['<esc>'] = cmp.mapping.abort(),
-				['<C-Space>'] = cmp.mapping.complete(),
-				['<C-e>'] = cmp.mapping({
+				['<Esc>'] = cmp.mapping({
 					i = cmp.mapping.abort(),
 					c = cmp.mapping.close(),
 				}),
 				['<CR>'] = cmp.mapping.confirm({ select = false }),
-				-- ['<c-l>'] = cmp.mapping(function(fallback)
+				-- ['<Down>'] = cmp.mapping(function(fallback)
 				-- 	if cmp.visible() then
 				-- 		cmp.select_next_item()
 				-- 	elseif luasnip.expandable() then
@@ -116,7 +115,7 @@ return {
 				-- 		fallback()
 				-- 	end
 				-- end, { 'i', 's' }),
-				-- ['<c-h'] = cmp.mapping(function(fallback)
+				-- ['<Up>'] = cmp.mapping(function(fallback)
 				-- 	if cmp.visible() then
 				-- 		cmp.select_prev_item()
 				-- 	elseif luasnip.jumpable(-1) then

@@ -1,7 +1,4 @@
 vim.diagnostic.config({
-	virtual_text = true,
-	signs = true,
-	underline = true,
 	update_in_insert = false,
 	severity_sort = true,
 })
@@ -9,6 +6,25 @@ vim.diagnostic.config({
 local function disableFmtProvider(client)
 	client.server_capabilities.documentFormattingProvider = false
 end
+
+local cap = vim.tbl_deep_extend(
+	'force',
+	vim.lsp.protocol.make_client_capabilities(),
+	require('cmp_nvim_lsp').default_capabilities(),
+	{
+		textDocument = {
+			foldingRange = {
+				dynamicRegistration = false,
+				lineFoldingOnly = true,
+			},
+			completion = {
+				completionItem = {
+					snippetSupport = true,
+				},
+			},
+		},
+	}
+)
 
 return {
 	{
@@ -22,19 +38,7 @@ return {
 				enabled = false,
 			},
 
-			capabilities = vim.tbl_extend('force', require('cmp_nvim_lsp').default_capabilities(), {
-				textDocument = {
-					foldingRange = {
-						dynamicRegistration = true,
-						lineFoldingOnly = true,
-					},
-					completion = {
-						completionItem = {
-							snippetSupport = true,
-						},
-					},
-				},
-			}),
+			capabilities = cap,
 
 			showMessage = {
 				messageActionItem = {
@@ -43,7 +47,8 @@ return {
 			},
 
 			flags = {
-				debounce_text_changes = 250,
+				debounce_text_changes = 150,
+				allow_incremental_sync = true,
 			},
 
 			servers = {
@@ -54,6 +59,7 @@ return {
 				gopls = {
 					settings = {
 						gopls = {
+							completeUnimported = true,
 							semanticTokens = false,
 							vulncheck = 'Imports',
 							gofumpt = true,
@@ -77,11 +83,11 @@ return {
 							directoryFilters = { '-node_modules', '-data' },
 
 							experimentalPostfixCompletions = true,
-							experimentalPackageCacheKey = true,
 						},
 					},
 				},
 
+				cssls = {},
 				html = {},
 				biome = {},
 				marksman = {},
@@ -97,7 +103,7 @@ return {
 				-- go
 				nls.code_actions.gomodifytags,
 				nls.code_actions.impl,
-				nls.formatting.goimports,
+				-- nls.formatting.goimports,
 				-- nls.diagnostics.golangci_lint,
 				-- ts
 				nls.formatting.biome.with({
