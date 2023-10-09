@@ -55,8 +55,7 @@ o.virtualedit = 'onemore'
 -- o.selectmode = 'mouse,key'
 o.mousemodel = 'extend'
 
--- o.guifont = 'Liga SFMono Nerd Font,Noto Color Emoji,Noto Sans Symbols,Noto Sans Symbols 2:h10'
-o.guifont = 'Liga SFMono Nerd Font:h10'
+o.guifont = 'Liga SFMono Nerd Font,Noto Color Emoji,Noto Sans Symbols,Noto Sans Symbols 2:h12'
 
 function FoldWithNlines()
 	local text = vim.treesitter.foldtext()

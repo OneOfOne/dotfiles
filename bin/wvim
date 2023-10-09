@@ -8,4 +8,4 @@ if [ -d "$p" ]; then
 	cwd="$p"
 fi
 
-kitty -d $cwd -- nvim $p $@ &>/dev/null &
+kitty -d $cwd -- firejail --whitelist=$p --read-write=$p nvim $p $@ &>/dev/null &

@@ -14,13 +14,14 @@ local function vmap(keys, fn, desc)
 	kmset('v', keys, fn, { desc = desc, noremap = true })
 end
 
--- local function tmap(keys, fn, desc)
--- 	kmset('t', keys, fn, { desc = desc, noremap = true })
--- end
+local function tmap(keys, fn, desc)
+	kmset('t', keys, fn, { desc = desc, noremap = true })
+end
 
 -- qol
 imap('<c-v>', '<left><c-o>"+p', 'paste clipboard')
 imap('<c-s-v>', '<left><c-o>"*p', 'paste selection')
+
 -- this breaks ctrl-z in the terminal, but honestly, who uses that with nvim?
 imap('<c-z>', '<c-o>u', 'undo')
 imap('<c-r>', '<c-o><c-r>', 'redo')

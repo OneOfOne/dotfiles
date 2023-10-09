@@ -103,7 +103,7 @@ return {
 				-- go
 				nls.code_actions.gomodifytags,
 				nls.code_actions.impl,
-				-- nls.formatting.goimports,
+				nls.formatting.goimports,
 				-- nls.diagnostics.golangci_lint,
 				-- ts
 				nls.formatting.biome.with({

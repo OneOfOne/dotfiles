@@ -43,7 +43,6 @@ return {
 		'goolord/alpha-nvim',
 		enabled = false,
 	},
-
 	-- disabled to be able to use system binaries
 	{
 		'jay-babu/mason-nvim-dap.nvim',
@@ -51,18 +50,6 @@ return {
 	},
 	{
 		'williamboman/mason-lspconfig.nvim',
-		enabled = false,
-	},
-	{
-		'saadparwaiz1/cmp_luasnip',
-		enabled = false,
-	},
-	{
-		'L3MON4D3/LuaSnip',
-		eanbled = false,
-	},
-	{
-		'rafamadriz/friendly-snippets',
 		enabled = false,
 	},
 }

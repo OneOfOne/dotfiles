@@ -28,6 +28,7 @@ require('lazy').setup({
 		-- { import = 'lazyvim.plugins.extras.lang.python' },
 		-- { import = 'lazyvim.plugins.extras.lang.clangd' },
 		{ import = 'lazyvim.plugins.extras.coding.copilot' },
+		{ import = 'lazyvim.plugins.extras.ui.mini-animate' },
 		{ import = 'lazyvim.plugins.extras.ui.edgy' },
 		{ import = 'plugins' },
 	},
