@@ -8,4 +8,11 @@ if [ -d "$p" ]; then
 	cwd="$p"
 fi
 
-kitty -d $cwd -- firejail --whitelist=$p --read-write=$p nvim $p $@ &>/dev/null &
+export ZDOTDIR=~/.dotfiles
+
+if [[ "$WAYLAND_DISPLAY" != "" ]]; then
+	kitty -d $cwd -- firejail --quiet --whitelist=$p --read-write=$p nvim $p $@ &
+else
+	firejail --quiet --whitelist=$p --read-write=$p nvim $p $@
+fi
+#kitty -d $cwd -- nvim $p $@ &>/dev/null &

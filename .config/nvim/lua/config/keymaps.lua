@@ -7,9 +7,11 @@ local kmset = vim.keymap.set
 local function nmap(keys, fn, desc)
 	kmset('n', keys, fn, { desc = desc, noremap = true })
 end
+
 local function imap(keys, fn, desc)
 	kmset({ 'i', 'c' }, keys, fn, { desc = desc, noremap = true })
 end
+
 local function vmap(keys, fn, desc)
 	kmset('v', keys, fn, { desc = desc, noremap = true })
 end

@@ -12,11 +12,20 @@ return {
 		},
 		opts = {
 			defaults = {
-				file_ignore_patterns = { 'node_modules', '.git' },
 				mappings = {
 					i = {
 						['<esc>'] = require('telescope.actions').close,
 					},
+				},
+				file_ignore_patterns = {
+					'node_modules',
+					'.env',
+					'package.json',
+					'yarn.lock',
+					'target',
+					'build',
+					'dist',
+					'.git',
 				},
 			},
 			pickers = {

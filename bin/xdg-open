@@ -1,0 +1,4 @@
+#!/bin/zsh
+
+systemd-run --user --quiet --no-block /usr/bin/xdg-open "$@" || /usr/bin/xdg-open "$@"
+

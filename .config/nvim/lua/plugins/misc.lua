@@ -1,6 +1,6 @@
 return {
 	{ 'almo7aya/openingh.nvim', config = true },
-	{ 'dstein64/nvim-scrollview', config = true },
+	-- { 'dstein64/nvim-scrollview', config = true }, -- lags nvim big time
 	{ 'NvChad/nvim-colorizer.lua', config = true },
 	{
 		'spm.nvim',
