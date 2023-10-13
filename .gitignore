@@ -8,3 +8,4 @@ pnpm-lock.yaml
 User/History
 .nvim/
 bun.lockb
+.zcompdump*

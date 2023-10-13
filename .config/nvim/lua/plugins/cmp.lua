@@ -84,46 +84,19 @@ return {
 				{ name = 'nvim_lsp' },
 				{ name = 'crates' },
 				{ name = 'copilot' },
-			}, {
 				{ name = 'luasnip' },
+			}, {
 				{ name = 'buffer' },
 				{ name = 'path' },
 				{ name = 'emoji' },
 			})
 
 			opts.mapping = vim.tbl_extend('force', opts.mapping, {
-				-- ['<Up>'] = cmp.mapping.select_prev_item(),
-				-- ['<Down>'] = cmp.mapping.select_next_item(),
-				['<C-d>'] = cmp.mapping.scroll_docs(-4),
-				['<C-f>'] = cmp.mapping.scroll_docs(4),
-				--['<esc>'] = cmp.mapping.abort(),
 				['<Esc>'] = cmp.mapping({
 					i = cmp.mapping.abort(),
 					c = cmp.mapping.close(),
 				}),
 				['<CR>'] = cmp.mapping.confirm({ select = false }),
-				-- ['<Down>'] = cmp.mapping(function(fallback)
-				-- 	if cmp.visible() then
-				-- 		cmp.select_next_item()
-				-- 	elseif luasnip.expandable() then
-				-- 		luasnip.expand()
-				-- 	elseif luasnip.expand_or_jumpable() then
-				-- 		luasnip.expand_or_jump()
-				-- 	elseif has_words_before() then
-				-- 		cmp.complete()
-				-- 	else
-				-- 		fallback()
-				-- 	end
-				-- end, { 'i', 's' }),
-				-- ['<Up>'] = cmp.mapping(function(fallback)
-				-- 	if cmp.visible() then
-				-- 		cmp.select_prev_item()
-				-- 	elseif luasnip.jumpable(-1) then
-				-- 		luasnip.jump(-1)
-				-- 	else
-				-- 		fallback()
-				-- 	end
-				-- end, { 'i', 's' }),
 			})
 
 			local cmp_window = require('cmp.config.window')

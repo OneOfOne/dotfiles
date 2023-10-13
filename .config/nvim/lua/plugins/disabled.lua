@@ -20,6 +20,10 @@ return {
 		enabled = false,
 	},
 	{
+		'ellisonleao/gruvbox.nvim',
+		enabled = false,
+	},
+	{
 		'folke/tokyonight.nvim',
 		enabled = false,
 	},
@@ -32,7 +36,7 @@ return {
 		enabled = false,
 	},
 	{
-		'ellisonleao/gruvbox.nvim',
+		'folke/neoconf.nvim',
 		enabled = false,
 	},
 	{

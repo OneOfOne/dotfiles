@@ -1,30 +1,6 @@
-vim.diagnostic.config({
-	update_in_insert = false,
-	severity_sort = false,
-})
-
 local function disableFmtProvider(client)
 	client.server_capabilities.documentFormattingProvider = false
 end
-
-local cap = vim.tbl_deep_extend(
-	'force',
-	vim.lsp.protocol.make_client_capabilities(),
-	require('cmp_nvim_lsp').default_capabilities(),
-	{
-		textDocument = {
-			foldingRange = {
-				dynamicRegistration = false,
-				lineFoldingOnly = true,
-			},
-			completion = {
-				completionItem = {
-					snippetSupport = true,
-				},
-			},
-		},
-	}
-)
 
 return {
 	{
@@ -38,7 +14,19 @@ return {
 				enabled = false,
 			},
 
-			capabilities = cap,
+			capabilities = {
+				textDocument = {
+					foldingRange = {
+						dynamicRegistration = false,
+						lineFoldingOnly = true,
+					},
+					completion = {
+						completionItem = {
+							snippetSupport = true,
+						},
+					},
+				},
+			},
 
 			showMessage = {
 				messageActionItem = {
@@ -133,7 +121,6 @@ return {
 				enable = true,
 				additional_vim_regex_highlighting = false,
 			},
-			indent = { enable = true },
 			incremental_selection = {
 				enable = true,
 				keymaps = {
@@ -147,10 +134,10 @@ return {
 				swap = {
 					enable = true,
 					swap_next = {
-						['<leader>a'] = '@parameter.inner',
+						['[a'] = '@parameter.inner',
 					},
 					swap_previous = {
-						['<leader>A'] = '@parameter.inner',
+						[']a'] = '@parameter.inner',
 					},
 				},
 			},
