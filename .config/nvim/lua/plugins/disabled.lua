@@ -56,4 +56,13 @@ return {
 		'williamboman/mason-lspconfig.nvim',
 		enabled = false,
 	},
+	-- using none-ls for now
+	{
+		'stevearc/conform.nvim',
+		enabled = false,
+	},
+	{
+		'mfussenegger/nvim-lint',
+		enabled = false,
+	},
 }

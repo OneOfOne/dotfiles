@@ -45,6 +45,7 @@ ctx
 cwd
 cxx
 dbs
+deref
 desc
 devel
 devlog
@@ -66,6 +67,7 @@ esc
 eslint
 etsy
 failsafe
+fav
 fg
 fgprof
 fi
@@ -88,6 +90,7 @@ gif
 giftcard
 github
 gnupg
+golang
 googleapis
 googlesource
 gopls
@@ -173,6 +176,7 @@ pacman
 param
 params
 password
+pci
 perl
 pii
 pkgbuilds
@@ -209,8 +213,11 @@ semver
 session
 setopt
 shada
+shopify
 shorthands
+signin
 signup
+sms
 sourceforge
 sources
 src
@@ -258,8 +265,10 @@ urlencoded
 usr
 utf
 utm
+uuid
 wasm
 webapp
+webhooks
 webm
 webp
 webpush
@@ -277,3 +286,8 @@ zig
 zsh
 zshrc
 µ
+dst
+mutex
+ro
+rw
+telnyx

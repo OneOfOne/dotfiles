@@ -9,10 +9,12 @@ if [ -d "$p" ]; then
 fi
 
 export ZDOTDIR=~/.dotfiles
-
+pushd $cwd
 if [[ "$WAYLAND_DISPLAY" != "" ]]; then
 	kitty -d $cwd -- firejail --quiet --whitelist=$p --read-write=$p nvim $p $@ &
+	#firejail --quiet --whitelist=$p --read-write=$p neovide --multigrid $p $@ &
 else
 	firejail --quiet --whitelist=$p --read-write=$p nvim $p $@
 fi
+popd
 #kitty -d $cwd -- nvim $p $@ &>/dev/null &

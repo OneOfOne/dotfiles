@@ -4,12 +4,11 @@ local o = vim.opt
 
 o.autoindent = true
 o.smartindent = false
-o.indentexpr = 'nvim_treesitter#indent()'
 
 o.expandtab = false
-o.softtabstop = 3
-o.shiftwidth = 3
-o.tabstop = 3
+o.softtabstop = 4
+o.shiftwidth = 4
+o.tabstop = 4
 
 o.iskeyword:append('-')
 -- o.iskeyword:append('.')
@@ -19,7 +18,6 @@ o.scrolloff = 0
 o.smoothscroll = true
 
 o.list = true
--- o.listchars:append({ tab = '│‒', nbsp = '∙', trail = '∙', extends = '▶', precedes = '◀', space = '·' }) -- , eol = '↴'
 o.listchars:append({ tab = '▎ ', nbsp = '∙', trail = '∙', extends = '▶', precedes = '◀', space = '·' }) -- , eol = '↴'
 o.fillchars:append({ fold = ' ' })
 vim.cmd([[match ErrorMsg '\s\+$']])
@@ -55,7 +53,7 @@ o.virtualedit = 'onemore'
 -- o.selectmode = 'mouse,key'
 o.mousemodel = 'extend'
 
-o.guifont = 'Liga SFMono Nerd Font,Noto Color Emoji,Noto Sans Symbols,Noto Sans Symbols 2:h12'
+o.guifont = 'Liga SFMono Nerd Font,Noto Color Emoji,Noto Sans Symbols,Noto Sans Symbols 2:h11'
 
 function FoldWithNlines()
 	local text = vim.treesitter.foldtext()
@@ -66,4 +64,4 @@ function FoldWithNlines()
 	return text
 end
 
-vim.opt.foldtext = 'v:lua.FoldWithNlines()'
+-- vim.opt.foldtext = 'v:lua.FoldWithNlines()'
