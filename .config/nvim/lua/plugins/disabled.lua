@@ -17,11 +17,11 @@ return {
 	},
 	{
 		'echasnovski/mini.indentscope',
-		enabled = false,
+		-- enabled = false,
 	},
 	{
 		'ellisonleao/gruvbox.nvim',
-		enabled = false,
+		--	enabled = false,
 	},
 	{
 		'folke/tokyonight.nvim',
@@ -41,10 +41,6 @@ return {
 	},
 	{
 		'nvim-pack/nvim-spectre',
-		enabled = false,
-	},
-	{
-		'goolord/alpha-nvim',
 		enabled = false,
 	},
 	-- disabled to be able to use system binaries

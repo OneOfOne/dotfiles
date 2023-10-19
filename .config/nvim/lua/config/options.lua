@@ -19,7 +19,7 @@ o.smoothscroll = true
 
 o.list = true
 o.listchars:append({ tab = '▎ ', nbsp = '∙', trail = '∙', extends = '▶', precedes = '◀', space = '·' }) -- , eol = '↴'
-o.fillchars:append({ fold = ' ' })
+o.fillchars:append({ fold = ' ', foldclose = '▶', foldopen = '' })
 vim.cmd([[match ErrorMsg '\s\+$']])
 
 o.title = true
@@ -64,4 +64,5 @@ function FoldWithNlines()
 	return text
 end
 
--- vim.opt.foldtext = 'v:lua.FoldWithNlines()'
+o.foldtext = 'v:lua.FoldWithNlines()'
+o.foldmethod = 'indent' -- treesitter is off in ts

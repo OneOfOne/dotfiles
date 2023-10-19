@@ -27,11 +27,11 @@ return {
 					overlay1 = '#735F3F',
 					overlay0 = '#5A4525',
 					surface2 = '#4B4F51',
-					surface1 = '#2A2D2E',
-					surface0 = '#232728',
-					base = '#1D2021',
-					mantle = '#191C1D',
-					crust = '#151819',
+					surface1 = '#3A3D3E',
+					surface0 = '#3A3D3E',
+					base = '#232728',
+					mantle = '#232728',
+					crust = '#333738',
 				},
 			},
 		},
@@ -77,23 +77,5 @@ return {
 			},
 			smart_move = { enabled = true },
 		},
-	},
-	{
-		'lukas-reineke/indent-blankline.nvim',
-		opts = {
-			scope = {
-				enabled = true,
-				show_start = false,
-				show_end = false,
-				-- highlight = 'Function',
-				include = {
-					node_type = { ['*'] = { '*' } },
-				},
-			},
-		},
-	},
-	{
-		'luukvbaal/statuscol.nvim',
-		config = true,
 	},
 }

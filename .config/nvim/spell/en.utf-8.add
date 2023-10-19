@@ -54,6 +54,7 @@ dirs
 dnc
 doctype
 dotfiles
+dst
 dtd
 dyn
 elseif
@@ -153,6 +154,7 @@ mpeg
 msg
 msgpack
 multilib
+mutex
 mw
 nas
 nbsp
@@ -196,16 +198,18 @@ realpath
 recaptcha
 reclone
 reddit
-Referer
+referer
 req
 rgb
 rgba
 rlog
+ro
 rome
 rshada
 rss
 rsync
 runuser
+rw
 scrollview
 sdk
 sed
@@ -236,6 +240,7 @@ systemd
 tbd
 tbl
 tcp
+telnyx
 timestamp
 tkg
 tls
@@ -286,8 +291,5 @@ zig
 zsh
 zshrc
 µ
-dst
-mutex
-ro
-rw
-telnyx
+treesitter
+multimap
