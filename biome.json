@@ -7,7 +7,7 @@
 		"enabled": true,
 		"formatWithErrors": true,
 		"indentStyle": "tab",
-		"indentSize": 4,
+		"indentWidth": 4,
 		"lineWidth": 140
 	},
 	"javascript": {
@@ -32,6 +32,12 @@
 			},
 			"suspicious": {
 				"noExplicitAny": "off"
+			},
+			"correctness": {
+				"useExhaustiveDependencies": "off"
+			},
+			"performance": {
+				"noAccumulatingSpread": "off"
 			},
 			"nursery": {
 				"all": false

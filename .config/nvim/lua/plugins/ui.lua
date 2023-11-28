@@ -78,4 +78,10 @@ return {
 			smart_move = { enabled = true },
 		},
 	},
+	{
+		'Bekaboo/dropbar.nvim',
+		dependencies = {
+			'nvim-telescope/telescope-fzf-native.nvim',
+		},
+	},
 }
