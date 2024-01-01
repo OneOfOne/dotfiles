@@ -43,7 +43,37 @@ return {
 				tsserver = {
 					on_attach = disableFmtProvider,
 				},
-
+				rust_analyzer = {
+					settings = {
+						['rust-analyzer'] = {
+							diagnostics = {
+								enable = true,
+								disabled = { 'unresolved-proc-macro' },
+								enableExperimental = true,
+							},
+							cargo = {
+								allFeatures = true,
+								loadOutDirsFromCheck = true,
+								runBuildScripts = true,
+								extraArgs = { '--no-capture ' },
+							},
+							-- Add clippy lints for Rust.
+							checkOnSave = {
+								allFeatures = true,
+								command = 'clippy',
+								extraArgs = { '--no-deps' },
+							},
+							procMacro = {
+								enable = true,
+								ignored = {
+									['async-trait'] = { 'async_trait' },
+									['napi-derive'] = { 'napi' },
+									['async-recursion'] = { 'async_recursion' },
+								},
+							},
+						},
+					},
+				},
 				gopls = {
 					settings = {
 						gopls = {

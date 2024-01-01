@@ -123,7 +123,7 @@ clientmachine=localhost
 ignoregeometry=true
 maxsize=2400,1400
 noborder=true
-noborderrule=3
+noborderrule=2
 position=0,720
 positionrule=3
 size=1280,720
@@ -132,7 +132,7 @@ skiptaskbar=true
 skiptaskbarrule=2
 types=1
 windowrole=messages
-wmclass=slack
+wmclass=Slack
 wmclassmatch=1
 
 [16]

@@ -11,7 +11,8 @@ fi
 export ZDOTDIR=~/.dotfiles
 pushd $cwd
 if [[ "$WAYLAND_DISPLAY" != "" ]]; then
-	kitty -d $cwd -- firejail --quiet --whitelist=$p --read-write=$p nvim $p $@ &
+	#kitty -d $cwd -- firejail --quiet --whitelist=$p --read-write=$p nvim $p $@ &
+	kitty -d $cwd -- nvim $p $@ &
 	#firejail --quiet --whitelist=$p --read-write=$p neovide --multigrid $p $@ &
 else
 	firejail --quiet --whitelist=$p --read-write=$p nvim $p $@
