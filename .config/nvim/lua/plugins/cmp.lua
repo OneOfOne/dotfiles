@@ -17,12 +17,6 @@ end
 
 return {
 	{
-		'L3MON4D3/LuaSnip',
-		keys = function()
-			return {}
-		end,
-	},
-	{
 		'windwp/nvim-autopairs',
 		event = 'InsertEnter',
 		opts = {

@@ -30,6 +30,7 @@ require('lazy').setup({
 		-- { import = 'lazyvim.plugins.extras.lang.json' }, -- this breaks with biome
 		-- { import = 'lazyvim.plugins.extras.lang.python' },
 		-- { import = 'lazyvim.plugins.extras.lang.clangd' },
+		{ import = 'lazyvim.plugins.extras.coding.native_snippets' },
 		{ import = 'lazyvim.plugins.extras.coding.yanky' },
 		{ import = 'lazyvim.plugins.extras.coding.copilot' },
 		{ import = 'plugins' },
