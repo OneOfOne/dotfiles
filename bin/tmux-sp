@@ -1,17 +1,18 @@
 #!/bin/zsh
 
 SID="${1:-$PWD}"
-if [ "$SID" = "-k" ]; then
-	SID="${2:-$PWD}"
+if [ "$1" != "" ]; then
+	shift
 fi
 
 SID="$(echo $SID | sed -e 's/\W//g')"
 
-if [ "$1" = "-k" ]; then
-	tmux kill-session -t $SID
-	exit 0
-fi
+tmux attach-session -t $SID 2>/dev/null && exit 0
 
-tmux attach-session -t $SID 2>/dev/null ||
-tmux new-session -s $SID \; split-window -h \; set status off \; resize-pane -L 20 \; attach
-
+tmux new-session -s $SID -d -x 315 -y 93
+tmux send-keys "  sleep 0.5 && nvim ${1:-$PWD} && tmux kill-session -t $SID" ENTER
+tmux split-window -v
+tmux resize-pane -D 20
+tmux split-window -h
+tmux select-pane -t 0
+tmux attach -t $SID

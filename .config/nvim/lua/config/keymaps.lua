@@ -1,9 +1,9 @@
 -- https://medium.com/@alpha2phi/modern-neovim-configuration-hacks-93b13283969f#6ab4
 local kmset = vim.keymap.set
--- local function map(keys, fn, desc, opts)
--- 	kmset('', keys, fn, vim.tbl_extend('force', { desc = desc, noremap = true }, opts or {}))
--- end
---
+local function map(keys, fn, desc, opts)
+	kmset('', keys, fn, vim.tbl_extend('force', { desc = desc, noremap = true }, opts or {}))
+end
+
 local function nmap(keys, fn, desc)
 	kmset('n', keys, fn, { desc = desc, noremap = true })
 end
@@ -33,7 +33,6 @@ vmap('<LeftRelease>', '"*ygv', 'yank on mouse selection')
 nmap('<leader>gl', '<cmd>OpenInGHFileLines<cr>', 'open current file/line in github')
 
 nmap('<leader>gC', '<cmd>Telescope git_bcommits<cr>', 'show commit history for file')
-nmap('z=', '<cmd>Telescope spell_suggest theme=get_cursor previewer=false<cr>', 'use telescope for spelling suggestion')
 
 -- sane regexp defaults
 nmap('ss', ':%s/\\v')
@@ -43,6 +42,9 @@ nmap('sg', ':%g/\\v')
 nmap('sdg', ':.g/\\v')
 
 nmap('<leader>j', '*``cgn', 'ghetto multi cursors')
+
+map('<c-tab>', '<cmd>Telescope buffers<cr>', 'buffer list')
+imap('<c-tab>', '<cmd>Telescope buffers<cr>', 'buffer list')
 
 --
 nmap('vv', ':normal! v<cr>', 'map vv to v because lazyvim overrides that')

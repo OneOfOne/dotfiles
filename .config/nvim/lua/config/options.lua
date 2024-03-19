@@ -53,7 +53,12 @@ o.virtualedit = 'onemore'
 -- o.selectmode = 'mouse,key'
 o.mousemodel = 'extend'
 
-o.guifont = 'Liga SFMono Nerd Font,Noto Color Emoji,Noto Sans Symbols,Noto Sans Symbols 2:h11'
+o.guifont = 'Liga SFMono Nerd Font,Noto Sans Symbols,Noto Sans Symbols 2:h12'
+vim.g.neovide_hide_mouse_when_typing = true
+vim.g.neovide_scroll_animation_far_lines = 9999
+vim.g.neovide_refresh_rate = 120
+vim.g.neovide_cursor_animation_length = 0
+vim.g.neovide_cursor_animate_in_insert_mode = false
 
 function FoldWithNlines()
 	local text = vim.treesitter.foldtext()
@@ -64,5 +69,5 @@ function FoldWithNlines()
 	return text
 end
 
-o.foldtext = 'v:lua.FoldWithNlines()'
-o.foldmethod = 'indent' -- treesitter is off in ts
+-- o.foldtext = 'v:lua.FoldWithNlines()'
+-- o.foldmethod = 'expr'

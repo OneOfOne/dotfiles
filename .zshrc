@@ -63,3 +63,6 @@ alias .reload="source ~/.zshrc"
 typeset -aU path
 autoload -U compinit && compinit
 
+
+# bun completions
+[ -s "/home/oneofone/.bun/_bun" ] && source "/home/oneofone/.bun/_bun"

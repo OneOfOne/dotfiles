@@ -27,21 +27,23 @@ return {
 		'hrsh7th/nvim-cmp',
 
 		dependencies = {
-			'hrsh7th/cmp-emoji',
 			'onsails/lspkind.nvim',
 		},
 
 		opts = function(_, opts)
 			local cmp = require('cmp')
-			-- local luasnip = require('luasnip')
 			local lspkind = require('lspkind')
 
 			opts.preselect = cmp.PreselectMode.None
-
+			opts.experimental = {
+				ghost_text = {
+					hl_group = 'CmpGhostText',
+				},
+			}
 			opts.performance = {
-				debounce = 150,
-				throttle = 150,
-				fetching_timeout = 250,
+				debounce = 350,
+				throttle = 350,
+				fetching_timeout = 350,
 				confirm_resolve_timeout = 80,
 				async_budget = 1,
 				max_view_entries = 100,
@@ -82,7 +84,6 @@ return {
 			}, {
 				{ name = 'buffer' },
 				{ name = 'path' },
-				{ name = 'emoji' },
 			})
 
 			opts.mapping = vim.tbl_extend('force', opts.mapping, {
