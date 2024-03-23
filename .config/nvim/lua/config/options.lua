@@ -19,7 +19,7 @@ o.smoothscroll = true
 
 o.list = true
 o.listchars:append({ tab = '▎ ', nbsp = '∙', trail = '∙', extends = '▶', precedes = '◀', space = '·' }) -- , eol = '↴'
-o.fillchars:append({ fold = ' ', foldclose = '▶', foldopen = '' })
+o.fillchars = { fold = ' ', foldclose = '▶', foldopen = '' }
 vim.cmd([[match ErrorMsg '\s\+$']])
 
 o.title = true
@@ -53,12 +53,15 @@ o.virtualedit = 'onemore'
 -- o.selectmode = 'mouse,key'
 o.mousemodel = 'extend'
 
-o.guifont = 'Liga SFMono Nerd Font,Noto Sans Symbols,Noto Sans Symbols 2:h12'
+o.guifont = 'Liga SFMono Nerd Font,MonaspiceAr Nerd Font Mono,Noto Sans Symbols,Noto Sans Symbols 2:h11'
+-- o.guifont = 'MonaspiceAr Nerd Font Mono,Noto Sans Symbols,Noto Sans Symbols 2:h10'
 vim.g.neovide_hide_mouse_when_typing = true
-vim.g.neovide_scroll_animation_far_lines = 9999
+vim.g.neovide_scroll_animation_length = 0.1
+vim.g.neovide_scroll_animation_far_lines = 1
 vim.g.neovide_refresh_rate = 120
 vim.g.neovide_cursor_animation_length = 0
 vim.g.neovide_cursor_animate_in_insert_mode = false
+vim.g.neovide_scale_factor = 1
 
 function FoldWithNlines()
 	local text = vim.treesitter.foldtext()

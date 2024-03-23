@@ -9,6 +9,8 @@ if not vim.loop.fs_stat(lazypath) then
 		lazypath,
 	})
 end
+
+---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 
 require('lazy').setup({
@@ -28,7 +30,7 @@ require('lazy').setup({
 
 		{ import = 'lazyvim.plugins.extras.lsp.none-ls' },
 
-		{ import = 'lazyvim.plugins.extras.editor.leap' },
+		-- { import = 'lazyvim.plugins.extras.editor.leap' },
 		{ import = 'lazyvim.plugins.extras.editor.navic' },
 
 		{ import = 'lazyvim.plugins.extras.lang.typescript' },

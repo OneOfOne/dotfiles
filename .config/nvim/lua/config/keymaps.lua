@@ -1,24 +1,22 @@
 -- https://medium.com/@alpha2phi/modern-neovim-configuration-hacks-93b13283969f#6ab4
 local kmset = vim.keymap.set
-local function map(keys, fn, desc, opts)
-	kmset('', keys, fn, vim.tbl_extend('force', { desc = desc, noremap = true }, opts or {}))
+local function map(mode, keys, fn, desc, opts)
+	kmset(mode, keys, fn, vim.tbl_extend('force', { desc = desc, noremap = true }, opts or {}))
 end
 
-local function nmap(keys, fn, desc)
-	kmset('n', keys, fn, { desc = desc, noremap = true })
+local function nmap(keys, fn, desc, opts)
+	map('n', keys, fn, desc, opts)
 end
 
-local function imap(keys, fn, desc)
-	kmset({ 'i', 'c' }, keys, fn, { desc = desc, noremap = true })
+local function imap(keys, fn, desc, opts)
+	map({ 'i', 'c' }, keys, fn, desc, opts)
 end
 
-local function vmap(keys, fn, desc)
-	kmset('v', keys, fn, { desc = desc, noremap = true })
+local function vmap(keys, fn, desc, opts)
+	map({ 'v', 'x' }, keys, fn, desc, opts)
 end
 
-local function tmap(keys, fn, desc)
-	kmset('t', keys, fn, { desc = desc, noremap = true })
-end
+local remap = { noremap = false, remap = true }
 
 -- qol
 imap('<c-v>', '<left><c-o>"+p', 'paste clipboard')
@@ -28,7 +26,7 @@ imap('<c-s-v>', '<left><c-o>"*p', 'paste selection')
 imap('<c-z>', '<c-o>u', 'undo')
 imap('<c-r>', '<c-o><c-r>', 'redo')
 
-vmap('<LeftRelease>', '"*ygv', 'yank on mouse selection')
+-- vmap('<LeftRelease>', '"*ygv', 'yank on mouse selection')
 
 nmap('<leader>gl', '<cmd>OpenInGHFileLines<cr>', 'open current file/line in github')
 
@@ -42,8 +40,9 @@ nmap('sg', ':%g/\\v')
 nmap('sdg', ':.g/\\v')
 
 nmap('<leader>j', '*``cgn', 'ghetto multi cursors')
+vmap('<leader>j', '*``cgn', 'ghetto multi cursors', remap)
 
-map('<c-tab>', '<cmd>Telescope buffers<cr>', 'buffer list')
+map('', '<c-tab>', '<cmd>Telescope buffers<cr>', 'buffer list')
 imap('<c-tab>', '<cmd>Telescope buffers<cr>', 'buffer list')
 
 --
@@ -59,3 +58,12 @@ vmap('<cr>', '<esc>o', 'make enter insert a new line')
 nmap('DD', 'dd', 'delete to clipboard')
 nmap('dd', '"_dd', 'keep deleted lines from the clipboard')
 nmap('x', '"_x', 'keep deleted chars from the clipboard')
+
+nmap('<leader>tw', function()
+	--https://www.reddit.com/r/neovim/comments/1bjlihf/comment/kvu63wj/
+	vim.ui.input({ prompt = 'Update tab size: ' }, function(input)
+		vim.opt.tabstop = tonumber(input)
+		vim.opt.softtabstop = tonumber(input)
+		vim.opt.shiftwidth = tonumber(input)
+	end)
+end, 'update tab size')

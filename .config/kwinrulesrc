@@ -44,23 +44,6 @@ wmclass=chrome google-chrome
 wmclasscomplete=true
 wmclassmatch=1
 
-[11]
-Description=Konsole nvim
-clientmachine=localhost
-ignoregeometry=true
-ignoregeometryrule=3
-noborderrule=2
-position=1280,0
-positionrule=2
-size=2560,1440
-sizerule=2
-skiptaskbar=true
-title=tmux
-titlematch=2
-types=1
-windowrole=messages
-wmclass=org.kde.konsole
-
 [12]
 Description=Konsole (WL)
 clientmachine=localhost
@@ -473,8 +456,8 @@ wmclasscomplete=true
 wmclassmatch=1
 
 [General]
-count=21
-rules=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21
+count=20
+rules=1,2,3,4,5,6,7,8,9,10,12,13,14,15,16,17,18,19,20,21
 
 [a0a253d2-9a34-4b95-9240-7a3e990f81c1]
 Description=All

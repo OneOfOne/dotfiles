@@ -5,7 +5,7 @@ return {
 	},
 	{
 		'echasnovski/mini.pairs',
-		enabld = false,
+		enabled = false,
 	},
 	{
 		'echasnovski/mini.surround',
@@ -29,7 +29,7 @@ return {
 	},
 	{
 		'folke/tokyonight.nvim',
-		enabled = false,
+		-- enabled = false,
 	},
 	{
 		'folke/persistence.nvim',
