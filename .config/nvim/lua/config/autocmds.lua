@@ -13,13 +13,23 @@ au({ 'FileType' }, { 'json', 'jsonc', 'Outline' }, function()
 	vim.wo.conceallevel = 0
 end)
 
+au({ 'ModeChanged' }, { '*' }, function()
+	if vim.api.nvim_buf_get_option(0, 'modifiable') then
+		LazyVim.toggle.inlay_hints(0, vim.v.event.new_mode == 'n')
+	end
+end)
+
+--
+-- au({ 'CursorHold', 'CursorHoldI' }, {}, 'TSEnable highlight')
+-- au({ 'CursorMoved', 'CursorMovedI' }, {}, 'TSDisable highlight')
+
 -- au({ 'FileType' }, { 'typescript', 'typescriptreact' }, function()
 -- 	vim.g.editorconfig = false
 -- 	vim.opt_local.tabstop = 3
 -- 	vim.opt_local.shiftwidth = 3
 -- end)
 
-au({ 'FileType' }, { 'lazyterm' }, function()
+au({ 'FileType' }, { 'lazyterm', 'terminal' }, function()
 	vim.wo.spell = false
 	vim.wo.winfixbuf = true
 end)
