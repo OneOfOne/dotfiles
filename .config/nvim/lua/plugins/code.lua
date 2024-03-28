@@ -15,7 +15,7 @@ return {
 		opts = {
 			format_notify = true,
 			inlay_hints = {
-				enabled = false,
+				enabled = true,
 			},
 			codelens = {
 				enabled = true,
@@ -28,6 +28,17 @@ return {
 			flags = {
 				debounce_text_changes = 350,
 				allow_incremental_sync = true,
+			},
+			servers = {
+				jsonls = {
+					settings = {
+						json = {
+							format = {
+								enable = false,
+							},
+						},
+					},
+				},
 			},
 		},
 	},

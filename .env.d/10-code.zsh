@@ -2,8 +2,8 @@
 export SDKBASE="$HOME/sdk"
 export GOPATH="$HOME/code/go"
 export GOBIN="$GOPATH/bin"
-export GOSUMDB="off"
-export GOPROXY="direct"
+# export GOSUMDB="off"
+# export GOPROXY="direct"
 export GO111MODULE=auto
 
 export GOAMD64=v3

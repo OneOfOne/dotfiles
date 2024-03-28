@@ -9,6 +9,25 @@ return {
 					require('telescope').load_extension('fzf')
 				end,
 			},
+			{
+				'isak102/telescope-git-file-history.nvim',
+				dependencies = { 'tpope/vim-fugitive' },
+				event = 'VeryLazy',
+				config = function()
+					LazyVim.on_load('telescope.nvim', function()
+						require('telescope').load_extension('git_file_history')
+					end)
+				end,
+				keys = {
+					{
+						'<leader>gf',
+						function()
+							require('telescope').extensions.git_file_history.git_file_history()
+						end,
+						desc = 'git current file history',
+					},
+				},
+			},
 		},
 		opts = {
 			defaults = {

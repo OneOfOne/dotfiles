@@ -18,8 +18,24 @@ o.scrolloff = 0
 o.smoothscroll = true
 
 o.list = true
-o.listchars:append({ tab = '▎ ', nbsp = '∙', trail = '∙', extends = '▶', precedes = '◀', space = '·' }) -- , eol = '↴'
-o.fillchars = { fold = ' ', foldclose = '▶', foldopen = '' }
+local sp = '∙'
+o.listchars = { tab = '┃ ', nbsp = sp, trail = sp, lead = sp, space = sp, extends = '▶', precedes = '◀' } -- , eol = '↴'
+o.fillchars = {
+	fold = ' ',
+	foldclose = '▶',
+	foldopen = '',
+	horiz = '━',
+	horizup = '━',
+	horizdown = '━',
+	-- horizup = '┻',
+	-- horizdown = '┳',
+	vert = '┃',
+	--vertleft = '┫',
+	vertleft = '┃',
+	vertright = '┃',
+	-- vertright = '┣',
+	verthoriz = '╋',
+}
 vim.cmd([[match ErrorMsg '\s\+$']])
 
 o.title = true
@@ -28,6 +44,7 @@ o.copyindent = true
 o.breakindent = true
 o.breakindentopt = 'sbr'
 o.showbreak = '❯ '
+o.startofline = true
 
 o.paste = false
 o.clipboard:append('unnamed')
@@ -44,14 +61,15 @@ o.completeopt:append('noinsert')
 
 o.grepprg = 'rg --hidden --vimgrep'
 
-o.ttimeout = false
+o.timeoutlen = 500
+o.ttimeoutlen = 50
 o.updatetime = 50
 
 -- better selection
 o.selection = 'inclusive'
 o.virtualedit = 'onemore'
 -- o.selectmode = 'mouse,key'
-o.mousemodel = 'extend'
+o.mousemodel = ''
 
 o.guifont = 'Liga SFMono Nerd Font,MonaspiceAr Nerd Font Mono,Noto Sans Symbols,Noto Sans Symbols 2:h11'
 -- o.guifont = 'MonaspiceAr Nerd Font Mono,Noto Sans Symbols,Noto Sans Symbols 2:h10'

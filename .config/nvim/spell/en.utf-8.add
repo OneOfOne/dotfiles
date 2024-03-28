@@ -1,9 +1,9 @@
-ok
 addons
 addr
 aiq
 aiqstaging
 alives
+alpinebrain
 alpineiq
 alpn
 amd
@@ -98,6 +98,7 @@ fontconfig
 fp
 fstype
 func
+fw
 gc
 geo
 geofence
@@ -195,6 +196,7 @@ npm
 num
 nvim
 ohmyzsh
+ok
 oneofone
 ooo
 optout
