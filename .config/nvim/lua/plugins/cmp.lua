@@ -1,17 +1,55 @@
-local function has_words_before()
-	unpack = unpack or table.unpack
-	local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-	return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match('%s') == nil
+local types = require('cmp.types')
+
+---@type table<integer, integer>
+local modified_priority = {
+	[types.lsp.CompletionItemKind.Keyword] = 1, -- top
+	[types.lsp.CompletionItemKind.Variable] = 2,
+	[types.lsp.CompletionItemKind.Field] = 2,
+	[types.lsp.CompletionItemKind.Method] = 3,
+	[types.lsp.CompletionItemKind.Function] = 3,
+	[types.lsp.CompletionItemKind.Text] = 90, -- bottom
+	[types.lsp.CompletionItemKind.Snippet] = 100, -- top
+}
+
+local function rust_trait(e)
+	local ci = e.completion_item
+	if ci.labelDetails ~= nil and ci.labelDetails.detail ~= nil then
+		local ld = ci.labelDetails.detail
+		return string.find(ld, '^ %(use ') ~= nil or string.find(ld, '^ %(as ') ~= nil
+	end
 end
 
-local function cmp_snippts_last(entry1, entry2)
-	local types = require('cmp.types')
-	-- https://www.reddit.com/r/neovim/comments/woih9n/comment/ikbd6iy/?utm_source=reddit&utm_medium=web2x&context=3
-	if entry1:get_kind() == types.lsp.CompletionItemKind.Snippet then
-		return false
+local function modified_kind(e)
+	local kind = e:get_kind()
+	kind = modified_priority[kind] or kind
+
+	if e.source.name == 'copilot' then
+		kind = 0
 	end
-	if entry2:get_kind() == types.lsp.CompletionItemKind.Snippet then
-		return true
+
+	-- rust traits after methods/functions
+	if kind == 3 and rust_trait(e) then
+		kind = 4
+	end
+
+	-- print(kind, e.source.name)
+
+	return kind
+end
+
+local function sort_by_name(e1, e2) -- sort by length ignoring "=~"
+	local n1 = string.gsub(e1.completion_item.label, '[=~()_,. ]', '')
+	local n2 = string.gsub(e2.completion_item.label, '[=~()_,. ]', '')
+	if n1 and n2 then
+		return n1 < n2
+	end
+end
+
+local function sort_by_kind(e1, e2)
+	local k1 = modified_kind(e1)
+	local k2 = modified_kind(e2)
+	if k1 ~= k2 then
+		return k1 - k2 < 0
 	end
 end
 
@@ -28,6 +66,7 @@ return {
 
 		dependencies = {
 			'onsails/lspkind.nvim',
+			-- 'chrisgrieser/cmp_yanky',
 		},
 
 		opts = function(_, opts)
@@ -61,26 +100,20 @@ return {
 				}),
 			}
 
+			local compare = cmp.config.compare
+
 			opts.sorting = {
-				priority_weight = 2,
+				-- thank you https://github.com/pysan3/dotfiles/blob/9d3ca30baecefaa2a6453d8d6d448d62b5614ff2/nvim/lua/plugins/70-nvim-cmp.lua#L39-L49
 				comparators = {
-					cmp_snippts_last,
-					cmp.config.compare.offset,
-					cmp.config.compare.exact,
-					cmp.config.compare.score,
-					-- cmp.config.compare.recently_used,
-					cmp.config.compare.kind,
-					-- cmp.config.compare.sort_text,
-					cmp.config.compare.length,
-					cmp.config.compare.order,
+					sort_by_kind,
+					sort_by_name,
 				},
 			}
 
 			opts.sources = cmp.config.sources({
+				{ name = 'copilot' },
 				{ name = 'nvim_lsp' },
 				{ name = 'crates' },
-				{ name = 'copilot' },
-				{ name = 'luasnip' },
 			}, {
 				{ name = 'buffer' },
 				{ name = 'path' },
