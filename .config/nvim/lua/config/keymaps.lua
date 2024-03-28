@@ -1,7 +1,6 @@
 -- https://medium.com/@alpha2phi/modern-neovim-configuration-hacks-93b13283969f#6ab4
-local kmset = vim.keymap.set
 local function map(mode, keys, fn, desc, opts)
-	kmset(mode, keys, fn, vim.tbl_extend('force', { desc = desc, noremap = true }, opts or {}))
+	vim.keymap.set(mode, keys, fn, vim.tbl_extend('force', { desc = desc, noremap = true }, opts or {}))
 end
 
 local function nmap(keys, fn, desc, opts)
@@ -26,18 +25,36 @@ imap('<c-s-v>', '<left><c-o>"*p', 'paste selection')
 imap('<c-z>', '<c-o>u', 'undo')
 imap('<c-r>', '<c-o><c-r>', 'redo')
 
--- vmap('<LeftRelease>', '"*ygv', 'yank on mouse selection')
+nmap('<RightMouse>', '<LeftMouse>', 'reassign right mouse button to left')
+
+-- reassign (shift|ctrl)-(left|right) mouse to just left, otherwise they don't work in vmap
+nmap('<S-LeftMouse>', '<LeftMouse>')
+nmap('<S-LeftDrag>', '<LeftDrag>')
+vmap('<S-LeftDrag>', '<LeftDrag>')
+nmap('<S-RightMouse>', '<LeftMouse>')
+nmap('<S-RightDrag>', '<LeftDrag>')
+vmap('<S-RightDrag>', '<LeftDrag>')
+nmap('<C-LeftMouse>', '<LeftMouse>')
+nmap('<C-LeftDrag>', '<LeftDrag>')
+vmap('<C-LeftDrag>', '<LeftDrag>')
+nmap('<C-RightMouse>', '<LeftMouse>')
+nmap('<C-RightDrag>', '<LeftDrag>')
+vmap('<C-RightDrag>', '<LeftDrag>')
+
+vmap('<S-LeftRelease>', '"*ygv<esc>', 'yank selection to * clipboard')
+vmap('<S-RightRelease>', '"*dgv<esc>', 'delete selection to * clipboard')
+vmap('<C-LeftRelease>', '"*P', 'replace selection')
 
 nmap('<leader>gl', '<cmd>OpenInGHFileLines<cr>', 'open current file/line in github')
 
 nmap('<leader>gC', '<cmd>Telescope git_bcommits<cr>', 'show commit history for file')
 
 -- sane regexp defaults
-nmap('ss', ':%s/\\v')
-vmap('ss', '"zy<ESC>:%s~\\M<c-r>z~~gc<left><left><left>', 'search & replace selection in visual mode')
-nmap('sds', ':.s/\\v')
-nmap('sg', ':%g/\\v')
-nmap('sdg', ':.g/\\v')
+-- nmap('ss', ':%s/\\v')
+-- vmap('ss', '"zy<ESC>:%s~\\M<c-r>z~~gc<left><left><left>', 'search & replace selection in visual mode')
+-- nmap('sds', ':.s/\\v')
+-- nmap('sg', ':%g/\\v')
+-- nmap('sdg', ':.g/\\v')
 
 nmap('<leader>j', '*``cgn', 'ghetto multi cursors')
 vmap('<leader>j', '*``cgn', 'ghetto multi cursors', remap)
