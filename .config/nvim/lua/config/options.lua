@@ -82,13 +82,14 @@ vim.g.neovide_cursor_animate_in_insert_mode = false
 vim.g.neovide_scale_factor = 1
 
 function FoldWithNlines()
-	local text = vim.treesitter.foldtext()
 	local n_lines = vim.v.foldend - vim.v.foldstart
+	local lstart = string.gsub(vim.fn.getline(vim.v.foldstart), '\t', '    ')
+	local lend = string.gsub(vim.fn.getline(vim.v.foldend), '\t', '')
 
-	---@diagnostic disable-next-line: param-type-mismatch
-	table.insert(text, { (' 󰁂 %d '):format(n_lines), { 'Folded' } })
+	local text = ('%s … %s 󰁂 %d'):format(lstart, lend, n_lines)
 	return text
 end
 
--- o.foldtext = 'v:lua.FoldWithNlines()'
--- o.foldmethod = 'expr'
+o.foldtext = 'v:lua.FoldWithNlines()'
+o.foldmethod = 'expr'
+o.foldexpr = "v:lua.require'lazyvim.util'.ui.foldexpr()"

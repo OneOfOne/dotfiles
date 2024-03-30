@@ -12,7 +12,7 @@ local function imap(keys, fn, desc, opts)
 end
 
 local function vmap(keys, fn, desc, opts)
-	map({ 'v', 'x' }, keys, fn, desc, opts)
+	map({ 'v' }, keys, fn, desc, opts)
 end
 
 local remap = { noremap = false, remap = true }

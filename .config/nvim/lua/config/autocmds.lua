@@ -14,8 +14,12 @@ au({ 'FileType' }, { 'json', 'jsonc', 'Outline' }, function()
 end)
 
 au({ 'ModeChanged' }, { '*' }, function()
-	if vim.api.nvim_buf_get_option(0, 'modifiable') then
-		LazyVim.toggle.inlay_hints(0, vim.v.event.new_mode == 'n')
+	local clients = vim.lsp.get_clients({ bufnr = 0 })
+	for _, cli in ipairs(clients) do
+		if cli.server_capabilities.inlayHintProvider then
+			LazyVim.toggle.inlay_hints(0, vim.v.event.new_mode == 'n')
+			return
+		end
 	end
 end)
 

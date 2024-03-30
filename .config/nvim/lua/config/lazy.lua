@@ -23,14 +23,15 @@ require('lazy').setup({
 		{ import = 'lazyvim.plugins.extras.test.core' },
 		{ import = 'lazyvim.plugins.extras.dap.core' },
 
+		{ import = 'lazyvim.plugins.extras.coding.native_snippets' },
+		{ import = 'lazyvim.plugins.extras.coding.copilot' },
+
 		{ import = 'lazyvim.plugins.extras.util.mini-hipatterns' },
-		-- { import = 'lazyvim.plugins.extras.util.gitui' },
 
 		{ import = 'lazyvim.plugins.extras.ui.edgy' },
-		-- { import = 'lazyvim.plugins.extras.ui.mini-animate' },
 
-		-- { import = 'lazyvim.plugins.extras.editor.leap' },
 		{ import = 'lazyvim.plugins.extras.editor.navic' },
+		{ import = 'lazyvim.plugins.extras.editor.trouble-v3' },
 
 		{ import = 'lazyvim.plugins.extras.lang.json' },
 		{ import = 'lazyvim.plugins.extras.lang.typescript' },
@@ -39,9 +40,6 @@ require('lazy').setup({
 		{ import = 'lazyvim.plugins.extras.lang.rust' },
 		-- { import = 'lazyvim.plugins.extras.lang.clangd' },
 
-		{ import = 'lazyvim.plugins.extras.coding.native_snippets' },
-		-- { import = 'lazyvim.plugins.extras.coding.yanky' },
-		{ import = 'lazyvim.plugins.extras.coding.copilot' },
 		{ import = 'plugins' },
 	},
 	defaults = {

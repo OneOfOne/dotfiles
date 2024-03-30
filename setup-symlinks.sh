@@ -10,7 +10,6 @@ ln -vsf $DOTS/.zshrc ~/
 ln -vsf $DOTS/.gitconfig ~/
 ln -vsf $DOTS/.wezterm.lua ~/
 
-
 mkdir ~/bin &>/dev/null
 
 for p in $DOTS/.config/*; do

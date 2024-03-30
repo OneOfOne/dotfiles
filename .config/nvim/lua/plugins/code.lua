@@ -77,19 +77,6 @@ return {
 		'nvim-treesitter/nvim-treesitter',
 		event = { 'BufReadPost', 'BufNewFile' },
 		opts = {
-			highlight = {
-				enable = true,
-				additional_vim_regex_highlighting = false,
-			},
-			-- incremental_selection = {
-			-- 	enable = false,
-			-- 	keymaps = {
-			-- 		init_selection = '<BS>',
-			-- 		node_incremental = '<BS>',
-			-- 		scope_incremental = '<C-BS>',
-			-- 		node_decremental = '<A-BS>',
-			-- 	},
-			-- },
 			textobjects = {
 				swap = {
 					enable = true,
@@ -98,6 +85,15 @@ return {
 					},
 					swap_previous = {
 						[']a'] = '@parameter.inner',
+					},
+				},
+				lsp_interop = {
+					enable = true,
+					border = 'none',
+					floating_preview_opts = {},
+					peek_definition_code = {
+						['<leader>df'] = '@function.outer',
+						['<leader>dF'] = '@class.outer',
 					},
 				},
 			},

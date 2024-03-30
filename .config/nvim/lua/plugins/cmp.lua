@@ -2,13 +2,13 @@ local types = require('cmp.types')
 
 ---@type table<integer, integer>
 local modified_priority = {
-	[types.lsp.CompletionItemKind.Keyword] = 1, -- top
+	[types.lsp.CompletionItemKind.Keyword] = 1,
 	[types.lsp.CompletionItemKind.Variable] = 2,
 	[types.lsp.CompletionItemKind.Field] = 2,
 	[types.lsp.CompletionItemKind.Method] = 3,
 	[types.lsp.CompletionItemKind.Function] = 3,
-	[types.lsp.CompletionItemKind.Text] = 90, -- bottom
-	[types.lsp.CompletionItemKind.Snippet] = 100, -- top
+	[types.lsp.CompletionItemKind.Text] = 90,
+	[types.lsp.CompletionItemKind.Snippet] = 100,
 }
 
 local function rust_trait(e)
@@ -38,8 +38,8 @@ local function modified_kind(e)
 end
 
 local function sort_by_name(e1, e2) -- sort by length ignoring "=~"
-	local n1 = string.gsub(e1.completion_item.label, '[=~()_,. ]', '')
-	local n2 = string.gsub(e2.completion_item.label, '[=~()_,. ]', '')
+	local n1 = e1.completion_item.label
+	local n2 = e2.completion_item.label
 	if n1 and n2 then
 		return n1 < n2
 	end
@@ -96,6 +96,8 @@ return {
 			opts.formatting = {
 				format = lspkind.cmp_format({
 					mode = 'symbol_text',
+					ellipsis_char = '...',
+					maxwidth = 50,
 					--menu = {},
 				}),
 			}
