@@ -13,16 +13,39 @@ au({ 'FileType' }, { 'json', 'jsonc', 'Outline' }, function()
 	vim.wo.conceallevel = 0
 end)
 
+local has_inlay_hints = nil
+
 au({ 'ModeChanged' }, { '*' }, function()
+	local ih = vim.lsp.inlay_hint
+	local nmode = vim.v.event.new_mode
+
+	if has_inlay_hints == nil or nmode ~= 'n' then
+		has_inlay_hints = ih.is_enabled()
+	end
+
+	if nmode == 'n' and not has_inlay_hints then
+		return
+	end
+
 	local clients = vim.lsp.get_clients({ bufnr = 0 })
 	for _, cli in ipairs(clients) do
 		if cli.server_capabilities.inlayHintProvider then
-			LazyVim.toggle.inlay_hints(0, vim.v.event.new_mode == 'n')
+			ih.enable(0, nmode == 'n')
 			return
 		end
 	end
 end)
+au('InsertEnter', '*', function()
+	vim.diagnostic.config({
+		virtual_text = false,
+	})
+end)
 
+au('InsertLeave', '*', function()
+	vim.diagnostic.config({
+		virtual_text = true,
+	})
+end)
 --
 -- au({ 'CursorHold', 'CursorHoldI' }, {}, 'TSEnable highlight')
 -- au({ 'CursorMoved', 'CursorMovedI' }, {}, 'TSDisable highlight')

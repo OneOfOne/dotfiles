@@ -3,10 +3,12 @@ local types = require('cmp.types')
 ---@type table<integer, integer>
 local modified_priority = {
 	[types.lsp.CompletionItemKind.Keyword] = 1,
+	[types.lsp.CompletionItemKind.Value] = 1,
+	[types.lsp.CompletionItemKind.EnumMember] = 1,
 	[types.lsp.CompletionItemKind.Variable] = 2,
 	[types.lsp.CompletionItemKind.Field] = 2,
 	[types.lsp.CompletionItemKind.Method] = 3,
-	[types.lsp.CompletionItemKind.Function] = 3,
+	[types.lsp.CompletionItemKind.Function] = 4,
 	[types.lsp.CompletionItemKind.Text] = 90,
 	[types.lsp.CompletionItemKind.Snippet] = 100,
 }
@@ -28,8 +30,8 @@ local function modified_kind(e)
 	end
 
 	-- rust traits after methods/functions
-	if kind == 3 and rust_trait(e) then
-		kind = 4
+	if rust_trait(e) then
+		kind = kind + 1
 	end
 
 	-- print(kind, e.source.name)
@@ -38,9 +40,9 @@ local function modified_kind(e)
 end
 
 local function sort_by_name(e1, e2) -- sort by length ignoring "=~"
-	local n1 = e1.completion_item.label
-	local n2 = e2.completion_item.label
-	if n1 and n2 then
+	local n1 = e1.completion_item.label or e1.completion_item.sortText
+	local n2 = e2.completion_item.label or e2.completion_item.sortText
+	if n1 and n2 and n1 ~= n2 then
 		return n1 < n2
 	end
 end
@@ -49,7 +51,7 @@ local function sort_by_kind(e1, e2)
 	local k1 = modified_kind(e1)
 	local k2 = modified_kind(e2)
 	if k1 ~= k2 then
-		return k1 - k2 < 0
+		return k1 < k2
 	end
 end
 
@@ -74,11 +76,11 @@ return {
 			local lspkind = require('lspkind')
 
 			opts.preselect = cmp.PreselectMode.None
-			opts.experimental = {
-				ghost_text = {
-					hl_group = 'CmpGhostText',
-				},
+
+			completion = {
+				completeopt = 'menu,menuone,noinsert,noselect',
 			}
+
 			opts.performance = {
 				debounce = 350,
 				throttle = 350,
@@ -86,11 +88,6 @@ return {
 				confirm_resolve_timeout = 80,
 				async_budget = 1,
 				max_view_entries = 100,
-			}
-
-			opts.completion = {
-				completeopt = 'menu,menuone,noselect,noinsert',
-				keyword_length = 2,
 			}
 
 			opts.formatting = {
@@ -102,24 +99,27 @@ return {
 				}),
 			}
 
-			local compare = cmp.config.compare
-
+			local compare = require('cmp.config.compare')
 			opts.sorting = {
 				-- thank you https://github.com/pysan3/dotfiles/blob/9d3ca30baecefaa2a6453d8d6d448d62b5614ff2/nvim/lua/plugins/70-nvim-cmp.lua#L39-L49
 				comparators = {
+					compare.offset,
+					compare.exact,
 					sort_by_kind,
 					sort_by_name,
+					compare.score,
+					compare.order,
 				},
 			}
 
-			opts.sources = cmp.config.sources({
-				{ name = 'copilot' },
-				{ name = 'nvim_lsp' },
-				{ name = 'crates' },
-			}, {
-				{ name = 'buffer' },
-				{ name = 'path' },
-			})
+			-- opts.sources = cmp.config.sources({
+			-- 	{ name = 'copilot' },
+			-- 	{ name = 'nvim_lsp' },
+			-- 	{ name = 'crates' },
+			-- }, {
+			-- 	{ name = 'buffer' },
+			-- 	{ name = 'path' },
+			-- })
 
 			opts.mapping = vim.tbl_extend('force', opts.mapping, {
 				['<Esc>'] = cmp.mapping({
@@ -134,6 +134,12 @@ return {
 				completion = cmp_window.bordered(),
 				documentation = cmp_window.bordered(),
 			}
+
+			opts.view = vim.tbl_extend('force', opts.view or {}, {
+				entries = {
+					follow_cursor = true,
+				},
+			})
 
 			local cmp_autopairs = require('nvim-autopairs.completion.cmp')
 			cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())

@@ -23,15 +23,25 @@
 		"rules": {
 			"all": true,
 			"complexity": {
-				"noUselessFragments": "off"
+				"noUselessFragments": "off",
+				"noExcessiveCognitiveComplexity": "off"
 			},
 			"style": {
 				"useSingleVarDeclarator": "off",
 				"noParameterAssign": "off",
-				"noNonNullAssertion": "off"
+				"noNonNullAssertion": "off",
+				"useNamingConvention": "off",
+				"useFilenamingConvention": "off",
+				"useBlockStatements": "off",
+				"noDefaultExport": "off",
+				"noImplicitBoolean": "off"
 			},
 			"suspicious": {
-				"noExplicitAny": "off"
+				"noExplicitAny": "off",
+				"noArrayIndexKey": "off",
+				"noEmptyBlockStatements": "off",
+				"noConsoleLog": "off",
+				"useAwait": "off"
 			},
 			"correctness": {
 				"useExhaustiveDependencies": "off"

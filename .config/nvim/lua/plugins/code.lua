@@ -1,11 +1,3 @@
-local function disableFmtProvider(client)
-	client.server_capabilities.documentFormattingProvider = false
-end
-
-local function disableHlProvider(client)
-	client.server_capabilities.semanticTokensProvider = nil
-end
-
 return {
 	{
 		'neovim/nvim-lspconfig',
@@ -14,6 +6,7 @@ return {
 		},
 		opts = {
 			format_notify = true,
+
 			inlay_hints = {
 				enabled = true,
 			},
@@ -30,15 +23,61 @@ return {
 				allow_incremental_sync = true,
 			},
 			servers = {
-				jsonls = {
+				-- jsonls = {
+				-- 	settings = {
+				-- 		json = {
+				-- 			format = {
+				-- 				enable = false,
+				-- 			},
+				-- 		},
+				-- 	},
+				-- },
+				vtsls = {
+					keys = {
+						{
+							'<leader>co',
+							function()
+								vim.lsp.buf.code_action({
+									apply = true,
+									context = {
+										only = { 'source.organizeImports.ts' },
+										diagnostics = {},
+									},
+								})
+							end,
+							desc = 'Organize Imports',
+						},
+						{
+							'<leader>cR',
+							function()
+								vim.lsp.buf.code_action({
+									apply = true,
+									context = {
+										only = { 'source.removeUnused.ts' },
+										diagnostics = {},
+									},
+								})
+							end,
+							desc = 'Remove Unused Imports',
+						},
+					},
 					settings = {
-						json = {
+						completions = {
+							completeFunctionCalls = true,
+						},
+						javascript = {
+							format = {
+								enable = false,
+							},
+						},
+						typescript = {
 							format = {
 								enable = false,
 							},
 						},
 					},
 				},
+				biome = {},
 			},
 		},
 	},
@@ -52,18 +91,18 @@ return {
 				nls.code_actions.gomodifytags,
 				nls.code_actions.impl,
 				nls.formatting.goimports,
-				-- nls.diagnostics.golangci_lint,
+				nls.diagnostics.golangci_lint,
 				-- ts
-				nls.formatting.biome.with({
-					args = {
-						'check',
-						'--apply-unsafe',
-						'--formatter-enabled=true',
-						'--organize-imports-enabled=true',
-						'--skip-errors',
-						'$FILENAME',
-					},
-				}),
+				-- nls.formatting.biome.with({
+				-- 	args = {
+				-- 		'check',
+				-- 		'--apply',
+				-- 		'--formatter-enabled=true',
+				-- 		'--organize-imports-enabled=true',
+				-- 		'--skip-errors',
+				-- 		'$FILENAME',
+				-- 	},
+				-- }),
 				-- other
 				nls.formatting.stylua,
 				nls.formatting.shfmt.with({

@@ -19,7 +19,6 @@ return {
 						enabled = true,
 						leave_dirs_open = false,
 					},
-					use_libuv_file_watcher = true,
 				},
 			},
 		},

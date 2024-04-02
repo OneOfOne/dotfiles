@@ -7,8 +7,7 @@
   "license": "MIT",
   "dependencies": {
     "@biomejs/biome": "^1.2.2",
-    "bun": "^1.0.4",
-    "typescript-language-server": "^3.3.2",
-    "vscode-langservers-extracted": "^4.7.0"
+    "@vtsls/language-server": "^0.2.1",
+    "bun": "^1.0.4"
   }
 }

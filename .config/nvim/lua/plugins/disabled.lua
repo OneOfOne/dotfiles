@@ -69,6 +69,10 @@ return {
 		'nvim-treesitter/nvim-treesitter-context',
 		enabled = false,
 	},
+	{
+		'L3MON4D3/LuaSnip',
+		enabled = false,
+	},
 	-- {
 	-- 	'rcarriga/nvim-notify',
 	-- 	enabled = false,

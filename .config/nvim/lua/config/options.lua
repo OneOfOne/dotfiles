@@ -14,7 +14,7 @@ o.iskeyword:append('-')
 -- o.iskeyword:append('.')
 o.relativenumber = true
 o.wrap = true
-o.scrolloff = 0
+o.scrolloff = 1
 o.smoothscroll = true
 
 o.list = true
@@ -62,7 +62,7 @@ o.completeopt:append('noinsert')
 o.grepprg = 'rg --hidden --vimgrep'
 
 o.timeoutlen = 500
-o.ttimeoutlen = 50
+o.ttimeoutlen = 100
 o.updatetime = 50
 
 -- better selection
