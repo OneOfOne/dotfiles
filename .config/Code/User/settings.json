@@ -98,7 +98,6 @@
 	"terminal.external.linuxExec": "konsole",
 	"terminal.integrated.copyOnSelection": true,
 	"terminal.integrated.tabs.enabled": false,
-	"terminal.integrated.enableBell": true,
 	"terminal.integrated.gpuAcceleration": "on",
 	"terminal.integrated.enablePersistentSessions": false,
 	"terminal.integrated.shellIntegration.enabled": false,
@@ -549,4 +548,8 @@
 		"*.pprof": "easyview.view"
 	},
 	"git.openRepositoryInParentFolders": "never",
+	"accessibility.signals.terminalBell": {
+		"sound": "on"
+	},
+	"terminal.integrated.enableVisualBell": true,
 }

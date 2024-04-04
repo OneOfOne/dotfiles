@@ -42,7 +42,8 @@ map({ 'n', 'v' }, '<C-LeftDrag>', '<LeftDrag>')
 nmap('<C-RightMouse>', '<LeftMouse>')
 map({ 'n', 'v' }, '<C-RightDrag>', '<LeftDrag>')
 
-vmap('<S-LeftRelease>', '"*ygv<esc>', 'yank selection to *')
+vmap('<LeftRelease>', '"*ygv<esc>', 'yank selection to *')
+vmap('<S-LeftRelease>', '<LeftRelease>', '')
 vmap('<S-RightRelease>', '"*dgv<esc>', 'delete selection to *')
 vmap('<C-LeftRelease>', '"*P', 'replace selection with *')
 

@@ -23,57 +23,15 @@ return {
 				allow_incremental_sync = true,
 			},
 			servers = {
-				-- jsonls = {
-				-- 	settings = {
-				-- 		json = {
-				-- 			format = {
-				-- 				enable = false,
-				-- 			},
-				-- 		},
-				-- 	},
-				-- },
-				vtsls = {
-					keys = {
-						{
-							'<leader>co',
-							function()
-								vim.lsp.buf.code_action({
-									apply = true,
-									context = {
-										only = { 'source.organizeImports.ts' },
-										diagnostics = {},
-									},
-								})
-							end,
-							desc = 'Organize Imports',
-						},
-						{
-							'<leader>cR',
-							function()
-								vim.lsp.buf.code_action({
-									apply = true,
-									context = {
-										only = { 'source.removeUnused.ts' },
-										diagnostics = {},
-									},
-								})
-							end,
-							desc = 'Remove Unused Imports',
+				jsonls = {
+					commands = {
+						Format = {
+							function() end,
 						},
 					},
-					settings = {
-						completions = {
-							completeFunctionCalls = true,
-						},
-						javascript = {
-							format = {
-								enable = false,
-							},
-						},
-						typescript = {
-							format = {
-								enable = false,
-							},
+					json = {
+						format = {
+							enable = false,
 						},
 					},
 				},

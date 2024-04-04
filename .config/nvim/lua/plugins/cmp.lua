@@ -8,7 +8,7 @@ local modified_priority = {
 	[types.lsp.CompletionItemKind.Variable] = 2,
 	[types.lsp.CompletionItemKind.Field] = 2,
 	[types.lsp.CompletionItemKind.Method] = 3,
-	[types.lsp.CompletionItemKind.Function] = 4,
+	[types.lsp.CompletionItemKind.Function] = 5,
 	[types.lsp.CompletionItemKind.Text] = 90,
 	[types.lsp.CompletionItemKind.Snippet] = 100,
 }

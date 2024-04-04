@@ -1,3 +1,4 @@
+local root = require('lazyvim.util.root')
 return {
 	{
 		'nvim-telescope/telescope.nvim',
@@ -22,6 +23,9 @@ return {
 				},
 			},
 		},
+		keys = {
+			{ '<leader><space>', '<cmd>Telescope git_commits<CR>', desc = 'Find Files (Root Dir)' },
+		},
 		opts = {
 			defaults = {
 				mappings = {
@@ -32,7 +36,6 @@ return {
 				file_ignore_patterns = {
 					'node_modules',
 					'.env',
-					'package.json',
 					'yarn.lock',
 					'target',
 					'build',
@@ -43,16 +46,18 @@ return {
 			pickers = {
 				buffers = {
 					sort_lastused = true,
+					sort_mru = true,
 					ignore_current_buffer = true,
 					previewer = false,
 					theme = 'dropdown',
 				},
 				find_files = {
+					cwd = root.git() or root.get(),
 					hidden = true,
 				},
 				live_grep = {
 					additional_args = function()
-						return { '--hidden' }
+						return { '--hidden', '--mmap', '-g', '!{**/node_modules/*,**/.git/*}' }
 					end,
 				},
 			},
