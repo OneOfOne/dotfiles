@@ -24,7 +24,7 @@ return {
 			},
 		},
 		keys = {
-			{ '<leader><space>', '<cmd>Telescope git_commits<CR>', desc = 'Find Files (Root Dir)' },
+			{ '<leader><space>', '<cmd>Telescope find_files<cr>', desc = 'Find Files (Root Dir)' },
 		},
 		opts = {
 			defaults = {

@@ -57,18 +57,16 @@ end
 
 return {
 	{
-		'windwp/nvim-autopairs',
-		event = 'InsertEnter',
-		opts = {
-			check_ts = true,
-		},
-	},
-	{
 		'hrsh7th/nvim-cmp',
-
 		dependencies = {
 			'onsails/lspkind.nvim',
-			-- 'chrisgrieser/cmp_yanky',
+			{
+				'windwp/nvim-autopairs',
+				event = 'InsertEnter',
+				opts = {
+					check_ts = true,
+				},
+			},
 		},
 
 		opts = function(_, opts)
@@ -77,26 +75,14 @@ return {
 
 			opts.preselect = cmp.PreselectMode.None
 
-			completion = {
+			opts.completion = {
 				completeopt = 'menu,menuone,noinsert,noselect',
 			}
 
 			opts.performance = {
 				debounce = 350,
 				throttle = 350,
-				fetching_timeout = 350,
-				confirm_resolve_timeout = 80,
-				async_budget = 1,
 				max_view_entries = 100,
-			}
-
-			opts.formatting = {
-				format = lspkind.cmp_format({
-					mode = 'symbol_text',
-					ellipsis_char = '...',
-					maxwidth = 50,
-					--menu = {},
-				}),
 			}
 
 			local compare = require('cmp.config.compare')
@@ -108,7 +94,6 @@ return {
 					sort_by_kind,
 					sort_by_name,
 					compare.score,
-					compare.order,
 				},
 			}
 
@@ -134,12 +119,6 @@ return {
 				completion = cmp_window.bordered(),
 				documentation = cmp_window.bordered(),
 			}
-
-			opts.view = vim.tbl_extend('force', opts.view or {}, {
-				entries = {
-					follow_cursor = true,
-				},
-			})
 
 			local cmp_autopairs = require('nvim-autopairs.completion.cmp')
 			cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())

@@ -21,7 +21,8 @@ local remap = { noremap = false, remap = true }
 
 -- qol
 -- map({ 'i' }, '<c-v>', '<left><c-o>"+p', 'paste clipboard')
--- map({ 'i' }, '<c-s-v>', '<left><c-o>"*p', 'paste selection')
+map({ 'i' }, '<c-s-v>', '<left><c-o>"*p', 'paste selection')
+map({ 't' }, '<c-s-v>', '<c-\\><c-n>"*pi', 'paste selection')
 
 -- this breaks ctrl-z in the terminal, but honestly, who uses that with nvim?
 map({ 'i' }, '<c-z>', '<c-o>u', 'undo')

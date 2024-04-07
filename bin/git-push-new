@@ -15,11 +15,11 @@ for arg in "$@"; do
 	fi
 done
 
-if git remote show -n origin | grep -q $BRANCH; then 
+if git remote show -n origin | grep -q $BRANCH; then
 	git push "$args" || exit 1
 else
 	echo creating new branch
 	git push --set-upstream origin $BRANCH $args || exit 1
 fi
 
-[ "$nopr" == "0" ] && hub pull-request -o
+[ "$nopr" == "0" ] && gh pr create -w

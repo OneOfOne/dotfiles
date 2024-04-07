@@ -9,3 +9,4 @@ User/History
 .nvim/
 bun.lockb
 .zcompdump*
+tls/

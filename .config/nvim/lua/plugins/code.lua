@@ -8,7 +8,7 @@ return {
 			format_notify = true,
 
 			inlay_hints = {
-				enabled = true,
+				enabled = false,
 			},
 			codelens = {
 				enabled = true,
@@ -51,16 +51,17 @@ return {
 				nls.formatting.goimports,
 				nls.diagnostics.golangci_lint,
 				-- ts
-				-- nls.formatting.biome.with({
-				-- 	args = {
-				-- 		'check',
-				-- 		'--apply',
-				-- 		'--formatter-enabled=true',
-				-- 		'--organize-imports-enabled=true',
-				-- 		'--skip-errors',
-				-- 		'$FILENAME',
-				-- 	},
-				-- }),
+				nls.formatting.biome.with({
+					filetypes = { 'javascript', 'javascriptreact', 'json', 'jsonc', 'typescript', 'typescriptreact' },
+					args = {
+						'check',
+						'--apply-unsafe',
+						'--formatter-enabled=true',
+						'--organize-imports-enabled=true',
+						'--skip-errors',
+						'$FILENAME',
+					},
+				}),
 				-- other
 				nls.formatting.stylua,
 				nls.formatting.shfmt.with({
@@ -74,6 +75,7 @@ return {
 		'nvim-treesitter/nvim-treesitter',
 		event = { 'BufReadPost', 'BufNewFile' },
 		opts = {
+			sync_install = false,
 			textobjects = {
 				swap = {
 					enable = true,
@@ -100,12 +102,21 @@ return {
 		'CopilotC-Nvim/CopilotChat.nvim',
 		branch = 'canary',
 		dependencies = {
-			{ 'zbirenbaum/copilot.lua' }, -- or github/copilot.vim
-			{ 'nvim-lua/plenary.nvim' }, -- for curl, log wrapper
+			{ 'zbirenbaum/copilot.lua' },
+			{ 'nvim-lua/plenary.nvim' },
 		},
 		keys = {
 			{
-				'<leader>cpp',
+				'<leader>ah',
+				function()
+					local actions = require('CopilotChat.actions')
+					require('CopilotChat.integrations.telescope').pick(actions.help_actions())
+				end,
+				desc = 'CopilotChat - Help actions',
+			},
+			-- Show
+			{
+				'<leader>ap',
 				function()
 					local actions = require('CopilotChat.actions')
 					require('CopilotChat.integrations.telescope').pick(actions.prompt_actions())
@@ -113,7 +124,7 @@ return {
 				desc = 'CopilotChat - Prompt actions',
 			},
 			{
-				'<leader>cpc',
+				'<leader>ac',
 				function()
 					local input = vim.fn.input('Quick Chat: ')
 					if input ~= '' then
@@ -122,6 +133,23 @@ return {
 				end,
 				desc = 'CopilotChat - Quick chat',
 			},
+			{ '<leader>ae', '<cmd>CopilotChatExplain<cr>', desc = 'CopilotChat - Explain code' },
+			{ '<leader>at', '<cmd>CopilotChatTests<cr>', desc = 'CopilotChat - Generate tests' },
+			{ '<leader>ar', '<cmd>CopilotChatReview<cr>', desc = 'CopilotChat - Review code' },
+			{ '<leader>aR', '<cmd>CopilotChatRefactor<cr>', desc = 'CopilotChat - Refactor code' },
+			{ '<leader>an', '<cmd>CopilotChatBetterNamings<cr>', desc = 'CopilotChat - Better Naming' },
+			{
+				'<leader>am',
+				'<cmd>CopilotChatCommit<cr>',
+				desc = 'CopilotChat - Generate commit message for all changes',
+			},
+			{
+				'<leader>aM',
+				'<cmd>CopilotChatCommitStaged<cr>',
+				desc = 'CopilotChat - Generate commit message for staged changes',
+			},
+			{ '<leader>af', '<cmd>CopilotChatFixDiagnostic<cr>', desc = 'CopilotChat - Fix Diagnostic' },
+			{ '<leader>al', '<cmd>CopilotChatReset<cr>', desc = 'CopilotChat - Clear buffer and chat history' },
 		},
 		opts = {
 			window = {
@@ -131,7 +159,27 @@ return {
 				height = 0.4,
 				row = 1,
 			},
+			show_help = true,
 			debug = false,
 		},
+		config = function(_, opts)
+			local chat = require('CopilotChat')
+			local select = require('CopilotChat.select')
+			opts.selection = select.unnamed
+			chat.setup(opts)
+
+			vim.api.nvim_create_autocmd('BufEnter', {
+				pattern = 'copilot-*',
+				callback = function()
+					vim.opt_local.relativenumber = true
+					vim.opt_local.number = true
+
+					local ft = vim.bo.filetype
+					if ft == 'copilot-chat' then
+						vim.bo.filetype = 'markdown'
+					end
+				end,
+			})
+		end,
 	},
 }

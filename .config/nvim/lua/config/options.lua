@@ -81,15 +81,11 @@ vim.g.neovide_cursor_animation_length = 0
 vim.g.neovide_cursor_animate_in_insert_mode = false
 vim.g.neovide_scale_factor = 1
 
-function FoldWithNlines()
-	local n_lines = vim.v.foldend - vim.v.foldstart
-	local lstart = string.gsub(vim.fn.getline(vim.v.foldstart), '\t', '    ')
-	local lend = string.gsub(vim.fn.getline(vim.v.foldend), '\t', '')
+local utils = require('config.utils')
 
-	local text = ('%s … %s 󰁂 %d'):format(lstart, lend, n_lines)
-	return text
-end
-
-o.foldtext = 'v:lua.FoldWithNlines()'
-o.foldmethod = 'expr'
-o.foldexpr = "v:lua.require'lazyvim.util'.ui.foldexpr()"
+-- something keeps overriding foldexpr
+utils.setTimeout(250, function()
+	vim.o.foldmethod = 'expr'
+	vim.o.foldtext = "v:lua.require('config.utils').foldLines()"
+	vim.o.foldexpr = "v:lua.require('lazyvim.util').ui.foldexpr()"
+end)

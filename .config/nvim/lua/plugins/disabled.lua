@@ -1,5 +1,9 @@
 return {
 	{
+		'echasnovski/mini.comment',
+		enabled = true,
+	},
+	{
 		'echasnovski/mini.ai',
 		enabled = false,
 	},

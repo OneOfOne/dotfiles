@@ -1,3 +1,0 @@
-#!/bin/sh
-env https_proxy="socks5h://socksy:socksock@oneofone.xyz:44444" curl https://limitlessfx.com/ip.php &>/dev/null &
-lsof -n -i TCP:9050 &>/dev/null || autossh -M1192 -o ControlMaster=no -o ControlPath=none -o CheckHostIP=no -o Compression=yes -f -N oneofonexyz-proxy

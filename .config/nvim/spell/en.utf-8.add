@@ -45,6 +45,7 @@ consts
 cpid
 cr
 crewapp
+csr
 csv
 ctrl
 ctx
@@ -138,6 +139,7 @@ instaweb
 io
 ios
 ip
+iptables
 ipv6
 iwd
 javascript
@@ -150,11 +152,13 @@ jsx
 jumpable
 kde
 keymap
+keypair
 lang
 lastname
 lazyvim
 leafly
 len
+letsencrypt
 lf
 linux
 llvm
@@ -187,6 +191,7 @@ nbsp
 ne
 neo
 neovim
+nftables
 nls
 noblacklist
 nodejs
@@ -199,6 +204,7 @@ ohmyzsh
 ok
 oneofone
 ooo
+openssl
 optout
 os
 ota
@@ -240,6 +246,7 @@ rgba
 rlog
 ro
 rome
+rsa
 rserv
 rshada
 rss
@@ -251,6 +258,8 @@ sdk
 sed
 seg
 semver
+serde
+serializable
 session
 setopt
 shada
@@ -316,6 +325,7 @@ url
 urlencoded
 usr
 utf
+util
 utm
 uuid
 vm
@@ -343,4 +353,5 @@ zipcode
 zsh
 zshrc
 µ
-OoO
+filetype
+feat

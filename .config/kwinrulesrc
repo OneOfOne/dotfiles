@@ -44,10 +44,9 @@ wmclass=chrome google-chrome
 wmclasscomplete=true
 wmclassmatch=1
 
-[12]
+[11]
 Description=Konsole (WL)
 clientmachine=localhost
-ignoregeometry=true
 noborder=true
 noborderrule=3
 position=3840,720
@@ -63,28 +62,27 @@ wmclass=konsole org.kde.konsole
 wmclasscomplete=true
 wmclassmatch=1
 
-[13]
+[12]
 Description=Gajim
-below=true
 clientmachine=localhost
 ignoregeometryrule=2
-maxsize=2560,1440
 noborder=true
-noborderrule=2
-position=4172,0
+noborderrule=3
+position=4394,0
 positionrule=3
-size=960,720
+size=720,720
 sizerule=3
 skiptaskbar=true
 skiptaskbarrule=2
 strictgeometryrule=2
+title=nvim.*Konsole
 types=1
 windowrole=messages
 wmclass=python3.11 org.gajim.Gajim
 wmclasscomplete=true
 wmclassmatch=1
 
-[14]
+[13]
 Description=Slack
 below=true
 clientmachine=localhost
@@ -102,11 +100,11 @@ windowrole=messages
 wmclass=Slack
 wmclassmatch=1
 
-[15]
+[14]
 Description=Discord
+below=true
 clientmachine=localhost
-ignoregeometry=true
-maxsize=2400,1400
+maxsize=2560,1440
 noborder=true
 noborderrule=3
 position=0,0
@@ -120,9 +118,8 @@ windowrole=messages
 wmclass=discord
 wmclassmatch=1
 
-[16]
+[15]
 Description=Chrome-slack
-below=true
 clientmachine=localhost
 ignoregeometry=true
 maxsize=2400,1400
@@ -139,8 +136,9 @@ wmclass=chrome chrome-kbfiajfedekjelkibmdphnikobmeikcc-Default
 wmclasscomplete=true
 wmclassmatch=1
 
-[17]
+[16]
 Description=Chrome-grafana
+below=true
 clientmachine=localhost
 ignoregeometry=true
 maxsize=2400,1400
@@ -157,7 +155,7 @@ wmclass=chrome chrome-bcffodegbapcpcbnpdniphdppfkmpelc-Default
 wmclasscomplete=true
 wmclassmatch=1
 
-[18]
+[17]
 Description=Scrcpy
 clientmachine=localhost
 ignoregeometry=true
@@ -171,20 +169,38 @@ windowrole=messages
 wmclass=scrcpy
 wmclassmatch=1
 
-[19]
+[18]
 Description=wezterm
 clientmachine=localhost
 ignoregeometry=true
 ignoregeometryrule=2
 maxsize=2400,1400
 maxsizerule=2
+noborder=true
 position=1280,0
 positionrule=3
-size=2560,1440
+size=1280,720
+skiptaskbar=true
 strictgeometryrule=2
 types=1
 windowrole=messages
 wmclass=wezterm-gui org.wezfurlong.wezterm
+wmclasscomplete=true
+wmclassmatch=1
+
+[19]
+Description=neovide
+clientmachine=localhost
+ignoregeometry=true
+ignoregeometryrule=3
+maxsize=2400,1400
+position=1280,0
+positionrule=3
+size=2560,1440
+sizerule=3
+types=1
+windowrole=messages
+wmclass=neovide neovide
 wmclasscomplete=true
 wmclassmatch=1
 
@@ -200,7 +216,7 @@ wmclasscomplete=true
 wmclassmatch=1
 
 [20]
-Description=neovide
+Description=kitty
 clientmachine=localhost
 ignoregeometry=true
 ignoregeometryrule=3
@@ -211,7 +227,7 @@ size=2560,1440
 sizerule=3
 types=1
 windowrole=messages
-wmclass=neovide neovide
+wmclass=kitty
 wmclasscomplete=true
 wmclassmatch=1
 
@@ -457,7 +473,7 @@ wmclassmatch=1
 
 [General]
 count=20
-rules=1,2,3,4,5,6,7,8,9,10,12,13,14,15,16,17,18,19,20,21
+rules=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20
 
 [a0a253d2-9a34-4b95-9240-7a3e990f81c1]
 Description=All
