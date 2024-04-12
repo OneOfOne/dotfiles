@@ -11,6 +11,7 @@ return {
 		dir = '~/code/nvim/spm.nvim',
 		config = true,
 		event = 'VeryLazy',
+		enabled = not os.getenv('SSH_CONNECTION'),
 		--enabled = false,
 	},
 	{

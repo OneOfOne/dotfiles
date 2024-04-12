@@ -59,30 +59,6 @@ return {
 	{
 		'hrsh7th/nvim-cmp',
 		dependencies = {
-			{
-				'cmp-ai',
-				dir = '~/code/nvim/cmp-ai',
-				config = function()
-					local cmp_ai = require('cmp_ai.config')
-
-					cmp_ai:setup({
-						max_lines = 100,
-						provider = 'Ollama',
-						provider_options = {
-							stream = true,
-							model = 'codegemma:7b-code',
-							prompt = function(pre, suf)
-								return '<|fim_prefix|>' .. pre .. '<|fim_suffix|>' .. suf .. '<|fim_middle|>'
-							end,
-						},
-						notify = true,
-						notify_callback = function(msg)
-							vim.notify(msg)
-						end,
-						run_on_every_keystroke = false,
-					})
-				end,
-			},
 			'onsails/lspkind.nvim',
 			{
 				'windwp/nvim-autopairs',
@@ -141,16 +117,6 @@ return {
 			-- })
 
 			opts.mapping = vim.tbl_extend('force', opts.mapping, {
-				['<C-x>'] = cmp.mapping(
-					cmp.mapping.complete({
-						config = {
-							sources = cmp.config.sources({
-								{ name = 'cmp_ai' },
-							}),
-						},
-					}),
-					{ 'i' }
-				),
 				['<CR>'] = cmp.mapping.confirm({ select = false }),
 			})
 
