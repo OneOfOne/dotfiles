@@ -8,14 +8,9 @@ local function au(typ, pattern, cmdOrFn)
 	end
 end
 
-au({ 'FileType' }, { 'json', 'jsonc', 'Outline' }, function()
-	vim.wo.spell = false
-	vim.wo.conceallevel = 0
-end)
-
 local has_inlay_hints = nil
 
-au({ 'ModeChanged' }, { '*' }, function()
+au('ModeChanged', { '*' }, function()
 	local ih = vim.lsp.inlay_hint
 	local nmode = vim.v.event.new_mode
 
@@ -35,6 +30,7 @@ au({ 'ModeChanged' }, { '*' }, function()
 		end
 	end
 end)
+
 au('InsertEnter', '*', function()
 	vim.diagnostic.config({
 		virtual_text = false,
@@ -46,23 +42,28 @@ au('InsertLeave', '*', function()
 		virtual_text = true,
 	})
 end)
---
--- au({ 'CursorHold', 'CursorHoldI' }, {}, 'TSEnable highlight')
--- au({ 'CursorMoved', 'CursorMovedI' }, {}, 'TSDisable highlight')
 
--- au({ 'FileType' }, { 'typescript', 'typescriptreact' }, function()
--- 	vim.g.editorconfig = false
--- 	vim.opt_local.tabstop = 3
--- 	vim.opt_local.shiftwidth = 3
--- end)
-
-au({ 'FileType' }, { 'lazyterm', 'terminal' }, function()
+au('FileType', { 'lazyterm', 'terminal' }, function()
 	vim.wo.spell = false
 	vim.wo.winfixbuf = true
 end)
 
--- au({ 'BufWritePre' }, { '*' }, function()
--- 	local cur = vim.fn.getpos('.')
--- 	vim.cmd([[%s/\s\+$//e]])
--- 	vim.fn.setpos('.', cur)
+au('FileType', { 'json', 'jsonc', 'Outline' }, function()
+	vim.wo.spell = false
+	vim.wo.conceallevel = 0
+end)
+
+au('FileType', { 'notify' }, function()
+	vim.wo.spell = false
+	vim.bo.filetype = 'markdown'
+end)
+
+-- au('CursorMovedI', nil, function()
+-- 	require('cmp').close()
+-- end)
+--
+-- au('CursorHoldI', nil, function()
+-- 	if #vim.fn.getline('.') > 1 then
+-- 		require('cmp').complete()
+-- 	end
 -- end)

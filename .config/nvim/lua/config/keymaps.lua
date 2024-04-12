@@ -24,6 +24,22 @@ local remap = { noremap = false, remap = true }
 map({ 'i' }, '<c-s-v>', '<left><c-o>"*p', 'paste selection')
 map({ 't' }, '<c-s-v>', '<c-\\><c-n>"*pi', 'paste selection')
 
+map('', '<LeftRelease>', function()
+	if vim.bo.ft == 'lazyterm' then
+		return '<LeftRelease>i'
+	end
+	return '<LeftRelease>'
+end, '', { expr = true })
+
+map('', '<MiddleRelease>', function()
+	if vim.bo.ft == 'lazyterm' then
+		return '<MiddleRelease>i'
+	end
+	return '<MiddleRelease>'
+end, '', { expr = true })
+
+map({ 't' }, '<buffer><LeftRelease>', '<c-\\><c-n>i', 'paste selection')
+
 -- this breaks ctrl-z in the terminal, but honestly, who uses that with nvim?
 map({ 'i' }, '<c-z>', '<c-o>u', 'undo')
 map({ 'i' }, '<c-r>', '<c-o><c-r>', 'redo')

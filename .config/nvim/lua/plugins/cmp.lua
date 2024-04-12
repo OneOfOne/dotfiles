@@ -59,6 +59,30 @@ return {
 	{
 		'hrsh7th/nvim-cmp',
 		dependencies = {
+			{
+				'cmp-ai',
+				dir = '~/code/nvim/cmp-ai',
+				config = function()
+					local cmp_ai = require('cmp_ai.config')
+
+					cmp_ai:setup({
+						max_lines = 100,
+						provider = 'Ollama',
+						provider_options = {
+							stream = true,
+							model = 'codegemma:7b-code',
+							prompt = function(pre, suf)
+								return '<|fim_prefix|>' .. pre .. '<|fim_suffix|>' .. suf .. '<|fim_middle|>'
+							end,
+						},
+						notify = true,
+						notify_callback = function(msg)
+							vim.notify(msg)
+						end,
+						run_on_every_keystroke = false,
+					})
+				end,
+			},
 			'onsails/lspkind.nvim',
 			{
 				'windwp/nvim-autopairs',
@@ -71,19 +95,28 @@ return {
 
 		opts = function(_, opts)
 			local cmp = require('cmp')
-			local lspkind = require('lspkind')
 
 			opts.preselect = cmp.PreselectMode.None
 
-			opts.completion = {
-				completeopt = 'menu,menuone,noinsert,noselect',
+			opts.matching = {
+				disallow_fuzzy_matching = true,
+				disallow_fullfuzzy_matching = true,
+				disallow_partial_fuzzy_matching = true,
+				disallow_partial_matching = true,
+				disallow_prefix_unmatching = false,
 			}
 
-			opts.performance = {
-				debounce = 350,
-				throttle = 350,
-				max_view_entries = 100,
+			opts.completion = {
+				-- autocomplete = false, -- controlled in autocmds.lua
+				completeopt = 'menu,menuone,noinsert,noselect',
 			}
+			--
+			-- opts.performance = {
+			-- 	async_budget = 1,
+			-- 	debounce = 250,
+			-- 	throttle = 250,
+			-- 	max_view_entries = 100,
+			-- }
 
 			local compare = require('cmp.config.compare')
 			opts.sorting = {
@@ -96,9 +129,10 @@ return {
 					compare.score,
 				},
 			}
-
+			--
 			-- opts.sources = cmp.config.sources({
 			-- 	{ name = 'copilot' },
+			--
 			-- 	{ name = 'nvim_lsp' },
 			-- 	{ name = 'crates' },
 			-- }, {
@@ -107,10 +141,16 @@ return {
 			-- })
 
 			opts.mapping = vim.tbl_extend('force', opts.mapping, {
-				['<Esc>'] = cmp.mapping({
-					i = cmp.mapping.abort(),
-					c = cmp.mapping.close(),
-				}),
+				['<C-x>'] = cmp.mapping(
+					cmp.mapping.complete({
+						config = {
+							sources = cmp.config.sources({
+								{ name = 'cmp_ai' },
+							}),
+						},
+					}),
+					{ 'i' }
+				),
 				['<CR>'] = cmp.mapping.confirm({ select = false }),
 			})
 
@@ -119,6 +159,8 @@ return {
 				completion = cmp_window.bordered(),
 				documentation = cmp_window.bordered(),
 			}
+
+			opts.experimental = {}
 
 			local cmp_autopairs = require('nvim-autopairs.completion.cmp')
 			cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())

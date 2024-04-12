@@ -82,6 +82,7 @@ ev
 facebook
 failsafe
 fav
+feat
 fg
 fgprof
 fi
@@ -89,6 +90,7 @@ filepath
 filereadable
 filesize
 filesystem
+filetype
 firejail
 firstname
 flowhub
@@ -353,5 +355,13 @@ zipcode
 zsh
 zshrc
 µ
-filetype
-feat
+statuscode
+hyperium
+ascii
+vec
+ietf
+rfc
+RUSTFLAGS
+ffi
+rustc
+cdylib

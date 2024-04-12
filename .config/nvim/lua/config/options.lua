@@ -63,7 +63,7 @@ o.grepprg = 'rg --hidden --vimgrep'
 
 o.timeoutlen = 500
 o.ttimeoutlen = 100
-o.updatetime = 50
+o.updatetime = 250
 
 -- better selection
 o.selection = 'inclusive'
@@ -71,7 +71,7 @@ o.virtualedit = 'onemore'
 -- o.selectmode = 'mouse,key'
 o.mousemodel = ''
 
-o.guifont = 'Liga SFMono Nerd Font,MonaspiceAr Nerd Font Mono,Noto Sans Symbols,Noto Sans Symbols 2:h11'
+o.guifont = 'ComicShannsMono Nerd Font,Noto Sans Symbols,Noto Sans Symbols 2:h12'
 -- o.guifont = 'MonaspiceAr Nerd Font Mono,Noto Sans Symbols,Noto Sans Symbols 2:h10'
 vim.g.neovide_hide_mouse_when_typing = true
 vim.g.neovide_scroll_animation_length = 0.1
