@@ -11,7 +11,7 @@ return {
 		dir = '~/code/nvim/spm.nvim',
 		config = true,
 		event = 'VeryLazy',
-		enabled = require('config.utils').is_remote_ssh(),
+		enabled = require('config.utils').is_local(),
 		--enabled = false,
 	},
 	{
