@@ -9,7 +9,7 @@ return {
 	},
 	{
 		'echasnovski/mini.pairs',
-		enabled = false,
+		-- enabled = false,
 	},
 	{
 		'echasnovski/mini.surround',

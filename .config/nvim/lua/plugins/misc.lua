@@ -11,7 +11,7 @@ return {
 		dir = '~/code/nvim/spm.nvim',
 		config = true,
 		event = 'VeryLazy',
-		enabled = not os.getenv('SSH_CONNECTION'),
+		enabled = require('config.utils').is_remote_ssh(),
 		--enabled = false,
 	},
 	{
@@ -64,4 +64,5 @@ return {
 			restriction_mode = 'hint',
 		},
 	},
+	{ 'akinsho/git-conflict.nvim', version = '*', config = true },
 }

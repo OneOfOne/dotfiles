@@ -19,4 +19,8 @@ M.foldLines = function()
 	return text
 end
 
+M.is_local = function()
+	return not os.getenv('SSH_CONNECTION')
+end
+
 return M

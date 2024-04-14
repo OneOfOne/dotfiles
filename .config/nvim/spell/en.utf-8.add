@@ -1,3 +1,4 @@
+RUSTFLAGS
 addons
 addr
 aiq
@@ -12,6 +13,7 @@ app
 arg
 args
 asc
+ascii
 async
 autocert
 autoload
@@ -28,6 +30,7 @@ builtins
 ccache
 cdn
 cdnjs
+cdylib
 certbot
 cfg
 charset
@@ -83,6 +86,7 @@ facebook
 failsafe
 fav
 feat
+ffi
 fg
 fgprof
 fi
@@ -128,7 +132,9 @@ href
 hs
 httpserv
 hugo
+hyperium
 ico
+ietf
 ifa
 im
 img
@@ -243,6 +249,7 @@ reddit
 referer
 req
 restapi
+rfc
 rgb
 rgba
 rlog
@@ -254,6 +261,7 @@ rshada
 rss
 rsync
 runuser
+rustc
 rw
 scrollview
 sdk
@@ -282,6 +290,7 @@ srcs
 srv
 ss
 starfield
+statuscode
 str
 struct
 stylua
@@ -330,6 +339,7 @@ utf
 util
 utm
 uuid
+vec
 vm
 wasm
 webapp
@@ -355,13 +365,3 @@ zipcode
 zsh
 zshrc
 µ
-statuscode
-hyperium
-ascii
-vec
-ietf
-rfc
-RUSTFLAGS
-ffi
-rustc
-cdylib

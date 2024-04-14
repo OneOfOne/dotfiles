@@ -97,7 +97,7 @@ return {
 	},
 	{
 		'folke/noice.nvim',
-		opus = {
+		opts = {
 			presets = {
 				lsp_doc_border = true,
 			},
@@ -106,7 +106,26 @@ return {
 				signature = { enabled = true },
 			},
 			smart_move = { enabled = true },
+			routes = {
+				{
+					filter = {
+						event = 'notify',
+						find = 'textDocument/codeLens is not supported',
+					},
+					opts = { skip = true },
+				},
+				{
+					filter = {
+						event = 'msg_show',
+						any = {
+							{ find = '%d+L, %d+B' },
+							{ find = '; after #%d+' },
+							{ find = '; before #%d+' },
+						},
+					},
+					view = 'mini',
+				},
+			},
 		},
 	},
-	{ 'akinsho/git-conflict.nvim', version = '*', config = true },
 }

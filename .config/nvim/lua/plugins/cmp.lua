@@ -60,13 +60,13 @@ return {
 		'hrsh7th/nvim-cmp',
 		dependencies = {
 			'onsails/lspkind.nvim',
-			{
-				'windwp/nvim-autopairs',
-				event = 'InsertEnter',
-				opts = {
-					check_ts = true,
-				},
-			},
+			-- {
+			-- 	'windwp/nvim-autopairs',
+			-- 	event = 'InsertEnter',
+			-- 	opts = {
+			-- 		check_ts = true,
+			-- 	},
+			-- },
 		},
 
 		opts = function(_, opts)
@@ -74,13 +74,13 @@ return {
 
 			opts.preselect = cmp.PreselectMode.None
 
-			opts.matching = {
-				disallow_fuzzy_matching = true,
-				disallow_fullfuzzy_matching = true,
-				disallow_partial_fuzzy_matching = true,
-				disallow_partial_matching = true,
-				disallow_prefix_unmatching = false,
-			}
+			-- opts.matching = {
+			-- 	disallow_fuzzy_matching = true,
+			-- 	disallow_fullfuzzy_matching = true,
+			-- 	disallow_partial_fuzzy_matching = true,
+			-- 	disallow_partial_matching = true,
+			-- 	disallow_prefix_unmatching = false,
+			-- }
 
 			opts.completion = {
 				-- autocomplete = false, -- controlled in autocmds.lua
@@ -128,8 +128,8 @@ return {
 
 			opts.experimental = {}
 
-			local cmp_autopairs = require('nvim-autopairs.completion.cmp')
-			cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
+			-- local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+			-- cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
 		end,
 	},
 }

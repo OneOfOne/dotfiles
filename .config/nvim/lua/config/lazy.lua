@@ -24,7 +24,7 @@ require('lazy').setup({
 		{ import = 'lazyvim.plugins.extras.dap.core' },
 
 		{ import = 'lazyvim.plugins.extras.coding.native_snippets' },
-		{ import = 'lazyvim.plugins.extras.coding.copilot', enabled = not os.getenv('SSH_CONNECTION') },
+		{ import = 'lazyvim.plugins.extras.coding.copilot', enabled = require('config.utils').is_local() },
 
 		{ import = 'lazyvim.plugins.extras.util.mini-hipatterns' },
 

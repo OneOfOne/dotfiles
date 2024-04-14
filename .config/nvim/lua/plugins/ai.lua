@@ -2,7 +2,7 @@ return {
 	{
 		'ChatGPT.nvim',
 		dir = '~/code/nvim/ChatGPT.nvim',
-		enabled = not os.getenv('SSH_CONNECTION'),
+		enabled = require('config.utils').is_local(),
 		event = 'VeryLazy',
 		keys = {
 			{ '<leader>cga', '<cmd>ChatGPTActAs<CR>', mode = { 'n', 'v' } },
@@ -68,7 +68,7 @@ return {
 	{
 		'CopilotC-Nvim/CopilotChat.nvim',
 		branch = 'canary',
-		enabled = not os.getenv('SSH_CONNECTION'),
+		enabled = require('config.utils').is_local(),
 		dependencies = {
 			{ 'nvim-lua/plenary.nvim' },
 		},
