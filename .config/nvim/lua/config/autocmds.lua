@@ -14,6 +14,12 @@ au('ModeChanged', { '*' }, function()
 	local ih = vim.lsp.inlay_hint
 	local nmode = vim.v.event.new_mode
 
+	vim.diagnostic.config({
+		virtual_text = nmode == 'n',
+		underline = nmode == 'n',
+		signs = nmode == 'n',
+	})
+
 	if has_inlay_hints == nil or nmode ~= 'n' then
 		has_inlay_hints = ih.is_enabled()
 	end
@@ -31,19 +37,7 @@ au('ModeChanged', { '*' }, function()
 	end
 end)
 
-au('InsertEnter', '*', function()
-	vim.diagnostic.config({
-		virtual_text = false,
-	})
-end)
-
-au('InsertLeave', '*', function()
-	vim.diagnostic.config({
-		virtual_text = true,
-	})
-end)
-
-au('FileType', { 'lazyterm', 'terminal' }, function()
+au('FileType', { 'lazyterm', 'terminal', 'qf' }, function()
 	vim.wo.spell = false
 	vim.wo.winfixbuf = true
 end)
@@ -54,8 +48,8 @@ au('FileType', { 'json', 'jsonc', 'Outline' }, function()
 end)
 
 au('FileType', { 'notify' }, function()
-	vim.wo.spell = false
 	vim.bo.filetype = 'markdown'
+	vim.wo.spell = false
 end)
 
 -- au('CursorMovedI', nil, function()

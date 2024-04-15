@@ -1,4 +1,8 @@
+local actions = require('telescope.actions')
+local builtin = require('telescope.builtin')
 local root = require('lazyvim.util.root')
+local utils = require('telescope.utils')
+
 return {
 	{
 		'nvim-telescope/telescope.nvim',
@@ -25,12 +29,31 @@ return {
 		},
 		keys = {
 			{ '<leader><space>', '<cmd>Telescope find_files<cr>', desc = 'Find Files (Root Dir)' },
+			{
+				'<leader>b<space>',
+				function()
+					builtin.find_files({ cwd = utils.buffer_dir() })
+				end,
+				desc = 'Find files in cwd',
+			},
+			{
+				'<leader>b/',
+				function()
+					builtin.live_grep({ cwd = utils.buffer_dir() })
+				end,
+				desc = 'Grep files in cwd',
+			},
 		},
 		opts = {
 			defaults = {
 				mappings = {
 					i = {
-						['<esc>'] = require('telescope.actions').close,
+						-- ['<esc>'] = actions.close,
+						['<C-q>'] = function(bufnr)
+							actions.smart_send_to_qflist(bufnr)
+							actions.open_qflist(bufnr)
+							require('config.utils').gsr()
+						end,
 					},
 				},
 				file_ignore_patterns = {
@@ -57,7 +80,7 @@ return {
 				},
 				live_grep = {
 					additional_args = function()
-						return { '--hidden', '--mmap', '-g', '!{**/node_modules/*,**/.git/*}' }
+						return { '--hidden', '--mmap', '-g', '!{**/node_modules/*,**/.git/*,**/target/*}' }
 					end,
 				},
 			},

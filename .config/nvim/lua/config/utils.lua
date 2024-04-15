@@ -23,4 +23,20 @@ M.is_local = function()
 	return not os.getenv('SSH_CONNECTION')
 end
 
+-- global search & replace
+M.gsr = function()
+	if #vim.fn.getqflist() == 0 then
+		return vim.notify('No quickfix list found')
+	end
+
+	local input = vim.fn.input('s/<>/g: ')
+	if input == '' then
+		return vim.notify('No input')
+	end
+
+	vim.cmd('noa cdo s/' .. input .. '/g')
+	vim.cmd('noa bufdo up | bd')
+	vim.cmd.LspRestart()
+end
+
 return M
