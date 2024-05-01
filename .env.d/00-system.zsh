@@ -11,7 +11,7 @@ setopt extendedglob
 # Try to make the completion list smaller (occupying less lines) by printing
 # the matches in columns with different widths
 setopt listpacked
-setopt longlistjobs             # Display PID when using jobs
+setopt longlistjobs # Display PID when using jobs
 #setopt ignoreeof
 #setopt autocontinue
 # setopt rmstarsilent
@@ -27,7 +27,6 @@ zstyle ':completion:*' rehash true
 zstyle ':completion:*' completer _expand _complete _ignored _approximate
 zstyle ':completion:*' special-dirs false
 
-
 alias ..="cd .."
 alias ...="cd ../.."
 alias pcd="popd"
@@ -36,7 +35,7 @@ path=($HOME/.dotfiles/bin $path)
 path=($HOME/bin $path)
 
 # macos utils are horrid
-if [[ `uname -s` == 'Darwin' ]]; then
+if [[ $(uname -s) == 'Darwin' ]]; then
 	export HOMEBREW_NO_ENV_HINTS=1
 	path=($(find /opt/homebrew/Cellar -name gnubin) /opt/homebrew/bin $path)
 fi
@@ -89,3 +88,5 @@ alias visu="sudo -E nvim"
 
 # set term tab size
 [[ $- == *i* ]] && tabs -4
+
+env | grep -q SSH && export TERM=xterm-256color

@@ -10,3 +10,4 @@ User/History
 bun.lockb
 .zcompdump*
 tls/
+.config/item2

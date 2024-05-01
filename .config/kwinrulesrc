@@ -67,18 +67,18 @@ Description=Gajim
 clientmachine=localhost
 ignoregeometryrule=2
 noborder=true
-noborderrule=3
+noborderrule=2
 position=4394,0
-positionrule=3
+positionrule=2
 size=720,720
-sizerule=3
+sizerule=2
 skiptaskbar=true
 skiptaskbarrule=2
 strictgeometryrule=2
 title=nvim.*Konsole
 types=1
 windowrole=messages
-wmclass=python3.11 org.gajim.Gajim
+wmclass=python3.12 org.gajim.Gajim
 wmclasscomplete=true
 wmclassmatch=1
 
@@ -458,6 +458,12 @@ sizerule=2
 skiptaskbar=true
 windowrole=messages
 wmclass=overwatch.exe
+wmclassmatch=1
+
+[9052ce10-4d8c-41a8-b93d-2b47e7d515a9]
+Description=Application settings for org.gajim.Gajim
+wmclass=python3.12 org.gajim.Gajim
+wmclasscomplete=true
 wmclassmatch=1
 
 [9135f958-e9fd-4837-aba5-d9c2f9c894a8]

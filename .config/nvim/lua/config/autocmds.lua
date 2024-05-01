@@ -31,7 +31,7 @@ au('ModeChanged', { '*' }, function()
 	local clients = vim.lsp.get_clients({ bufnr = 0 })
 	for _, cli in ipairs(clients) do
 		if cli.server_capabilities.inlayHintProvider then
-			ih.enable(0, nmode == 'n')
+			ih.enable(nmode == 'n', { bufnr = 0 })
 			return
 		end
 	end
