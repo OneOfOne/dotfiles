@@ -75,12 +75,14 @@ return {
 					theme = 'dropdown',
 				},
 				find_files = {
+					file_ignore_patterns = { 'node_modules', '.git', '.venv' },
 					cwd = root.git() or root.get(),
 					hidden = true,
 				},
 				live_grep = {
+					file_ignore_patterns = { 'node_modules', '.git' },
 					additional_args = function()
-						return { '--hidden', '--mmap', '-g', '!{**/node_modules/*,**/.git/*,**/target/*}' }
+						return { '--hidden', '--mmap' }
 					end,
 				},
 			},

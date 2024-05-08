@@ -32,9 +32,11 @@ require('lazy').setup({
 
 		{ import = 'lazyvim.plugins.extras.editor.navic' },
 		{ import = 'lazyvim.plugins.extras.editor.trouble-v3' },
+		{ import = 'lazyvim.plugins.extras.editor.mini-diff' },
 
 		{ import = 'lazyvim.plugins.extras.lang.json' },
 		-- { import = 'lazyvim.plugins.extras.lang.typescript' },
+		{ import = 'lazyvim.plugins.extras.lang.python' },
 		{ import = 'lazyvim.plugins.extras.lang.yaml' },
 		{ import = 'lazyvim.plugins.extras.lang.go' },
 		{ import = 'lazyvim.plugins.extras.lang.rust' },

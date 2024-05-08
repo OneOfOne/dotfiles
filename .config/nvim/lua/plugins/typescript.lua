@@ -126,9 +126,9 @@ return {
 						},
 						-- enables project wide error reporting similar to vscode
 						-- tsserver = {
-						--   experimental = {
-						--     enableProjectDiagnostics = true,
-						--   },
+						-- 	experimental = {
+						-- 		enableProjectDiagnostics = true,
+						-- 	},
 						-- },
 					},
 				},

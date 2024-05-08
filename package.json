@@ -1,13 +1,16 @@
 {
-  "name": "dotfiles",
-  "version": "1.0.0",
-  "private": true,
-  "description": "global packages",
-  "author": "OneOfOne",
-  "license": "MIT",
-  "dependencies": {
-    "@biomejs/biome": "^1.2.2",
-    "@vtsls/language-server": "^0.2.1",
-    "bun": "^1.0.4"
-  }
+	"name": "dotfiles",
+	"version": "1.0.0",
+	"private": true,
+	"description": "global packages",
+	"author": "OneOfOne",
+	"license": "MIT",
+	"dependencies": {
+		"@biomejs/biome": "latest",
+		"@vtsls/language-server": "latest",
+		"bun": "latest",
+		"typescript-language-server": "latest",
+		"vscode-langservers-extracted": "latest"
+	},
+	"trustedDependencies": ["@biomejs/biome"]
 }

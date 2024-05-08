@@ -56,13 +56,19 @@ done
 ttyctl -f # fix annoying apps that don't exit right
 
 DOTS="$HOME/.dotfiles"
-alias .gitup="pushd $DOTS; git pull --recurse-submodules && git submodule update --init --force && git submodule foreach --recursive git main && .reload; popd"
-alias .reload="source ~/.zshrc"
+
+function .gitup {
+	cd $DOTS
+	git pull --recurse-submodules
+	git submodule update --init --force
+	git submodule foreach --recursive git main
+	cd -
+}
 
 # ensure path includes only unique paths
 typeset -aU path
 autoload -U compinit && compinit
 
-
 # bun completions
-[ -s "/home/oneofone/.bun/_bun" ] && source "/home/oneofone/.bun/_bun"
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
+

@@ -90,3 +90,13 @@ alias visu="sudo -E nvim"
 [[ $- == *i* ]] && tabs -4
 
 env | grep -q SSH && export TERM=xterm-256color
+
+[ ! -d ~/.tmux/plugins/tpm ] && git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
+if ! nvim --version | grep -q v0.10; then
+	mkcd ~/bin/ &&
+		curl -O -L https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage &&
+		chmod +x nvim.appimage &&
+		./nvim.appimage --appimage-extract &&
+		ln -s ~/bin/nvim ~/bin/squashfs-root/usr/bin/nvim
+fi

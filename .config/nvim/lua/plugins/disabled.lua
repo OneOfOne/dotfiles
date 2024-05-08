@@ -1,11 +1,11 @@
 return {
 	{
 		'echasnovski/mini.comment',
-		enabled = true,
+		-- enabled = true,
 	},
 	{
 		'echasnovski/mini.ai',
-		enabled = true,
+		-- enabled = true,
 	},
 	{
 		'echasnovski/mini.pairs',

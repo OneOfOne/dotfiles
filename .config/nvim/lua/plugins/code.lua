@@ -45,7 +45,7 @@ return {
 						},
 					},
 				},
-				biome = {},
+				-- biome = {},
 			},
 		},
 	},
@@ -69,7 +69,7 @@ return {
 						'--formatter-enabled=true',
 						'--organize-imports-enabled=true',
 						'--skip-errors',
-						'$FILENAME',
+						'--stdin-file-path=$FILENAME',
 					},
 				}),
 				-- other
