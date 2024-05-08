@@ -12,9 +12,9 @@ ln -vsf $DOTS/.tmux.conf ~/
 
 mkdir ~/bin &>/dev/null || true
 
-# for p in $DOTS/.config/*; do
-# 	#ln -vsf "${p}" ~/.config/
-# done
+for p in $DOTS/.config/*; do
+	ln -vsf "${p}" ~/.config/
+done
 
 cd $DOTS
 git pull --recurse-submodules
