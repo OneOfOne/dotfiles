@@ -8,7 +8,7 @@ export GO111MODULE=auto
 
 export GOAMD64=v3
 
-export ANDROID_HOME="$HOME/Android/Sdk"
+export ANDROID_HOME="$HOME/sdk/android"
 
 # if [ -x /bin/zig ]; then
 # 	export CC="zig cc"

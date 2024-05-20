@@ -10,7 +10,9 @@
 		"@vtsls/language-server": "latest",
 		"bun": "latest",
 		"typescript-language-server": "latest",
+		"vscode-html-languageservice": "latest",
+		"vscode-json-languageservice": "latest",
 		"vscode-langservers-extracted": "latest"
 	},
-	"trustedDependencies": ["@biomejs/biome"]
+	"trustedDependencies": ["@biomejs/biome", "bun", "core-js"]
 }

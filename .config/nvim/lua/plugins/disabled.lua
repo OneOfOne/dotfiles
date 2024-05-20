@@ -1,33 +1,5 @@
 return {
 	{
-		'echasnovski/mini.comment',
-		-- enabled = true,
-	},
-	{
-		'echasnovski/mini.ai',
-		-- enabled = true,
-	},
-	{
-		'echasnovski/mini.pairs',
-		-- enabled = false,
-	},
-	{
-		'echasnovski/mini.surround',
-		-- enabled = false,
-	},
-	{
-		'echasnovski/mini.bufremove',
-		-- enabled = false,
-	},
-	{
-		'echasnovski/mini.indentscope',
-		-- enabled = false,
-	},
-	{
-		'lukas-reineke/indent-blankline.nvim',
-		enabled = false,
-	},
-	{
 		'ellisonleao/gruvbox.nvim',
 		enabled = false,
 	},

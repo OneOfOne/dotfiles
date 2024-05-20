@@ -75,15 +75,6 @@ function _err {
 
 export LESS='--tabs=4 --no-init --LONG-PROMPT --ignore-case --quit-if-one-screen --RAW-CONTROL-CHARS'
 
-function androidenv {
-	export ANDROID_HOME=$HOME/sdk/android
-	export ANDROID_NDK_HOME=$ANDROID_HOME/ndk/24.0.8215888/
-	PATH=$PATH:$ANDROID_HOME/emulator
-	PATH=$PATH:$ANDROID_HOME/tools
-	PATH=$PATH:$ANDROID_HOME/tools/bin
-	export PATH=$PATH:$ANDROID_HOME/platform-tools
-}
-
 alias visu="sudo -E nvim"
 
 # set term tab size
@@ -93,10 +84,10 @@ env | grep -q SSH && export TERM=xterm-256color
 
 [ ! -d ~/.tmux/plugins/tpm ] && git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
-if ! nvim --version | grep -q v0.10; then
+if ! nvim --version | grep -q v0.1; then
 	mkcd ~/bin/ &&
 		curl -O -L https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage &&
 		chmod +x nvim.appimage &&
 		./nvim.appimage --appimage-extract &&
-		ln -s ~/bin/nvim ~/bin/squashfs-root/usr/bin/nvim
+		ln -sfv ~/bin/squashfs-root/usr/bin/nvim ~/bin/nvim
 fi

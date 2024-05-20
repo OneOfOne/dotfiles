@@ -1,5 +1,6 @@
 addons
 addr
+ahmed
 aiq
 aiqstaging
 alives
@@ -9,6 +10,7 @@ alpn
 amd
 api
 app
+appsrv
 arg
 args
 asc
@@ -19,6 +21,7 @@ autoload
 autosize
 backend
 bday
+bigtable
 birchmount
 birthdate
 bool
@@ -98,6 +101,7 @@ firejail
 firstname
 flowhub
 fm
+fmt
 fn
 fname
 fontconfig
@@ -241,6 +245,7 @@ putContactPushID
 pwd
 qmk
 qol
+quickfix
 realpath
 recaptcha
 reclone
@@ -275,6 +280,7 @@ setopt
 shada
 shopify
 shorthands
+sid
 signedup
 signin
 signup

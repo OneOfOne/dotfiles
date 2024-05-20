@@ -110,7 +110,10 @@ return {
 				{
 					filter = {
 						event = 'notify',
-						find = 'textDocument/codeLens is not supported',
+						any = {
+							{ find = 'textDocument/codeLens is not supported' },
+							{ find = 'Searching in Files' },
+						},
 					},
 					opts = { skip = true },
 				},

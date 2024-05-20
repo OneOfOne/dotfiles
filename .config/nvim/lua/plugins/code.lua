@@ -78,6 +78,7 @@ return {
 					filetypes = { 'sh', 'zsh' },
 				}),
 			}
+			opts.debug = true
 			return opts
 		end,
 	},
@@ -107,5 +108,9 @@ return {
 				},
 			},
 		},
+	},
+	{
+		'f-person/git-blame.nvim',
+		config = true,
 	},
 }

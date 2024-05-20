@@ -15,24 +15,7 @@ vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 
 require('lazy').setup({
 	spec = {
-		{
-			'LazyVim/LazyVim',
-			import = 'lazyvim.plugins',
-		},
-		{ import = 'lazyvim.plugins.extras.lsp.none-ls' },
-		{ import = 'lazyvim.plugins.extras.test.core' },
-		{ import = 'lazyvim.plugins.extras.dap.core' },
-
-		{ import = 'lazyvim.plugins.extras.coding.native_snippets' },
-		{ import = 'lazyvim.plugins.extras.coding.copilot', enabled = require('config.utils').is_local() },
-
-		{ import = 'lazyvim.plugins.extras.util.mini-hipatterns' },
-
-		{ import = 'lazyvim.plugins.extras.ui.edgy' },
-
-		{ import = 'lazyvim.plugins.extras.editor.navic' },
-		{ import = 'lazyvim.plugins.extras.editor.trouble-v3' },
-		{ import = 'lazyvim.plugins.extras.editor.mini-diff' },
+		{ 'LazyVim/LazyVim', import = 'lazyvim.plugins' },
 
 		{ import = 'lazyvim.plugins.extras.lang.json' },
 		-- { import = 'lazyvim.plugins.extras.lang.typescript' },
@@ -40,6 +23,25 @@ require('lazy').setup({
 		{ import = 'lazyvim.plugins.extras.lang.yaml' },
 		{ import = 'lazyvim.plugins.extras.lang.go' },
 		{ import = 'lazyvim.plugins.extras.lang.rust' },
+
+		{ import = 'lazyvim.plugins.extras.lsp.none-ls' },
+		{ import = 'lazyvim.plugins.extras.test.core' },
+		{ import = 'lazyvim.plugins.extras.dap.core' },
+
+		{ import = 'lazyvim.plugins.extras.coding.mini-surround' },
+		{ import = 'lazyvim.plugins.extras.coding.copilot', enabled = require('config.utils').is_local() },
+
+		{ import = 'lazyvim.plugins.extras.util.mini-hipatterns' },
+		{ import = 'lazyvim.plugins.extras.util.dot' },
+
+		{ import = 'lazyvim.plugins.extras.editor.navic' },
+		{ import = 'lazyvim.plugins.extras.editor.trouble-v3' },
+		{ import = 'lazyvim.plugins.extras.editor.mini-diff' },
+
+		{ import = 'lazyvim.plugins.extras.ui.edgy' },
+		{ import = 'lazyvim.plugins.extras.ui.mini-indentscope' },
+		-- { import = 'lazyvim.plugins.extras.ui.treesitter-rewrite' },
+
 		-- { import = 'lazyvim.plugins.extras.lang.clangd' },
 
 		{ import = 'plugins' },

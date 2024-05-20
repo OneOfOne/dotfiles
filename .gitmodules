@@ -13,3 +13,6 @@
 [submodule ".env.d/oh-my-zsh.custom/themes/powerlevel10k"]
 	path = .env.d/oh-my-zsh.custom/themes/powerlevel10k
 	url = https://github.com/romkatv/powerlevel10k.git
+[submodule ".env.d/oh-my-zsh.custom/plugins/zaw"]
+	path = .env.d/oh-my-zsh.custom/plugins/zaw
+	url = https://github.com/zsh-users/zaw

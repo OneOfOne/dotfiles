@@ -30,6 +30,8 @@ plugins=(
 	ripgrep
 	zsh-syntax-highlighting
 	zsh-interactive-cd
+	git
+	zaw
 )
 
 [[ -d "${CLOUDSDK_HOME}" ]] && plugins+=(gcloud kubectl)
@@ -48,6 +50,9 @@ P10K_PATH="$ZSH_CUSTOM/p10k.zsh"
 [[ -f $P10K_PATH ]] && source $P10K_PATH
 
 source $ZSH/oh-my-zsh.sh
+
+# CTRL-R will pull up zaw-history (backwards zsh history search)
+bindkey '^r' zaw-history
 
 for file in $ENV_FILES/*.zsh; do
 	source "$file"
