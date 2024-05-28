@@ -60,13 +60,18 @@ return {
 		'hrsh7th/nvim-cmp',
 		dependencies = {
 			'onsails/lspkind.nvim',
-			-- {
-			-- 	'windwp/nvim-autopairs',
-			-- 	event = 'InsertEnter',
-			-- 	opts = {
-			-- 		check_ts = true,
-			-- 	},
-			-- },
+			{
+				'windwp/nvim-autopairs',
+				event = 'InsertEnter',
+				opts = {
+					check_ts = true,
+					map_cr = false,
+					map_bs = false,
+					enable_check_bracket_line = false,
+					ignored_next_char = '[%w%.]',
+					fast_wrap = {},
+				},
+			},
 		},
 
 		opts = function(_, opts)

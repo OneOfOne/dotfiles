@@ -30,6 +30,7 @@ require('lazy').setup({
 
 		{ import = 'lazyvim.plugins.extras.coding.mini-surround' },
 		{ import = 'lazyvim.plugins.extras.coding.copilot', enabled = require('config.utils').is_local() },
+		{ import = 'lazyvim.plugins.extras.coding.copilot-chat', enabled = require('config.utils').is_local() },
 
 		{ import = 'lazyvim.plugins.extras.util.mini-hipatterns' },
 		{ import = 'lazyvim.plugins.extras.util.dot' },
@@ -40,6 +41,7 @@ require('lazy').setup({
 
 		{ import = 'lazyvim.plugins.extras.ui.edgy' },
 		{ import = 'lazyvim.plugins.extras.ui.mini-indentscope' },
+		{ import = 'lazyvim.plugins.extras.ui.mini-animate' },
 		-- { import = 'lazyvim.plugins.extras.ui.treesitter-rewrite' },
 
 		-- { import = 'lazyvim.plugins.extras.lang.clangd' },

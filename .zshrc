@@ -67,6 +67,7 @@ function .gitup {
 	git pull --recurse-submodules
 	git submodule update --init --force
 	git submodule foreach --recursive git main
+	bun update
 	cd -
 }
 

@@ -84,9 +84,7 @@ return {
 	},
 	{
 		'nvim-treesitter/nvim-treesitter',
-		event = { 'BufReadPost', 'BufNewFile' },
 		opts = {
-			sync_install = false,
 			textobjects = {
 				swap = {
 					enable = true,
@@ -109,6 +107,7 @@ return {
 			},
 		},
 	},
+	{ 'nvim-treesitter/nvim-treesitter-textobjects', enabled = false },
 	{
 		'f-person/git-blame.nvim',
 		config = true,

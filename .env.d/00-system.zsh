@@ -84,10 +84,14 @@ env | grep -q SSH && export TERM=xterm-256color
 
 [ ! -d ~/.tmux/plugins/tpm ] && git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
-if ! nvim --version | grep -q v0.1; then
+function update-nvim {
 	mkcd ~/bin/ &&
 		curl -O -L https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage &&
 		chmod +x nvim.appimage &&
 		./nvim.appimage --appimage-extract &&
 		ln -sfv ~/bin/squashfs-root/usr/bin/nvim ~/bin/nvim
+}
+
+if ! nvim --version | grep -q v0.1; then
+	update-nvim
 fi

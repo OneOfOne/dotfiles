@@ -62,12 +62,13 @@
 [alias]
 	ll = log --stat --abbrev-commit --abbrev=8 --pretty='format:%Cgreen*%Creset Commit (%G?): %Cblue%h%Creset (%Cred%H%Creset)%n    %CgreenAuthor:%Creset %an (%ae)%n    %CgreenDate:%Creset %ad%n    %CgreenSubject: %Creset%s%n%b' --show-signature
 	l1 = log --abbrev-commit --abbrev=8 --pretty='format:%Cgreen%h%Creset [ %ad ] %s'
-	l2 = log --color --abbrev-commit --abbrev=8 --pretty='format:%Cred*%Creset %Cgreen%h%Creset [ %s ]'
+	l2 = log --color --abbrev-commit --abbrev=8 --pretty='format:%Cred*%Creset %Cgreen%h%Creset %s'
 	raw = log -r --root --raw --no-abbrev --pretty='format:%h~%an~%ad~'
 	changes = diff --name-status -r
 
 	rp = repack -a -d --depth=250 --window=250 -f
 	co = checkout
+	ci = commit -a
 
 	st = status --short --untracked-files=no
 
@@ -95,8 +96,8 @@
 	gc-all = !git -c gc.reflogExpire=0 -c gc.reflogExpireUnreachable=0 -c gc.rerereresolved=0 -c gc.rerereunresolved=0 -c gc.pruneExpire=now gc --aggressive
 	undo-last = reset --soft HEAD~1
 
-	list-old-branches = !git branch -a --merged | grep -Ev 'master|main|dev|HEAD'
-	delete-merged-branches = "!git branch -d $(git list-old-branches) && git remote prune origin"
+	list-old-branches = !git branch -a --merged | grep -Ev 'master|main|dev|HEAD|\\*' | sed -e 's@remotes/@@g'
+	delete-merged-branches = "!git branch -d --remote $(git list-old-branches)"
 	clean-old = "!f() { git delete-merged-branches; du -h --max-depth=0 .git && git reflog expire --all --expire=now && git gc --prune=now --aggressive; du -h --max-depth=0 .git; }; f"
 
 
