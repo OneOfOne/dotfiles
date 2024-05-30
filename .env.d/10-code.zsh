@@ -10,6 +10,9 @@ export GOAMD64=v3
 
 export ANDROID_HOME="$HOME/sdk/android"
 
+# remove when node fixes their crap
+export UV_USE_IO_URING=0
+
 # if [ -x /bin/zig ]; then
 # 	export CC="zig cc"
 # 	export CXX="zig cxx"
@@ -111,24 +114,17 @@ function rebuildgotools {
 	# 	github.com/sqs/goreturns \
 	# 	honnef.co/go/tools/... 2>&1 | egrep -v 'meta tag'
 
-	pushd ~gh/go-delve/delve/ && trap "popd >/dev/null" EXIT
+	pushd ~gh/go-delve/delve/
 	git reset --hard
-	git pull || return 1
-	go mod vendor || return 1
-	# go mod tidy || return 1
-	make install || return 1
+	git pull && go mod vendor && make install
 	popd &>/dev/null
 
-	pushd ~gh/../golang.org/x/tools/gopls && trap "popd >/dev/null" EXIT
-	git reset --hard && git pull || return 1
-	env GO111MODULE=on GOGC=off go install -v || return 1
-
-	pushd ~/code/vscode/vscode-go && trap "popd >/dev/null" EXIT
-	git reset --hard
-	git pull || return 1
-	npm install || return 1
-	vsce package -o /tmp/gocode.vsix || return 1
-	code --install-extension /tmp/gocode.vsix --force || return 1
+	go install mvdan.cc/gofumpt@latest
+	go install golang.org/x/tools/gopls@latest
+	go install golang.org/x/tools/cmd/goimports@latest
+	go install github.com/fatih/gomodifytags@latest
+	go install github.com/golangci/golangci-lint/cmd/golangci-lint@lates
+	go install github.com/josharian/impl@latest
 
 	pkill -9 gopls &>/dev/null
 }

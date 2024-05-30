@@ -51,7 +51,6 @@ au('FileType', { 'notify' }, function()
 	vim.bo.filetype = 'markdown'
 	vim.wo.spell = false
 end)
-
 -- au('CursorMovedI', nil, function()
 -- 	require('cmp').close()
 -- end)

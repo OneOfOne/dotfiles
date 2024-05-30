@@ -71,6 +71,8 @@ o.virtualedit = 'onemore'
 -- o.selectmode = 'mouse,key'
 o.mousemodel = ''
 
+o.foldmethod = 'indent'
+
 o.guifont = 'ComicShannsMono Nerd Font,Noto Sans Symbols,Noto Sans Symbols 2:h12'
 -- o.guifont = 'MonaspiceAr Nerd Font Mono,Noto Sans Symbols,Noto Sans Symbols 2:h10'
 vim.g.neovide_hide_mouse_when_typing = true
@@ -81,11 +83,13 @@ vim.g.neovide_cursor_animation_length = 0
 vim.g.neovide_cursor_animate_in_insert_mode = false
 vim.g.neovide_scale_factor = 1
 
-local utils = require('config.utils')
-
--- something keeps overriding foldexpr
-utils.setTimeout(250, function()
-	vim.o.foldmethod = 'expr'
-	vim.o.foldtext = "v:lua.require('config.utils').foldLines()"
-	vim.o.foldexpr = "v:lua.require('lazyvim.util').ui.foldexpr()"
-end)
+-- local utils = require('config.utils')
+--
+-- -- something keeps overriding foldexpr
+-- utils.setTimeout(250, function()
+-- 	vim.o.foldmethod = 'indent'
+-- 	vim.o.foldtext = "v:lua.require('config.utils').foldLines()"
+-- 	vim.o.foldexpr = "v:lua.require('lazyvim.util').ui.foldexpr()"
+-- end)
+--
+--

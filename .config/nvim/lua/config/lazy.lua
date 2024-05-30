@@ -36,7 +36,6 @@ require('lazy').setup({
 		{ import = 'lazyvim.plugins.extras.util.dot' },
 
 		{ import = 'lazyvim.plugins.extras.editor.navic' },
-		{ import = 'lazyvim.plugins.extras.editor.trouble-v3' },
 		{ import = 'lazyvim.plugins.extras.editor.mini-diff' },
 
 		{ import = 'lazyvim.plugins.extras.ui.edgy' },

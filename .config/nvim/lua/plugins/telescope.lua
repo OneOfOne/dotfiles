@@ -28,7 +28,20 @@ return {
 			},
 		},
 		keys = {
-			{ '<leader><space>', '<cmd>Telescope find_files<cr>', desc = 'Find Files (Root Dir)' },
+			{
+				'<leader><space>',
+				function()
+					builtin.find_files({ cwd = root.git() or root.get() })
+				end,
+				desc = 'Find Files (Root Dir)',
+			},
+			{
+				'<leader>/',
+				function()
+					builtin.live_grep({ cwd = root.git() or root.get() })
+				end,
+				desc = 'Grep Files (Root Dir)',
+			},
 			{
 				'<leader>b<space>',
 				function()
@@ -76,11 +89,10 @@ return {
 				},
 				find_files = {
 					file_ignore_patterns = { 'node_modules', '.git', '.venv' },
-					cwd = root.git() or root.get(),
 					hidden = true,
 				},
 				live_grep = {
-					file_ignore_patterns = { 'node_modules', '.git' },
+					file_ignore_patterns = { 'node_modules', '.git', '.venv' },
 					additional_args = function()
 						return { '--hidden', '--mmap' }
 					end,

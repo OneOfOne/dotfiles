@@ -16,6 +16,7 @@ args
 asc
 ascii
 async
+auth
 autocert
 autoload
 autosize
@@ -47,6 +48,7 @@ conf
 config
 const
 consts
+cors
 cpid
 cr
 crewapp
@@ -373,4 +375,3 @@ zipcode
 zsh
 zshrc
 µ
-auth
