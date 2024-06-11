@@ -18,11 +18,12 @@ require('lazy').setup({
 		{ 'LazyVim/LazyVim', import = 'lazyvim.plugins' },
 
 		{ import = 'lazyvim.plugins.extras.lang.json' },
-		-- { import = 'lazyvim.plugins.extras.lang.typescript' },
+		{ import = 'lazyvim.plugins.extras.lang.typescript' },
 		{ import = 'lazyvim.plugins.extras.lang.python' },
 		{ import = 'lazyvim.plugins.extras.lang.yaml' },
 		{ import = 'lazyvim.plugins.extras.lang.go' },
 		{ import = 'lazyvim.plugins.extras.lang.rust' },
+		-- { import = 'lazyvim.plugins.extras.lang.clangd' },
 
 		{ import = 'lazyvim.plugins.extras.lsp.none-ls' },
 		{ import = 'lazyvim.plugins.extras.test.core' },
@@ -36,14 +37,11 @@ require('lazy').setup({
 		{ import = 'lazyvim.plugins.extras.util.dot' },
 
 		{ import = 'lazyvim.plugins.extras.editor.navic' },
-		{ import = 'lazyvim.plugins.extras.editor.mini-diff' },
+		-- { import = 'lazyvim.plugins.extras.editor.mini-diff' },
 
 		{ import = 'lazyvim.plugins.extras.ui.edgy' },
 		{ import = 'lazyvim.plugins.extras.ui.mini-indentscope' },
 		{ import = 'lazyvim.plugins.extras.ui.mini-animate' },
-		-- { import = 'lazyvim.plugins.extras.ui.treesitter-rewrite' },
-
-		-- { import = 'lazyvim.plugins.extras.lang.clangd' },
 
 		{ import = 'plugins' },
 	},

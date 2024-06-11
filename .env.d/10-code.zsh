@@ -116,17 +116,17 @@ function rebuildgotools {
 
 	pushd ~gh/go-delve/delve/
 	git reset --hard
-	git pull && go mod vendor && make install
-	popd &>/dev/null
+	git pull && go mod vendor && make install || true
+	popd
 
 	go install mvdan.cc/gofumpt@latest
 	go install golang.org/x/tools/gopls@latest
 	go install golang.org/x/tools/cmd/goimports@latest
 	go install github.com/fatih/gomodifytags@latest
-	go install github.com/golangci/golangci-lint/cmd/golangci-lint@lates
+	go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
 	go install github.com/josharian/impl@latest
 
-	pkill -9 gopls &>/dev/null
+	pkill -9 gopls &>/dev/null || true
 }
 
 function gotest {

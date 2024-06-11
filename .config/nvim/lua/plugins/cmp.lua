@@ -112,6 +112,8 @@ return {
 			}
 			--
 			-- opts.sources = cmp.config.sources({
+			-- 	{ name = 'cmp_ai' },
+			-- })
 			-- 	{ name = 'copilot' },
 			--
 			-- 	{ name = 'nvim_lsp' },

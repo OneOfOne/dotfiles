@@ -45,7 +45,6 @@ return {
 						},
 					},
 				},
-				-- biome = {},
 			},
 		},
 	},
@@ -62,10 +61,19 @@ return {
 				-- nls.diagnostics.golangci_lint,
 				-- ts
 				nls.formatting.biome.with({
-					filetypes = { 'javascript', 'javascriptreact', 'json', 'jsonc', 'typescript', 'typescriptreact' },
+					filetypes = {
+						'javascript',
+						'javascriptreact',
+						'json',
+						'jsonc',
+						'typescript',
+						'typescriptreact',
+						'css',
+					},
 					args = {
 						'check',
-						'--apply-unsafe',
+						'--write',
+						'--unsafe',
 						'--formatter-enabled=true',
 						'--organize-imports-enabled=true',
 						'--skip-errors',
@@ -85,6 +93,7 @@ return {
 	{
 		'nvim-treesitter/nvim-treesitter',
 		opts = {
+			ensure_installed = { 'vim', 'vimdoc' },
 			textobjects = {
 				swap = {
 					enable = true,

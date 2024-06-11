@@ -35,7 +35,8 @@ M.gsr = function()
 	end
 
 	vim.cmd('noa cdo s/' .. input .. '/g')
-	vim.cmd('noa bufdo up | bd')
+	vim.fn.setqflist({})
+	vim.cmd('noa wall')
 	vim.cmd.LspRestart()
 end
 

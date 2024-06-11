@@ -1,6 +1,6 @@
 return {
 	{
-		'jellydn/gen.nvim',
+		'David-Kunz/gen.nvim',
 		opts = {
 			model = 'llama3:8b-instruct-fp16', -- The default model to use.
 			host = 'localhost', -- The host running the Ollama service.

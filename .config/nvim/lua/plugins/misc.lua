@@ -7,17 +7,13 @@ return {
 	{ 'itchyny/vim-qfedit', config = function() end },
 	{ 'dstein64/nvim-scrollview', config = true },
 	{
-		'spm.nvim',
-		dir = '~/code/nvim/spm.nvim',
+		'OneOfOne/spm.nvim',
 		config = true,
-		event = 'VeryLazy',
-		enabled = require('config.utils').is_local(),
 		--enabled = false,
 	},
 	{
 		'folke/flash.nvim',
 		event = 'VeryLazy',
-		---@type Flash.Config
 		opts = {
 			multi_window = false,
 			incremental = true,

@@ -19,10 +19,6 @@ return {
 		'folke/neoconf.nvim',
 		enabled = false,
 	},
-	{
-		'nvim-pack/nvim-spectre',
-		enabled = false,
-	},
 	-- disabled to be able to use system binaries
 	{
 		'jay-babu/mason-nvim-dap.nvim',
@@ -51,7 +47,7 @@ return {
 	},
 	{
 		'lewis6991/gitsigns.nvim',
-		enabled = false,
+		-- enabled = false,
 	},
 	-- {
 	-- 	'rcarriga/nvim-notify',

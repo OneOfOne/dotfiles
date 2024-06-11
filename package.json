@@ -1,21 +1,22 @@
 {
-	"name": "dotfiles",
-	"version": "1.0.0",
-	"private": true,
-	"description": "global packages",
-	"author": "OneOfOne",
-	"license": "MIT",
-	"dependencies": {
-		"@biomejs/biome": "latest",
-		"@vtsls/language-server": "latest",
-		"bun": "latest",
-		"markdownlint-cli": "latest",
-		"marksman": "latest",
-		"typescript-language-server": "latest",
-		"vscode-html-languageservice": "latest",
-		"vscode-json-languageservice": "latest",
-		"vscode-langservers-extracted": "latest",
-		"yaml-language-server": "latest"
-	},
-	"trustedDependencies": ["@biomejs/biome", "bun", "core-js"]
+  "name": "dotfiles",
+  "version": "1.0.0",
+  "private": true,
+  "description": "global packages",
+  "author": "OneOfOne",
+  "license": "MIT",
+  "dependencies": {
+    "@biomejs/biome": "latest",
+    "@vtsls/language-server": "latest",
+    "bash-language-server": "latest",
+    "bun": "latest",
+    "markdownlint-cli": "latest",
+    "marksman": "latest",
+    "typescript-language-server": "latest",
+    "vscode-html-languageservice": "latest",
+    "vscode-json-languageservice": "latest",
+    "vscode-langservers-extracted": "latest",
+    "yaml-language-server": "latest"
+  },
+  "trustedDependencies": ["@biomejs/biome", "bun", "core-js"]
 }

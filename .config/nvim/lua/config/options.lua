@@ -72,9 +72,13 @@ o.virtualedit = 'onemore'
 o.mousemodel = ''
 
 o.foldmethod = 'indent'
+o.foldlevelstart = -1
 
-o.guifont = 'ComicShannsMono Nerd Font,Noto Sans Symbols,Noto Sans Symbols 2:h12'
--- o.guifont = 'MonaspiceAr Nerd Font Mono,Noto Sans Symbols,Noto Sans Symbols 2:h10'
+o.guifont = 'ComicShannsMono Nerd Font,Noto Sans Symbols,Noto Sans Symbols 2:h13'
+-- o.guifont = 'iMWritingMono Nerd Font,Noto Sans Symbols,Noto Sans Symbols 2:h12'
+-- o.guifont = 'MonoLisa Nerd Font Mono,Noto Sans Symbols,Noto Sans Symbols 2:h12'
+-- o.guifont = 'GeistMono Nerd Font,Noto Sans Symbols,Noto Sans Symbols 2:h12'
+-- o.guifont = 'Fantasque Sans Mono,Noto Sans Symbols,Noto Sans Symbols 2:h13'
 vim.g.neovide_hide_mouse_when_typing = true
 vim.g.neovide_scroll_animation_length = 0.1
 vim.g.neovide_scroll_animation_far_lines = 1
