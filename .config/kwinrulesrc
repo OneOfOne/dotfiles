@@ -375,7 +375,7 @@ wmclasscomplete=true
 wmclassmatch=1
 
 [4]
-Description=Application settings for steam_app_0
+Description=WoW
 blockcompositing=true
 clientmachine=localhost
 ignoregeometry=true
@@ -384,6 +384,7 @@ noborder=true
 noborderrule=2
 position=2560,0
 size=2560,1440
+sizerule=2
 title=NVIM
 windowrole=messages
 wmclass=steam_app_0 steam_app_0

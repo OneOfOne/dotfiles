@@ -116,7 +116,7 @@ return {
 			},
 		},
 	},
-	{ 'nvim-treesitter/nvim-treesitter-textobjects', enabled = false },
+	-- { 'nvim-treesitter/nvim-treesitter-textobjects', enabled = false },
 	{
 		'f-person/git-blame.nvim',
 		enabled = false,
