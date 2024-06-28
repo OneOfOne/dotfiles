@@ -78,3 +78,6 @@ function qemu-uefi() {
 		$args
 }
 
+function tmuxs() {
+	tmux new -A -s $(basename $PWD)
+}
