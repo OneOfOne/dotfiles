@@ -74,7 +74,7 @@ o.mousemodel = ''
 o.foldmethod = 'indent'
 o.foldlevelstart = -1
 
-o.guifont = 'ComicShannsMono Nerd Font,Noto Sans Symbols,Noto Sans Symbols 2:h12'
+-- o.guifont = 'ComicShannsMono Nerd Font,Noto Sans Symbols,Noto Sans Symbols 2:h12'
 -- o.guifont = 'iMWritingMono Nerd Font,Noto Sans Symbols,Noto Sans Symbols 2:h12'
 -- o.guifont = 'MonoLisa Nerd Font Mono,Noto Sans Symbols,Noto Sans Symbols 2:h11'
 -- o.guifont = 'GeistMono Nerd Font,Noto Sans Symbols,Noto Sans Symbols 2:h12'
@@ -83,7 +83,7 @@ vim.g.neovide_hide_mouse_when_typing = true
 vim.g.neovide_scroll_animation_length = 0.1
 vim.g.neovide_scroll_animation_far_lines = 1
 vim.g.neovide_refresh_rate = 120
-vim.g.neovide_cursor_animation_length = 0
+-- vim.g.neovide_cursor_animation_length = 0
 vim.g.neovide_cursor_animate_in_insert_mode = false
 vim.g.neovide_scale_factor = 1
 

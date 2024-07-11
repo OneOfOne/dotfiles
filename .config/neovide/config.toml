@@ -1,0 +1,9 @@
+size = "2650x1440"
+vsync = false
+fork = true
+
+[font]
+normal = ["ComicShannsMono Nerd Font", "MonoLisa Nerd Font Mono"]
+size = 13
+hinting = "full"
+edging = "antialias"

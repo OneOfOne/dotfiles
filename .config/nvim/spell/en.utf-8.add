@@ -277,6 +277,7 @@ sdk
 sed
 seg
 semver
+sendgrid
 serde
 serializable
 session
@@ -306,6 +307,7 @@ struct
 stylua
 subdir
 svc
+svg
 sys
 syscall
 systemctl
@@ -377,5 +379,3 @@ zipcode
 zsh
 zshrc
 µ
-sendgrid
-svg

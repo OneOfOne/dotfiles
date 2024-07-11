@@ -22,6 +22,7 @@ noborderrule=2
 position=1280,0
 positionrule=2
 size=2560,1440
+sizerule=2
 title=NVIM
 windowrole=messages
 wmclass=steam_app_1245620
@@ -42,6 +43,7 @@ position=1280,0
 size=2560,1440
 sizerule=2
 skiptaskbar=true
+strictgeometryrule=2
 windowrole=messages
 wmclass=wow.exe
 wmclassmatch=1
@@ -108,7 +110,7 @@ maxsize=2560,1440
 noborder=true
 noborderrule=2
 position=4394,0
-positionrule=2
+positionrule=3
 size=720,720
 sizerule=2
 skiptaskbar=true
@@ -141,21 +143,17 @@ wmclassmatch=1
 
 [16]
 Description=Discord
-below=true
 clientmachine=localhost
-ignoregeometry=true
-maxsize=2400,1400
 noborder=true
-noborderrule=3
+noborderrule=2
 position=0,0
 positionrule=3
-size=1280,720
-sizerule=3
 skiptaskbar=true
 skiptaskbarrule=2
 types=1
 windowrole=messages
-wmclass=discord
+wmclass=electron discord
+wmclasscomplete=true
 wmclassmatch=1
 
 [17]
@@ -219,11 +217,14 @@ adaptivesyncrule=2
 clientmachine=localhost
 noborder=true
 noborderrule=2
-size=2560,1440
+position=1280,0
+positionrule=2
+size=2560,1441
 sizerule=2
 title=NVIM
 windowrole=messages
-wmclass=steam_app_553850
+wmclass=steam_app_553850 steam_app_553850
+wmclasscomplete=true
 wmclassmatch=1
 
 [20]
@@ -540,8 +541,8 @@ wmclasscomplete=true
 wmclassmatch=1
 
 [General]
-count=23
-rules=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23
+count=25
+rules=b9be79da-886f-48aa-86e4-8a22e3a1c1c8,d893340f-c787-4cd0-afe8-32ee76f11ac5,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23
 
 [a0a253d2-9a34-4b95-9240-7a3e990f81c1]
 Description=All
@@ -601,4 +602,28 @@ noborder=true
 noborderrule=2
 wmclass=steam_app_0 steam_app_0
 wmclasscomplete=true
+wmclassmatch=1
+
+[b9be79da-886f-48aa-86e4-8a22e3a1c1c8]
+Description=wow beta
+clientmachine=localhost
+noborder=true
+noborderrule=2
+position=1280,0
+positionrule=2
+size=2560,1440
+sizerule=2
+wmclass=wowb.exe
+wmclassmatch=1
+
+[d893340f-c787-4cd0-afe8-32ee76f11ac5]
+Description=Application settings for gamescope
+adaptivesyncrule=2
+noborder=true
+noborderrule=2
+position=1280,0
+positionrule=2
+size=2560,1440
+sizerule=2
+wmclass=gamescope
 wmclassmatch=1
