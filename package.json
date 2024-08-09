@@ -6,6 +6,7 @@
 	"author": "OneOfOne",
 	"license": "MIT",
 	"dependencies": {
+		"@ast-grep/cli": "^0.26.0",
 		"@biomejs/biome": "latest",
 		"@vtsls/language-server": "latest",
 		"bash-language-server": "latest",
@@ -18,5 +19,5 @@
 		"vscode-langservers-extracted": "latest",
 		"yaml-language-server": "latest"
 	},
-	"trustedDependencies": ["@biomejs/biome", "bun", "core-js"]
+	"trustedDependencies": ["@ast-grep/cli", "@biomejs/biome", "bun", "core-js"]
 }

@@ -61,4 +61,10 @@ return {
 		},
 	},
 	{ 'akinsho/git-conflict.nvim', version = '*', config = true },
+	{
+		'viocost/viedit',
+		config = function()
+			require('viedit').setup()
+		end,
+	},
 }

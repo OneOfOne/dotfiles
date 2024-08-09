@@ -1,12 +1,15 @@
 vim.lsp.handlers['workspace/workspaceFolders'] = nil
 
 vim.diagnostic.config({
-	virtual_text = true,
+	-- virtual_text = true,
 	underline = true,
 	signs = true,
-	update_in_insert = true,
+	update_in_insert = false,
 	severity_sort = true,
+	float = true,
 })
+
+-- vim.cmd([[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false, max_width=80})]])
 
 return {
 	{
@@ -53,12 +56,12 @@ return {
 		opts = function(_, opts)
 			local nls = require('null-ls').builtins
 			opts.sources = { --override lazyvim's default sources
-				-- nls.code_actions.gitsigns,
+				nls.code_actions.gitsigns,
 				-- go
 				nls.code_actions.gomodifytags,
 				nls.code_actions.impl,
 				nls.formatting.goimports,
-				nls.diagnostics.golangci_lint,
+				-- nls.diagnostics.golangci_lint,
 				-- ts
 				nls.formatting.biome.with({
 					filetypes = {
