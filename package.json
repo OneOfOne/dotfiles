@@ -6,7 +6,7 @@
 	"author": "OneOfOne",
 	"license": "MIT",
 	"dependencies": {
-		"@ast-grep/cli": "^0.26.0",
+		"@ast-grep/cli": "^0.26.2",
 		"@biomejs/biome": "latest",
 		"@vtsls/language-server": "latest",
 		"bash-language-server": "latest",

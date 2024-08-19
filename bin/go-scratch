@@ -1,6 +1,6 @@
 #!/bin/zsh
 set -e
-EDITOR="wvim"
+EDITOR="neovide"
 GOPATH="$(go env GOPATH)"
 BASE="$GOPATH/src/tmp/"
 
@@ -65,7 +65,8 @@ func BenchmarkMain(b *testing.B) {
 		}
 	})
 }" >"${D}/main_test.$ARG"
-
+pushd "${D}"
+go mod init
 $EDITOR "$D"
 
 echo -n "delete '$D'? " && read Y

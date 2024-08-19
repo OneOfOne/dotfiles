@@ -50,6 +50,7 @@ wmclassmatch=1
 
 [11]
 Description=Overwatch
+adaptivesyncrule=2
 clientmachine=localhost
 ignoregeometry=true
 noborder=true
