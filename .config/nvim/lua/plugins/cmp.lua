@@ -92,12 +92,11 @@ return {
 				completeopt = 'menu,menuone,noinsert,noselect',
 			}
 			--
-			-- opts.performance = {
-			-- 	async_budget = 1,
-			-- 	debounce = 250,
-			-- 	throttle = 250,
-			-- 	max_view_entries = 100,
-			-- }
+			opts.performance = {
+				debounce = 10,
+				throttle = 10,
+				max_view_entries = 100,
+			}
 
 			local compare = require('cmp.config.compare')
 			opts.sorting = {
@@ -105,9 +104,14 @@ return {
 				comparators = {
 					compare.offset,
 					compare.exact,
+					compare.score,
 					sort_by_kind,
 					sort_by_name,
-					compare.score,
+					compare.recently_used,
+					compare.locality,
+					compare.sort_text,
+					compare.length,
+					compare.order,
 				},
 			}
 			--

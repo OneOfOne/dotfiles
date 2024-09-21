@@ -27,11 +27,11 @@ plugins=(
 	copyfile
 	dotenv
 	isodate
-	ripgrep
 	zsh-syntax-highlighting
 	zsh-interactive-cd
 	git
 	zaw
+	aliases
 )
 
 [[ -d "${CLOUDSDK_HOME}" ]] && plugins+=(gcloud kubectl)

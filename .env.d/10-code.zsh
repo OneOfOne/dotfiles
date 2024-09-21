@@ -125,12 +125,12 @@ function rebuildgotools {
 	git pull && go mod vendor && make install || true
 	popd
 
-	go install mvdan.cc/gofumpt@latest
-	go install golang.org/x/tools/gopls@latest
-	go install golang.org/x/tools/cmd/goimports@latest
-	go install github.com/fatih/gomodifytags@latest
-	go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
-	go install github.com/josharian/impl@latest
+	go install -v mvdan.cc/gofumpt@latest
+	go install -v golang.org/x/tools/gopls@latest
+	go install -v golang.org/x/tools/cmd/goimports@latest
+	go install -v github.com/fatih/gomodifytags@latest
+	go install -v github.com/golangci/golangci-lint/cmd/golangci-lint@latest
+	go install -v github.com/josharian/impl@latest
 
 	pkill -9 gopls &>/dev/null || true
 }

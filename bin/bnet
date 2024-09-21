@@ -1,58 +1,13 @@
 #!/bin/sh
-WowDir="/win/d/World of Warcraft"
-AppsDir="$WowDir/apps"
-export WINEPREFIX=$HOME/wine/bnet
-export WINEFSYNC=1
-export WINEFSYNC_FUTEX2=1
-export WINEFSYNC_SPINCOUNT=100
+set -e
+export WINEPREFIX="/games/hgl/wine/Battle.Net/pfx/"
+cd "$WINEPREFIX/drive_c"
 
-export STAGING_SHARED_MEMORY=1
-export DXVK_ASYNC=1
-export DXVK_HUD=fps
-export DXVK_CONFIG_FILE=$HOME/wine/games/dxvk.conf
-
-export VKD3D_CONFIG=force_static_cbv,dxr,dxr11
-
-export __GL_DXVK_OPTIMIZATIONS=1
-export __GL_SHADER_DISK_CACHE=1
-export __GL_SHADER_DISK_CACHE_SKIP_CLEANUP=1
-
-export WINE_FULLSCREEN_FSR=1
-export WINE_FULLSCREEN_FSR_CUSTOM_MODE=2560x1440
-#export WINEDEBUG=
-
-bgstuff() {
-	sudo /usr/lib/gamemode/cpugovctl set performance
-	cd "$WowDir/_retail_"
-	# delete the d3d12 dll that comes with wow, we use our own for performance reasons
-	inotifywait --include d3d12.dll -e close . && sleep 1s && /bin/rm -v d3d12.dll
-	sleep 5m && sudo renice -n -5 $(pidof WoW.exe)
-}
-
-if [ "$1" = "" ]; then
-	bgstuff &
-	cd "$WowDir"
-	wine "World of Warcraft Launcher.exe" &
-	sleep 30s && sudo renice -n -10 $(pidof wineserver)
-	jobs -p
-	wineserver -w
-	pkill inotifywait
-	sudo /usr/lib/gamemode/cpugovctl set schedutil
-elif [ "$1" = "k" ]; then
-	wineserver -k
-	kill -9 $(pgrep exe) &>/dev/null
-elif [ "$1" = "curse" ]; then
-	cd "$AppsDir"
-	./CurseForge*
+if [ "$1" = "tsm" ]; then
+	cd tsm
+	wine ./app/TSMApplication.exe
 elif [ "$1" = "logs" ]; then
-	cd "$AppsDir"
-	./Warcraft-Logs-Uploader*
-elif [ "$1" = "wa" ]; then
-	cd "$AppsDir"
-	./WeakAuras-Companion*
-elif [ "$1" = "amr" ]; then
-	cd "$AppsDir/amr/AskMrRobotClient"
-	wine simclient.exe
+	./warcraftlogs*.appimage
 else
 	"$@"
 fi

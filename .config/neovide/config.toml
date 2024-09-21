@@ -3,7 +3,12 @@ vsync = false
 fork = true
 
 [font]
-normal = ["ComicShannsMono Nerd Font", "MonoLisa Nerd Font Mono"]
-size = 13
+normal = [
+	"CaskaydiaMono Nerd Font",
+	"Lilex Nerd Font Mono",
+	"ComicShannsMono Nerd Font",
+	"MonoLisa Nerd Font Mono",
+]
+size = 12
 hinting = "full"
 edging = "antialias"
