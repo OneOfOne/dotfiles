@@ -7,6 +7,14 @@ return {
 	{
 		'nvim-telescope/telescope.nvim',
 		dependencies = {
+			-- {
+			-- 	'iguanacucumber/magazine.nvim',
+			-- 	url = 'https://github.com/iguanacucumber/magazine.nvim',
+			-- 	name = 'nvim-cmp',
+			-- 	-- dev = true,
+			-- 	-- build = 'git clone https://github.com/iguanacucumber/magazine.nvim ~/projects/nvim-cmp/',
+			-- },
+
 			{
 				'isak102/telescope-git-file-history.nvim',
 				dependencies = { 'tpope/vim-fugitive' },
@@ -69,15 +77,6 @@ return {
 						end,
 					},
 				},
-				file_ignore_patterns = {
-					'node_modules',
-					'.env',
-					'yarn.lock',
-					'target',
-					'build',
-					'dist',
-					'.git',
-				},
 			},
 			pickers = {
 				buffers = {
@@ -88,11 +87,11 @@ return {
 					theme = 'dropdown',
 				},
 				find_files = {
-					file_ignore_patterns = { 'node_modules', '.git', '.venv' },
+					file_ignore_patterns = { 'node_modules', '.git', '.venv', 'build', 'dist' },
 					hidden = true,
 				},
 				live_grep = {
-					file_ignore_patterns = { 'node_modules', '.git', '.venv' },
+					file_ignore_patterns = { 'node_modules', '.git', '.venv', 'build', 'dist' },
 					additional_args = function()
 						return { '--hidden', '--mmap' }
 					end,

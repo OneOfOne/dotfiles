@@ -60,7 +60,6 @@ return {
 			restriction_mode = 'hint',
 		},
 	},
-	{ 'akinsho/git-conflict.nvim', version = '*', config = true },
 	{
 		'viocost/viedit',
 		config = function()

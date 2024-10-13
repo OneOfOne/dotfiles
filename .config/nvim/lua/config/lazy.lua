@@ -12,7 +12,8 @@ end
 
 ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
-
+vim.g.lazyvim_picker = 'telescope'
+-- vim.g.lazyvim_picker = 'fzf'
 require('lazy').setup({
 	spec = {
 		{ 'LazyVim/LazyVim', import = 'lazyvim.plugins' },
@@ -37,6 +38,8 @@ require('lazy').setup({
 		{ import = 'lazyvim.plugins.extras.util.dot' },
 
 		{ import = 'lazyvim.plugins.extras.editor.navic' },
+		-- { import = 'lazyvim.plugins.extras.editor.fzf' },
+		{ import = 'lazyvim.plugins.extras.editor.telescope' },
 		-- { import = 'lazyvim.plugins.extras.editor.mini-diff' },
 
 		{ import = 'lazyvim.plugins.extras.ui.edgy' },

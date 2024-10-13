@@ -1,13 +1,36 @@
 #!/bin/sh
 set -e
-export WINEPREFIX="/games/hgl/wine/Battle.Net/pfx/"
+export WINEPREFIX=/games/battle.net
+export WINEDEBUG=-all
+export DXVK_LOG_LEVEL=none
+export VKD3D_DEBUG=none
+export VKD3D_SHADER_DEBUG=none
+export ENABLE_HDR_WSI=1
+export DXVK_HDR=1
+
 cd "$WINEPREFIX/drive_c"
 
 if [ "$1" = "tsm" ]; then
 	cd tsm
 	wine ./app/TSMApplication.exe
+
 elif [ "$1" = "logs" ]; then
 	./warcraftlogs*.appimage
-else
+
+elif [ "$1" = "wt" ]; then
+	shift
+	winetricks "$@"
+
+elif [ "$1" = "w" ]; then
+	shift
 	"$@"
+
+elif [ "$1" = "k" ]; then
+	wineserver -k
+
+else
+	cd "Program Files (x86)/Battle.net"
+	bnet tsm &
+	wine Battle.net.exe
+	wineserver -w
 fi

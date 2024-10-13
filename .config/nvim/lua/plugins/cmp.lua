@@ -57,7 +57,11 @@ end
 
 return {
 	{
-		'hrsh7th/nvim-cmp',
+		'iguanacucumber/magazine.nvim',
+		name = 'nvim-cmp',
+		-- dev = true,
+		-- build = 'git clone https://github.com/iguanacucumber/magazine.nvim ~/projects/nvim-cmp/',
+
 		dependencies = {
 			'onsails/lspkind.nvim',
 			{
@@ -93,8 +97,8 @@ return {
 			}
 			--
 			opts.performance = {
-				debounce = 10,
-				throttle = 10,
+				debounce = 0,
+				throttle = 0,
 				max_view_entries = 100,
 			}
 

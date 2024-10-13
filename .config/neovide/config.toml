@@ -9,6 +9,6 @@ normal = [
 	"ComicShannsMono Nerd Font",
 	"MonoLisa Nerd Font Mono",
 ]
-size = 12
+size = 11
 hinting = "full"
 edging = "antialias"
