@@ -7,14 +7,6 @@ return {
 	{
 		'nvim-telescope/telescope.nvim',
 		dependencies = {
-			-- {
-			-- 	'iguanacucumber/magazine.nvim',
-			-- 	url = 'https://github.com/iguanacucumber/magazine.nvim',
-			-- 	name = 'nvim-cmp',
-			-- 	-- dev = true,
-			-- 	-- build = 'git clone https://github.com/iguanacucumber/magazine.nvim ~/projects/nvim-cmp/',
-			-- },
-
 			{
 				'isak102/telescope-git-file-history.nvim',
 				dependencies = { 'tpope/vim-fugitive' },

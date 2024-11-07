@@ -61,9 +61,9 @@ o.completeopt:append('noinsert')
 
 o.grepprg = 'rg --hidden --vimgrep'
 
-o.timeoutlen = 500
-o.ttimeoutlen = 100
-o.updatetime = 250
+-- o.timeoutlen = 500
+-- o.ttimeoutlen = 100
+-- o.updatetime = 250
 
 -- better selection
 o.selection = 'inclusive'
@@ -71,7 +71,6 @@ o.virtualedit = 'onemore'
 -- o.selectmode = 'mouse,key'
 o.mousemodel = ''
 
-o.foldmethod = 'indent'
 o.foldlevelstart = -1
 
 -- o.guifont = 'ComicShannsMono Nerd Font,Noto Sans Symbols,Noto Sans Symbols 2:h12'
@@ -89,11 +88,11 @@ vim.g.neovide_scale_factor = 1
 
 -- local utils = require('config.utils')
 --
--- -- something keeps overriding foldexpr
--- utils.setTimeout(250, function()
--- 	vim.o.foldmethod = 'indent'
--- 	vim.o.foldtext = "v:lua.require('config.utils').foldLines()"
--- 	vim.o.foldexpr = "v:lua.require('lazyvim.util').ui.foldexpr()"
--- end)
+-- something keeps overriding foldexpr
+require('config.utils').setTimeout(250, function()
+	vim.o.foldmethod = 'expr'
+	vim.o.foldtext = "v:lua.require('config.utils').foldLines()"
+	-- vim.o.foldexpr = "v:lua.require('lazyvim.util').ui.foldexpr()"
+end)
 --
 --

@@ -50,8 +50,8 @@ return {
 					surface2 = '#3A3D4A',
 					surface1 = '#454545', --''#5F515D',
 					surface0 = '#404040',
-					base = '#202020',
-					mantle = '#252525',
+					base = '#17212c',
+					mantle = '#17212c',
 					crust = '#353535',
 				},
 			},
@@ -98,6 +98,7 @@ return {
 	},
 	{
 		'folke/noice.nvim',
+		-- enabled = false,
 		opts = {
 			presets = {
 				lsp_doc_border = true,
@@ -131,5 +132,24 @@ return {
 				},
 			},
 		},
+	},
+	{
+		'folke/snacks.nvim',
+		opts = {
+			statuscolumn = {
+				enabled = true,
+				folds = {
+					open = true, -- show open fold icons
+					git_hl = true, -- use Git Signs hl for fold icons
+				},
+			},
+		},
+	},
+	{
+		'adelarsq/image_preview.nvim',
+		event = 'VeryLazy',
+		config = function()
+			require('image_preview').setup()
+		end,
 	},
 }

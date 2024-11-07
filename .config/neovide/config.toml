@@ -4,8 +4,7 @@ fork = true
 
 [font]
 normal = [
-	"Monaspace Neon",
-	"CaskaydiaMono Nerd Font",
+	"CaskaydiaMono Nerd Font Mono",
 	"Lilex Nerd Font Mono",
 	"ComicShannsMono Nerd Font",
 	"MonoLisa Nerd Font Mono",

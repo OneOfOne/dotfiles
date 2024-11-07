@@ -17,7 +17,7 @@ vim.g.lazyvim_picker = 'telescope'
 require('lazy').setup({
 	spec = {
 		{ 'LazyVim/LazyVim', import = 'lazyvim.plugins' },
-
+		-- { import = 'lazyvim.plugins.extras.coding.blink' },
 		{ import = 'lazyvim.plugins.extras.lang.json' },
 		{ import = 'lazyvim.plugins.extras.lang.typescript' },
 		{ import = 'lazyvim.plugins.extras.lang.python' },

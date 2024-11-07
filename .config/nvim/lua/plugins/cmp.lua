@@ -56,9 +56,14 @@ local function sort_by_kind(e1, e2)
 end
 
 return {
+	{ 'iguanacucumber/mag-nvim-lsp', name = 'cmp-nvim-lsp', opts = {} },
+	{ 'iguanacucumber/mag-nvim-lua', name = 'cmp-nvim-lua' },
+	{ 'iguanacucumber/mag-buffer', name = 'cmp-buffer' },
+	{ 'iguanacucumber/mag-cmdline', name = 'cmp-cmdline' },
 	{
 		'iguanacucumber/magazine.nvim',
 		name = 'nvim-cmp',
+		-- disabled = true,
 		-- dev = true,
 		-- build = 'git clone https://github.com/iguanacucumber/magazine.nvim ~/projects/nvim-cmp/',
 
@@ -83,23 +88,8 @@ return {
 
 			opts.preselect = cmp.PreselectMode.None
 
-			-- opts.matching = {
-			-- 	disallow_fuzzy_matching = true,
-			-- 	disallow_fullfuzzy_matching = true,
-			-- 	disallow_partial_fuzzy_matching = true,
-			-- 	disallow_partial_matching = true,
-			-- 	disallow_prefix_unmatching = false,
-			-- }
-
 			opts.completion = {
-				-- autocomplete = false, -- controlled in autocmds.lua
 				completeopt = 'menu,menuone,noinsert,noselect',
-			}
-			--
-			opts.performance = {
-				debounce = 0,
-				throttle = 0,
-				max_view_entries = 100,
 			}
 
 			local compare = require('cmp.config.compare')
@@ -118,7 +108,7 @@ return {
 					compare.order,
 				},
 			}
-			--
+
 			-- opts.sources = cmp.config.sources({
 			-- 	{ name = 'cmp_ai' },
 			-- })
@@ -141,10 +131,72 @@ return {
 				documentation = cmp_window.bordered(),
 			}
 
-			opts.experimental = {}
+			opts.experimental = {
+				ghost_text = true,
+			}
 
 			-- local cmp_autopairs = require('nvim-autopairs.completion.cmp')
 			-- cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
 		end,
+	},
+	{
+		'saghen/blink.cmp',
+		version = '*',
+		enabled = false,
+		opts_extend = { 'sources.completion.enabled_providers' },
+		dependencies = {
+			'rafamadriz/friendly-snippets',
+			-- add blink.compat to dependencies
+			{
+				'saghen/blink.compat',
+				opts = {
+					impersonate_nvim_cmp = true,
+					-- enable_events = true,
+				},
+			},
+		},
+		event = 'InsertEnter',
+
+		---@module 'blink.cmp'
+		---@type blink.cmp.Config
+		opts = {
+			highlight = {
+				-- sets the fallback highlight groups to nvim-cmp's highlight groups
+				-- useful for when your theme doesn't support blink.cmp
+				-- will be removed in a future release, assuming themes add support
+				use_nvim_cmp_as_default = false,
+			},
+			-- set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
+			-- adjusts spacing to ensure icons are aligned
+			nerd_font_variant = 'mono',
+			windows = {
+				autocomplete = {
+					draw = 'reversed',
+					winblend = vim.o.pumblend,
+				},
+				documentation = {
+					auto_show = true,
+				},
+				ghost_text = {
+					enabled = true,
+				},
+			},
+
+			-- experimental auto-brackets support
+			accept = { auto_brackets = { enabled = true } },
+
+			-- experimental signature help support
+			trigger = { signature_help = { enabled = true } },
+			sources = {
+				completion = {
+					-- remember to enable your providers here
+					enabled_providers = { 'lsp', 'path', 'snippets', 'buffer' },
+				},
+			},
+
+			keymap = {
+				preset = 'enter',
+			},
+		},
 	},
 }
