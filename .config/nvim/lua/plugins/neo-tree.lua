@@ -18,10 +18,6 @@ return {
 						'node_modules',
 					},
 				},
-				follow_current_file = {
-					enabled = true,
-					leave_dirs_open = false,
-				},
 				window = {
 					mappings = {
 						['<leader>o'] = 'system_open',
@@ -29,6 +25,7 @@ return {
 						['<leader>h'] = 'show_history',
 					},
 				},
+				use_libuv_file_watcher = true,
 			},
 			commands = {
 				system_open = function(state)

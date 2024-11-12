@@ -9,6 +9,7 @@ return {
 	{
 		'OneOfOne/spm.nvim',
 		config = true,
+		lazy = false,
 		--enabled = false,
 	},
 	{

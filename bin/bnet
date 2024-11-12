@@ -5,7 +5,9 @@ export WINEDEBUG=-all
 export DXVK_LOG_LEVEL=none
 export VKD3D_DEBUG=none
 export VKD3D_SHADER_DEBUG=none
-export ENABLE_HDR_WSI=1
+# export ENABLE_HDR_WSI=1
+export WINE_CPU_TOPOLOGY="16:0,1,2,3,4,5,6,7,16,17,18,19,20,21,22,23"
+# export ENABLE_GAMESCOPE_WSI=1
 export DXVK_HDR=1
 trap "bnet k" SIGINT SIGTERM
 
@@ -33,9 +35,11 @@ elif [ "$1" = "r" ]; then
 	wineserver -w
 
 elif [ "$1" = "k" ]; then
+	pkill -9 gamescope-wl || true
 	wineserver -k
-	pkill -9 gamescope-wl
 
 else
-	gamescope --hdr-enabled -W 2560 -H 1440 --adaptive-sync -b -- game-performance bnet r &>/dev/null
+	# gamescope -W 2560 -H 1440 --adaptive-sync --hdr-enabled --hdr-itm-enable --hdr-debug-force-support -b -- gamemoderun bnet r &>/dev/null
+	bnet r &>/dev/null
+	# gamescope -w 2560 -h 1440 --adaptive-sync -b -- game-performance bnet r
 fi

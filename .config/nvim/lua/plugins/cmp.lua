@@ -63,9 +63,7 @@ return {
 	{
 		'iguanacucumber/magazine.nvim',
 		name = 'nvim-cmp',
-		-- disabled = true,
-		-- dev = true,
-		-- build = 'git clone https://github.com/iguanacucumber/magazine.nvim ~/projects/nvim-cmp/',
+		-- enabled = false,
 
 		dependencies = {
 			'onsails/lspkind.nvim',
@@ -138,65 +136,5 @@ return {
 			-- local cmp_autopairs = require('nvim-autopairs.completion.cmp')
 			-- cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
 		end,
-	},
-	{
-		'saghen/blink.cmp',
-		version = '*',
-		enabled = false,
-		opts_extend = { 'sources.completion.enabled_providers' },
-		dependencies = {
-			'rafamadriz/friendly-snippets',
-			-- add blink.compat to dependencies
-			{
-				'saghen/blink.compat',
-				opts = {
-					impersonate_nvim_cmp = true,
-					-- enable_events = true,
-				},
-			},
-		},
-		event = 'InsertEnter',
-
-		---@module 'blink.cmp'
-		---@type blink.cmp.Config
-		opts = {
-			highlight = {
-				-- sets the fallback highlight groups to nvim-cmp's highlight groups
-				-- useful for when your theme doesn't support blink.cmp
-				-- will be removed in a future release, assuming themes add support
-				use_nvim_cmp_as_default = false,
-			},
-			-- set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
-			-- adjusts spacing to ensure icons are aligned
-			nerd_font_variant = 'mono',
-			windows = {
-				autocomplete = {
-					draw = 'reversed',
-					winblend = vim.o.pumblend,
-				},
-				documentation = {
-					auto_show = true,
-				},
-				ghost_text = {
-					enabled = true,
-				},
-			},
-
-			-- experimental auto-brackets support
-			accept = { auto_brackets = { enabled = true } },
-
-			-- experimental signature help support
-			trigger = { signature_help = { enabled = true } },
-			sources = {
-				completion = {
-					-- remember to enable your providers here
-					enabled_providers = { 'lsp', 'path', 'snippets', 'buffer' },
-				},
-			},
-
-			keymap = {
-				preset = 'enter',
-			},
-		},
 	},
 }

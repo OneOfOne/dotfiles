@@ -37,11 +37,6 @@ au('ModeChanged', { '*' }, function()
 	end
 end)
 
-au('FileType', { 'lazyterm', 'terminal', 'qf' }, function()
-	vim.wo.spell = false
-	vim.wo.winfixbuf = true
-end)
-
 au('FileType', { 'json', 'jsonc', 'Outline' }, function()
 	vim.wo.spell = false
 	vim.wo.conceallevel = 0
@@ -51,12 +46,7 @@ au('FileType', { 'notify' }, function()
 	vim.bo.filetype = 'markdown'
 	vim.wo.spell = false
 end)
--- au('CursorMovedI', nil, function()
--- 	require('cmp').close()
--- end)
---
--- au('CursorHoldI', nil, function()
--- 	if #vim.fn.getline('.') > 1 then
--- 		require('cmp').complete()
--- 	end
--- end)
+
+au({ 'TermOpen', 'TermEnter' }, 'term://*', function()
+	vim.wo.winfixbuf = true
+end)

@@ -25,14 +25,14 @@ map({ 'i' }, '<c-s-v>', '<left><c-o>"*p', 'paste selection')
 map({ 't' }, '<c-s-v>', '<c-\\><c-n>"*pi', 'paste selection')
 
 map('', '<LeftRelease>', function()
-	if vim.bo.ft == 'lazyterm' then
+	if vim.bo.ft == 'snacks_terminal' then
 		return '<LeftRelease>i'
 	end
 	return '<LeftRelease>'
 end, '', { expr = true })
 
 map('', '<MiddleRelease>', function()
-	if vim.bo.ft == 'lazyterm' then
+	if vim.bo.ft == 'snacks_terminal' then
 		return '<MiddleRelease>i'
 	end
 	return '<MiddleRelease>'
