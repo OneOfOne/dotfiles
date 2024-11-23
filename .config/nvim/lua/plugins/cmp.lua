@@ -15,10 +15,10 @@ local modified_priority = {
 
 local function rust_trait(e)
 	local ci = e.completion_item
-	if ci.labelDetails ~= nil and ci.labelDetails.detail ~= nil then
-		local ld = ci.labelDetails.detail
-		return string.find(ld, '^ %(use ') ~= nil or string.find(ld, '^ %(as ') ~= nil
-	end
+	-- if ci ~= nil and ci.labelDetails ~= nil and ci.labelDetails.detail ~= nil then
+	-- 	local ld = ci.labelDetails.detail
+	-- 	return string.find(ld, '^ %(use ') ~= nil or string.find(ld, '^ %(as ') ~= nil
+	-- end
 end
 
 local function modified_kind(e)
@@ -57,13 +57,17 @@ end
 
 return {
 	{ 'iguanacucumber/mag-nvim-lsp', name = 'cmp-nvim-lsp', opts = {} },
-	{ 'iguanacucumber/mag-nvim-lua', name = 'cmp-nvim-lua' },
 	{ 'iguanacucumber/mag-buffer', name = 'cmp-buffer' },
 	{ 'iguanacucumber/mag-cmdline', name = 'cmp-cmdline' },
+	{ 'https://codeberg.org/FelipeLema/cmp-async-path', name = 'cmp-path' },
 	{
 		'iguanacucumber/magazine.nvim',
 		name = 'nvim-cmp',
+		version = false,
 		-- enabled = false,
+		-- dev = true,
+		-- dir = '~/code/nvim/LazyVim',
+		optional = true,
 
 		dependencies = {
 			'onsails/lspkind.nvim',
@@ -108,9 +112,8 @@ return {
 			}
 
 			-- opts.sources = cmp.config.sources({
-			-- 	{ name = 'cmp_ai' },
-			-- })
 			-- 	{ name = 'copilot' },
+			-- 	{ name = 'mineut' },
 			--
 			-- 	{ name = 'nvim_lsp' },
 			-- 	{ name = 'crates' },
@@ -132,9 +135,100 @@ return {
 			opts.experimental = {
 				ghost_text = true,
 			}
-
-			-- local cmp_autopairs = require('nvim-autopairs.completion.cmp')
-			-- cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
 		end,
 	},
+	{
+		'saghen/blink.cmp',
+		optional = true,
+		version = false,
+		build = 'cargo build --release',
+		dependencies = {
+			-- {
+			-- 	'saghen/blink.compat',
+			-- 	enabled = false,
+			-- 	opts = {
+			-- 		-- some plugins lazily register their completion source when nvim-cmp is
+			-- 		-- loaded, so pretend that we are nvim-cmp, and that nvim-cmp is loaded.
+			-- 		-- most plugins don't do this, so this option should rarely be needed
+			-- 		-- NOTE: only has effect when using lazy.nvim plugin manager
+			-- 		impersonate_nvim_cmp = true,
+			--
+			-- 		-- some sources, like codeium.nvim, rely on nvim-cmp events to function properly
+			-- 		-- when enabled, emit those events
+			-- 		-- NOTE: somewhat hacky, may harm performance or break
+			-- 		enable_events = true,
+			--
+			-- 		-- print some debug information. Might be useful for troubleshooting
+			-- 		debug = true,
+			-- 	},
+			-- },
+			-- -- {
+			-- -- 	'nikutsuki/bcp.nvim',
+			-- -- 	dependecies = { 'zbirenbaum/copilot.lua' },
+			-- --
+			-- -- 	config = function()
+			-- -- 		require('bcp').setup()
+			-- -- 	end,
+			-- -- },
+		},
+		opts = {
+			-- completion = {
+			-- 	-- remember to enable your providers here
+			-- 	enabled_providers = { 'lsp', 'path', 'snippets', 'buffer', 'copilot' },
+			-- },
+			-- providers = {
+			-- 	-- create provider
+			-- 	copilot = {
+			-- 		name = 'copilot', -- IMPORTANT: use the same name as you would for nvim-cmp
+			-- 		module = 'blink.compat.source',
+			--
+			-- 		-- all blink.cmp source config options work as normal:
+			-- 		score_offset = -3,
+			--
+			-- 		opts = {
+			-- 			-- this table is passed directly to the proxied completion source
+			-- 			-- as the `option` field in nvim-cmp's source config
+			--
+			-- 			-- this is an option from cmp-digraphs
+			-- 			-- cache_digraphs_on_start = true,
+			-- 		},
+			-- 	},
+			highlight = {
+				use_nvim_cmp_as_default = true,
+			},
+			windows = {
+				autocomplete = {
+					draw = {
+						columns = { { 'label', 'label_description', gap = 1 }, { 'kind_icon', 'kind' } },
+					},
+					border = 'rounded',
+				},
+				documentation = {
+					border = 'rounded',
+				},
+				signature_help = {
+					border = 'rounded',
+					scrollbar = true,
+				},
+			},
+		},
+	},
+	-- LSP servers and clients communicate what features they support through "capabilities".
+	--  By default, Neovim support a subset of the LSP specification.
+	--  With blink.cmp, Neovim has *more* capabilities which are communicated to the LSP servers.
+	--  Explanation from TJ: https://youtu.be/m8C0Cq9Uv9o?t=1275
+	--
+	-- This can vary by config, but in-general for nvim-lspconfig:
+	--
+	-- {
+	-- 	'neovim/nvim-lspconfig',
+	-- 	dependencies = { 'saghen/blink.cmp' },
+	-- 	config = function(_, opts)
+	-- 		local lspconfig = require('lspconfig')
+	-- 		for server, config in pairs(opts.servers or {}) do
+	-- 			config.capabilities = require('blink.cmp').get_lsp_capabilities(config.capabilities)
+	-- 			lspconfig[server].setup(config)
+	-- 		end
+	-- 	end,
+	-- },
 }

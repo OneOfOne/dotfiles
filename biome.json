@@ -1,5 +1,5 @@
 {
-	"$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+	"$schema": "node_modules/@biomejs/biome/configuration_schema.json",
 	"organizeImports": {
 		"enabled": true
 	},
@@ -17,6 +17,9 @@
 		},
 		"globals": ["__DEV__"]
 	},
+	"files": {
+		"ignore": ["dist/*", "android/*", "ios/*"]
+	},
 	"linter": {
 		"enabled": true,
 		"ignore": ["node_modules"],
@@ -32,22 +35,34 @@
 				"noNonNullAssertion": "off",
 				"useNamingConvention": "off",
 				"useFilenamingConvention": "off",
+				"noNamespaceImport": "off",
 				"useBlockStatements": "off",
 				"noDefaultExport": "off",
-				"noImplicitBoolean": "off"
+				"noImplicitBoolean": "off",
+				"useExplicitLengthCheck": "off",
+				"noNamespace": "off"
 			},
 			"suspicious": {
 				"noExplicitAny": "off",
 				"noArrayIndexKey": "off",
 				"noEmptyBlockStatements": "off",
 				"noConsoleLog": "off",
-				"useAwait": "off"
+				"useAwait": "off",
+				"noConsole": "off"
 			},
 			"correctness": {
-				"useExhaustiveDependencies": "off"
+				"useExhaustiveDependencies": "off",
+				"useImportExtensions": "off",
+				"noUndeclaredDependencies": "off",
+				"noNodejsModules": "off"
 			},
 			"performance": {
-				"noAccumulatingSpread": "off"
+				"noReExportAll": "off",
+				"noAccumulatingSpread": "off",
+				"noBarrelFile": "off"
+			},
+			"security": {
+				"noDangerouslySetInnerHtml": "off"
 			},
 			"nursery": {
 				"all": false

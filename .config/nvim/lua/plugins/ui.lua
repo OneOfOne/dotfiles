@@ -57,12 +57,14 @@ return {
 			},
 		},
 	},
-	{ 'EdenEast/nightfox.nvim' },
+	{
+		'https://gitlab.com/bartekjaszczak/finale-nvim',
+		config = function() end,
+	},
 	{
 		'LazyVim/LazyVim',
 		opts = {
-			colorscheme = 'catppuccin',
-			-- colorscheme = 'terafox',
+			colorscheme = 'finale',
 		},
 	},
 	{
@@ -144,12 +146,5 @@ return {
 				},
 			},
 		},
-	},
-	{
-		'adelarsq/image_preview.nvim',
-		event = 'VeryLazy',
-		config = function()
-			require('image_preview').setup()
-		end,
 	},
 }

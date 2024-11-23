@@ -47,6 +47,7 @@ o.showbreak = '❯ '
 o.startofline = true
 
 o.paste = false
+---@diagnostic disable-next-line: undefined-field
 o.clipboard:append('unnamed')
 
 o.undofile = false
@@ -73,11 +74,6 @@ o.mousemodel = ''
 
 o.foldlevelstart = -1
 
--- o.guifont = 'ComicShannsMono Nerd Font,Noto Sans Symbols,Noto Sans Symbols 2:h12'
--- o.guifont = 'iMWritingMono Nerd Font,Noto Sans Symbols,Noto Sans Symbols 2:h12'
--- o.guifont = 'MonoLisa Nerd Font Mono,Noto Sans Symbols,Noto Sans Symbols 2:h11'
--- o.guifont = 'GeistMono Nerd Font,Noto Sans Symbols,Noto Sans Symbols 2:h12'
--- o.guifont = 'SeriousShanns Nerd Font Mono,Noto Sans Symbols,Noto Sans Symbols 2:h12'
 vim.g.neovide_hide_mouse_when_typing = true
 vim.g.neovide_scroll_animation_length = 0.1
 vim.g.neovide_scroll_animation_far_lines = 1
@@ -92,7 +88,4 @@ vim.g.neovide_scale_factor = 1
 require('config.utils').setTimeout(250, function()
 	vim.o.foldmethod = 'expr'
 	vim.o.foldtext = "v:lua.require('config.utils').foldLines()"
-	-- vim.o.foldexpr = "v:lua.require('lazyvim.util').ui.foldexpr()"
 end)
---
---

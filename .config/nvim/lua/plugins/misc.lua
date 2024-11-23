@@ -8,9 +8,11 @@ return {
 	{ 'dstein64/nvim-scrollview', config = true },
 	{
 		'OneOfOne/spm.nvim',
+		dev = true,
+		dir = '~/code/nvim/spm.nvim',
 		config = true,
 		lazy = false,
-		--enabled = false,
+		-- enabled = false,
 	},
 	{
 		'folke/flash.nvim',
@@ -44,21 +46,6 @@ return {
 			default_mappings = true,
 			force_write_shada = false,
 			refresh_interval = 250,
-		},
-	},
-	{
-		'm4xshen/hardtime.nvim',
-		enabled = false,
-		dependencies = { 'MunifTanjim/nui.nvim', 'nvim-lua/plenary.nvim' },
-		opts = {
-			disabled_keys = {
-				['<Up>'] = {},
-				['<Down>'] = {},
-				['<Left>'] = {},
-				['<Right>'] = {},
-			},
-			disable_mouse = false,
-			restriction_mode = 'hint',
 		},
 	},
 	{

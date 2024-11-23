@@ -1,47 +1,67 @@
 vim.lsp.handlers['workspace/workspaceFolders'] = nil
 
-vim.diagnostic.config({
-	-- virtual_text = true,
-	underline = true,
-	signs = true,
-	update_in_insert = false,
-	severity_sort = true,
-	float = true,
-})
-
 -- vim.cmd([[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false, max_width=80})]])
 
 return {
 	{
 		'neovim/nvim-lspconfig',
-		opts = {
-			format_notify = true,
+		priority = 10,
+		opts = function(_, opts)
+			local ret = vim.tbl_deep_extend('force', opts, {
+				diagnostics = {
+					virtual_text = false,
+					signs = true,
+					underline = true,
+					update_in_insert = false,
+					severity_sort = true,
+					float = true,
+				},
+				format_notify = true,
 
-			inlay_hints = {
-				enabled = false,
-			},
-			codelens = {
-				enabled = true,
-			},
-			showMessage = {
-				messageActionItem = {
-					additionalPropertiesSupport = true,
+				inlay_hints = {
+					enabled = false,
 				},
-			},
-			servers = {
-				jsonls = {
-					commands = {
-						Format = {
-							function() end,
-						},
-					},
-					json = {
-						format = {
-							enable = false,
-						},
+				codelens = {
+					enabled = true,
+				},
+				showMessage = {
+					messageActionItem = {
+						additionalPropertiesSupport = true,
 					},
 				},
-				biome = {},
+				format = {
+					timeout_ms = 1000,
+				},
+				servers = {
+					jsonls = {
+						commands = {
+							Format = {
+								function() end,
+							},
+						},
+						json = {
+							format = {
+								enable = false,
+							},
+						},
+					},
+					biome = {},
+					html = {},
+				},
+			})
+			return ret
+		end,
+	},
+	{
+		'rachartier/tiny-inline-diagnostic.nvim',
+		-- enabled = false,
+		event = 'LspAttach', -- Or `LspAttach`
+		priority = 1000, -- needs to be loaded in first
+		opts = {
+			options = {
+				-- Show the source of the diagnostic.
+				show_source = true,
+				multiline = true,
 			},
 		},
 	},
@@ -59,15 +79,6 @@ return {
 				-- nls.diagnostics.golangci_lint,
 				-- ts
 				nls.formatting.biome.with({
-					filetypes = {
-						'javascript',
-						'javascriptreact',
-						'json',
-						'jsonc',
-						'typescript',
-						'typescriptreact',
-						'css',
-					},
 					args = {
 						'check',
 						'--write',
@@ -84,7 +95,6 @@ return {
 					filetypes = { 'sh', 'zsh' },
 				}),
 			}
-			opts.debug = true
 			return opts
 		end,
 	},
@@ -99,16 +109,16 @@ return {
 			textobjects = {
 				swap = {
 					enable = true,
-					swap_next = {
-						['[a'] = '@parameter.inner',
-					},
 					swap_previous = {
 						[']a'] = '@parameter.inner',
+					},
+					swap_next = {
+						['[a'] = '@parameter.inner',
 					},
 				},
 				lsp_interop = {
 					enable = true,
-					border = 'none',
+					border = 'rounded',
 					floating_preview_opts = {},
 					peek_definition_code = {
 						['<leader>df'] = '@function.outer',

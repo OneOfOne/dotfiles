@@ -162,6 +162,7 @@ jobqueue
 jpeg
 js
 json
+jsonb
 jsx
 jumpable
 kde
@@ -239,6 +240,7 @@ png
 polyfill
 popup
 pos
+posthog
 pprof
 preprocess
 printf
@@ -379,4 +381,3 @@ zipcode
 zsh
 zshrc
 µ
-jsonb

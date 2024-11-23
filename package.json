@@ -10,11 +10,11 @@
 		"@biomejs/biome": "latest",
 		"@vtsls/language-server": "latest",
 		"bash-language-server": "latest",
-		"bun": "latest",
+		"bun": "1.1.29",
 		"markdownlint-cli": "latest",
 		"marksman": "latest",
 		"typescript-language-server": "latest",
-		"vscode-html-languageservice": "latest",
+		"vscode-html-languageservice": "^5.3.1",
 		"vscode-json-languageservice": "latest",
 		"vscode-langservers-extracted": "latest",
 		"yaml-language-server": "latest"
