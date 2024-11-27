@@ -5,7 +5,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 	if vim.v.shell_error ~= 0 then
 		vim.api.nvim_echo({
 			{ 'Failed to clone lazy.nvim:\n', 'ErrorMsg' },
-			{ out, 'WarningMsg' },
+			{ out,                            'WarningMsg' },
 			{ '\nPress any key to exit...' },
 		}, true, {})
 		vim.fn.getchar()
@@ -18,14 +18,20 @@ vim.g.lazyvim_picker = 'telescope'
 -- vim.g.lazyvim_picker = 'fzf'
 require('lazy').setup({
 	spec = {
-		{ 'LazyVim/LazyVim', import = 'lazyvim.plugins' },
-		{ import = 'lazyvim.plugins.extras.coding.blink' },
+		{
+			'LazyVim/LazyVim',
+			import = 'lazyvim.plugins'
+		},
+
+		-- { import = 'lazyvim.plugins.extras.coding.blink', enabled = require('config.utils').is_local() },
 		{ import = 'lazyvim.plugins.extras.lang.json' },
 		{ import = 'lazyvim.plugins.extras.lang.typescript' },
 		{ import = 'lazyvim.plugins.extras.lang.python' },
 		{ import = 'lazyvim.plugins.extras.lang.yaml' },
 		{ import = 'lazyvim.plugins.extras.lang.go' },
 		{ import = 'lazyvim.plugins.extras.lang.rust' },
+
+		{ import = 'lazyvim.plugins.extras.formatting.biome' },
 		-- { import = 'lazyvim.plugins.extras.lang.clangd' },
 
 		{ import = 'lazyvim.plugins.extras.lsp.none-ls' },
@@ -35,8 +41,14 @@ require('lazy').setup({
 
 		{ import = 'lazyvim.plugins.extras.coding.mini-surround' },
 
-		{ import = 'lazyvim.plugins.extras.ai.copilot', enabled = require('config.utils').is_local() },
-		{ import = 'lazyvim.plugins.extras.ai.copilot-chat', enabled = require('config.utils').is_local() },
+		{
+			import = 'lazyvim.plugins.extras.ai.copilot',
+			enabled = require('config.utils').is_local()
+		},
+		{
+			import = 'lazyvim.plugins.extras.ai.copilot-chat',
+			enabled = require('config.utils').is_local()
+		},
 
 		{ import = 'lazyvim.plugins.extras.util.mini-hipatterns' },
 		{ import = 'lazyvim.plugins.extras.util.dot' },
