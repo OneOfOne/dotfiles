@@ -5,7 +5,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 	if vim.v.shell_error ~= 0 then
 		vim.api.nvim_echo({
 			{ 'Failed to clone lazy.nvim:\n', 'ErrorMsg' },
-			{ out,                            'WarningMsg' },
+			{ out, 'WarningMsg' },
 			{ '\nPress any key to exit...' },
 		}, true, {})
 		vim.fn.getchar()
@@ -20,10 +20,10 @@ require('lazy').setup({
 	spec = {
 		{
 			'LazyVim/LazyVim',
-			import = 'lazyvim.plugins'
+			import = 'lazyvim.plugins',
 		},
 
-		-- { import = 'lazyvim.plugins.extras.coding.blink', enabled = require('config.utils').is_local() },
+		{ import = 'lazyvim.plugins.extras.coding.blink', enabled = require('config.utils').is_local() },
 		{ import = 'lazyvim.plugins.extras.lang.json' },
 		{ import = 'lazyvim.plugins.extras.lang.typescript' },
 		{ import = 'lazyvim.plugins.extras.lang.python' },
@@ -43,11 +43,11 @@ require('lazy').setup({
 
 		{
 			import = 'lazyvim.plugins.extras.ai.copilot',
-			enabled = require('config.utils').is_local()
+			enabled = require('config.utils').is_local(),
 		},
 		{
 			import = 'lazyvim.plugins.extras.ai.copilot-chat',
-			enabled = require('config.utils').is_local()
+			enabled = require('config.utils').is_local(),
 		},
 
 		{ import = 'lazyvim.plugins.extras.util.mini-hipatterns' },

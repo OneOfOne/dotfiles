@@ -142,74 +142,38 @@ return {
 		optional = true,
 		version = false,
 		build = 'cargo build --release',
-		dependencies = {
-			-- {
-			-- 	'saghen/blink.compat',
-			-- 	enabled = false,
-			-- 	opts = {
-			-- 		-- some plugins lazily register their completion source when nvim-cmp is
-			-- 		-- loaded, so pretend that we are nvim-cmp, and that nvim-cmp is loaded.
-			-- 		-- most plugins don't do this, so this option should rarely be needed
-			-- 		-- NOTE: only has effect when using lazy.nvim plugin manager
-			-- 		impersonate_nvim_cmp = true,
-			--
-			-- 		-- some sources, like codeium.nvim, rely on nvim-cmp events to function properly
-			-- 		-- when enabled, emit those events
-			-- 		-- NOTE: somewhat hacky, may harm performance or break
-			-- 		enable_events = true,
-			--
-			-- 		-- print some debug information. Might be useful for troubleshooting
-			-- 		debug = true,
-			-- 	},
-			-- },
-			-- -- {
-			-- -- 	'nikutsuki/bcp.nvim',
-			-- -- 	dependecies = { 'zbirenbaum/copilot.lua' },
-			-- --
-			-- -- 	config = function()
-			-- -- 		require('bcp').setup()
-			-- -- 	end,
-			-- -- },
-		},
+		dependencies = {},
 		opts = {
-			-- completion = {
-			-- 	-- remember to enable your providers here
-			-- 	enabled_providers = { 'lsp', 'path', 'snippets', 'buffer', 'copilot' },
-			-- },
-			-- providers = {
-			-- 	-- create provider
-			-- 	copilot = {
-			-- 		name = 'copilot', -- IMPORTANT: use the same name as you would for nvim-cmp
-			-- 		module = 'blink.compat.source',
-			--
-			-- 		-- all blink.cmp source config options work as normal:
-			-- 		score_offset = -3,
-			--
-			-- 		opts = {
-			-- 			-- this table is passed directly to the proxied completion source
-			-- 			-- as the `option` field in nvim-cmp's source config
-			--
-			-- 			-- this is an option from cmp-digraphs
-			-- 			-- cache_digraphs_on_start = true,
-			-- 		},
-			-- 	},
-			highlight = {
+			appearance = {
 				use_nvim_cmp_as_default = true,
 			},
-			windows = {
-				autocomplete = {
+			completion = {
+				menu = {
 					draw = {
-						columns = { { 'label', 'label_description', gap = 1 }, { 'kind_icon', 'kind' } },
+						columns = {
+							{ 'label', 'label_description', gap = 1 },
+							{ 'kind_icon', 'source_name' },
+						},
 					},
 					border = 'rounded',
 				},
 				documentation = {
-					border = 'rounded',
+					window = {
+						border = 'rounded',
+					},
 				},
-				signature_help = {
+			},
+			signature = {
+				enabled = true,
+				window = {
 					border = 'rounded',
 					scrollbar = true,
 				},
+			},
+			fuzzy = {
+				sorts = { 'score', 'label', 'kind' },
+				use_typo_resistance = false,
+				max_items = 50,
 			},
 		},
 	},

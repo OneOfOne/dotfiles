@@ -95,7 +95,6 @@ return {
 	{
 		'nvim-treesitter/nvim-treesitter',
 		opts = {
-			-- ensure_installed = { 'vimdoc', 'luadoc', 'vim', 'lua', 'markdown', 'query' },
 			textobjects = {
 				swap = {
 					enable = true,
