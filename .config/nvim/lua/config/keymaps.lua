@@ -23,6 +23,7 @@ local remap = { noremap = false, remap = true }
 -- map({ 'i' }, '<c-v>', '<left><c-o>"+p', 'paste clipboard')
 map({ 'i' }, '<c-s-v>', '<left><c-o>"*p', 'paste selection')
 map({ 't' }, '<c-s-v>', '<c-\\><c-n>"*pi', 'paste selection')
+nmap('yc', 'yy<cmd>normal gcc<CR>p', 'copy line and comment prev') -- thank you reddit
 
 map('', '<LeftRelease>', function()
 	if vim.bo.ft == 'snacks_terminal' then

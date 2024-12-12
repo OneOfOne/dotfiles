@@ -50,8 +50,10 @@ return {
 					surface2 = '#3A3D4A',
 					surface1 = '#454545', --''#5F515D',
 					surface0 = '#404040',
-					base = '#17212c',
-					mantle = '#17212c',
+					-- base = '#17212c',
+					base = '#1f1c16',
+					mantle = '#1f1c16',
+					-- mantle = '#17212c',
 					crust = '#353535',
 				},
 			},
@@ -64,7 +66,7 @@ return {
 	{
 		'LazyVim/LazyVim',
 		opts = {
-			colorscheme = 'finale',
+			colorscheme = 'catppuccin',
 		},
 	},
 	{

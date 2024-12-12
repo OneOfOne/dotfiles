@@ -55,6 +55,8 @@ local function sort_by_kind(e1, e2)
 	end
 end
 
+vim.g.lazyvim_blink_main = true
+
 return {
 	{ 'iguanacucumber/mag-nvim-lsp', name = 'cmp-nvim-lsp', opts = {} },
 	{ 'iguanacucumber/mag-buffer', name = 'cmp-buffer' },
@@ -142,7 +144,6 @@ return {
 		optional = true,
 		version = false,
 		build = 'cargo build --release',
-		dependencies = {},
 		opts = {
 			appearance = {
 				use_nvim_cmp_as_default = true,
@@ -171,7 +172,6 @@ return {
 				},
 			},
 			fuzzy = {
-				sorts = { 'score', 'label', 'kind' },
 				use_typo_resistance = false,
 				max_items = 50,
 			},

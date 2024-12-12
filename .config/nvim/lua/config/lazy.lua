@@ -23,7 +23,7 @@ require('lazy').setup({
 			import = 'lazyvim.plugins',
 		},
 
-		{ import = 'lazyvim.plugins.extras.coding.blink', enabled = require('config.utils').is_local() },
+		-- { import = 'lazyvim.plugins.extras.coding.blink', enabled = require('config.utils').is_local() },
 		{ import = 'lazyvim.plugins.extras.lang.json' },
 		{ import = 'lazyvim.plugins.extras.lang.typescript' },
 		{ import = 'lazyvim.plugins.extras.lang.python' },
@@ -58,7 +58,7 @@ require('lazy').setup({
 		-- { import = 'lazyvim.plugins.extras.editor.fzf' },
 
 		{ import = 'lazyvim.plugins.extras.ui.edgy' },
-		{ import = 'lazyvim.plugins.extras.ui.mini-indentscope' },
+		-- { import = 'lazyvim.plugins.extras.ui.mini-indentscope' },
 
 		{ import = 'plugins' },
 	},

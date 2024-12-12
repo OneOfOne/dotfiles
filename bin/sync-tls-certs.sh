@@ -3,7 +3,7 @@ set -e
 
 pushd ~/.dotfiles/tls
 
-rsync -aL root@oneofone.dev:/etc/letsencrypt/live/oneofone.dev-0001/{privkey,fullchain}.pem .
+sudo -uoneofone rsync -aL root@oneofone.dev:/etc/letsencrypt/live/oneofone.dev-0001/{privkey,fullchain}.pem .
 
 mv privkey.pem oneofone_dev.key
 mv fullchain.pem oneofone_dev.crt

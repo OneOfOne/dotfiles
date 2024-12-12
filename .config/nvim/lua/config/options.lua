@@ -85,7 +85,5 @@ vim.g.neovide_scale_factor = 1
 -- local utils = require('config.utils')
 --
 -- something keeps overriding foldexpr
-require('config.utils').setTimeout(250, function()
-	vim.o.foldmethod = 'expr'
-	vim.o.foldtext = "v:lua.require('config.utils').foldLines()"
-end)
+vim.o.foldmethod = 'expr'
+vim.o.foldtext = "v:lua.require('config.utils').foldLines()"
