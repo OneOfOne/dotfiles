@@ -10,7 +10,7 @@
 		"@biomejs/biome": "latest",
 		"@vtsls/language-server": "latest",
 		"bash-language-server": "latest",
-		"bun": "1.1.29",
+		"bun": "1.1.30",
 		"markdownlint-cli": "latest",
 		"marksman": "latest",
 		"typescript-language-server": "latest",
