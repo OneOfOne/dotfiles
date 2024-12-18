@@ -45,7 +45,7 @@ return {
 			{
 				'<leader>b<space>',
 				function()
-					builtin.find_files({ cwd = utils.buffer_dir() })
+					builtin.find_files({ cwd = utils.buffer_dir(), hidden = false })
 				end,
 				desc = 'Find files in cwd',
 			},

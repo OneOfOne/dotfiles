@@ -66,7 +66,7 @@ return {
 	{
 		'LazyVim/LazyVim',
 		opts = {
-			colorscheme = 'catppuccin',
+			colorscheme = 'finale',
 		},
 	},
 	{
@@ -113,6 +113,15 @@ return {
 			},
 			smart_move = { enabled = true },
 			routes = {
+				{ filter = { event = 'msg_show', find = 'written' } },
+				{ filter = { event = 'msg_show', find = 'yanked' } },
+				{ filter = { event = 'msg_show', find = '%d+L, %d+B' } },
+				{ filter = { event = 'msg_show', find = '; after #%d+' } },
+				{ filter = { event = 'msg_show', find = '; before #%d+' } },
+				{ filter = { event = 'msg_show', find = '%d fewer lines' } },
+				{ filter = { event = 'msg_show', find = '%d more lines' } },
+				{ filter = { event = 'msg_show', find = '<ed' } },
+				{ filter = { event = 'msg_show', find = '>ed' } },
 				{
 					filter = {
 						event = 'notify',
@@ -121,18 +130,6 @@ return {
 							{ find = 'Searching in Files' },
 						},
 					},
-					opts = { skip = true },
-				},
-				{
-					filter = {
-						event = 'msg_show',
-						any = {
-							{ find = '%d+L, %d+B' },
-							{ find = '; after #%d+' },
-							{ find = '; before #%d+' },
-						},
-					},
-					view = 'mini',
 				},
 			},
 		},
@@ -141,10 +138,33 @@ return {
 		'folke/snacks.nvim',
 		opts = {
 			statuscolumn = {
-				enabled = true,
 				folds = {
 					open = true, -- show open fold icons
 					git_hl = true, -- use Git Signs hl for fold icons
+				},
+			},
+			indent = {
+				enabled = true,
+				hl = {
+					'SnacksIndent1',
+					'SnacksIndent2',
+					'SnacksIndent3',
+					'SnacksIndent4',
+					'SnacksIndent5',
+					'SnacksIndent6',
+					'SnacksIndent7',
+					'SnacksIndent8',
+				},
+				chunk = {
+					enabled = true,
+				},
+				blank = {
+					char = ' ',
+				},
+			},
+			styles = {
+				notification = {
+					wo = { wrap = true },
 				},
 			},
 		},

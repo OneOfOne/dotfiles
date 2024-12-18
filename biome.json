@@ -30,7 +30,6 @@
 				"noExcessiveCognitiveComplexity": "off"
 			},
 			"style": {
-				"useSingleVarDeclarator": "off",
 				"noParameterAssign": "off",
 				"noNonNullAssertion": "off",
 				"useNamingConvention": "off",

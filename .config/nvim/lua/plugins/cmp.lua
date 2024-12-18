@@ -1,67 +1,4 @@
-local types = require('cmp.types')
-
----@type table<integer, integer>
-local modified_priority = {
-	[types.lsp.CompletionItemKind.Keyword] = 1,
-	[types.lsp.CompletionItemKind.Value] = 1,
-	[types.lsp.CompletionItemKind.EnumMember] = 1,
-	[types.lsp.CompletionItemKind.Variable] = 2,
-	[types.lsp.CompletionItemKind.Field] = 2,
-	[types.lsp.CompletionItemKind.Method] = 3,
-	[types.lsp.CompletionItemKind.Function] = 5,
-	[types.lsp.CompletionItemKind.Text] = 90,
-	[types.lsp.CompletionItemKind.Snippet] = 100,
-}
-
-local function rust_trait(e)
-	local ci = e.completion_item
-	-- if ci ~= nil and ci.labelDetails ~= nil and ci.labelDetails.detail ~= nil then
-	-- 	local ld = ci.labelDetails.detail
-	-- 	return string.find(ld, '^ %(use ') ~= nil or string.find(ld, '^ %(as ') ~= nil
-	-- end
-end
-
-local function modified_kind(e)
-	local kind = e:get_kind()
-	kind = modified_priority[kind] or kind
-
-	if e.source.name == 'copilot' then
-		kind = 0
-	end
-
-	-- rust traits after methods/functions
-	if rust_trait(e) then
-		kind = kind + 1
-	end
-
-	-- print(kind, e.source.name)
-
-	return kind
-end
-
-local function sort_by_name(e1, e2) -- sort by length ignoring "=~"
-	local n1 = e1.completion_item.label or e1.completion_item.sortText
-	local n2 = e2.completion_item.label or e2.completion_item.sortText
-	if n1 and n2 and n1 ~= n2 then
-		return n1 < n2
-	end
-end
-
-local function sort_by_kind(e1, e2)
-	local k1 = modified_kind(e1)
-	local k2 = modified_kind(e2)
-	if k1 ~= k2 then
-		return k1 < k2
-	end
-end
-
-vim.g.lazyvim_blink_main = true
-
 return {
-	{ 'iguanacucumber/mag-nvim-lsp', name = 'cmp-nvim-lsp', opts = {} },
-	{ 'iguanacucumber/mag-buffer', name = 'cmp-buffer' },
-	{ 'iguanacucumber/mag-cmdline', name = 'cmp-cmdline' },
-	{ 'https://codeberg.org/FelipeLema/cmp-async-path', name = 'cmp-path' },
 	{
 		'iguanacucumber/magazine.nvim',
 		name = 'nvim-cmp',
@@ -73,22 +10,70 @@ return {
 
 		dependencies = {
 			'onsails/lspkind.nvim',
-			{
-				'windwp/nvim-autopairs',
-				event = 'InsertEnter',
-				opts = {
-					check_ts = true,
-					map_cr = false,
-					map_bs = false,
-					enable_check_bracket_line = false,
-					ignored_next_char = '[%w%.]',
-					fast_wrap = {},
-				},
-			},
+			{ 'iguanacucumber/mag-nvim-lsp', name = 'cmp-nvim-lsp', opts = {} },
+			{ 'iguanacucumber/mag-buffer', name = 'cmp-buffer' },
+			{ 'iguanacucumber/mag-cmdline', name = 'cmp-cmdline' },
+			{ 'https://codeberg.org/FelipeLema/cmp-async-path', name = 'cmp-path' },
 		},
 
 		opts = function(_, opts)
 			local cmp = require('cmp')
+			local types = require('cmp.types')
+
+			---@type table<integer, integer>
+			local modified_priority = {
+				[types.lsp.CompletionItemKind.Keyword] = 1,
+				[types.lsp.CompletionItemKind.Value] = 1,
+				[types.lsp.CompletionItemKind.EnumMember] = 1,
+				[types.lsp.CompletionItemKind.Variable] = 2,
+				[types.lsp.CompletionItemKind.Field] = 2,
+				[types.lsp.CompletionItemKind.Method] = 3,
+				[types.lsp.CompletionItemKind.Function] = 5,
+				[types.lsp.CompletionItemKind.Text] = 90,
+				[types.lsp.CompletionItemKind.Snippet] = 100,
+			}
+
+			local function rust_trait(e)
+				local ci = e.completion_item
+				-- if ci ~= nil and ci.labelDetails ~= nil and ci.labelDetails.detail ~= nil then
+				-- 	local ld = ci.labelDetails.detail
+				-- 	return string.find(ld, '^ %(use ') ~= nil or string.find(ld, '^ %(as ') ~= nil
+				-- end
+			end
+
+			local function modified_kind(e)
+				local kind = e:get_kind()
+				kind = modified_priority[kind] or kind
+
+				if e.source.name == 'copilot' then
+					kind = 0
+				end
+
+				-- rust traits after methods/functions
+				if rust_trait(e) then
+					kind = kind + 1
+				end
+
+				-- print(kind, e.source.name)
+
+				return kind
+			end
+
+			local function sort_by_name(e1, e2) -- sort by length ignoring "=~"
+				local n1 = e1.completion_item.label or e1.completion_item.sortText
+				local n2 = e2.completion_item.label or e2.completion_item.sortText
+				if n1 and n2 and n1 ~= n2 then
+					return n1 < n2
+				end
+			end
+
+			local function sort_by_kind(e1, e2)
+				local k1 = modified_kind(e1)
+				local k2 = modified_kind(e2)
+				if k1 ~= k2 then
+					return k1 < k2
+				end
+			end
 
 			opts.preselect = cmp.PreselectMode.None
 
@@ -150,11 +135,13 @@ return {
 			},
 			completion = {
 				menu = {
+					winblend = 0,
 					draw = {
 						columns = {
 							{ 'label', 'label_description', gap = 1 },
-							{ 'kind_icon', 'source_name' },
+							{ 'kind_icon', 'source_name', gab = 1 },
 						},
+						padding = 0,
 					},
 					border = 'rounded',
 				},
@@ -173,26 +160,23 @@ return {
 			},
 			fuzzy = {
 				use_typo_resistance = false,
-				max_items = 50,
 			},
 		},
 	},
-	-- LSP servers and clients communicate what features they support through "capabilities".
-	--  By default, Neovim support a subset of the LSP specification.
-	--  With blink.cmp, Neovim has *more* capabilities which are communicated to the LSP servers.
-	--  Explanation from TJ: https://youtu.be/m8C0Cq9Uv9o?t=1275
-	--
-	-- This can vary by config, but in-general for nvim-lspconfig:
-	--
-	-- {
-	-- 	'neovim/nvim-lspconfig',
-	-- 	dependencies = { 'saghen/blink.cmp' },
-	-- 	config = function(_, opts)
-	-- 		local lspconfig = require('lspconfig')
-	-- 		for server, config in pairs(opts.servers or {}) do
-	-- 			config.capabilities = require('blink.cmp').get_lsp_capabilities(config.capabilities)
-	-- 			lspconfig[server].setup(config)
-	-- 		end
-	-- 	end,
-	-- },
+	{
+		'neovim/nvim-lspconfig',
+		dependencies = { 'saghen/blink.cmp' },
+
+		-- example using `opts` for defining servers
+		opts = {
+			servers = {
+				lua_ls = {},
+			},
+		},
+		config = function(_, opts)
+			for _, config in pairs(opts.servers) do
+				config.capabilities = require('blink.cmp').get_lsp_capabilities(config.capabilities)
+			end
+		end,
+	},
 }

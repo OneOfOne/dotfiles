@@ -54,24 +54,5 @@ return {
 			require('viedit').setup()
 		end,
 	},
-	{
-		'folke/snacks.nvim',
-		opts = {
-			input = { enabled = true },
-			-- animate = { enabled = true },
-			indent = {
-				enabled = true,
-				chunk = {
-					enabled = true,
-				},
-			},
-
-			styles = {
-				notification = {
-					wo = { wrap = true },
-				},
-			},
-			-- scope = { siblings = true },
-		},
-	},
+	-- { 'echasnovski/mini.operators', config = true },
 }

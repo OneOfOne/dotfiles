@@ -13,7 +13,10 @@ return {
 					underline = true,
 					update_in_insert = false,
 					severity_sort = true,
-					float = true,
+					float = {
+						border = 'rounded',
+						source = 'always',
+					},
 				},
 				format_notify = true,
 
