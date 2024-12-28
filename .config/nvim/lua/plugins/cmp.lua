@@ -127,8 +127,6 @@ return {
 	{
 		'saghen/blink.cmp',
 		optional = true,
-		version = false,
-		build = 'cargo build --release',
 		opts = {
 			appearance = {
 				use_nvim_cmp_as_default = true,
@@ -163,20 +161,20 @@ return {
 			},
 		},
 	},
-	{
-		'neovim/nvim-lspconfig',
-		dependencies = { 'saghen/blink.cmp' },
-
-		-- example using `opts` for defining servers
-		opts = {
-			servers = {
-				lua_ls = {},
-			},
-		},
-		config = function(_, opts)
-			for _, config in pairs(opts.servers) do
-				config.capabilities = require('blink.cmp').get_lsp_capabilities(config.capabilities)
-			end
-		end,
-	},
+	-- {
+	-- 	'neovim/nvim-lspconfig',
+	-- 	dependencies = { 'saghen/blink.cmp' },
+	--
+	-- 	-- example using `opts` for defining servers
+	-- 	opts = {
+	-- 		servers = {
+	-- 			lua_ls = {},
+	-- 		},
+	-- 	},
+	-- 	config = function(_, opts)
+	-- 		for _, config in pairs(opts.servers) do
+	-- 			config.capabilities = require('blink.cmp').get_lsp_capabilities(config.capabilities)
+	-- 		end
+	-- 	end,
+	-- },
 }

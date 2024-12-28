@@ -29,6 +29,7 @@ bool
 bq
 br
 buf
+bufferline
 builtins
 ccache
 cdn

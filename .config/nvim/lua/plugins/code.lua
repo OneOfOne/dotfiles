@@ -1,5 +1,15 @@
 vim.lsp.handlers['workspace/workspaceFolders'] = nil
-
+vim.diagnostic.config({
+	virtual_text = true,
+	signs = true,
+	underline = true,
+	update_in_insert = false,
+	severity_sort = true,
+	float = {
+		border = 'rounded',
+		source = true,
+	},
+})
 -- vim.cmd([[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false, max_width=80})]])
 
 return {
@@ -7,17 +17,6 @@ return {
 		'neovim/nvim-lspconfig',
 		opts = function(_, opts)
 			local ret = vim.tbl_deep_extend('force', opts, {
-				diagnostics = {
-					virtual_text = false,
-					signs = true,
-					underline = true,
-					update_in_insert = false,
-					severity_sort = true,
-					float = {
-						border = 'rounded',
-						source = 'always',
-					},
-				},
 				format_notify = true,
 
 				inlay_hints = {
@@ -55,19 +54,6 @@ return {
 		end,
 	},
 	{
-		'rachartier/tiny-inline-diagnostic.nvim',
-		-- enabled = false,
-		event = 'LspAttach', -- Or `LspAttach`
-		priority = 1000, -- needs to be loaded in first
-		opts = {
-			options = {
-				-- Show the source of the diagnostic.
-				show_source = true,
-				multiline = true,
-			},
-		},
-	},
-	{
 		'nvimtools/none-ls.nvim',
 		-- enabled = false,
 		optional = true,
@@ -98,6 +84,13 @@ return {
 	{
 		'nvim-treesitter/nvim-treesitter',
 		opts = {
+			incremental_selection = {
+				keymaps = {
+					init_selection = '<leader>vv',
+					node_incremental = '+',
+					node_decremental = '_',
+				},
+			},
 			textobjects = {
 				swap = {
 					enable = true,

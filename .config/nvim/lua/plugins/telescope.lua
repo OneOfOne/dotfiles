@@ -67,6 +67,7 @@ return {
 							actions.open_qflist(bufnr)
 							require('config.utils').gsr()
 						end,
+						['<Tab'] = actions.move_selection_next,
 					},
 				},
 			},

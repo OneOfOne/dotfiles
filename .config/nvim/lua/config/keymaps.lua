@@ -1,5 +1,3 @@
----@diagnostic disable: unused-local, unused-function
-
 -- https://medium.com/@alpha1phi/modern-neovim-configuration-hacks-93b13283969f#6ab4
 local function map(mode, keys, fn, desc, opts)
 	vim.keymap.set(mode, keys, fn, vim.tbl_extend('force', { desc = desc, noremap = true }, opts or {}))
@@ -24,6 +22,11 @@ local remap = { noremap = false, remap = true }
 map({ 'i' }, '<c-s-v>', '<left><c-o>"*p', 'paste selection')
 map({ 't' }, '<c-s-v>', '<c-\\><c-n>"*pi', 'paste selection')
 nmap('yc', 'yy<cmd>normal gcc<CR>p', 'copy line and comment prev') -- thank you reddit
+nmap(
+	'<leader>vp',
+	':lua require("nvim-treesitter.incremental_selection").init_selection()<cr>P',
+	'replace node with clipboard'
+)
 
 map('', '<LeftRelease>', function()
 	if vim.bo.ft == 'snacks_terminal' then
@@ -67,16 +70,8 @@ vmap('<C-LeftRelease>', '"*P', 'replace selection with *')
 
 nmap('<leader>gl', '<cmd>OpenInGHFileLines<cr>', 'open current file/line in github')
 
--- sane regexp defaults
--- nmap('ss', ':%s/\\v')
--- vmap('ss', '"zy<ESC>:%s~\\M<c-r>z~~gc<left><left><left>', 'search & replace selection in visual mode')
--- nmap('sds', ':.s/\\v')
--- nmap('sg', ':%g/\\v')
--- nmap('sdg', ':.g/\\v')
-
 -- convenience
-nmap('<leader>j', '*``cgn', 'ghetto multi cursors')
-vmap('<leader>j', '*``cgn', 'ghetto multi cursors', remap)
+vmap('<leader>j', 'zy:%s%\\V<C-r>0%%gc<left><left><left>', 'Search/replace visual')
 
 map({ '', 'i' }, '<c-tab>', '<cmd>Telescope buffers<cr>', 'buffer list')
 
@@ -87,7 +82,6 @@ map({ '' }, 'J', ':s/\\n/, /<cr>o<esc>k$', 'join lines with ,')
 nmap('k', '5k', 'because 5k is better than 1k')
 nmap('j', '5j', 'because 5j is better than 1j')
 
-nmap('<bs>', '<c-o>', 'backspace to ctrl-o')
 vmap('<cr>', '<esc>o', 'make enter insert a new line')
 
 nmap('+', '<cmd>vert res +5<cr>')
@@ -104,6 +98,7 @@ nmap('<leader>sudo', '<cmd>w !sudo tee "%" >/dev/null<cr><cmd>edit!<cr>', 'sudo 
 
 nmap('<leader>tw', function()
 	--https://www.reddit.com/r/neovim/comments/1bjlihf/comment/kvu63wj/
+	---@diagnostic disable-next-line: missing-fields
 	vim.ui.input({ prompt = 'Update tab size: ' }, function(input)
 		vim.opt.tabstop = tonumber(input)
 		vim.opt.softtabstop = tonumber(input)

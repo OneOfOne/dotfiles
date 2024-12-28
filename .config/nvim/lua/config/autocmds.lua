@@ -8,35 +8,6 @@ local function au(typ, pattern, cmdOrFn)
 	end
 end
 
-local has_inlay_hints = nil
-
-au('ModeChanged', { '*' }, function()
-	local ih = vim.lsp.inlay_hint
-	local nmode = vim.v.event.new_mode
-
-	vim.diagnostic.config({
-		virtual_text = nmode == 'n',
-		underline = nmode == 'n',
-		signs = nmode == 'n',
-	})
-
-	if has_inlay_hints == nil or nmode ~= 'n' then
-		has_inlay_hints = ih.is_enabled()
-	end
-
-	if nmode == 'n' and not has_inlay_hints then
-		return
-	end
-
-	local clients = vim.lsp.get_clients({ bufnr = 0 })
-	for _, cli in ipairs(clients) do
-		if cli.server_capabilities.inlayHintProvider then
-			ih.enable(nmode == 'n', { bufnr = 0 })
-			return
-		end
-	end
-end)
-
 au('FileType', { 'json', 'jsonc', 'Outline' }, function()
 	vim.wo.spell = false
 	vim.wo.conceallevel = 0
