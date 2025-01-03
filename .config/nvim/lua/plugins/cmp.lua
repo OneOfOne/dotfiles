@@ -140,6 +140,7 @@ return {
 							{ 'kind_icon', 'source_name', gab = 1 },
 						},
 						padding = 0,
+						treesitter = { 'lsp' },
 					},
 					border = 'rounded',
 				},
@@ -148,9 +149,15 @@ return {
 						border = 'rounded',
 					},
 				},
+				list = {
+					selection = 'manual',
+					cycle = {
+						from_top = false,
+					},
+				},
 			},
 			signature = {
-				enabled = true,
+				enabled = false,
 				window = {
 					border = 'rounded',
 					scrollbar = true,
@@ -159,22 +166,28 @@ return {
 			fuzzy = {
 				use_typo_resistance = false,
 			},
+			sources = {
+				-- default = { 'lsp', 'path', 'buffer', 'minuet' },
+				default = { 'lsp', 'path', 'buffer' },
+				transform_items = function(_, items)
+					return vim.tbl_filter(function(item)
+						return item.kind ~= require('blink.cmp.types').CompletionItemKind.Snippet
+					end, items)
+				end,
+				providers = {
+					sp = {
+						name = 'LSP',
+						module = 'blink.cmp.sources.lsp',
+						async = true,
+						fallbacks = { 'buffer' },
+					},
+					-- minuet = {
+					-- 	name = 'minuet',
+					-- 	module = 'minuet.blink',
+					-- 	score_offset = 8, -- Gives minuet higher priority among suggestions
+					-- },
+				},
+			},
 		},
 	},
-	-- {
-	-- 	'neovim/nvim-lspconfig',
-	-- 	dependencies = { 'saghen/blink.cmp' },
-	--
-	-- 	-- example using `opts` for defining servers
-	-- 	opts = {
-	-- 		servers = {
-	-- 			lua_ls = {},
-	-- 		},
-	-- 	},
-	-- 	config = function(_, opts)
-	-- 		for _, config in pairs(opts.servers) do
-	-- 			config.capabilities = require('blink.cmp').get_lsp_capabilities(config.capabilities)
-	-- 		end
-	-- 	end,
-	-- },
 }

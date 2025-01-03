@@ -2,10 +2,21 @@ return {
 	{ 'folke/lazy.nvim', version = false },
 	{ 'LazyVim/LazyVim', version = false },
 	{ 'almo7aya/openingh.nvim', config = true },
-
-	-- { 'echasnovski/mini.map', version = false, config = true },
-	{ 'itchyny/vim-qfedit', config = function() end },
-	{ 'dstein64/nvim-scrollview', config = true },
+	{
+		'echasnovski/mini.map',
+		config = function()
+			local map = require('mini.map')
+			map.setup({
+				integrations = {
+					map.gen_integration.diagnostic(),
+					map.gen_integration.builtin_search(),
+					map.gen_integration.diff(),
+					map.gen_integration.gitsigns(),
+				},
+			})
+			map.open()
+		end,
+	},
 	{
 		'OneOfOne/spm.nvim',
 		dev = true,
@@ -16,7 +27,6 @@ return {
 	},
 	{
 		'folke/flash.nvim',
-		event = 'VeryLazy',
 		opts = {
 			multi_window = false,
 			incremental = true,
@@ -49,10 +59,9 @@ return {
 		},
 	},
 	{
-		'viocost/viedit',
-		config = function()
-			require('viedit').setup()
-		end,
+		'3rd/image.nvim',
+		enabled = not vim.g.neovide,
+		opts = {},
 	},
 	-- { 'echasnovski/mini.operators', config = true },
 }

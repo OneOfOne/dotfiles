@@ -25,8 +25,11 @@ nmap('yc', 'yy<cmd>normal gcc<CR>p', 'copy line and comment prev') -- thank you 
 nmap(
 	'<leader>vp',
 	':lua require("nvim-treesitter.incremental_selection").init_selection()<cr>P',
-	'replace node with clipboard'
+	'replace with clipboard'
 )
+
+nmap('<leader>vc', ':lua require("nvim-treesitter.incremental_selection").init_selection()<cr>"_c', 'change node')
+nmap('<leader>vd', ':lua require("nvim-treesitter.incremental_selection").init_selection()<cr>"_d', 'delete node')
 
 map('', '<LeftRelease>', function()
 	if vim.bo.ft == 'snacks_terminal' then

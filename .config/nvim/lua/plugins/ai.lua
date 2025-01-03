@@ -1,23 +1,30 @@
 return {
-	-- {
-	-- 	'milanglacier/minuet-ai.nvim',
-	-- 	lazy = false,
-	-- 	-- enabled = false,
-	-- 	config = function()
-	-- 		require('minuet').setup({
-	-- 			provider = 'openai_compatible',
-	-- 			provider_options = {
-	-- 				openai_compatible = {
-	-- 					model = 'qwen2.5-coder:32b',
-	-- 					end_point = 'http://localhost:11434/v1/chat/completions',
-	-- 					name = 'Ollama',
-	-- 					api_key = 'PATH',
-	-- 					stream = true,
-	-- 				},
-	-- 			},
-	-- 		})
-	-- 	end,
-	-- },
+	{
+		'milanglacier/minuet-ai.nvim',
+		lazy = false,
+		enabled = false,
+		config = function()
+			require('minuet').setup({
+				after_cursor_filter_length = 20,
+				notify = 'error',
+				provider = 'openai',
+				provider_options = {
+					openai_fim_compatible = {
+						model = 'qwen2.5-coder:7b',
+						end_point = 'http://127.0.0.1:11434/v1/completions',
+						name = 'Ollama',
+						stream = true,
+						api_key = 'LANG',
+						max_tokens = 512,
+						optional = {
+							stop = nil,
+							max_tokens = nil,
+						},
+					},
+				},
+			})
+		end,
+	},
 	-- {
 	-- 	'nvim-cmp',
 	-- 	opts = function(_, opts)

@@ -14,7 +14,7 @@ o.iskeyword:append('-')
 -- o.iskeyword:append('.')
 o.relativenumber = true
 o.wrap = true
-o.scrolloff = 1
+o.scrolloff = 0
 o.smoothscroll = true
 
 o.list = true

@@ -1,6 +1,6 @@
-vim.lsp.handlers['workspace/workspaceFolders'] = nil
+-- vim.lsp.handlers['workspace/workspaceFolders'] = nil
 vim.diagnostic.config({
-	virtual_text = true,
+	virtual_text = false,
 	signs = true,
 	underline = true,
 	update_in_insert = false,
@@ -11,47 +11,43 @@ vim.diagnostic.config({
 	},
 })
 -- vim.cmd([[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false, max_width=80})]])
-
 return {
 	{
 		'neovim/nvim-lspconfig',
-		opts = function(_, opts)
-			local ret = vim.tbl_deep_extend('force', opts, {
-				format_notify = true,
+		opts = {
+			format_notify = true,
 
-				inlay_hints = {
-					enabled = false,
+			inlay_hints = {
+				enabled = true,
+			},
+			codelens = {
+				enabled = true,
+			},
+			showMessage = {
+				messageActionItem = {
+					additionalPropertiesSupport = true,
 				},
-				codelens = {
-					enabled = true,
-				},
-				showMessage = {
-					messageActionItem = {
-						additionalPropertiesSupport = true,
-					},
-				},
-				format = {
-					timeout_ms = 1000,
-				},
-				servers = {
-					jsonls = {
-						commands = {
-							Format = {
-								function() end,
-							},
-						},
-						json = {
-							format = {
-								enable = false,
-							},
+			},
+			format = {
+				timeout_ms = 1000,
+			},
+			servers = {
+				jsonls = {
+					commands = {
+						Format = {
+							function() end,
 						},
 					},
-					-- biome = {},
-					html = {},
+					json = {
+						format = {
+							enable = false,
+						},
+					},
 				},
-			})
-			return ret
-		end,
+				-- biome = {},
+				html = {},
+			},
+		},
 	},
 	{
 		'nvimtools/none-ls.nvim',
@@ -113,10 +109,9 @@ return {
 			},
 		},
 	},
-	-- { 'nvim-treesitter/nvim-treesitter-textobjects', enabled = false },
 	{
-		'f-person/git-blame.nvim',
-		enabled = false,
-		config = true,
+		'chrisgrieser/nvim-lsp-endhints',
+		event = 'LspAttach',
+		opts = {},
 	},
 }

@@ -2,6 +2,9 @@ local M = {}
 
 M.setTimeout = function(timeout, callback)
 	local timer = vim.uv.new_timer()
+	if timer == nil then
+		return nil
+	end
 	timer:start(timeout, 0, function()
 		timer:stop()
 		timer:close()
