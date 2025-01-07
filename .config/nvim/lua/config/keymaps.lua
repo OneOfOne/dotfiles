@@ -12,7 +12,7 @@ local function imap(keys, fn, desc, opts)
 end
 
 local function vmap(keys, fn, desc, opts)
-	map({ 'v' }, keys, fn, desc, opts)
+	map({ 'v', 'x' }, keys, fn, desc, opts)
 end
 
 local remap = { noremap = false, remap = true }
@@ -74,7 +74,8 @@ vmap('<C-LeftRelease>', '"*P', 'replace selection with *')
 nmap('<leader>gl', '<cmd>OpenInGHFileLines<cr>', 'open current file/line in github')
 
 -- convenience
-vmap('<leader>j', 'zy:%s%\\V<C-r>0%%gc<left><left><left>', 'Search/replace visual')
+-- vmap('<leader>j', 'zy:%s%\\V<C-r>0%%gc<left><left><left>', 'Search/replace visual')
+vmap('<leader>j', '""y<cmd>let @/=escape(@", "/[].*$^~")<cr>"_cgn', 'Search/replace visual')
 
 map({ '', 'i' }, '<c-tab>', '<cmd>Telescope buffers<cr>', 'buffer list')
 

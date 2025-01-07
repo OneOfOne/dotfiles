@@ -8,7 +8,6 @@ return {
 		priority = 1000,
 		config = function()
 			local colors = require('ayu.colors')
-			colors.generate(false)
 			require('ayu').setup({
 				mirage = false,
 				overrides = function()
@@ -26,9 +25,37 @@ return {
 		end,
 	},
 	{
+		'craftzdog/solarized-osaka.nvim',
+		lazy = false,
+		priority = 1000,
+		opts = {
+			transparent = true, -- Enable this to disable setting the background color
+			terminal_colors = true, -- Configure the colors used when opening a `:terminal` in [Neovim](https://github.com/neovim/neovim)
+			styles = {
+				-- Style to be applied to different syntax groups
+				-- Value is any valid attr-list value for `:help nvim_set_hl`
+				comments = { italic = true },
+				keywords = { italic = true },
+				functions = { bold = true },
+				variables = {},
+				-- Background styles. Can be "dark", "transparent" or "normal"
+				sidebars = 'transparent', -- style for sidebars, see below
+				floats = 'dark', -- style for floating windows
+			},
+			dim_inactive = true, -- dims inactive windows
+			lualine_bold = true, -- When `true`, section headers in the lualine theme will be bold
+
+			on_colors = function(colors) end,
+
+			on_highlights = function(hl, colors)
+				hl.Pmenu = 'transparent'
+			end,
+		},
+	},
+	{
 		'LazyVim/LazyVim',
 		opts = {
-			colorscheme = 'ayu',
+			colorscheme = 'solarized-osaka',
 		},
 	},
 	{
@@ -50,7 +77,7 @@ return {
 		'nvim-lualine/lualine.nvim',
 		opts = {
 			options = {
-				theme = 'finale',
+				theme = 'solarized-osaka',
 			},
 			sections = {
 				lualine_y = {
