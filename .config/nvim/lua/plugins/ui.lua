@@ -1,51 +1,22 @@
 return {
 	{
-		'https://gitlab.com/bartekjaszczak/finale-nvim',
-		config = function() end,
-	},
-	{
-		'Shatur/neovim-ayu',
-		priority = 1000,
-		config = function()
-			local colors = require('ayu.colors')
-			require('ayu').setup({
-				mirage = false,
-				overrides = function()
-					return {
-						Normal = { bg = '#181111' },
-						LineNr = { fg = '#7F6633' }, -- 50% luminance of #FFCC66 used in colors.accent
-						Visual = { bg = '#533a3a' },
-						BlinkCmpGhostText = { fg = colors.accent },
-						LspInlayHint = { fg = colors.comment, bg = colors.bg, italic = true },
-						Pmenu = { bg = colors.bg },
-						PmenuSel = { fg = '#7F6633' },
-					}
-				end,
-			})
-		end,
-	},
-	{
 		'craftzdog/solarized-osaka.nvim',
 		lazy = false,
 		priority = 1000,
 		opts = {
-			transparent = true, -- Enable this to disable setting the background color
+			transparent = false, -- Enable this to disable setting the background color
 			terminal_colors = true, -- Configure the colors used when opening a `:terminal` in [Neovim](https://github.com/neovim/neovim)
 			styles = {
-				-- Style to be applied to different syntax groups
-				-- Value is any valid attr-list value for `:help nvim_set_hl`
 				comments = { italic = true },
 				keywords = { italic = true },
 				functions = { bold = true },
-				variables = {},
-				-- Background styles. Can be "dark", "transparent" or "normal"
-				sidebars = 'transparent', -- style for sidebars, see below
-				floats = 'dark', -- style for floating windows
-			},
-			dim_inactive = true, -- dims inactive windows
-			lualine_bold = true, -- When `true`, section headers in the lualine theme will be bold
+				variables = { italic = true },
 
-			on_colors = function(colors) end,
+				sidebars = 'transparent',
+				floats = 'dark',
+			},
+			dim_inactive = false,
+			lualine_bold = true,
 
 			on_highlights = function(hl, colors)
 				hl.Pmenu = 'transparent'

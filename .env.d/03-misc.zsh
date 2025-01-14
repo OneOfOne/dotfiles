@@ -2,6 +2,8 @@ export WINEDEBUG=-all
 export WINEDLLOVERRIDES=winemenubuilder.exe=d
 export VKD3D_SHADER_CACHE_PATH=/tmp
 export DXVK_STATE_CACHE_PATH=/tmp
+export DXVK_FRAME_RATE=120
+export VKD3D_FRAME_RATE=120
 
 function dig-any {
 	command dig $@ ANY | grep -v -E '^$|^;'

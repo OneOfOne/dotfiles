@@ -294,7 +294,7 @@ wmclassmatch=1
 Description=Application settings for java-lang-Thread
 clientmachine=localhost
 size=2560,1440
-sizerule=2
+sizerule=3
 wmclass=java-lang-Thread
 wmclassmatch=1
 
@@ -725,6 +725,7 @@ wmclassmatch=1
 [fcc4d2e9-31ee-471e-8efa-c2a45eab6d5b]
 Description=Rivals
 clientmachine=localhost
+fullscreenrule=2
 noborder=true
 noborderrule=2
 position=1280,0

@@ -1,6 +1,7 @@
 -- vim.lsp.handlers['workspace/workspaceFolders'] = nil
 vim.diagnostic.config({
 	virtual_text = false,
+	virtual_lines = { only_current_line = true },
 	signs = true,
 	underline = true,
 	update_in_insert = false,
@@ -16,9 +17,20 @@ return {
 		'neovim/nvim-lspconfig',
 		opts = {
 			format_notify = true,
-
+			diagnostics = {
+				virtual_text = false,
+				virtual_lines = { only_current_line = true },
+				signs = true,
+				underline = true,
+				update_in_insert = true,
+				severity_sort = true,
+				float = {
+					border = 'rounded',
+					source = true,
+				},
+			},
 			inlay_hints = {
-				enabled = true,
+				enabled = false,
 			},
 			codelens = {
 				enabled = true,
@@ -46,6 +58,25 @@ return {
 				},
 				-- biome = {},
 				html = {},
+				harper_ls = {
+					settings = {
+						['harper-ls'] = {
+							userDictPath = vim.fn.stdpath('config') .. '/spell/en.utf-8.add',
+						},
+					},
+				},
+			},
+		},
+	},
+	{
+		'rachartier/tiny-inline-diagnostic.nvim',
+		event = 'LspAttach', -- Or `LspAttach`
+		opts = {
+			preset = 'classic',
+			options = {
+				show_source = true,
+				multilines = true,
+				multiple_diag_under_cursor = true,
 			},
 		},
 	},
@@ -108,10 +139,5 @@ return {
 				},
 			},
 		},
-	},
-	{
-		'chrisgrieser/nvim-lsp-endhints',
-		event = 'LspAttach',
-		opts = {},
 	},
 }

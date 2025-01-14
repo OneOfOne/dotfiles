@@ -127,6 +127,9 @@ return {
 	{
 		'saghen/blink.cmp',
 		optional = true,
+		opts_extend = {
+			'sources.default',
+		},
 		opts = {
 			appearance = {
 				use_nvim_cmp_as_default = true,
@@ -150,7 +153,7 @@ return {
 					},
 				},
 				list = {
-					selection = 'manual',
+					selection = { preselect = false, auto_insert = false },
 					cycle = {
 						from_top = false,
 					},
@@ -170,12 +173,13 @@ return {
 				-- default = { 'lsp', 'path', 'buffer', 'minuet' },
 				default = { 'lsp', 'path', 'buffer' },
 				transform_items = function(_, items)
+					local types = require('blink.cmp.types')
 					return vim.tbl_filter(function(item)
-						return item.kind ~= require('blink.cmp.types').CompletionItemKind.Snippet
+						return item.kind ~= types.CompletionItemKind.Snippet
 					end, items)
 				end,
 				providers = {
-					sp = {
+					lsp = {
 						name = 'LSP',
 						module = 'blink.cmp.sources.lsp',
 						async = true,
