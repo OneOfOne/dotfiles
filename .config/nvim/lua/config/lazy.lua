@@ -14,8 +14,6 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-vim.g.lazyvim_picker = 'telescope'
--- vim.g.lazyvim_picker = 'fzf'
 require('lazy').setup({
 	spec = {
 		{
@@ -56,7 +54,9 @@ require('lazy').setup({
 		{ import = 'lazyvim.plugins.extras.util.dot' },
 
 		{ import = 'lazyvim.plugins.extras.editor.navic' },
-		{ import = 'lazyvim.plugins.extras.editor.telescope' },
+		{ import = 'lazyvim.plugins.extras.editor.snacks_picker' },
+
+		-- { import = 'lazyvim.plugins.extras.editor.telescope' },
 
 		{ import = 'lazyvim.plugins.extras.ui.edgy' },
 

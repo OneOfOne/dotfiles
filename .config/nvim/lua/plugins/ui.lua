@@ -18,6 +18,7 @@ return {
 			dim_inactive = false,
 			lualine_bold = true,
 
+			---@diagnostic disable-next-line: unused-local
 			on_highlights = function(hl, colors)
 				hl.Pmenu = 'transparent'
 			end,
@@ -38,7 +39,7 @@ return {
 				themable = true,
 				separator_style = 'slope',
 				left_mouse_command = function(bufnum)
-					vim.fn.win_gotoid(vim.g.main_win or 1000) -- assume 1000 is the main window if vim.g.main_win is nil
+					vim.fn.win_gotoid(vim.g.main_win or 1000) -- Assume 1000 is the main window if vim.g.main_win is nil
 					vim.api.nvim_set_current_buf(bufnum)
 				end,
 			},
@@ -56,14 +57,6 @@ return {
 					{ 'selectioncount', padding = { left = 1, right = 0 }, separator = ' ' },
 					{ 'location', padding = { left = 0, right = 1 } },
 				},
-			},
-			winbar = {
-				-- lualine_a = { 'buffers' },
-				-- 	lualine_b = {},
-				-- 	lualine_c = {},
-				-- 	lualine_x = {},
-				-- 	lualine_y = {},
-				-- 	lualine_z = { 'tabs' },
 			},
 		},
 	},
@@ -97,41 +90,6 @@ return {
 							{ find = 'Searching in Files' },
 						},
 					},
-				},
-			},
-		},
-	},
-	{
-		'folke/snacks.nvim',
-		opts = {
-			statuscolumn = {
-				folds = {
-					open = true, -- show open fold icons
-					git_hl = true, -- use Git Signs hl for fold icons
-				},
-			},
-			indent = {
-				enabled = true,
-				hl = {
-					'SnacksIndent1',
-					'SnacksIndent2',
-					'SnacksIndent3',
-					'SnacksIndent4',
-					'SnacksIndent5',
-					'SnacksIndent6',
-					'SnacksIndent7',
-					'SnacksIndent8',
-				},
-				chunk = {
-					enabled = true,
-				},
-				blank = {
-					char = ' ',
-				},
-			},
-			styles = {
-				notification = {
-					wo = { wrap = true },
 				},
 			},
 		},

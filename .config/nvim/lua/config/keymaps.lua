@@ -77,8 +77,6 @@ nmap('<leader>gl', '<cmd>OpenInGHFileLines<cr>', 'open current file/line in gith
 -- vmap('<leader>j', 'zy:%s%\\V<C-r>0%%gc<left><left><left>', 'Search/replace visual')
 vmap('<leader>j', '""y<cmd>let @/=escape(@", "/[].*$^~")<cr>"_cgn', 'Search/replace visual')
 
-map({ '', 'i' }, '<c-tab>', '<cmd>Telescope buffers<cr>', 'buffer list')
-
 nmap('vv', ':normal! v<cr>', 'map vv to v because lazyvim overrides that')
 nmap('<home>', '^', 'make home go to the beginning of indentation')
 map({ '' }, 'J', ':s/\\n/, /<cr>o<esc>k$', 'join lines with ,')

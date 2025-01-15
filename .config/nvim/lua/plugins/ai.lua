@@ -28,6 +28,7 @@ return {
 	{
 		'olimorris/codecompanion.nvim',
 		priority = 999,
+		event = 'LspAttach',
 		dependencies = {
 			'nvim-lua/plenary.nvim',
 			'nvim-treesitter/nvim-treesitter',
@@ -36,13 +37,12 @@ return {
 		keys = {
 			{
 				'<leader>ad',
-				'<cmd>CodeCompanion /buffer please write documentation for the selected code and append it above it<cr>',
+				'<cmd>CodeCompanion /buffer you are an expert in writing documentation, please write documentation for the selected code and append the comment above it<cr>',
 				mode = 'v',
 				desc = 'Generate documentation',
 			},
 		},
 		opts = {
-			--Refer to: https://github.com/olimorris/codecompanion.nvim/blob/main/lua/codecompanion/config.lua
 			display = {
 				inline = {
 					layout = 'buffer', -- vertical|horizontal|buffer
@@ -52,12 +52,8 @@ return {
 				},
 			},
 			strategies = {
-				--NOTE: Change the adapter as required
 				chat = { adapter = 'copilot' },
 				inline = { adapter = 'copilot' },
-			},
-			opts = {
-				log_level = 'DEBUG',
 			},
 		},
 	},

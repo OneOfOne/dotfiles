@@ -71,7 +71,7 @@ o.grepprg = 'rg --hidden --vimgrep'
 o.selection = 'inclusive'
 o.virtualedit = 'onemore'
 -- o.selectmode = 'mouse,key'
--- o.mousemodel = ''
+o.mousemodel = 'extend'
 
 o.foldlevelstart = -1
 
@@ -89,6 +89,6 @@ vim.g.neovide_cursor_smooth_blink = true
 vim.o.foldmethod = 'expr'
 vim.o.foldtext = "v:lua.require('config.utils').foldLines()"
 
-vim.g.lazyvim_picker = 'telescope'
+vim.g.lazyvim_picker = 'snacks'
 vim.g.lazyvim_blink_main = true
 -- vim.g.lazyvim_cmp = 'nvim-cmp'
