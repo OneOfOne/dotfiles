@@ -75,6 +75,7 @@ nmap('<leader>gl', '<cmd>OpenInGHFileLines<cr>', 'open current file/line in gith
 
 -- convenience
 -- vmap('<leader>j', 'zy:%s%\\V<C-r>0%%gc<left><left><left>', 'Search/replace visual')
+nmap('<leader>j', '<cmd>let @/=expand("<cword>")<cr>cgn', 'Search/replace visual')
 vmap('<leader>j', '""y<cmd>let @/=escape(@", "/[].*$^~")<cr>"_cgn', 'Search/replace visual')
 
 nmap('vv', ':normal! v<cr>', 'map vv to v because lazyvim overrides that')
@@ -90,6 +91,7 @@ nmap('+', '<cmd>vert res +5<cr>')
 nmap('-', '<cmd>vert res -5<cr>')
 
 -- overrides
+nmap('<leader>yy', '_yg_', 'trim yank')
 nmap('DD', 'dd', 'delete to clipboard')
 nmap('dd', '"_dd', 'keep deleted lines from the clipboard')
 nmap('x', '"_x', 'keep deleted chars from the clipboard')

@@ -32,7 +32,6 @@ return {
 	},
 	{
 		'akinsho/bufferline.nvim',
-		-- enabled = false,
 		opts = {
 			options = {
 				always_show_bufferline = true,
@@ -82,6 +81,7 @@ return {
 				{ filter = { event = 'msg_show', find = '%d more lines' } },
 				{ filter = { event = 'msg_show', find = '<ed' } },
 				{ filter = { event = 'msg_show', find = '>ed' } },
+				{ filter = { find = 'a nil value' } },
 				{
 					filter = {
 						event = 'notify',

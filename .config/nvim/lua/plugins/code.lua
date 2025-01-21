@@ -1,16 +1,4 @@
 -- vim.lsp.handlers['workspace/workspaceFolders'] = nil
-vim.diagnostic.config({
-	virtual_text = false,
-	virtual_lines = { only_current_line = true },
-	signs = true,
-	underline = true,
-	update_in_insert = false,
-	severity_sort = true,
-	float = {
-		border = 'rounded',
-		source = true,
-	},
-})
 -- vim.cmd([[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false, max_width=80})]])
 return {
 	{
@@ -22,7 +10,7 @@ return {
 				virtual_lines = { only_current_line = true },
 				signs = true,
 				underline = true,
-				update_in_insert = true,
+				update_in_insert = false,
 				severity_sort = true,
 				float = {
 					border = 'rounded',
@@ -58,19 +46,19 @@ return {
 				},
 				-- biome = {},
 				html = {},
-				harper_ls = {
-					settings = {
-						['harper-ls'] = {
-							userDictPath = vim.fn.stdpath('config') .. '/spell/en.utf-8.add',
-						},
-					},
-				},
+				-- harper_ls = {
+				-- 	settings = {
+				-- 		['harper-ls'] = {
+				-- 			userDictPath = vim.fn.stdpath('config') .. '/spell/en.utf-8.add',
+				-- 		},
+				-- 	},
+				-- },
 			},
 		},
 	},
 	{
 		'rachartier/tiny-inline-diagnostic.nvim',
-		event = 'LspAttach', -- Or `LspAttach`
+		event = 'LspAttach',
 		opts = {
 			preset = 'classic',
 			options = {

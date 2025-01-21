@@ -2,7 +2,7 @@ return {
 	{
 		'milanglacier/minuet-ai.nvim',
 		lazy = false,
-		enabled = false,
+
 		config = function()
 			require('minuet').setup({
 				after_cursor_filter_length = 20,
@@ -10,15 +10,14 @@ return {
 				provider = 'openai_fim_compatible',
 				provider_options = {
 					openai_fim_compatible = {
-						model = 'qwen2.5-coder:3b',
-						end_point = 'http://127.0.0.1:11434/v1/completions',
+						api_key = 'TERM',
 						name = 'Ollama',
+						end_point = 'http://localhost:11434/v1/completions',
+						model = 'qwen2.5-coder:14b',
 						stream = false,
-						api_key = 'LANG',
-						max_tokens = 16384,
 						optional = {
-							stop = nil,
-							max_tokens = nil,
+							max_tokens = 256,
+							top_p = 0.9,
 						},
 					},
 				},

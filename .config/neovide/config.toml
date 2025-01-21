@@ -1,6 +1,7 @@
 size = "2650x1440"
 vsync = false
 fork = true
+multigrid = false
 
 [font]
 normal = [

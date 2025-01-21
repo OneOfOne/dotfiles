@@ -2,33 +2,30 @@ return {
 	{ 'folke/lazy.nvim', version = false },
 	{ 'LazyVim/LazyVim', version = false },
 	{ 'almo7aya/openingh.nvim', config = true },
-	{
-		'echasnovski/mini.map',
-		enabled = false,
-		config = function()
-			local map = require('mini.map')
-			map.setup({
-				integrations = {
-					map.gen_integration.diagnostic(),
-					map.gen_integration.builtin_search(),
-					map.gen_integration.diff(),
-					map.gen_integration.gitsigns(),
-				},
-				window = {
-					focusable = true,
-					winblend = 100,
-				},
-			})
-			map.open()
-		end,
-	}, ---@module "neominimap.config.meta"
+	---@module "neominimap.config.meta"
 	{
 		'Isrothy/neominimap.nvim',
-		enabled = true,
+		-- enabled = false,
 		lazy = false, -- NOTE: NO NEED to Lazy load
 		-- Optional
 		init = function()
-			--- Put your configuration here
+			local group = vim.api.nvim_create_augroup('minimap', { clear = true })
+
+			vim.api.nvim_create_autocmd('InsertEnter', {
+				group = group,
+				pattern = '*',
+				callback = function()
+					require('neominimap').bufOff({}, {})
+				end,
+			})
+			vim.api.nvim_create_autocmd('InsertLeave', {
+				group = group,
+				pattern = '*',
+				callback = function()
+					require('neominimap').bufOn({}, {})
+				end,
+			})
+
 			---@type Neominimap.UserConfig
 			vim.g.neominimap = {
 				auto_enable = true,
@@ -37,11 +34,19 @@ return {
 				},
 				click = {
 					enabled = true,
+					auto_switch_focus = true,
 				},
 				mark = {
 					enabled = true,
 					show_builtins = true,
 				},
+				search = {
+					enabled = true, ---@type boolean
+					mode = 'icon', ---@type Neominimap.Handler.Annotation.Mode
+					priority = 20, ---@type integer
+					icon = '󰱽 ', ---@type string
+				},
+				delay = 250,
 			}
 		end,
 	},

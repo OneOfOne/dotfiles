@@ -291,11 +291,13 @@ wmclasscomplete=true
 wmclassmatch=1
 
 [29292350-66d6-47fe-8eca-b82a27ba2d57]
-Description=Application settings for java-lang-Thread
+Description=ToS
 clientmachine=localhost
 size=2560,1440
 sizerule=3
-wmclass=java-lang-Thread
+types=1
+wmclass=java-lang-Thread java-lang-Thread
+wmclasscomplete=true
 wmclassmatch=1
 
 [2e1ac029-e0f3-4401-8c67-08c321546cae]
