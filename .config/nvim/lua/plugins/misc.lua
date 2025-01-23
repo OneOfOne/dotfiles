@@ -6,8 +6,8 @@ return {
 	{
 		'Isrothy/neominimap.nvim',
 		-- enabled = false,
-		lazy = false, -- NOTE: NO NEED to Lazy load
-		-- Optional
+		event = 'LspAttach',
+		lazy = true,
 		init = function()
 			local group = vim.api.nvim_create_augroup('minimap', { clear = true })
 

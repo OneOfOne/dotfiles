@@ -43,18 +43,16 @@ return {
 					scrollbar = true,
 				},
 			},
-			fuzzy = {
-				use_typo_resistance = false,
-			},
+			fuzzy = {},
 			sources = {
 				-- default = { 'lsp', 'path', 'buffer', 'minuet' },
 				default = { 'lsp', 'path', 'buffer' },
-				-- transform_items = function(_, items)
-				-- 	local types = require('blink.cmp.types')
-				-- 	return vim.tbl_filter(function(item)
-				-- 		return item.kind ~= types.CompletionItemKind.Snippet
-				-- 	end, items)
-				-- end,
+				transform_items = function(_, items)
+					local types = require('blink.cmp.types')
+					return vim.tbl_filter(function(item)
+						return item.kind ~= types.CompletionItemKind.Snippet
+					end, items)
+				end,
 				providers = {
 					-- minuet = {
 					-- 	name = 'minuet',

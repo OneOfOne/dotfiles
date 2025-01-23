@@ -53,12 +53,12 @@ require('lazy').setup({
 		{ import = 'lazyvim.plugins.extras.util.mini-hipatterns' },
 		{ import = 'lazyvim.plugins.extras.util.dot' },
 
-		{ import = 'lazyvim.plugins.extras.editor.navic' },
+		-- { import = 'lazyvim.plugins.extras.editor.navic' },
 		{ import = 'lazyvim.plugins.extras.editor.snacks_picker' },
 
 		-- { import = 'lazyvim.plugins.extras.editor.telescope' },
 
-		{ import = 'lazyvim.plugins.extras.ui.edgy' },
+		-- { import = 'lazyvim.plugins.extras.ui.edgy' },
 
 		{ import = 'plugins' },
 	},

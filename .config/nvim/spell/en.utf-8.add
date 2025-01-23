@@ -4,6 +4,7 @@ addons
 addr
 ahmed
 aiq
+aiqapps
 aiqstaging
 alives
 alpinebrain
@@ -13,6 +14,7 @@ amd
 api
 app
 appsrv
+appstaging
 arg
 args
 asc
@@ -28,6 +30,7 @@ bday
 bigtable
 birchmount
 birthdate
+bm
 bool
 bottlenecked
 bq
@@ -347,6 +350,7 @@ udp
 ui
 uid
 uids
+un
 uname
 undercurls
 unicode
@@ -390,5 +394,3 @@ zipcode
 zsh
 zshrc
 µ
-bm
-appstaging

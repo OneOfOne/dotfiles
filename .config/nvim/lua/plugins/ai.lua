@@ -2,7 +2,7 @@ return {
 	{
 		'milanglacier/minuet-ai.nvim',
 		lazy = false,
-
+		enabled = false,
 		config = function()
 			require('minuet').setup({
 				after_cursor_filter_length = 20,

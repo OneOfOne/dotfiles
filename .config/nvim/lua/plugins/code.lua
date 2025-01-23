@@ -6,15 +6,16 @@ return {
 		opts = {
 			format_notify = true,
 			diagnostics = {
-				virtual_text = false,
-				virtual_lines = { only_current_line = true },
+				virtual_text = {
+					source = 'always',
+				},
 				signs = true,
 				underline = true,
 				update_in_insert = false,
 				severity_sort = true,
 				float = {
 					border = 'rounded',
-					source = true,
+					source = 'always',
 				},
 			},
 			inlay_hints = {
@@ -44,7 +45,7 @@ return {
 						},
 					},
 				},
-				-- biome = {},
+				biome = {},
 				html = {},
 				-- harper_ls = {
 				-- 	settings = {
@@ -59,6 +60,7 @@ return {
 	{
 		'rachartier/tiny-inline-diagnostic.nvim',
 		event = 'LspAttach',
+		enabled = false,
 		opts = {
 			preset = 'classic',
 			options = {

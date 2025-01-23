@@ -8,6 +8,7 @@ pnpm-lock.yaml
 User/History
 .nvim/
 bun.lockb
+bun.lock
 .zcompdump*
 tls/
 .config/item2
