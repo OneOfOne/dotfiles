@@ -63,8 +63,8 @@ o.completeopt:append('noinsert')
 
 o.grepprg = 'rg --hidden --vimgrep'
 
--- o.timeoutlen = 500
--- o.ttimeoutlen = 100
+o.timeoutlen = 50
+o.ttimeoutlen = 10
 -- o.updatetime = 250
 
 -- better selection

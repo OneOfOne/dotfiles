@@ -21,7 +21,8 @@ M.foldLines = function()
 	local text = ('%s … %s 󰁂 %d'):format(lstart, lend, n_lines)
 	return text
 end
-local function get_hostname()
+
+M.get_hostname = function()
 	local f = io.popen('/bin/hostname')
 	if f == nil then
 		return ''
@@ -33,7 +34,7 @@ local function get_hostname()
 end
 
 M.is_local = function()
-	local hn = get_hostname()
+	local hn = M.get_hostname()
 	if hn == 'USS-Defiant' or hn == 'orville' then
 		return true
 	end
