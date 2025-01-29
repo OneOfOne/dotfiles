@@ -36,12 +36,27 @@ return {
 		keys = {
 			{
 				'<leader>ad',
-				'<cmd>CodeCompanion /buffer you are an expert in writing documentation, please write documentation for the selected code and append the comment above it<cr>',
+				'<cmd>CodeCompanion /buffer you are an expert in writing documentation, please write documentation above the selected code<cr>',
 				mode = 'v',
 				desc = 'Generate documentation',
 			},
 		},
 		opts = {
+			adapters = {
+				qwencoder = function()
+					return require('codecompanion.adapters').extend('ollama', {
+						name = 'qwencoder', -- Give this adapter a different name to differentiate it from the default ollama adapter
+						schema = {
+							model = {
+								default = 'qwen2.5-coder:14b-instruct-q8_0',
+							},
+							num_ctx = {
+								default = 32768,
+							},
+						},
+					})
+				end,
+			},
 			display = {
 				inline = {
 					layout = 'buffer', -- vertical|horizontal|buffer
@@ -51,9 +66,13 @@ return {
 				},
 			},
 			strategies = {
-				chat = { adapter = 'copilot' },
-				inline = { adapter = 'copilot' },
+				chat = { adapter = 'qwencoder' },
+				inline = { adapter = 'qwencoder' },
 			},
 		},
+	},
+	{
+		'MeanderingProgrammer/render-markdown.nvim',
+		ft = { 'markdown', 'codecompanion' },
 	},
 }

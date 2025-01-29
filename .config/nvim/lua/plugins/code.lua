@@ -45,7 +45,18 @@ return {
 						},
 					},
 				},
-				biome = {},
+				vtsls = {
+					settings = {
+						complete_function_calls = false,
+						vtsls = {
+							experimental = {
+								completion = {
+									enableServerSideFuzzyMatch = false,
+								},
+							},
+						},
+					},
+				},
 				html = {},
 				-- harper_ls = {
 				-- 	settings = {
@@ -54,19 +65,6 @@ return {
 				-- 		},
 				-- 	},
 				-- },
-			},
-		},
-	},
-	{
-		'rachartier/tiny-inline-diagnostic.nvim',
-		event = 'LspAttach',
-		enabled = false,
-		opts = {
-			preset = 'classic',
-			options = {
-				show_source = true,
-				multilines = true,
-				multiple_diag_under_cursor = true,
 			},
 		},
 	},

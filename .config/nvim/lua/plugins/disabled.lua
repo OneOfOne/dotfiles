@@ -1,4 +1,5 @@
 return {
+	{ 'catppuccin', enabled = false },
 	{
 		'ellisonleao/gruvbox.nvim',
 		enabled = false,
@@ -22,13 +23,12 @@ return {
 	-- disabled to be able to use system binaries
 	{
 		'jay-babu/mason-nvim-dap.nvim',
-		enabled = false,
+		enabled = not require('config.utils').is_local(),
 	},
 	{
 		'williamboman/mason-lspconfig.nvim',
-		enabled = false,
+		enabled = not require('config.utils').is_local(),
 	},
-	-- using none-ls for now
 	{
 		'stevearc/conform.nvim',
 		enabled = false,
@@ -41,12 +41,4 @@ return {
 		'L3MON4D3/LuaSnip',
 		enabled = false,
 	},
-	{
-		'lewis6991/gitsigns.nvim',
-		-- enabled = false,
-	},
-	-- {
-	-- 	'rcarriga/nvim-notify',
-	-- 	enabled = false,
-	-- },
 }

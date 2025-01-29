@@ -30,8 +30,9 @@ plugins=(
 	zsh-syntax-highlighting
 	zsh-interactive-cd
 	git
-	zaw
 	aliases
+	sudo
+	safe-paste
 )
 
 [[ -d "${CLOUDSDK_HOME}" ]] && plugins+=(gcloud kubectl)

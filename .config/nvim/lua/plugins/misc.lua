@@ -91,5 +91,11 @@ return {
 			refresh_interval = 250,
 		},
 	},
+	{
+		'folke/which-key.nvim',
+		opts = {
+			preset = 'modern',
+		},
+	},
 	-- { 'echasnovski/mini.operators', config = true },
 }

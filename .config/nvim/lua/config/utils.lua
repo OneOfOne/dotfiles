@@ -21,8 +21,22 @@ M.foldLines = function()
 	local text = ('%s … %s 󰁂 %d'):format(lstart, lend, n_lines)
 	return text
 end
+local function get_hostname()
+	local f = io.popen('/bin/hostname')
+	if f == nil then
+		return ''
+	end
+	local hostname = f:read('*a') or ''
+	f:close()
+	hostname = string.gsub(hostname, '\n$', '')
+	return hostname
+end
 
 M.is_local = function()
+	local hn = get_hostname()
+	if hn == 'USS-Defiant' or hn == 'orville' then
+		return true
+	end
 	return not os.getenv('SSH_CONNECTION')
 end
 

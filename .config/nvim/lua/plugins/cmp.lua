@@ -1,18 +1,22 @@
 return {
 	{
+		'giuxtaposition/blink-cmp-copilot',
+		enabled = false,
+	},
+	{
 		'saghen/blink.cmp',
 		optional = true,
 		opts_extend = {
 			'sources.default',
 		},
+		dependencies = { 'fang2hou/blink-copilot' },
 		opts = {
 			appearance = {
 				use_nvim_cmp_as_default = true,
 			},
 			completion = {
-				accept = { auto_brackets = { enabled = false } },
+				accept = { auto_brackets = { enabled = true } },
 				menu = {
-					winblend = 0,
 					draw = {
 						padding = 1,
 						treesitter = { 'lsp' },
@@ -54,6 +58,13 @@ return {
 					end, items)
 				end,
 				providers = {
+					copilot = {
+						module = 'blink-copilot',
+						opts = {
+							max_completions = 3,
+							max_attempts = 4,
+						},
+					},
 					-- minuet = {
 					-- 	name = 'minuet',
 					-- 	module = 'minuet.blink',

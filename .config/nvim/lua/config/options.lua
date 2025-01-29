@@ -83,12 +83,16 @@ vim.g.neovide_cursor_animation_length = 0.1
 vim.g.neovide_cursor_animate_in_insert_mode = false
 vim.g.neovide_scale_factor = 1
 
-o.guicursor = 'a:block-blinkwait500-blinkon500-blinkoff500'
-vim.g.neovide_cursor_smooth_blink = true
+-- o.guicursor = 'a:block-blinkwait500-blinkon500-blinkoff500'
+-- vim.g.neovide_cursor_smooth_blink = true
 --
 vim.o.foldmethod = 'expr'
 vim.o.foldtext = "v:lua.require('config.utils').foldLines()"
 
 vim.g.lazyvim_picker = 'snacks'
-vim.g.lazyvim_blink_main = true
+
+if require('config.utils').is_local() then
+	vim.g.lazyvim_blink_main = true
+	-- vim.g.lazyvim_rust_diagnostics = 'bacon-ls'
+end
 -- vim.g.lazyvim_cmp = 'nvim-cmp'

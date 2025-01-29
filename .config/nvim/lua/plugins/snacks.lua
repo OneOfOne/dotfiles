@@ -51,6 +51,9 @@ return {
 						},
 					},
 				},
+				matcher = {
+					sort_empty = true,
+				},
 			},
 			input = {
 				win = {

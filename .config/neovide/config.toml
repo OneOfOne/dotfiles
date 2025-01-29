@@ -1,11 +1,11 @@
 size = "2650x1440"
-vsync = false
+vsync = true
 fork = true
-multigrid = false
+multigrid = true
 
 [font]
 normal = [
-	"CaskaydiaMono Nerd Font Mono",
+	"CaskaydiaCove Nerd Font Mono",
 	"Lilex Nerd Font Mono",
 	"ComicShannsMono Nerd Font",
 	"MonoLisa Nerd Font Mono",

@@ -21,6 +21,9 @@ return {
 			---@diagnostic disable-next-line: unused-local
 			on_highlights = function(hl, colors)
 				hl.Pmenu = 'transparent'
+				hl.BufferLineSeparatorSelected = { bg = '#002630', fg = '#001217' }
+				hl.BufferLineSeparatorVisible = { bg = '#002630' }
+				hl.BufferLineBufferSelected = { bg = '#002630' }
 			end,
 		},
 	},
