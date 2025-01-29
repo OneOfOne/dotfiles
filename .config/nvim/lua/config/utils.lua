@@ -33,9 +33,10 @@ M.get_hostname = function()
 	return hostname
 end
 
+M.hostname = M.get_hostname()
+
 M.is_local = function()
-	local hn = M.get_hostname()
-	if hn == 'USS-Defiant' or hn == 'orville' then
+	if M.hostname == 'USS-Defiant.local' or M.hostname == 'orville' then
 		return true
 	end
 	return not os.getenv('SSH_CONNECTION')
