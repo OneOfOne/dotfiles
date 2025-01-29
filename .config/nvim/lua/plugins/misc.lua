@@ -52,7 +52,7 @@ return {
 	},
 	{
 		'OneOfOne/spm.nvim',
-		dev = true,
+		-- dev = true,
 		dir = '~/code/nvim/spm.nvim',
 		config = true,
 		lazy = false,
