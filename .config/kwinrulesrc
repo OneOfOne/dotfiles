@@ -403,7 +403,7 @@ wmclassmatch=1
 Description=Tastytrade
 clientmachine=localhost
 size=2560,1440
-sizerule=2
+sizerule=3
 wmclass=tasty.javafx.launcher.LauncherFxApp
 wmclassmatch=1
 

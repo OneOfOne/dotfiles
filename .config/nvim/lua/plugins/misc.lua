@@ -56,6 +56,7 @@ return {
 		-- dir = '~/code/nvim/spm.nvim',
 		config = true,
 		lazy = false,
+		version = false,
 		-- enabled = false,
 	},
 	{

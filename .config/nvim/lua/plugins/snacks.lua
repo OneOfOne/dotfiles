@@ -18,6 +18,7 @@ return {
 				sources = {
 					files = { hidden = true },
 					grep = { hidden = true },
+					explorer = { hidden = true },
 				},
 				layouts = {
 					select = {
@@ -55,6 +56,7 @@ return {
 					sort_empty = true,
 				},
 			},
+
 			input = {
 				win = {
 					keys = {

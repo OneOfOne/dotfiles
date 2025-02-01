@@ -1,5 +1,6 @@
 return {
 	'folke/edgy.nvim',
+	optional = true,
 	opts = function(_, opts)
 		return vim.tbl_deep_extend('force', opts, {
 			animate = {

@@ -35,10 +35,13 @@ return {
 	},
 	{
 		'akinsho/bufferline.nvim',
+		-- enabled = false,
 		opts = {
 			options = {
 				always_show_bufferline = true,
 				themable = true,
+				show_close_icon = false,
+				show_buffer_close_icons = false,
 				separator_style = 'slope',
 				left_mouse_command = function(bufnum)
 					vim.fn.win_gotoid(vim.g.main_win or 1000) -- Assume 1000 is the main window if vim.g.main_win is nil
@@ -52,6 +55,9 @@ return {
 		opts = {
 			options = {
 				theme = 'solarized-osaka',
+				disabled_filetypes = {
+					winbar = { 'neo-tree', 'alpha', 'snacks_terminal' },
+				},
 			},
 			sections = {
 				lualine_y = {
@@ -60,6 +66,34 @@ return {
 					{ 'location', padding = { left = 0, right = 1 } },
 				},
 			},
+			-- winbar = {
+			-- 	lualine_a = {
+			-- 		{
+			-- 			'buffers',
+			-- 			symbols = {
+			-- 				modified = ' ●',
+			-- 				alternate_file = '',
+			-- 				directory = '',
+			-- 			},
+			-- 		},
+			-- 	},
+			-- 	lualine_y = { 'diagnostics' },
+			-- 	lualine_z = { 'tabs' },
+			-- },
+			-- inactive_winbar = {
+			-- 	lualine_a = {
+			-- 		{
+			-- 			'buffers',
+			-- 			symbols = {
+			-- 				modified = ' ●',
+			-- 				alternate_file = '',
+			-- 				directory = '',
+			-- 			},
+			-- 		},
+			-- 	},
+			-- 	lualine_y = { 'diagnostics' },
+			-- 	lualine_z = { 'tabs' },
+			-- },
 		},
 	},
 	{
