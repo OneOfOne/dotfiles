@@ -6,9 +6,11 @@ return {
 		opts = {
 			format_notify = true,
 			diagnostics = {
-				virtual_text = {
-					source = 'always',
-				},
+				-- virtual_text = {
+				-- 	source = 'always',
+				-- },
+				virtual_text = false,
+				virtual_lines = true,
 				signs = true,
 				underline = true,
 				update_in_insert = false,

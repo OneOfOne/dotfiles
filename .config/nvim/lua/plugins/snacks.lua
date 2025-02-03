@@ -7,7 +7,11 @@ return {
 				'<c-tab>',
 				function()
 					---@diagnostic disable-next-line: missing-fields
-					Snacks.picker.buffers({ current = false, layout = { preview = false, preset = 'select' } })
+					Snacks.picker.buffers({
+						current = false,
+						sort_lastused = true,
+						layout = { preview = false, preset = 'select' },
+					})
 				end,
 				desc = 'buffer switcher',
 			},
