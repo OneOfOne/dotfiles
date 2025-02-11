@@ -11,13 +11,27 @@ return {
 				-- },
 				virtual_text = false,
 				virtual_lines = true,
-				signs = true,
 				underline = true,
 				update_in_insert = false,
 				severity_sort = true,
 				float = {
 					border = 'rounded',
 					source = 'always',
+				},
+				-- signs = true,
+				signs = {
+					text = {
+						[vim.diagnostic.severity.ERROR] = '', -- or other icon of your choice here, this is just what my config has:
+						[vim.diagnostic.severity.WARN] = '',
+						[vim.diagnostic.severity.INFO] = '',
+						[vim.diagnostic.severity.HINT] = '󰌵',
+					},
+					numhl = {
+						[vim.diagnostic.severity.WARN] = 'WarningMsg',
+						[vim.diagnostic.severity.ERROR] = 'ErrorMsg',
+						[vim.diagnostic.severity.INFO] = 'DiagnosticInfo',
+						[vim.diagnostic.severity.HINT] = 'DiagnosticHint',
+					},
 				},
 			},
 			inlay_hints = {

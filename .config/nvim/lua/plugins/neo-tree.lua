@@ -2,6 +2,7 @@ return {
 	{ 'sindrets/diffview.nvim' },
 	{
 		'nvim-neo-tree/neo-tree.nvim',
+		enabled = false,
 		opts = {
 			sources = { 'filesystem' },
 			sort_case_insensitive = true,

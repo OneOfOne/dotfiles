@@ -97,9 +97,9 @@ nmap('dd', '"_dd', 'keep deleted lines from the clipboard')
 nmap('x', '"_x', 'keep deleted chars from the clipboard')
 nmap('z=', '<cmd>lua Snacks.picker.spelling()<cr>', 'better spelling ui')
 
-if require('config.utils').is_local() then
-	nmap('<leader>gg', '<cmd>!kitty lazygit<cr>', 'lazygit in kitty')
-end
+-- if require('config.utils').is_local() then
+-- 	nmap('<leader>gg', '<cmd>!kitty lazygit<cr>', 'lazygit in kitty')
+-- end
 --- misc
 nmap('<leader>us', '<cmd>setlocal spell!<cr>', 'toggle spell checking per buffer')
 nmap('<leader>sudo', '<cmd>w !sudo tee "%" >/dev/null<cr><cmd>edit!<cr>', 'sudo write')
@@ -113,3 +113,19 @@ nmap('<leader>tw', function()
 		vim.opt.shiftwidth = tonumber(input)
 	end)
 end, 'update tab size')
+
+vim.keymap.set('n', '<C-d>', function()
+	vim.wo.scrolloff = 999
+	vim.defer_fn(function()
+		vim.wo.scrolloff = 8
+	end, 500)
+	return '<c-d>'
+end, { expr = true })
+
+vim.keymap.set('n', '<C-u>', function()
+	vim.wo.scrolloff = 999
+	vim.defer_fn(function()
+		vim.wo.scrolloff = 8
+	end, 500)
+	return '<c-u>'
+end, { expr = true })

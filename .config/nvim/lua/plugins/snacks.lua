@@ -35,7 +35,7 @@ return {
 							min_height = 10,
 							box = 'vertical',
 							border = 'rounded',
-							title = ' Select ',
+							-- title = ' Select ',
 							title_pos = 'center',
 							{ win = 'input', height = 1, border = 'bottom' },
 							{ win = 'list', border = 'none' },
@@ -74,6 +74,7 @@ return {
 				},
 			},
 			statuscolumn = {
+				enabled = true,
 				folds = {
 					open = true,
 					git_hl = true,

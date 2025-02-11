@@ -21,3 +21,13 @@ end)
 au({ 'TermOpen', 'TermEnter' }, 'term://*', function()
 	vim.wo.winfixbuf = true
 end)
+
+au('LspAttach', nil, function()
+	vim.cmd([[match ErrorMsg '\s\+$']])
+end)
+
+au('WinScrolled', nil, function()
+	-- local cursor = vim.api.nvim_win_get_cursor(0)
+	-- vim.notify(vim.inspect(cursor), 'debug')
+	-- vim.notify(vim.fn.strftime('%s'))
+end)

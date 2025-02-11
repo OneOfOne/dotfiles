@@ -4,7 +4,7 @@ return {
 		lazy = false,
 		priority = 1000,
 		opts = {
-			transparent = false, -- Enable this to disable setting the background color
+			transparent = true, -- Enable this to disable setting the background color
 			terminal_colors = true, -- Configure the colors used when opening a `:terminal` in [Neovim](https://github.com/neovim/neovim)
 			styles = {
 				comments = { italic = true },
@@ -21,16 +21,50 @@ return {
 			---@diagnostic disable-next-line: unused-local
 			on_highlights = function(hl, colors)
 				hl.Pmenu = 'transparent'
-				hl.BufferLineSeparatorSelected = { bg = '#002630', fg = '#001217' }
-				hl.BufferLineSeparatorVisible = { bg = '#002630' }
-				hl.BufferLineBufferSelected = { bg = '#002630' }
+				-- hl.BufferLineSeparatorSelected = { bg = '#002630', fg = '#001217' }
+				-- hl.BufferLineSeparatorVisible = { bg = '#002630' }
+				hl.BufferLineBufferSelected = { fg = '#ffffff' }
 			end,
+		},
+	},
+	{
+		'timmypidashev/darkbox.nvim',
+		lazy = false,
+		opts = {
+			terminal_colors = true, -- add neovim terminal colors
+			undercurl = true,
+			underline = true,
+			bold = true,
+			italic = {
+				strings = true,
+				emphasis = true,
+				comments = true,
+				operators = false,
+				folds = true,
+				variables = true,
+			},
+			strikethrough = true,
+			invert_selection = false,
+			invert_signs = false,
+			invert_tabline = false,
+			invert_intend_guides = false,
+			inverse = true, -- invert background for search, diffs, statuslines and errors
+			contrast = '', -- can be "retro", "dim" or empty string for classic
+			palette_overrides = {},
+			overrides = {
+				Pmenu = { bg = 'none' },
+				SnacksPickerPathHidden = { link = 'SnacksPickerFile' },
+				BufferLineBufferSelected = { fg = '#ffffff', bg = 'red' },
+			},
+			dim_inactive = false,
+			transparent_mode = true,
 		},
 	},
 	{
 		'LazyVim/LazyVim',
 		opts = {
 			colorscheme = 'solarized-osaka',
+			-- colorscheme = 'darkbox',
 		},
 	},
 	{
@@ -42,7 +76,7 @@ return {
 				themable = true,
 				show_close_icon = false,
 				show_buffer_close_icons = false,
-				separator_style = 'slope',
+				separator_style = 'slant',
 				left_mouse_command = function(bufnum)
 					vim.fn.win_gotoid(vim.g.main_win or 1000) -- Assume 1000 is the main window if vim.g.main_win is nil
 					vim.api.nvim_set_current_buf(bufnum)
@@ -51,13 +85,35 @@ return {
 		},
 	},
 	{
+		-- Calls `require('slimline').setup({})`
+		'sschleemilch/slimline.nvim',
+		enabled = false,
+		opts = {
+			hl = {
+				modes = {
+					normal = 'Type', -- highlight base of modes
+					insert = 'Function',
+					pending = 'Boolean',
+					visual = 'Keyword',
+					command = 'String',
+				},
+				base = 'Comment', -- highlight of everything in in between components
+				primary = 'Normal', -- highlight of primary parts (e.g. filename)
+				secondary = 'Comment', -- highlight of secondary parts (e.g. filepath)
+			},
+		},
+	},
+	{
 		'nvim-lualine/lualine.nvim',
+		-- enabled = false,
 		opts = {
 			options = {
-				theme = 'solarized-osaka',
+				theme = 'auto',
 				disabled_filetypes = {
 					winbar = { 'neo-tree', 'alpha', 'snacks_terminal' },
 				},
+				component_seperators = { left = '', right = '' },
+				section_seperators = { left = '', right = '' },
 			},
 			sections = {
 				lualine_y = {

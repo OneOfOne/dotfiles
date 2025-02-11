@@ -37,7 +37,7 @@ o.fillchars = {
 	-- vertright = '┣',
 	verthoriz = '╋',
 }
-vim.cmd([[match ErrorMsg '\s\+$']])
+-- vim.cmd([[match ErrorMsg '\s\+$']])
 
 o.title = true
 
