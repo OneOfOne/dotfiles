@@ -95,3 +95,5 @@ function update-nvim {
 if ! nvim --version | grep -q v0.1; then
 	# update-nvim
 fi
+
+export GPG_TTY=$(tty)
