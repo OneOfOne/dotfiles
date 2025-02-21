@@ -115,6 +115,7 @@ return {
 	{
 		'nvim-treesitter/nvim-treesitter',
 		opts = {
+			ensure_installed = { 'css', 'scss', 'latex' },
 			incremental_selection = {
 				keymaps = {
 					init_selection = '<leader>vv',

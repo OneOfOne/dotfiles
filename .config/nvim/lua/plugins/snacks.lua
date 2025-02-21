@@ -6,11 +6,10 @@ return {
 			{
 				'<c-tab>',
 				function()
-					---@diagnostic disable-next-line: missing-fields
 					Snacks.picker.buffers({
 						current = false,
 						sort_lastused = true,
-						layout = { preview = false, preset = 'select' },
+						layout = { preset = 'select' },
 					})
 				end,
 				desc = 'buffer switcher',
@@ -26,7 +25,7 @@ return {
 				},
 				layouts = {
 					select = {
-						preview = false,
+						preview = nil,
 						layout = {
 							backdrop = false,
 							width = 0.4,
@@ -73,6 +72,10 @@ return {
 					},
 				},
 			},
+			image = {
+				enabled = true,
+				force = true,
+			},
 			statuscolumn = {
 				enabled = true,
 				folds = {
@@ -89,11 +92,6 @@ return {
 					char = ' ',
 				},
 			},
-			-- styles = {
-			-- 	notification = {
-			-- 		wo = { wrap = true },
-			-- 	},
-			-- },
 		},
 	},
 }

@@ -154,7 +154,7 @@ skiptaskbar=true
 skiptaskbarrule=2
 types=1
 windowrole=messages
-wmclass=electron discord
+wmclass=discord discord
 wmclasscomplete=true
 wmclassmatch=1
 

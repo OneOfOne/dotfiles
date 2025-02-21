@@ -11,9 +11,6 @@ return {
 		},
 		dependencies = { 'fang2hou/blink-copilot' },
 		opts = {
-			appearance = {
-				use_nvim_cmp_as_default = true,
-			},
 			completion = {
 				accept = { auto_brackets = { enabled = true } },
 				menu = {

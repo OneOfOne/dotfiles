@@ -1,3 +1,4 @@
+---@diagnostic disable: unused-local, unused-function
 -- https://medium.com/@alpha1phi/modern-neovim-configuration-hacks-93b13283969f#6ab4
 local function map(mode, keys, fn, desc, opts)
 	vim.keymap.set(mode, keys, fn, vim.tbl_extend('force', { desc = desc, noremap = true }, opts or {}))
@@ -93,7 +94,7 @@ nmap('-', '<cmd>vert res -5<cr>')
 -- overrides
 nmap('<leader>yy', '_yg_', 'trim yank')
 nmap('DD', 'dd', 'delete to clipboard')
-nmap('dd', '"_dd', 'keep deleted lines from the clipboard')
+nmap('dd', '"_dd', 'keep deleted lines from the clipboard', remap)
 nmap('x', '"_x', 'keep deleted chars from the clipboard')
 nmap('z=', '<cmd>lua Snacks.picker.spelling()<cr>', 'better spelling ui')
 
