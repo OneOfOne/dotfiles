@@ -1,7 +1,6 @@
 return {
 	{ 'folke/lazy.nvim', version = false },
 	{ 'LazyVim/LazyVim', version = false },
-	{ 'almo7aya/openingh.nvim', config = true },
 	---@module "neominimap.config.meta"
 	{
 		'Isrothy/neominimap.nvim',
@@ -61,13 +60,27 @@ return {
 	},
 	{
 		'folke/flash.nvim',
+		keys = {
+			{
+				'<a-s>',
+				mode = { 'i' },
+				function()
+					require('flash').jump()
+				end,
+				desc = 'Flash',
+			},
+		},
 		opts = {
-			multi_window = false,
-			incremental = true,
-			jump = {
-				autojump = false,
+			jump = {},
+			modes = {
+				char = {
+					jump_labels = true,
+					search = { wrap = true },
+				},
 			},
 			search = {
+				multi_window = false,
+				incremental = true,
 				mode = function(str)
 					return '\\<' .. str
 				end,
@@ -77,8 +90,7 @@ return {
 				reuse = 'all',
 				rainbow = {
 					enabled = true,
-					-- number between 1 and 9
-					shade = 5,
+					shade = 9,
 				},
 			},
 		},
@@ -90,6 +102,9 @@ return {
 			default_mappings = true,
 			force_write_shada = false,
 			refresh_interval = 250,
+			mappings = {
+				delete = '<leader>d',
+			},
 		},
 	},
 	{

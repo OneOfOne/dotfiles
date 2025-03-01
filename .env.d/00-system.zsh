@@ -18,7 +18,7 @@ setopt longlistjobs # Display PID when using jobs
 
 setopt histreduceblanks histignorespace histignorealldups
 
-#autoload -U regexp-replace
+#autoload -U regexp-replace qq
 setopt re_match_pcre
 
 autoload zmv
@@ -37,7 +37,8 @@ path=($HOME/bin $path)
 # macos utils are horrid
 if [[ $(uname -s) == 'Darwin' ]]; then
 	export HOMEBREW_NO_ENV_HINTS=1
-	path=($(find /opt/homebrew/Cellar -name gnubin) /opt/homebrew/bin $path)
+	[ -d /opt/homebrew ] && path=($(find /opt/homebrew/Cellar -name gnubin) /opt/homebrew/bin $path)
+	path=($(find /usr/local -name gnubin) $path)
 fi
 
 alias ls="ls -hF --group-directories-first --color"

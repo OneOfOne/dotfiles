@@ -6,11 +6,7 @@ return {
 			{
 				'<c-tab>',
 				function()
-					Snacks.picker.buffers({
-						current = false,
-						sort_lastused = true,
-						layout = { preset = 'select' },
-					})
+					Snacks.picker.buffers({ current = false, sort_lastused = true, layout = { preset = 'select' } })
 				end,
 				desc = 'buffer switcher',
 			},
@@ -55,22 +51,10 @@ return {
 						},
 					},
 				},
-				matcher = {
-					sort_empty = true,
-				},
 			},
 
 			input = {
-				win = {
-					keys = {
-						i_del_word = { '<C-w>', 'delete_word', mode = 'i' },
-					},
-					actions = {
-						delete_word = function()
-							vim.cmd('normal! diw<cr>')
-						end,
-					},
-				},
+				win = {},
 			},
 			image = {
 				enabled = true,

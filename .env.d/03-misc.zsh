@@ -1,5 +1,6 @@
 export WINEDEBUG=-all
 export WINEDLLOVERRIDES=winemenubuilder.exe=d
+export WINE_CPU_TOPOLOGY="16:0,1,2,3,4,5,6,7,16,17,18,19,20,21,22,23"
 export VKD3D_SHADER_CACHE_PATH=/tmp
 export DXVK_STATE_CACHE_PATH=/tmp
 export DXVK_FRAME_RATE=120

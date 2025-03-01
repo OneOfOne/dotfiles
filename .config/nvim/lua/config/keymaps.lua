@@ -22,7 +22,7 @@ local remap = { noremap = false, remap = true }
 -- map({ 'i' }, '<c-v>', '<left><c-o>"+p', 'paste clipboard')
 map({ 'i' }, '<c-s-v>', '<left><c-o>"*p', 'paste selection')
 map({ 't' }, '<c-s-v>', '<c-\\><c-n>"*pi', 'paste selection')
-nmap('yc', 'yy<cmd>normal gcc<CR>p', 'copy line and comment prev') -- thank you reddit
+
 nmap(
 	'<leader>vp',
 	':lua require("nvim-treesitter.incremental_selection").init_selection()<cr>P',
@@ -72,8 +72,6 @@ vmap('<S-LeftRelease>', '<LeftRelease>', '')
 vmap('<S-RightRelease>', '"*dgv<esc>', 'delete selection to *')
 vmap('<C-LeftRelease>', '"*P', 'replace selection with *')
 
-nmap('<leader>gl', '<cmd>OpenInGHFileLines<cr>', 'open current file/line in github')
-
 -- convenience
 -- vmap('<leader>j', 'zy:%s%\\V<C-r>0%%gc<left><left><left>', 'Search/replace visual')
 nmap('<leader>j', '<cmd>let @/=expand("<cword>")<cr>cgn', 'Search/replace visual')
@@ -93,16 +91,13 @@ nmap('-', '<cmd>vert res -5<cr>')
 
 -- overrides
 nmap('<leader>yy', '_yg_', 'trim yank')
-nmap('DD', 'dd', 'delete to clipboard')
-nmap('dd', '"_dd', 'keep deleted lines from the clipboard', remap)
-nmap('x', '"_x', 'keep deleted chars from the clipboard')
-nmap('z=', '<cmd>lua Snacks.picker.spelling()<cr>', 'better spelling ui')
+nmap('<leader>dd', '"_dd', 'keep deleted lines from the clipboard', remap)
+nmap('<leader>yc', 'yy<cmd>normal gcc<CR>p', 'copy line and comment prev') -- thank you reddit
 
 -- if require('config.utils').is_local() then
 -- 	nmap('<leader>gg', '<cmd>!kitty lazygit<cr>', 'lazygit in kitty')
 -- end
 --- misc
-nmap('<leader>us', '<cmd>setlocal spell!<cr>', 'toggle spell checking per buffer')
 nmap('<leader>sudo', '<cmd>w !sudo tee "%" >/dev/null<cr><cmd>edit!<cr>', 'sudo write')
 
 nmap('<leader>tw', function()
