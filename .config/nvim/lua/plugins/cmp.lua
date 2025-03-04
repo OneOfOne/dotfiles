@@ -9,7 +9,10 @@ return {
 		opts_extend = {
 			'sources.default',
 		},
-		dependencies = { 'fang2hou/blink-copilot' },
+		dependencies = { {
+			'fang2hou/blink-copilot',
+			enabled = require('config.utils').is_local(),
+		} },
 		opts = {
 			completion = {
 				accept = { auto_brackets = { enabled = true } },
@@ -48,13 +51,6 @@ return {
 			sources = {
 				-- default = { 'lsp', 'path', 'buffer', 'minuet' },
 				providers = {
-					copilot = {
-						module = 'blink-copilot',
-						opts = {
-							max_completions = 3,
-							max_attempts = 4,
-						},
-					},
 					-- minuet = {
 					-- 	name = 'minuet',
 					-- 	module = 'minuet.blink',
