@@ -27,6 +27,7 @@ return {
 	{
 		'olimorris/codecompanion.nvim',
 		priority = 999,
+		enabled = false,
 		event = 'LspAttach',
 		dependencies = {
 			'nvim-lua/plenary.nvim',

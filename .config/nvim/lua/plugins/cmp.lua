@@ -1,18 +1,10 @@
 return {
 	{
-		'giuxtaposition/blink-cmp-copilot',
-		enabled = false,
-	},
-	{
 		'saghen/blink.cmp',
 		optional = true,
 		opts_extend = {
 			'sources.default',
 		},
-		dependencies = { {
-			'fang2hou/blink-copilot',
-			enabled = require('config.utils').is_local(),
-		} },
 		opts = {
 			completion = {
 				accept = { auto_brackets = { enabled = true } },
