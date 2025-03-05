@@ -6,10 +6,29 @@ local p="$1"
 if [ -d "$p" ]; then
 	p="$(realpath $p)"
 	cwd="$p"
+elif [ -f "$p" ]; then
+	p="$(realpath $p)"
+	cwd="$(dirname $p)"
 fi
 
 export ZDOTDIR=~/.dotfiles
+
+JAIL_RW=("$HOME/.local/state/nvim" "$HOME/.local/share/nvim" "$HOME/.cache/nvim" "$HOME/.gnupg" "$p")
+which go &>/dev/null && JAIL_RW+=("$(go env GOMODCACHE)")
+[ -d "$HOME/.config/lazygit" ] && JAIL_RW+=("$HOME/.config/lazygit")
+
+JAIL="firejail --noprofile --caps.drop=all --nonewprivs --seccomp --noroot --disable-mnt --read-only=\"$HOME\""
+for jp in $JAIL_RW; do
+	JAIL="$JAIL --read-write=\"$jp\""
+done
+
 pushd $cwd
-kitty -d $cwd -- nvim $p $@ 2>/dev/null &
+
+echo $JAIL
+if [ "$DISPLAY" != "" ]; then
+	eval kitty -d $cwd -- $JAIL nvim $p $@ &>/dev/null &
+else
+	eval $JAIL nvim $p $@
+fi
+
 popd
-#kitty -d $cwd -- nvim $p $@ &>/dev/null &
