@@ -9,11 +9,16 @@ if [ -d "$p" ]; then
 elif [ -f "$p" ]; then
 	p="$(realpath $p)"
 	cwd="$(dirname $p)"
+elif [ "$p" != "" ]; then
+	p="$(realpath $p)"
+	touch "$p"
+	cwd="$(dirname $p)"
 fi
 
 export ZDOTDIR=~/.dotfiles
 
-JAIL_RW=("$HOME/.local/state/nvim" "$HOME/.local/share/nvim" "$HOME/.cache" "$HOME/.gnupg" "/var/run/docker.sock" "$HOME/.dotfiles/.config/nvim" "$p")
+JAIL_RW=("$p" "$HOME/.local/state/nvim" "$HOME/.local/share/nvim" "$HOME/.cache" "$HOME/.gnupg" "/var/run/docker.sock" "$HOME/.dotfiles/.config/nvim")
+JAIL_RW+=("$HOME/.expo" "$HOME/.bun")
 which go &>/dev/null && JAIL_RW+=("$(go env GOMODCACHE)")
 [ -d "$HOME/.config/lazygit" ] && JAIL_RW+=("$HOME/.config/lazygit")
 
@@ -26,7 +31,7 @@ done
 
 pushd $cwd
 
-echo $JAIL
+# echo $JAIL
 if [ "$DISPLAY" != "" ]; then
 	eval kitty -d $cwd -- $JAIL nvim $p $@ &>/dev/null &
 else
