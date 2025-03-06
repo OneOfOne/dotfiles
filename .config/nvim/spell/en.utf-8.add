@@ -1,5 +1,6 @@
 CursorHold
 CursorHoldI
+GOMODCACHE
 addons
 addr
 ahmed
@@ -74,6 +75,7 @@ devel
 deviceid
 devlog
 dir
+dirname
 dirs
 dnc
 doctype
@@ -178,6 +180,7 @@ keymap
 keypair
 lang
 lastname
+lazygit
 lazyvim
 leafly
 len
@@ -196,6 +199,7 @@ makepkg
 md
 mirrorlist
 mmap
+mnt
 mobilephone
 modprobed
 mones
@@ -220,7 +224,10 @@ nftables
 nls
 noblacklist
 nodejs
+nonewprivs
+noprofile
 noremap
+noroot
 noto
 npm
 num
@@ -286,6 +293,7 @@ rustflags
 rw
 scrollview
 sdk
+seccomp
 sed
 seg
 semver
