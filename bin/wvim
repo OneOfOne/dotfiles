@@ -18,13 +18,13 @@ fi
 export ZDOTDIR=~/.dotfiles
 
 JAIL_RW=("$p" "$HOME/.local/state/nvim" "$HOME/.local/share/nvim" "$HOME/.cache" "$HOME/.gnupg" "/var/run/docker.sock" "$HOME/.dotfiles/.config/nvim")
-JAIL_RW+=("$HOME/.expo" "$HOME/.bun" "$HOME/.docker")
+JAIL_RW+=("$HOME/.expo" "$HOME/.bun" "$HOME/.docker" "$HOME/.config/gcloud" "$HOME/.app-store")
 which go &>/dev/null && JAIL_RW+=("$(go env GOMODCACHE)")
 [ -d "$HOME/.config/lazygit" ] && JAIL_RW+=("$HOME/.config/lazygit")
 
 #JAIL="firejail --noprofile --caps.drop=all --nonewprivs --seccomp --noroot --disable-mnt --read-only=\"$HOME\""
-JAIL="firejail --noprofile --caps.drop=all --nonewprivs --seccomp --noroot --disable-mnt --private-tmp --read-only=\"$HOME\""
-JAIL="$JAIL --tracelog --writable-run-user"
+JAIL="firejail --noprofile --caps.drop=all --nonewprivs --seccomp --disable-mnt --private-tmp --private-dev --read-only=\"$HOME\""
+JAIL="$JAIL --tracelog --ipc-namespace --writable-run-user --blacklist=/nas --blacklist=/games"
 for jp in $JAIL_RW; do
 	JAIL="$JAIL --read-write=\"$jp\""
 done
