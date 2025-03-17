@@ -1,7 +1,7 @@
 ---@diagnostic disable: unused-local, unused-function
 -- https://medium.com/@alpha1phi/modern-neovim-configuration-hacks-93b13283969f#6ab4
 local function map(mode, keys, fn, desc, opts)
-	vim.keymap.set(mode, keys, fn, vim.tbl_extend('force', { desc = desc, noremap = true }, opts or {}))
+	vim.keymap.set(mode, keys, fn, vim.tbl_extend('force', { desc = desc, noremap = true, remap = false }, opts or {}))
 end
 
 local function nmap(keys, fn, desc, opts)
@@ -74,7 +74,7 @@ vmap('<C-LeftRelease>', '"*P', 'replace selection with *')
 
 -- convenience
 -- vmap('<leader>j', 'zy:%s%\\V<C-r>0%%gc<left><left><left>', 'Search/replace visual')
-nmap('<leader>j', '<cmd>let @/=expand("<cword>")<cr>cgn', 'Search/replace visual')
+nmap('<leader>j', '<cmd>let @/=expand("<cword>")<cr>cgn', 'Search/replace normal')
 vmap('<leader>j', '""y<cmd>let @/=escape(@", "/[].*$^~")<cr>"_cgn', 'Search/replace visual')
 
 nmap('vv', ':normal! v<cr>', 'map vv to v because lazyvim overrides that')
@@ -90,9 +90,9 @@ nmap('+', '<cmd>vert res +5<cr>')
 nmap('-', '<cmd>vert res -5<cr>')
 
 -- overrides
-nmap('<leader>yy', '_yg_', 'trim yank')
-nmap('<leader>dd', '"_dd', 'keep deleted lines from the clipboard', remap)
-nmap('<leader>yc', 'yy<cmd>normal gcc<CR>p', 'copy line and comment prev') -- thank you reddit
+nmap('`yy', '_yg_', 'trim yank')
+nmap('`dd', '"_dd', 'keep deleted lines from the clipboard')
+nmap('`yc', 'yy<cmd>normal gcc<CR>p', 'copy line and comment prev') -- thank you reddit
 
 -- if require('config.utils').is_local() then
 -- 	nmap('<leader>gg', '<cmd>!kitty lazygit<cr>', 'lazygit in kitty')

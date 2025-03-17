@@ -8,15 +8,16 @@ return {
 				after_cursor_filter_length = 20,
 				notify = 'error',
 				provider = 'openai_fim_compatible',
+				context_window = 512,
 				provider_options = {
 					openai_fim_compatible = {
 						api_key = 'TERM',
 						name = 'Ollama',
 						end_point = 'http://localhost:11434/v1/completions',
-						model = 'qwen2.5-coder:14b',
+						model = 'qwen2.5-coder:7b',
 						stream = false,
 						optional = {
-							max_tokens = 256,
+							max_tokens = 56,
 							top_p = 0.9,
 						},
 					},

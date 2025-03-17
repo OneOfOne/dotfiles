@@ -60,31 +60,8 @@ return {
 	},
 	{
 		'folke/flash.nvim',
-		keys = {
-			{
-				'<a-s>',
-				mode = { 'i' },
-				function()
-					require('flash').jump()
-				end,
-				desc = 'Flash',
-			},
-		},
+		-- enabled = false,
 		opts = {
-			jump = {},
-			modes = {
-				char = {
-					jump_labels = true,
-					search = { wrap = true },
-				},
-			},
-			search = {
-				multi_window = false,
-				incremental = true,
-				mode = function(str)
-					return '\\<' .. str
-				end,
-			},
 			label = {
 				style = 'inline',
 				reuse = 'all',
@@ -99,11 +76,11 @@ return {
 		'chentoast/marks.nvim',
 		event = 'BufReadPre',
 		opts = {
-			default_mappings = true,
+			default_mappings = false,
 			force_write_shada = false,
 			refresh_interval = 250,
 			mappings = {
-				delete = '<leader>d',
+				delete = '`dm',
 			},
 		},
 	},
@@ -111,6 +88,12 @@ return {
 		'folke/which-key.nvim',
 		opts = {
 			preset = 'modern',
+		},
+	},
+	{
+		'lewis6991/gitsigns.nvim',
+		opts = {
+			current_line_blame = true,
 		},
 	},
 	-- { 'echasnovski/mini.operators', config = true },

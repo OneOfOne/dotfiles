@@ -31,6 +31,7 @@ return {
 						from_top = false,
 					},
 				},
+				trigger = { prefetch_on_insert = false },
 			},
 			signature = {
 				enabled = true,
