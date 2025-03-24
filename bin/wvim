@@ -18,7 +18,7 @@ fi
 export ZDOTDIR=~/.dotfiles
 
 JAIL_RW=("$p" "$HOME/.local/state/nvim" "$HOME/.local/share/nvim" "$HOME/.cache" "$HOME/.gnupg" "/var/run/docker.sock" "$HOME/.dotfiles/.config/nvim")
-JAIL_RW+=("$HOME/.expo" "$HOME/.bun" "$HOME/.docker" "$HOME/.config/gcloud" "$HOME/.app-store")
+JAIL_RW+=("$HOME/.expo" "$HOME/.bun" "$HOME/.docker" "$HOME/.app-store" "$HOME/.rustup")
 which go &>/dev/null && JAIL_RW+=("$(go env GOMODCACHE)")
 [ -d "$HOME/.config/lazygit" ] && JAIL_RW+=("$HOME/.config/lazygit")
 

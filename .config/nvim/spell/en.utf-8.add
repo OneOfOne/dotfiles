@@ -349,6 +349,7 @@ tokio
 toml
 torvalds
 tpm
+tracelog
 treesitter
 tsx
 tt

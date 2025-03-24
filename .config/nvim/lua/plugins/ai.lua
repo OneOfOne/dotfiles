@@ -50,7 +50,7 @@ return {
 						name = 'qwencoder', -- Give this adapter a different name to differentiate it from the default ollama adapter
 						schema = {
 							model = {
-								default = 'qwen2.5-coder:14b-instruct-q8_0',
+								default = 'gemma3:12b',
 							},
 							num_ctx = {
 								default = 32768,

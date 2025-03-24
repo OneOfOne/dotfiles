@@ -76,18 +76,18 @@ return {
 		'chentoast/marks.nvim',
 		event = 'BufReadPre',
 		opts = {
-			default_mappings = false,
+			default_mappings = true,
 			force_write_shada = false,
 			refresh_interval = 250,
 			mappings = {
-				delete = '`dm',
+				-- delete = '`dm',
 			},
 		},
 	},
 	{
 		'folke/which-key.nvim',
 		opts = {
-			preset = 'modern',
+			-- preset = 'modern',
 		},
 	},
 	{

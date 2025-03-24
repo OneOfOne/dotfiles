@@ -90,9 +90,11 @@ nmap('+', '<cmd>vert res +5<cr>')
 nmap('-', '<cmd>vert res -5<cr>')
 
 -- overrides
-nmap('`yy', '_yg_', 'trim yank')
-nmap('`dd', '"_dd', 'keep deleted lines from the clipboard')
-nmap('`yc', 'yy<cmd>normal gcc<CR>p', 'copy line and comment prev') -- thank you reddit
+nmap('<leader>yy', '_yg_', 'trim yank')
+nmap('D', 'dd', 'keep deleted lines from the clipboard')
+nmap('dd', '"_dd', 'keep deleted lines from the clipboard')
+nmap('x', '"_x', 'keep deleted lines from the clipboard')
+nmap('yc', '"zyy<cmd>normal gcc<CR>"zp', 'copy line and comment prev') -- thank you reddit
 
 -- if require('config.utils').is_local() then
 -- 	nmap('<leader>gg', '<cmd>!kitty lazygit<cr>', 'lazygit in kitty')

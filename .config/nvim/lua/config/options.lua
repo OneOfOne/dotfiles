@@ -62,9 +62,10 @@ o.spelloptions:append('camel')
 o.completeopt:append('noinsert')
 
 o.grepprg = 'rg --hidden --vimgrep'
-
-o.timeoutlen = 50
-o.ttimeoutlen = 10
+--
+o.timeout = false
+-- o.timeoutlen = 50
+-- o.ttimeoutlen = 10
 -- o.updatetime = 250
 
 -- better selection
@@ -72,6 +73,7 @@ o.selection = 'inclusive'
 o.virtualedit = 'onemore'
 -- o.selectmode = 'mouse,key'
 o.mousemodel = 'extend'
+o.winborder = 'rounded'
 
 o.foldlevelstart = -1
 
@@ -93,6 +95,4 @@ vim.g.lazyvim_picker = 'snacks'
 
 if require('config.utils').is_local() then
 	vim.g.lazyvim_blink_main = true
-	-- vim.g.lazyvim_rust_diagnostics = 'bacon-ls'
 end
--- vim.g.lazyvim_cmp = 'nvim-cmp'

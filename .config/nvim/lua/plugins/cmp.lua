@@ -18,12 +18,6 @@ return {
 							{ 'source_name' },
 						},
 					},
-					border = 'rounded',
-				},
-				documentation = {
-					window = {
-						border = 'rounded',
-					},
 				},
 				list = {
 					selection = { preselect = false, auto_insert = false },
@@ -36,7 +30,6 @@ return {
 			signature = {
 				enabled = true,
 				window = {
-					border = 'rounded',
 					scrollbar = true,
 				},
 			},
@@ -49,6 +42,12 @@ return {
 					-- 	module = 'minuet.blink',
 					-- 	score_offset = 8, -- Gives minuet higher priority among suggestions
 					-- },
+					path = {
+						module = 'blink.cmp.sources.path',
+						opts = {
+							show_hidden_files_by_default = true,
+						},
+					},
 				},
 			},
 		},
