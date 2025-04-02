@@ -10,7 +10,7 @@ return {
 					source = 'always',
 				},
 				-- virtual_text = false,
-				virtual_lines = false,
+				-- virtual_lines = false,
 				underline = true,
 				update_in_insert = false,
 				severity_sort = true,
@@ -19,6 +19,18 @@ return {
 					source = 'always',
 				},
 				-- signs = true,
+				-- virtual_text = {
+				-- 	source = 'always',
+				-- 	severity = {
+				-- 		max = vim.diagnostic.severity.WARN,
+				-- 	},
+				-- },
+				-- virtual_lines = {
+				-- 	current_line = true,
+				-- 	severity = {
+				-- 		min = vim.diagnostic.severity.ERROR,
+				-- 	},
+				-- },
 				signs = {
 					text = {
 						[vim.diagnostic.severity.ERROR] = '', -- or other icon of your choice here, this is just what my config has:
@@ -74,6 +86,9 @@ return {
 					},
 				},
 				html = {},
+				biome = {
+					single_file_support = true,
+				},
 				-- harper_ls = {
 				-- 	settings = {
 				-- 		['harper-ls'] = {
@@ -100,6 +115,7 @@ return {
 						'--formatter-enabled=true',
 						'--organize-imports-enabled=true',
 						'--skip-errors',
+						'--use-server',
 						'--stdin-file-path=$FILENAME',
 					},
 				}),

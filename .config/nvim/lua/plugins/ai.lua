@@ -1,4 +1,12 @@
+vim.g.copilot_settings = { selectedCompletionModel = 'gpt-4o-copilot' }
+
 return {
+	{
+		'zbirenbaum/copilot.lua',
+		opts = {
+			copilot_model = 'gpt-4o-copilot',
+		},
+	},
 	{
 		'milanglacier/minuet-ai.nvim',
 		lazy = false,

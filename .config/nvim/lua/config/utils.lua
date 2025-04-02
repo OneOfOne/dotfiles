@@ -55,4 +55,12 @@ M.gsr = function()
 	vim.cmd.LspRestart()
 end
 
+M.current_line_diagnostics = function()
+	local bufnr = 0
+	local line_nr = vim.api.nvim_win_get_cursor(0)[1] - 1
+	local opts = { ['lnum'] = line_nr }
+
+	return vim.diagnostic.get(bufnr, opts)
+end
+
 return M

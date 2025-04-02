@@ -13,21 +13,23 @@ au('FileType', { 'json', 'jsonc', 'Outline' }, function()
 	vim.wo.conceallevel = 0
 end)
 
-au('FileType', { 'notify' }, function()
-	vim.bo.filetype = 'markdown'
-	vim.wo.spell = false
-end)
-
-au({ 'TermOpen', 'TermEnter' }, 'term://*', function()
-	vim.wo.winfixbuf = true
-end)
-
 au('LspAttach', nil, function()
 	vim.cmd([[match ErrorMsg '\s\+$']])
 end)
 
-au('WinScrolled', nil, function()
-	-- local cursor = vim.api.nvim_win_get_cursor(0)
-	-- vim.notify(vim.inspect(cursor), 'debug')
-	-- vim.notify(vim.fn.strftime('%s'))
+au({ 'CursorHold', 'InsertLeave' }, nil, function()
+	local opts = {
+		focusable = false,
+		scope = 'cursor',
+		close_events = { 'BufLeave', 'CursorMoved', 'InsertEnter' },
+	}
+	vim.diagnostic.open_float(nil, opts)
+end)
+
+au('InsertEnter', nil, function()
+	vim.diagnostic.enable(false)
+end)
+
+au('InsertLeave', nil, function()
+	vim.diagnostic.enable(true)
 end)
