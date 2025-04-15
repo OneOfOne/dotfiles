@@ -7,7 +7,7 @@ return {
 		},
 		opts = {
 			completion = {
-				accept = { auto_brackets = { enabled = true } },
+				accept = { auto_brackets = { enabled = false } },
 				menu = {
 					draw = {
 						padding = 1,
@@ -22,7 +22,7 @@ return {
 				list = {
 					selection = { preselect = false, auto_insert = false },
 					cycle = {
-						from_top = false,
+						-- from_top = false,
 					},
 				},
 				trigger = { prefetch_on_insert = false },

@@ -53,9 +53,7 @@ return {
 				},
 			},
 
-			input = {
-				win = {},
-			},
+			input = {},
 			image = {
 				enabled = true,
 				force = true,

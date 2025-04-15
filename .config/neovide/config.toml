@@ -3,6 +3,10 @@ vsync = true
 fork = true
 multigrid = true
 
+[box-drawing]
+# "font-glyph", "native" or "selected-native"
+mode = "native"
+
 [font]
 normal = [
 	"CaskaydiaCove Nerd Font Mono",

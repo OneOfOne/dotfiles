@@ -3,86 +3,40 @@ vim.g.copilot_settings = { selectedCompletionModel = 'gpt-4o-copilot' }
 return {
 	{
 		'zbirenbaum/copilot.lua',
-		opts = {
-			copilot_model = 'gpt-4o-copilot',
-		},
-	},
-	{
-		'milanglacier/minuet-ai.nvim',
-		lazy = false,
-		enabled = false,
-		config = function()
-			require('minuet').setup({
-				after_cursor_filter_length = 20,
-				notify = 'error',
-				provider = 'openai_fim_compatible',
-				context_window = 512,
-				provider_options = {
-					openai_fim_compatible = {
-						api_key = 'TERM',
-						name = 'Ollama',
-						end_point = 'http://localhost:11434/v1/completions',
-						model = 'qwen2.5-coder:7b',
-						stream = false,
-						optional = {
-							max_tokens = 56,
-							top_p = 0.9,
-						},
-					},
-				},
-			})
+		opts = function(_, opts)
+			---@diagnostic disable-next-line: inject-field
+			require('copilot.api').status = require('copilot.status')
+			opts.copilot_model = 'gpt-4o-copilot'
 		end,
 	},
 	{
-		'olimorris/codecompanion.nvim',
-		priority = 999,
+		'giuxtaposition/blink-cmp-copilot',
 		enabled = false,
-		event = 'LspAttach',
-		dependencies = {
-			'nvim-lua/plenary.nvim',
-			'nvim-treesitter/nvim-treesitter',
-			{ 'echasnovski/mini.diff', opts = {} },
-		},
-		keys = {
-			{
-				'<leader>ad',
-				'<cmd>CodeCompanion /buffer you are an expert in writing documentation, please write documentation above the selected code<cr>',
-				mode = 'v',
-				desc = 'Generate documentation',
-			},
-		},
+	},
+	{
+		'saghen/blink.cmp',
+		dependencies = { 'fang2hou/blink-copilot' },
 		opts = {
-			adapters = {
-				qwencoder = function()
-					return require('codecompanion.adapters').extend('ollama', {
-						name = 'qwencoder', -- Give this adapter a different name to differentiate it from the default ollama adapter
-						schema = {
-							model = {
-								default = 'gemma3:12b',
-							},
-							num_ctx = {
-								default = 32768,
-							},
-						},
-					})
-				end,
-			},
-			display = {
-				inline = {
-					layout = 'buffer', -- vertical|horizontal|buffer
+			sources = {
+				providers = {
+					copilot = {
+						module = 'blink-copilot',
+					},
 				},
-				diff = {
-					provider = 'mini_diff',
-				},
-			},
-			strategies = {
-				chat = { adapter = 'qwencoder' },
-				inline = { adapter = 'qwencoder' },
 			},
 		},
 	},
 	{
-		'MeanderingProgrammer/render-markdown.nvim',
-		ft = { 'markdown', 'codecompanion' },
+		'yetone/avante.nvim',
+		dependencies = {
+			'MunifTanjim/nui.nvim',
+			{
+				'MeanderingProgrammer/render-markdown.nvim',
+				opts = { file_types = { 'markdown', 'Avante' } },
+				ft = { 'markdown', 'Avante' },
+			},
+		},
+		build = 'make',
+		opts = { provider = 'copilot' },
 	},
 }

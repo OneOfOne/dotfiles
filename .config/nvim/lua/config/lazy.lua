@@ -31,35 +31,21 @@ require('lazy').setup({
 		{ import = 'lazyvim.plugins.extras.lang.rust' },
 		-- { import = 'lazyvim.plugins.extras.lang.clangd' },
 
-		-- { import = 'lazyvim.plugins.extras.formatting.biome' },
-
 		{ import = 'lazyvim.plugins.extras.lsp.none-ls' },
 
 		{ import = 'lazyvim.plugins.extras.test.core' },
 		{ import = 'lazyvim.plugins.extras.dap.core' },
 
-		-- { import = 'lazyvim.plugins.extras.coding.mini-surround' },
-		-- { import = 'lazyvim.plugins.extras.coding.nvim-cmp' },
-
 		{
 			import = 'lazyvim.plugins.extras.ai.copilot',
-			enabled = require('config.utils').is_local(),
-		},
-		{
-			import = 'lazyvim.plugins.extras.ai.copilot-chat',
 			enabled = require('config.utils').is_local(),
 		},
 
 		{ import = 'lazyvim.plugins.extras.util.mini-hipatterns' },
 		{ import = 'lazyvim.plugins.extras.util.dot' },
 
-		-- { import = 'lazyvim.plugins.extras.editor.navic' },
 		{ import = 'lazyvim.plugins.extras.editor.snacks_picker' },
 		{ import = 'lazyvim.plugins.extras.editor.snacks_explorer' },
-
-		-- { import = 'lazyvim.plugins.extras.editor.telescope' },
-
-		-- { import = 'lazyvim.plugins.extras.ui.edgy' },
 
 		{ import = 'plugins' },
 	},
