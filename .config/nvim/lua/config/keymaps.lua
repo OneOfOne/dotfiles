@@ -94,7 +94,11 @@ nmap('<leader>yy', '_yg_', 'trim yank')
 nmap('D', 'dd', 'keep deleted lines from the clipboard')
 nmap('dd', '"_dd', 'keep deleted lines from the clipboard')
 nmap('x', '"_x', 'keep deleted lines from the clipboard')
-nmap('yc', '"zyy<cmd>normal gcc<CR>"zp', 'copy line and comment prev') -- thank you reddit
+nmap('yc', function()
+	vim.cmd('normal! ' .. vim.v.count1 .. 'zyy')
+	vim.cmd('normal ' .. vim.v.count1 .. 'gcc')
+	vim.cmd("normal! ']zp")
+end, 'copy line and comment prev') -- thank you reddit
 
 -- if require('config.utils').is_local() then
 -- 	nmap('<leader>gg', '<cmd>!kitty lazygit<cr>', 'lazygit in kitty')

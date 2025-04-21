@@ -1,3 +1,4 @@
+CLOUDSDK
 CursorHold
 CursorHoldI
 GOMODCACHE
@@ -258,6 +259,7 @@ png
 polyfill
 popup
 pos
+postgres
 posthog
 pprof
 preprocess
@@ -291,6 +293,7 @@ rsync
 runuser
 rustc
 rustflags
+rustup
 rw
 scrollview
 sdk
@@ -405,4 +408,3 @@ zipcode
 zsh
 zshrc
 µ
-rustup

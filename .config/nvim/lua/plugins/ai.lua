@@ -1,11 +1,8 @@
-vim.g.copilot_settings = { selectedCompletionModel = 'gpt-4o-copilot' }
-
 return {
 	{
 		'zbirenbaum/copilot.lua',
+		optional = true,
 		opts = function(_, opts)
-			---@diagnostic disable-next-line: inject-field
-			require('copilot.api').status = require('copilot.status')
 			opts.copilot_model = 'gpt-4o-copilot'
 		end,
 	},
@@ -28,6 +25,7 @@ return {
 	},
 	{
 		'yetone/avante.nvim',
+		event = 'VeryLazy',
 		dependencies = {
 			'MunifTanjim/nui.nvim',
 			{
