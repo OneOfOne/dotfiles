@@ -26,7 +26,7 @@ return {
 		enabled = not require('config.utils').is_local(),
 	},
 	{
-		'williamboman/mason-lspconfig.nvim',
+		'mason-org/mason-lspconfig.nvim',
 		enabled = not require('config.utils').is_local(),
 	},
 	{

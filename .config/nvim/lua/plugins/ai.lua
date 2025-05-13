@@ -25,7 +25,7 @@ return {
 	},
 	{
 		'yetone/avante.nvim',
-		event = 'VeryLazy',
+		event = 'LspAttach',
 		dependencies = {
 			'MunifTanjim/nui.nvim',
 			{

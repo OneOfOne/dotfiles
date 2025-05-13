@@ -123,6 +123,7 @@ return {
 				nls.formatting.shfmt.with({
 					filetypes = { 'sh', 'zsh' },
 				}),
+				nls.code_actions.gitsigns,
 			})
 			opts.debug = false
 			return opts
