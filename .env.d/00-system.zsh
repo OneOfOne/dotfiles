@@ -56,6 +56,8 @@ alias grep="grep --color"
 alias egrep="grep -E --color"
 alias fgrep="grep -F --color"
 
+alias hg="history | grep"
+
 function mkcd {
 	command mkdir -p $1 && pushd $1 >/dev/null
 }
@@ -64,10 +66,10 @@ function mkgit {
 	mkcd $1 && git init
 }
 
-if [ -x /bin/nvim ]; then
+if [ $(command -v nvim) != "" ]; then
 	export VTE_VERSION=100
-	export EDITOR="/bin/nvim"
-	export GIT_EDITOR="/bin/nvim"
+	export EDITOR="$(command -v nvim)"
+	export GIT_EDITOR="$(command -v nvim)"
 fi
 
 function _err {

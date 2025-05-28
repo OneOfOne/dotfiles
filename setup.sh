@@ -3,7 +3,7 @@ set -e
 setopt GLOB_DOTS
 
 DOTS="$HOME/.dotfiles"
-env BUN_INSTALL=/tmp/.bun curl -fsSL https://bun.sh/install | bash
+curl -fsSL https://bun.sh/install | bash
 
 ln -vsf $DOTS/.zshrc ~/
 ln -vsf $DOTS/.gitconfig ~/
@@ -20,7 +20,7 @@ cd $DOTS
 git pull --recurse-submodules
 git submodule update --init --force
 git submodule foreach --recursive git main
-/tmp/.bun/bun install && rm -rf /tmp/.bun
+~/.bun/bun install
 git checkout .zshrc
 cd -
 
