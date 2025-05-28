@@ -86,15 +86,14 @@ env | grep -q SSH && export TERM=xterm-256color
 [ ! -d ~/.tmux/plugins/tpm ] && git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 function update-nvim {
+	set -x
 	mkcd ~/bin/ &&
-		curl -O -L https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage &&
-		chmod +x nvim.appimage &&
-		./nvim.appimage --appimage-extract &&
-		ln -sfv ~/bin/squashfs-root/usr/bin/nvim ~/bin/nvim
+		curl -O -L https://github.com/neovim/neovim/releases/download/nightly/nvim-linux-x86_64.appimage &&
+		chmod +x nvim-linux-x86_64.appimage &&
+		./nvim-linux-x86_64.appimage --appimage-extract &&
+		ln -sfv ~/bin/squashfs-root/usr/bin/nvim ~/bin/nvim &&
+		rm -v nvim-linux-x86_64.appimage
+	cd -
 }
-
-if ! nvim --version | grep -q v0.1; then
-	# update-nvim
-fi
 
 export GPG_TTY=$(tty)

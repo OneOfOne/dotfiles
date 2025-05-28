@@ -2,6 +2,7 @@ return {
 	{
 		'saghen/blink.cmp',
 		optional = true,
+		version = '1.*',
 		opts_extend = {
 			'sources.default',
 		},

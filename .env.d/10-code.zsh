@@ -10,13 +10,12 @@ export GOAMD64=v4
 
 export ANDROID_HOME="$HOME/sdk/android"
 
+# docker
+export COMPOSE_BAKE=true
+export DOCKER_BUILDKI=1
+
 # remove when node fixes their crap
 export UV_USE_IO_URING=0
-
-# if [ -x /bin/zig ]; then
-# 	export CC="zig cc"
-# 	export CXX="zig cxx"
-# fi
 
 path=($HOME/.dotfiles/node_modules/.bin $path)
 path=($GOBIN $HOME/.cargo/bin $path)
