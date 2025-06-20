@@ -29,6 +29,7 @@ return {
 		'mason-org/mason-lspconfig.nvim',
 		enabled = not require('config.utils').is_local(),
 	},
+	{ 'nvim-dap', enabled = false },
 	{
 		'stevearc/conform.nvim',
 		enabled = false,

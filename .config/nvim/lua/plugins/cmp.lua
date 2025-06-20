@@ -6,6 +6,10 @@ return {
 		opts_extend = {
 			'sources.default',
 		},
+		dependencies = {
+			'Kaiser-Yang/blink-cmp-avante',
+			-- ... Other dependencies
+		},
 		opts = {
 			completion = {
 				accept = { auto_brackets = { enabled = false } },
@@ -37,16 +41,13 @@ return {
 			fuzzy = {},
 			sources = {
 				-- default = { 'lsp', 'path', 'buffer', 'minuet' },
+				default = { 'avante', 'lsp', 'path', 'buffer' },
 				providers = {
-					-- minuet = {
-					-- 	name = 'minuet',
-					-- 	module = 'minuet.blink',
-					-- 	score_offset = 8, -- Gives minuet higher priority among suggestions
-					-- },
-					path = {
-						module = 'blink.cmp.sources.path',
+					avante = {
+						module = 'blink-cmp-avante',
+						name = 'Avante',
 						opts = {
-							show_hidden_files_by_default = true,
+							-- options for blink-cmp-avante
 						},
 					},
 				},

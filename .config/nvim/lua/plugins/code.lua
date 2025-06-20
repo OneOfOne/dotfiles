@@ -1,5 +1,6 @@
 -- vim.lsp.handlers['workspace/workspaceFolders'] = nil
 -- vim.cmd([[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false, max_width=80})]])
+
 return {
 	{
 		'neovim/nvim-lspconfig',
@@ -113,9 +114,7 @@ return {
 						'--write',
 						'--unsafe',
 						'--formatter-enabled=true',
-						'--organize-imports-enabled=true',
-						'--skip-errors',
-						'--use-server',
+						'--assist-enabled=true',
 						'--stdin-file-path=$FILENAME',
 					},
 				}),
@@ -131,6 +130,7 @@ return {
 	},
 	{
 		'nvim-treesitter/nvim-treesitter',
+		-- branch = 'main',
 		opts = {
 			ensure_installed = { 'css', 'scss', 'latex' },
 			incremental_selection = {
