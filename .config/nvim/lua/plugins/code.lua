@@ -87,9 +87,7 @@ return {
 					},
 				},
 				html = {},
-				biome = {
-					single_file_support = true,
-				},
+				biome = {},
 				-- harper_ls = {
 				-- 	settings = {
 				-- 		['harper-ls'] = {
@@ -133,13 +131,13 @@ return {
 		-- branch = 'main',
 		opts = {
 			ensure_installed = { 'css', 'scss', 'latex' },
-			incremental_selection = {
-				keymaps = {
-					init_selection = '<leader>vv',
-					node_incremental = '+',
-					node_decremental = '_',
-				},
-			},
+			-- incremental_selection = {
+			-- 	keymaps = {
+			-- 		init_selection = '<leader>vv',
+			-- 		node_incremental = '+',
+			-- 		node_decremental = '_',
+			-- 	},
+			-- },
 			textobjects = {
 				swap = {
 					enable = true,
@@ -160,6 +158,13 @@ return {
 					},
 				},
 			},
+		},
+	},
+	{
+		'daliusd/incr.nvim',
+		opts = {
+			-- incr_key = '+', -- increment selection key
+			-- decr_key = '-', -- decrement selection key
 		},
 	},
 }

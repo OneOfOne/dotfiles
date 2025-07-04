@@ -8,7 +8,6 @@
 	"dependencies": {
 		"@ast-grep/cli": "latest",
 		"@biomejs/biome": "latest",
-		"@github/copilot-language-server": "latest",
 		"@typescript/native-preview": "latest",
 		"@vtsls/language-server": "latest",
 		"bash-language-server": "latest",
