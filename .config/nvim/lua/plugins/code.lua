@@ -128,36 +128,9 @@ return {
 	},
 	{
 		'nvim-treesitter/nvim-treesitter',
-		-- branch = 'main',
+		branch = 'main',
 		opts = {
 			ensure_installed = { 'css', 'scss', 'latex' },
-			-- incremental_selection = {
-			-- 	keymaps = {
-			-- 		init_selection = '<leader>vv',
-			-- 		node_incremental = '+',
-			-- 		node_decremental = '_',
-			-- 	},
-			-- },
-			textobjects = {
-				swap = {
-					enable = true,
-					swap_previous = {
-						[']a'] = '@parameter.inner',
-					},
-					swap_next = {
-						['[a'] = '@parameter.inner',
-					},
-				},
-				lsp_interop = {
-					enable = true,
-					border = 'rounded',
-					floating_preview_opts = {},
-					peek_definition_code = {
-						['<leader>df'] = '@function.outer',
-						['<leader>dF'] = '@class.outer',
-					},
-				},
-			},
 		},
 	},
 	{

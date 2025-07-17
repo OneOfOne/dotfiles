@@ -100,9 +100,9 @@ nmap('yc', function()
 	vim.cmd("normal! ']zp")
 end, 'copy line and comment prev') -- thank you reddit
 
--- if require('config.utils').is_local() then
--- 	nmap('<leader>gg', '<cmd>!kitty lazygit<cr>', 'lazygit in kitty')
--- end
+if require('config.utils').is_local() then
+	nmap('<leader>gg', '<cmd>!kitty lazygit<cr>', 'lazygit in kitty')
+end
 --- misc
 nmap('<leader>sudo', '<cmd>w !sudo tee "%" >/dev/null<cr><cmd>edit!<cr>', 'sudo write')
 
