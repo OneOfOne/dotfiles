@@ -2,9 +2,6 @@ return {
 	{
 		'zbirenbaum/copilot.lua',
 		optional = true,
-		opts = function(_, opts)
-			opts.copilot_model = 'gpt-4o-copilot'
-		end,
 	},
 	{
 		'giuxtaposition/blink-cmp-copilot',

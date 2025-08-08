@@ -88,6 +88,7 @@ return {
 				},
 				html = {},
 				biome = {},
+				-- tsgo = {},
 				-- harper_ls = {
 				-- 	settings = {
 				-- 		['harper-ls'] = {
