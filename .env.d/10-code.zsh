@@ -4,7 +4,7 @@ export GOPATH="$HOME/code/go"
 export GOBIN="$GOPATH/bin"
 # export GOSUMDB="off"
 # export GOPROXY="direct"
-export GO111MODULE=auto
+# export GO111MODULE=auto
 
 export GOAMD64=v4
 
@@ -24,7 +24,7 @@ path=($GOBIN $HOME/.cargo/bin $path)
 if [ -f "$HOME/sdk/google-cloud-sdk/path.zsh.inc" ]; then . '/home/oneofone/sdk/google-cloud-sdk/path.zsh.inc'; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f "$HOME/sdk/google-cloud-sdk/completion.zsh.inc" ]; then . '/home/oneofone/sdk/google-cloud-sdk/completion.zsh.inc'; fi
+# if [ -f "$HOME/sdk/google-cloud-sdk/completion.zsh.inc" ]; then . '/home/oneofone/sdk/google-cloud-sdk/completion.zsh.inc'; fi
 
 for gv in $(command ls "$SDKBASE/" 2>&1 | grep -E '^go'); do
 	name="${gv/./}"

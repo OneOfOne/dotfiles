@@ -1,3 +1,4 @@
+# set -x
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -38,11 +39,13 @@ plugins=(
 [[ -d "${CLOUDSDK_HOME}" ]] && plugins+=(gcloud kubectl)
 
 case "$(uname -s)" in
-	Linux)
-		plugins+=(systemd);;
-	Darwin)
-		plugins+=(macos brew);
-		export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
+Linux)
+	plugins+=(systemd)
+	;;
+Darwin)
+	plugins+=(macos brew)
+	export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
+	;;
 esac
 
 ZSH_THEME="powerlevel10k/powerlevel10k"
@@ -80,4 +83,3 @@ autoload -U compinit && compinit
 [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
 [ $(command -v fzf) != "" ] && source <(fzf --zsh)
-
