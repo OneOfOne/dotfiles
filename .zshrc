@@ -82,4 +82,6 @@ autoload -U compinit && compinit
 # bun completions
 [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
-[ $(command -v fzf) != "" ] && source <(fzf --zsh)
+if command -v fzf &>/dev/null; then
+	source <(fzf --zsh)
+fi
