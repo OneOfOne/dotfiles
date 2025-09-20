@@ -14,14 +14,14 @@ return {
 				group = group,
 				pattern = '*',
 				callback = function()
-					require('neominimap').bufOff({}, {})
+					require('neominimap').buf.disable()
 				end,
 			})
 			vim.api.nvim_create_autocmd('InsertLeave', {
 				group = group,
 				pattern = '*',
 				callback = function()
-					require('neominimap').bufOn({}, {})
+					require('neominimap').buf.enable()
 				end,
 			})
 

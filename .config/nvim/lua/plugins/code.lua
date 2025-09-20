@@ -134,11 +134,4 @@ return {
 			ensure_installed = { 'css', 'scss', 'latex' },
 		},
 	},
-	{
-		'daliusd/incr.nvim',
-		opts = {
-			-- incr_key = '+', -- increment selection key
-			-- decr_key = '-', -- decrement selection key
-		},
-	},
 }
