@@ -143,7 +143,7 @@ function gotest {
 function gobench {
 	local n="${1:-.}"
 	[ "$1" != "" ] && shift
-	go test -count=1 -v -run='^$' -benchmem -bench="$n" $@
+	go test -count=1 -v -run='^$' -benchmem -benchtime=5s -bench="$n" $@
 }
 
 function gobump {

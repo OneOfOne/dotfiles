@@ -12,7 +12,9 @@
 		"@vtsls/language-server": "latest",
 		"bash-language-server": "latest",
 		"bun": "latest",
+		"markdown-toc": "latest",
 		"markdownlint-cli": "latest",
+		"markdownlint-cli2": "latest",
 		"marksman": "latest",
 		"typescript-language-server": "latest",
 		"vscode-html-languageservice": "latest",
@@ -20,5 +22,10 @@
 		"vscode-langservers-extracted": "latest",
 		"yaml-language-server": "latest"
 	},
-	"trustedDependencies": ["@ast-grep/cli", "@biomejs/biome", "bun", "core-js"]
+	"trustedDependencies": [
+		"@ast-grep/cli",
+		"@biomejs/biome",
+		"bun",
+		"core-js"
+	]
 }

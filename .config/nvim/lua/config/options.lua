@@ -93,6 +93,8 @@ vim.o.foldtext = "v:lua.require('config.utils').foldLines()"
 
 vim.g.lazyvim_picker = 'snacks'
 
+o.autowriteall = true
+
 if require('config.utils').is_local() then
 	vim.g.lazyvim_blink_main = true
 end

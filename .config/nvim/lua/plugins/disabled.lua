@@ -22,28 +22,32 @@ return {
 	},
 	-- disabled to be able to use system binaries
 	{
-		'jay-babu/mason-nvim-dap.nvim',
+		'mason-nvim-dap.nvim',
 		enabled = not require('config.utils').is_local(),
 	},
 	{
-		'mason-org/mason-lspconfig.nvim',
+		'mason-lspconfig.nvim',
 		enabled = not require('config.utils').is_local(),
 	},
 	{ 'nvim-dap', enabled = false },
 	{
-		'stevearc/conform.nvim',
+		'conform.nvim',
 		enabled = false,
 	},
 	{
-		'mfussenegger/nvim-lint',
+		'nvim-lint',
 		enabled = false,
 	},
 	{
-		'L3MON4D3/LuaSnip',
+		'LuaSnip',
 		enabled = false,
 	},
 	{
-		'rafamadriz/friendly-snippets',
+		'friendly-snippets',
+		enabled = false,
+	},
+	{
+		'grug-far.nvim',
 		enabled = false,
 	},
 }

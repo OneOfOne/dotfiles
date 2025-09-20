@@ -140,7 +140,7 @@ skiptaskbar=true
 skiptaskbarrule=2
 types=1
 windowrole=messages
-wmclass=electron Slack
+wmclass=slack Slack
 wmclasscomplete=true
 wmclassmatch=1
 
@@ -157,7 +157,7 @@ skiptaskbar=true
 skiptaskbarrule=2
 types=1
 windowrole=messages
-wmclass=electron discord
+wmclass=discord discord
 wmclasscomplete=true
 wmclassmatch=1
 
