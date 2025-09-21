@@ -96,5 +96,13 @@ return {
 			current_line_blame = true,
 		},
 	},
+	{
+		'NeogitOrg/neogit',
+		dependencies = {
+			'nvim-lua/plenary.nvim', -- required
+			'sindrets/diffview.nvim',
+		},
+		opts = {},
+	},
 	-- { 'echasnovski/mini.operators', config = true },
 }
