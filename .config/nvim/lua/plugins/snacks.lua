@@ -14,10 +14,14 @@ return {
 		---@type snacks.Config
 		opts = {
 			picker = {
+				exclude = {
+					'node_modules',
+					'dist',
+				},
 				sources = {
 					files = { hidden = true },
 					grep = { hidden = true },
-					explorer = { hidden = true },
+					explorer = { hidden = true, ignored = true },
 				},
 				layouts = {
 					select = {

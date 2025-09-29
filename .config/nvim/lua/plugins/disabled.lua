@@ -50,4 +50,8 @@ return {
 		'grug-far.nvim',
 		enabled = false,
 	},
+	{
+		'mini.pairs',
+		enabled = false,
+	},
 }

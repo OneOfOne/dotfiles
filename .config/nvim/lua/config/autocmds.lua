@@ -21,6 +21,7 @@ au({ 'CursorHold', 'InsertLeave' }, nil, function()
 	local opts = {
 		focusable = false,
 		scope = 'cursor',
+
 		close_events = { 'BufLeave', 'CursorMoved', 'InsertEnter' },
 	}
 	vim.diagnostic.open_float(nil, opts)

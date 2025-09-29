@@ -1,21 +1,57 @@
+local keymap = require('blink.cmp.config.keymap')
 return {
 	{
 		'zbirenbaum/copilot.lua',
+		dependencies = {
+			'copilotlsp-nvim/copilot-lsp',
+		},
 		optional = true,
-	},
-	{
-		'giuxtaposition/blink-cmp-copilot',
-		enabled = false,
+		opts = {
+			nes = {
+				enabled = false,
+				auto_trigger = true,
+				keymap = {
+					accept_and_goto = '<leader>p',
+					accept = false,
+					dismiss = '<Esc>',
+				},
+			},
+		},
 	},
 	{
 		'saghen/blink.cmp',
-		dependencies = { 'fang2hou/blink-copilot' },
+		dependencies = {
+			'Kaiser-Yang/blink-cmp-avante',
+		},
 		opts = {
 			sources = {
+				-- Add 'avante' to the list
+				default = { 'avante' },
 				providers = {
-					copilot = {
-						module = 'blink-copilot',
+					avante = {
+						module = 'blink-cmp-avante',
+						name = 'Avante',
+						opts = {
+							-- options for blink-cmp-avante
+						},
 					},
+				},
+			},
+			keymap = {
+				['<c-cr>'] = {
+					function(cmp)
+						local nes = require('copilot-lsp.nes')
+						if vim.b[vim.api.nvim_get_current_buf()].nes_state then
+							cmp.hide()
+							return (nes.apply_pending_nes() and nes.walk_cursor_end_edit())
+						end
+						if cmp.snippet_active() then
+							return cmp.accept()
+						else
+							return cmp.select_and_accept()
+						end
+					end,
+					'fallback',
 				},
 			},
 		},
@@ -46,6 +82,9 @@ return {
 					},
 					api_key_name = 'cmd:kv-get get claude',
 				},
+			},
+			prompt_logger = { -- logs prompts to disk (timestamped, for replay/debugging)
+				enabled = false,
 			},
 			input = {
 				provider = 'snacks', -- "native" | "dressing" | "snacks"

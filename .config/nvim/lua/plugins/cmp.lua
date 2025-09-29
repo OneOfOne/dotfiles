@@ -12,7 +12,7 @@ return {
 		},
 		opts = {
 			completion = {
-				accept = { auto_brackets = { enabled = false } },
+				accept = { auto_brackets = { enabled = true } },
 				menu = {
 					draw = {
 						padding = 1,

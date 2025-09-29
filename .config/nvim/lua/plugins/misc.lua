@@ -96,13 +96,10 @@ return {
 			current_line_blame = true,
 		},
 	},
-	{
-		'NeogitOrg/neogit',
-		dependencies = {
-			'nvim-lua/plenary.nvim', -- required
-			'sindrets/diffview.nvim',
-		},
-		opts = {},
-	},
-	-- { 'echasnovski/mini.operators', config = true },
+	{ 'sindrets/diffview.nvim', opts = {} },
+	-- {
+	-- 	'tris203/precognition.nvim',
+	-- 	--event = "VeryLazy",
+	-- 	opts = {},
+	-- },
 }

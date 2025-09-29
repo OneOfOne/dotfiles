@@ -23,15 +23,6 @@ local remap = { noremap = false, remap = true }
 map({ 'i' }, '<c-s-v>', '<left><c-o>"*p', 'paste selection')
 map({ 't' }, '<c-s-v>', '<c-\\><c-n>"*pi', 'paste selection')
 
-nmap(
-	'<leader>vp',
-	':lua require("nvim-treesitter.incremental_selection").init_selection()<cr>P',
-	'replace with clipboard'
-)
-
-nmap('<leader>vc', ':lua require("nvim-treesitter.incremental_selection").init_selection()<cr>"_c', 'change node')
-nmap('<leader>vd', ':lua require("nvim-treesitter.incremental_selection").init_selection()<cr>"_d', 'delete node')
-
 map('', '<LeftRelease>', function()
 	if vim.bo.ft == 'snacks_terminal' then
 		return '<LeftRelease>i'
@@ -85,9 +76,6 @@ nmap('k', '5k', 'because 5k is better than 1k')
 nmap('j', '5j', 'because 5j is better than 1j')
 
 vmap('<cr>', '<esc>o', 'make enter insert a new line')
-
-nmap('+', '<cmd>vert res +5<cr>')
-nmap('-', '<cmd>vert res -5<cr>')
 
 -- overrides
 nmap('<leader>yy', '_yg_', 'trim yank')

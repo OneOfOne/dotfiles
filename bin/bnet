@@ -18,7 +18,7 @@ cd "$WINEPREFIX/drive_c"
 
 if [ "$1" = "tsm" ]; then
 	cd /games/bnet-games/tsm
-	wine ./app/TSMApplication.exe
+	umu-run ./app/TSMApplication.exe
 
 elif [ "$1" = "logs" ]; then
 	./warcraftlogs*.appimage
@@ -33,12 +33,11 @@ elif [ "$1" = "w" ]; then
 
 elif [ "$1" = "r" ]; then
 	cd "Program Files (x86)/Battle.net"
-	bnet tsm &
-	wine Battle.net.exe
+	# bnet tsm &
+	umu-run Battle.net.exe
 	wineserver -w
 
 elif [ "$1" = "k" ]; then
-	pkill -9 gamescope-wl || true
 	wineserver -k
 
 else

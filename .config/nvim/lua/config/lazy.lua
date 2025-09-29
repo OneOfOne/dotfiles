@@ -34,6 +34,7 @@ require('lazy').setup({
 		-- { import = 'lazyvim.plugins.extras.lang.clangd' },
 
 		{ import = 'lazyvim.plugins.extras.lsp.none-ls' },
+		{ import = 'lazyvim.plugins.extras.linting.eslint' },
 
 		-- { import = 'lazyvim.plugins.extras.test.core' },
 		-- { import = 'lazyvim.plugins.extras.dap.core' },
@@ -42,12 +43,24 @@ require('lazy').setup({
 			import = 'lazyvim.plugins.extras.ai.copilot',
 			enabled = require('config.utils').is_local(),
 		},
+		-- {
+		-- 	import = 'lazyvim.plugins.extras.ai.sidekick',
+		-- 	enabled = require('config.utils').is_local(),
+		-- },
+		-- {
+		-- 	import = 'lazyvim.plugins.extras.ai.copilot-native',
+		-- 	enabled = require('config.utils').is_local(),
+		-- },
 
 		{ import = 'lazyvim.plugins.extras.util.mini-hipatterns' },
 		{ import = 'lazyvim.plugins.extras.util.dot' },
 
 		{ import = 'lazyvim.plugins.extras.editor.snacks_picker' },
 		{ import = 'lazyvim.plugins.extras.editor.snacks_explorer' },
+
+		{ import = 'lazyvim.plugins.extras.ui.smear-cursor' },
+		-- { import = 'lazyvim.plugins.extras.ui.mini-animate' },
+		{ import = 'lazyvim.plugins.extras.ui.treesitter-context' },
 
 		{ import = 'plugins' },
 	},
