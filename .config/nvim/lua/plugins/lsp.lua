@@ -1,6 +1,6 @@
 -- vim.lsp.handlers['workspace/workspaceFolders'] = nil
 -- vim.cmd([[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false, max_width=80})]])
-
+vim.lsp.log.set_level('error')
 return {
 	{
 		'neovim/nvim-lspconfig',
@@ -11,8 +11,6 @@ return {
 					source = 'always',
 					prefix = 'icons',
 				},
-				-- virtual_text = false,
-				-- virtual_lines = false,
 				underline = true,
 				float = {
 					border = 'rounded',
@@ -35,11 +33,11 @@ return {
 			},
 			servers = {
 				jsonls = {
-					commands = {
-						Format = {
-							function() end,
-						},
-					},
+					-- commands = {
+					-- 	Format = {
+					-- 		function() end,
+					-- 	},
+					-- },
 					json = {
 						format = {
 							enable = false,
@@ -47,9 +45,10 @@ return {
 					},
 				},
 				vtsls = {
+					-- enabled = false,
 					settings = {
-						complete_function_calls = false,
 						vtsls = {
+							complete_function_calls = false,
 							experimental = {
 								completion = {
 									enableServerSideFuzzyMatch = false,
@@ -59,10 +58,40 @@ return {
 					},
 				},
 				gopls = {
+					-- cmd = { 'gopls', '-logfile=/tmp/gopls.log', '-rpc.trace' },
 					settings = {
 						gopls = {
 							completeFunctionCalls = false,
+							usePlaceholders = false,
+							analyses = {
+								nilness = true,
+								unusedparams = true,
+								unusedwrite = true,
+								useany = true,
+								fillreturns = false,
+							},
+							staticcheck = true,
+							semanticTokens = true,
 						},
+					},
+				},
+				tsgo = {
+					enabled = false,
+					cmd = { 'tsgo', '--lsp', '--stdio' },
+					filetypes = {
+						'javascript',
+						'javascriptreact',
+						'javascript.jsx',
+						'typescript',
+						'typescriptreact',
+						'typescript.tsx',
+					},
+					root_markers = {
+						'tsconfig.json',
+						'jsconfig.json',
+						'package.json',
+						'.git',
+						'tsconfig.base.json',
 					},
 				},
 				html = {},
@@ -77,6 +106,7 @@ return {
 		opts = function(_, opts)
 			local nls = require('null-ls').builtins
 			opts.sources = vim.tbl_extend('force', opts.sources, { --override lazyvim's default sources
+				nls.builtins.formatting.gofumpt,
 				-- ts
 				nls.formatting.biome.with({
 					args = {
@@ -88,6 +118,7 @@ return {
 						'--stdin-file-path=$FILENAME',
 					},
 				}),
+				--
 				-- other
 				nls.formatting.shfmt.with({
 					filetypes = { 'sh', 'zsh' },
@@ -102,7 +133,7 @@ return {
 		'nvim-treesitter/nvim-treesitter',
 		branch = 'main',
 		opts = {
-			ensure_installed = { 'css', 'scss', 'latex' },
+			ensure_installed = { 'css', 'scss' },
 		},
 	},
 }

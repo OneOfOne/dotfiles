@@ -1,4 +1,3 @@
-local keymap = require('blink.cmp.config.keymap')
 return {
 	{
 		'zbirenbaum/copilot.lua',
@@ -8,7 +7,7 @@ return {
 		optional = true,
 		opts = {
 			nes = {
-				enabled = false,
+				enabled = true,
 				auto_trigger = true,
 				keymap = {
 					accept_and_goto = '<leader>p',
@@ -31,9 +30,6 @@ return {
 					avante = {
 						module = 'blink-cmp-avante',
 						name = 'Avante',
-						opts = {
-							-- options for blink-cmp-avante
-						},
 					},
 				},
 			},

@@ -11,12 +11,13 @@ return {
 			-- ... Other dependencies
 		},
 		opts = {
+			appearance = {
+				nerd_font_variant = 'normal',
+			},
 			completion = {
-				accept = { auto_brackets = { enabled = true } },
 				menu = {
 					draw = {
 						padding = 1,
-						treesitter = { 'lsp' },
 						columns = {
 							{ 'kind_icon' },
 							{ 'label', 'label_description', gap = 1 },
@@ -38,20 +39,11 @@ return {
 					scrollbar = true,
 				},
 			},
-			fuzzy = {},
-			sources = {
-				-- default = { 'lsp', 'path', 'buffer', 'minuet' },
-				default = { 'avante', 'lsp', 'path', 'buffer' },
-				providers = {
-					avante = {
-						module = 'blink-cmp-avante',
-						name = 'Avante',
-						opts = {
-							-- options for blink-cmp-avante
-						},
-					},
-				},
+			cmdline = {
+				keymap = { preset = 'inherit' },
 			},
+			fuzzy = {},
+			sources = {},
 		},
 	},
 }

@@ -15,7 +15,6 @@ return {
 				sidebars = 'transparent',
 				floats = 'dark',
 			},
-			dim_inactive = false,
 			lualine_bold = true,
 
 			---@diagnostic disable-next-line: unused-local

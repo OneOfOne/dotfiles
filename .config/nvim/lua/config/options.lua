@@ -104,5 +104,5 @@ if require('config.utils').is_local() then
 end
 
 vim.g.lazyvim_eslint_auto_format = false
--- vim.g.ai_cmp = true
--- vim.g.copilot_nes = false
+vim.g.copilot_nes = true
+-- vim.g.ai_cmp = false

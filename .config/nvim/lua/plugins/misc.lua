@@ -14,14 +14,14 @@ return {
 				group = group,
 				pattern = '*',
 				callback = function()
-					require('neominimap').buf.disable()
+					require('neominimap.api').buf.disable()
 				end,
 			})
-			vim.api.nvim_create_autocmd('InsertLeave', {
+			vim.api.nvim_create_autocmd({ 'LspAttach', 'InsertLeave' }, {
 				group = group,
 				pattern = '*',
 				callback = function()
-					require('neominimap').buf.enable()
+					require('neominimap.api').buf.enable()
 				end,
 			})
 
@@ -45,7 +45,7 @@ return {
 					priority = 20, ---@type integer
 					icon = '󰱽 ', ---@type string
 				},
-				delay = 250,
+				delay = 500,
 			}
 		end,
 	},
@@ -79,9 +79,6 @@ return {
 			default_mappings = true,
 			force_write_shada = false,
 			refresh_interval = 250,
-			mappings = {
-				-- delete = '`dm',
-			},
 		},
 	},
 	{
@@ -96,7 +93,20 @@ return {
 			current_line_blame = true,
 		},
 	},
-	{ 'sindrets/diffview.nvim', opts = {} },
+	{
+		'sindrets/diffview.nvim',
+		opts = {},
+	},
+	{
+		'gbprod/cutlass.nvim',
+		opts = {
+			cut_key = 'x',
+			exclude = { 'xd' },
+			registers = {
+				select = '+',
+			},
+		},
+	},
 	-- {
 	-- 	'tris203/precognition.nvim',
 	-- 	--event = "VeryLazy",
