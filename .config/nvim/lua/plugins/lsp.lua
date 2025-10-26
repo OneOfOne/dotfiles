@@ -1,16 +1,18 @@
 -- vim.lsp.handlers['workspace/workspaceFolders'] = nil
 -- vim.cmd([[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false, max_width=80})]])
 vim.lsp.log.set_level('error')
+
 return {
 	{
 		'neovim/nvim-lspconfig',
 		opts = {
 			format_notify = true,
 			diagnostics = {
-				virtual_text = {
-					source = 'always',
-					prefix = 'icons',
-				},
+				-- virtual_text = {
+				-- 	source = 'always',
+				-- 	prefix = 'icons',
+				-- },
+				virtual_text = false,
 				underline = true,
 				float = {
 					border = 'rounded',
@@ -105,8 +107,14 @@ return {
 		optional = true,
 		opts = function(_, opts)
 			local nls = require('null-ls').builtins
+			-- gofumpt doesn't follow gopls's disabled analysises
+			opts.sources = vim.tbl_filter(function(source)
+				return source ~= nls.formatting.gofumpt
+			end, opts.sources)
+
 			opts.sources = vim.tbl_extend('force', opts.sources, { --override lazyvim's default sources
-				nls.builtins.formatting.gofumpt,
+				nls.diagnostics.golangci_lint,
+				-- nls.formatting.gofumpt,
 				-- ts
 				nls.formatting.biome.with({
 					args = {
@@ -134,6 +142,31 @@ return {
 		branch = 'main',
 		opts = {
 			ensure_installed = { 'css', 'scss' },
+		},
+	},
+	{
+		'rachartier/tiny-inline-diagnostic.nvim',
+		event = 'LspAttach',
+		priority = 1000,
+		-- enabled = false,
+		opts = {
+			options = {
+				show_source = {
+					enabled = true, -- Enable showing source names
+					if_many = false, -- Only show source if multiple sources exist for the same diagnostic
+				},
+				multilines = {
+					enabled = true, -- Enable support for multiline diagnostic messages
+					always_show = true, -- Always show messages on all lines of multiline diagnostics
+					trim_whitespaces = false, -- Remove leading/trailing whitespace from each line
+					tabstop = 4, -- Number of spaces per tab when expanding tabs
+				},
+				show_all_diags_on_cursorline = true,
+				break_line = {
+					enabled = true, -- Enable automatic line breaking
+					after = 60, -- Number of characters before inserting a line break
+				},
+			},
 		},
 	},
 }

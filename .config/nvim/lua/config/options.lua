@@ -96,6 +96,7 @@ vim.g.neovide_normal_opacity = 0.1
 --
 vim.o.foldmethod = 'expr'
 vim.o.foldtext = "v:lua.require('config.utils').foldLines()"
+vim.g.root_spec = { '.git', 'lsp', 'cwd' }
 
 o.autowriteall = true
 
@@ -104,5 +105,5 @@ if require('config.utils').is_local() then
 end
 
 vim.g.lazyvim_eslint_auto_format = false
-vim.g.copilot_nes = true
+vim.g.copilot_nes = false
 -- vim.g.ai_cmp = false

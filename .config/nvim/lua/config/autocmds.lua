@@ -16,21 +16,21 @@ end)
 au('LspAttach', nil, function()
 	vim.cmd([[match ErrorMsg '\s\+$']])
 end)
-
-au({ 'CursorHold', 'InsertLeave' }, nil, function()
-	local opts = {
-		focusable = false,
-		scope = 'cursor',
-
-		close_events = { 'BufLeave', 'CursorMoved', 'InsertEnter' },
-	}
-	vim.diagnostic.open_float(nil, opts)
-end)
-
-au('InsertEnter', nil, function()
-	vim.diagnostic.enable(false)
-end)
-
-au('InsertLeave', nil, function()
-	vim.diagnostic.enable(true)
-end)
+--
+-- au({ 'CursorHold', 'InsertLeave' }, nil, function()
+-- 	local opts = {
+-- 		focusable = false,
+-- 		scope = 'cursor',
+--
+-- 		close_events = { 'BufLeave', 'CursorMoved', 'InsertEnter' },
+-- 	}
+-- 	vim.diagnostic.open_float(opts)
+-- end)
+--
+-- au('InsertEnter', nil, function()
+-- 	vim.diagnostic.enable(false)
+-- end)
+--
+-- au('InsertLeave', nil, function()
+-- 	vim.diagnostic.enable(true)
+-- end)
