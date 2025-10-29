@@ -12,3 +12,4 @@ bun.lock
 .zcompdump*
 tls/
 .config/item2
+.config/lazygit/state.yml
