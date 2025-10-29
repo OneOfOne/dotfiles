@@ -128,7 +128,6 @@ function rebuildgotools {
 	go install -v golang.org/x/tools/gopls@latest
 	go install -v golang.org/x/tools/cmd/goimports@latest
 	go install -v github.com/fatih/gomodifytags@latest
-	go install -v github.com/golangci/golangci-lint/cmd/golangci-lint@latest
 	go install -v github.com/josharian/impl@latest
 
 	pkill -9 gopls &>/dev/null || true

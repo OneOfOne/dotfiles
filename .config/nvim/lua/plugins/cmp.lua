@@ -2,14 +2,6 @@ return {
 	{
 		'saghen/blink.cmp',
 		optional = true,
-		version = '1.*',
-		opts_extend = {
-			'sources.default',
-		},
-		dependencies = {
-			'Kaiser-Yang/blink-cmp-avante',
-			-- ... Other dependencies
-		},
 		opts = {
 			appearance = {
 				nerd_font_variant = 'normal',

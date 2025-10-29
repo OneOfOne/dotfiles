@@ -57,20 +57,25 @@ return {
 				},
 			},
 
+			explorer = {
+				trash = false,
+			},
+
 			input = {},
+
 			image = {
 				enabled = true,
 				force = true,
 			},
+
 			statuscolumn = {
-				enabled = true,
 				folds = {
 					open = true,
 					git_hl = true,
 				},
 			},
+
 			indent = {
-				enabled = true,
 				chunk = {
 					enabled = true,
 				},

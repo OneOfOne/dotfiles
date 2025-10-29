@@ -25,6 +25,9 @@ return {
 			codelens = {
 				enabled = true,
 			},
+			folds = {
+				enabled = false,
+			},
 			showMessage = {
 				messageActionItem = {
 					additionalPropertiesSupport = true,

@@ -13,16 +13,13 @@ return {
 				variables = { italic = true },
 
 				sidebars = 'transparent',
-				floats = 'dark',
+				floats = 'transparent',
 			},
 			lualine_bold = true,
 
 			---@diagnostic disable-next-line: unused-local
 			on_highlights = function(hl, colors)
 				hl.Pmenu = 'transparent'
-				-- hl.BufferLineSeparatorSelected = { bg = '#002630', fg = '#001217' }
-				-- hl.BufferLineSeparatorVisible = { bg = '#002630' }
-				-- hl.BufferLineBufferSelected = { fg = '#ffffff' }
 			end,
 		},
 	},
@@ -55,7 +52,7 @@ return {
 			options = {
 				theme = 'auto',
 				disabled_filetypes = {
-					winbar = { 'neo-tree', 'alpha', 'snacks_terminal' },
+					winbar = { 'snacks_terminal' },
 				},
 				component_seperators = { left = '', right = '' },
 				section_seperators = { left = '', right = '' },
@@ -120,15 +117,8 @@ return {
 				{ filter = { event = 'msg_show', find = '<ed' } },
 				{ filter = { event = 'msg_show', find = '>ed' } },
 				{ filter = { find = 'a nil value' } },
-				{
-					filter = {
-						event = 'notify',
-						any = {
-							{ find = 'textDocument/codeLens is not supported' },
-							{ find = 'Searching in Files' },
-						},
-					},
-				},
+				{ filter = { find = 'Searching in files' } },
+				{ filter = { find = 'textDocument/codeLens is not supported' } },
 			},
 		},
 	},

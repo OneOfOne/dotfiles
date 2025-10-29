@@ -80,28 +80,6 @@ return {
 		},
 	},
 	{
-		'saghen/blink.cmp',
-		opts = {
-			keymap = {
-				['<c-cr>'] = {
-					function(cmp)
-						local nes = require('copilot-lsp.nes')
-						if vim.b[vim.api.nvim_get_current_buf()].nes_state then
-							cmp.hide()
-							return (nes.apply_pending_nes() and nes.walk_cursor_end_edit())
-						end
-						if cmp.snippet_active() then
-							return cmp.accept()
-						else
-							return cmp.select_and_accept()
-						end
-					end,
-					'fallback',
-				},
-			},
-		},
-	},
-	{
 		'yetone/avante.nvim',
 		event = 'LspAttach',
 		optional = true,
@@ -124,18 +102,9 @@ return {
 				auto_suggestions = true,
 				auto_add_current_file = false,
 			},
-			prompt_logger = { -- logs prompts to disk (timestamped, for replay/debugging)
+			prompt_logger = {
 				enabled = false,
 			},
-			-- input = {
-			-- 	provider = 'snacks', -- "native" | "dressing" | "snacks"
-			-- 	provider_opts = {
-			-- 		-- Snacks input configuration
-			-- 		title = 'Avante Input',
-			-- 		icon = ' ',
-			-- 		placeholder = 'Enter your API key...',
-			-- 	},
-			-- },
 		},
 	},
 }
