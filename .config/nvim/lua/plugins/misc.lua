@@ -73,21 +73,6 @@ return {
 		},
 	},
 	{
-		'chentoast/marks.nvim',
-		event = 'BufReadPre',
-		opts = {
-			default_mappings = true,
-			force_write_shada = false,
-			refresh_interval = 250,
-		},
-	},
-	{
-		'folke/which-key.nvim',
-		opts = {
-			-- preset = 'modern',
-		},
-	},
-	{
 		'lewis6991/gitsigns.nvim',
 		opts = {
 			current_line_blame = true,
@@ -96,16 +81,6 @@ return {
 	{
 		'sindrets/diffview.nvim',
 		opts = {},
-	},
-	{
-		'gbprod/cutlass.nvim',
-		opts = {
-			cut_key = 'x',
-			exclude = { 'xd' },
-			registers = {
-				select = '+',
-			},
-		},
 	},
 	-- {
 	-- 	'tris203/precognition.nvim',

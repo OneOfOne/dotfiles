@@ -17,20 +17,54 @@ return {
 			},
 			lualine_bold = true,
 
-			---@diagnostic disable-next-line: unused-local
-			on_highlights = function(hl, colors)
+			on_highlights = function(hl)
 				hl.Pmenu = 'transparent'
 			end,
 		},
 	},
 	{
+		'timmypidashev/darkbox.nvim',
+		lazy = false,
+		name = 'darkbox',
+		opts = {
+			terminal_colors = true, -- add neovim terminal colors
+			undercurl = true,
+			underline = true,
+			bold = true,
+			italic = {
+				strings = true,
+				emphasis = true,
+				comments = true,
+				operators = false,
+				folds = true,
+			},
+			strikethrough = true,
+			invert_selection = false,
+			invert_signs = false,
+			invert_tabline = false,
+			invert_intend_guides = false,
+			inverse = true, -- invert background for search, diffs, statuslines and errors
+			contrast = '', -- can be "retro", "dim" or empty string for classic
+			overrides = {
+				Pmenu = { bg = 'none' },
+				BufferLineSeparator = { bg = '#3d3836', fg = '#3d3836' },
+				String = { link = 'DarkboxAqua' },
+				StatusLine = { link = 'lualine_c_normal' },
+			},
+			dim_inactive = false,
+			transparent_mode = false,
+		},
+	},
+	{
 		'LazyVim/LazyVim',
 		opts = {
-			colorscheme = 'solarized-osaka',
+			-- colorscheme = 'solarized-osaka',
+			colorscheme = 'darkbox',
 		},
 	},
 	{
 		'akinsho/bufferline.nvim',
+		-- enabled = false,
 		opts = {
 			options = {
 				always_show_bufferline = true,
@@ -64,6 +98,89 @@ return {
 					{ 'location', padding = { left = 0, right = 1 } },
 				},
 			},
+			-- winbar = {
+			-- 	lualine_a = {
+			-- 		{
+			-- 			'filename',
+			-- 			file_status = true,
+			-- 			newfile_status = true,
+			-- 			path = 1,
+			-- 			symbols = {
+			-- 				modified = '[+]',
+			-- 				readonly = '[-]',
+			-- 				unnamed = '[No Name]',
+			-- 				newfile = '[New]',
+			-- 			},
+			-- 		},
+			-- 	},
+			-- 	lualine_b = {},
+			-- 	lualine_c = {
+			-- 		{
+			-- 			'filetype',
+			-- 			colored = true,
+			-- 			icon_only = true,
+			-- 			icon = { align = 'left' },
+			-- 		},
+			-- 	},
+			-- 	lualine_x = {},
+			-- 	lualine_y = {},
+			-- 	lualine_z = {
+			-- 		{
+			-- 			'buffers',
+			-- 			show_modified_status = true,
+			-- 			use_mode_colors = false,
+			-- 			symbols = {
+			-- 				modified = ' ●',
+			-- 				alternate_file = '',
+			-- 				directory = '',
+			-- 			},
+			-- 			buffers_color = {
+			-- 				-- Same values as the general color option can be used here.
+			-- 				active = 'lualine_a_normal', -- Color for active buffer.
+			-- 				inactive = 'lualine_a_inactive', -- Color for inactive buffer.
+			-- 			},
+			-- 		},
+			-- 	},
+			-- },
+			-- inactive_winbar = {
+			-- 	lualine_a = {
+			-- 		{
+			-- 			'filename',
+			-- 			file_status = true,
+			-- 			newfile_status = true,
+			-- 			path = 1,
+			-- 			symbols = {
+			-- 				modified = '[+]',
+			-- 				readonly = '[-]',
+			-- 				unnamed = '[No Name]',
+			-- 				newfile = '[New]',
+			-- 			},
+			-- 		},
+			-- 	},
+			-- 	lualine_b = {
+			-- 		{
+			-- 			'filetype',
+			-- 			colored = true,
+			-- 			icon_only = true,
+			-- 			icon = { align = 'left' },
+			-- 		},
+			-- 	},
+			-- 	lualine_c = {},
+			-- 	lualine_x = {},
+			-- 	lualine_y = {
+			-- 		{
+			-- 			'buffers',
+			-- 			show_modified_status = true,
+			-- 			use_mode_colors = true,
+			-- 			symbols = {
+			-- 				modified = ' ●',
+			-- 				alternate_file = '',
+			-- 				directory = '',
+			-- 			},
+			-- 		},
+			-- 	},
+			-- 	lualine_z = {},
+			-- },
 			-- winbar = {
 			-- 	lualine_a = {
 			-- 		{

@@ -23,6 +23,11 @@ return {
 						-- from_top = false,
 					},
 				},
+				accept = {
+					auto_brackets = {
+						enabled = false,
+					},
+				},
 				trigger = { prefetch_on_insert = false },
 			},
 			signature = {

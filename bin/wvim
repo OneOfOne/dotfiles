@@ -31,9 +31,10 @@ done
 
 pushd $cwd
 
-echo $JAIL
+# echo $JAIL
 if [ "$DISPLAY" != "" ]; then
-	eval kitty -d $cwd -- $JAIL nvim $p $@ &>/dev/null &
+	# eval kitty -d $cwd -- $JAIL nvim $p $@ &>/dev/null &
+	eval kitty -d $cwd -- nvim $p $@ &>/dev/null &
 else
 	eval $JAIL nvim $p $@
 fi

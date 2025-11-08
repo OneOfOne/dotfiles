@@ -81,7 +81,7 @@ return {
 	},
 	{
 		'yetone/avante.nvim',
-		event = 'LspAttach',
+		event = 'InsertEnter',
 		optional = true,
 		opts = {
 			provider = 'claude',
@@ -101,6 +101,11 @@ return {
 			behaviour = {
 				auto_suggestions = true,
 				auto_add_current_file = false,
+				auto_set_keymaps = true,
+				confirmation_ui_style = 'popup',
+			},
+			selection = {
+				hint_display = 'delayed',
 			},
 			prompt_logger = {
 				enabled = false,

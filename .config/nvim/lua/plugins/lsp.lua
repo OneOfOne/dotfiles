@@ -141,13 +141,6 @@ return {
 		end,
 	},
 	{
-		'nvim-treesitter/nvim-treesitter',
-		branch = 'main',
-		opts = {
-			ensure_installed = { 'css', 'scss' },
-		},
-	},
-	{
 		'rachartier/tiny-inline-diagnostic.nvim',
 		event = 'LspAttach',
 		priority = 1000,
