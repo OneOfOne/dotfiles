@@ -68,6 +68,7 @@ return {
 		},
 		optional = true,
 		opts = {
+			copilot_model = 'claude-sonnet-4-20250514',
 			nes = {
 				enabled = false,
 				auto_trigger = true,
@@ -84,7 +85,7 @@ return {
 		event = 'InsertEnter',
 		optional = true,
 		opts = {
-			provider = 'claude',
+			provider = 'copilot',
 			-- hints = { enabled = false },
 			providers = {
 				claude = {

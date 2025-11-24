@@ -26,4 +26,14 @@ return {
 			refresh_interval = 250,
 		},
 	},
+	{
+		'nvim-treesitter/nvim-treesitter',
+		opts = {
+			ensure_installed = {
+				'zsh',
+				'css',
+				'scss',
+			},
+		},
+	},
 }

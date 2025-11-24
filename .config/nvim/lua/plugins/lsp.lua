@@ -60,6 +60,7 @@ return {
 								},
 							},
 						},
+						typescript = { preferences = { useAliasesForRenames = false } },
 					},
 				},
 				gopls = {
