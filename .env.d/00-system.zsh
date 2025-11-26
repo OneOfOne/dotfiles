@@ -66,7 +66,7 @@ function mkgit {
 	mkcd $1 && git init
 }
 
-if [ $(command -v nvim) != "" ]; then
+if [ "$(command -v nvim)" != "" ]; then
 	export VTE_VERSION=100
 	export EDITOR="$(command -v nvim)"
 	export GIT_EDITOR="$(command -v nvim)"
