@@ -110,20 +110,7 @@ function rebuildgotools {
 	echo using $(go version)
 	echo -------------------------------
 
-	# env GO111MODULE=off GOGC=off go get -u -v $@ \
-	# 	github.com/fatih/gomodifytags \
-	# 	github.com/josharian/impl \
-	# 	github.com/haya14busa/goplay/cmd/goplay \
-	# 	github.com/godoctor/godoctor \
-	# 	github.com/rogpeppe/godef \
-	# 	github.com/sqs/goreturns \
-	# 	honnef.co/go/tools/... 2>&1 | egrep -v 'meta tag'
-
-	pushd ~gh/go-delve/delve/
-	git reset --hard
-	git pull && go mod vendor && make install || true
-	popd
-
+	go install -v github.com/go-delve/delve/cmd/dlv@master
 	go install -v mvdan.cc/gofumpt@latest
 	go install -v golang.org/x/tools/gopls@latest
 	go install -v golang.org/x/tools/cmd/goimports@latest

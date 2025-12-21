@@ -6,6 +6,8 @@ export DXVK_STATE_CACHE_PATH=/tmp
 # export DXVK_FRAME_RATE=120
 # export VKD3D_FRAME_RATE=120
 
+[ ! -d "$HOME/.cache/zsh" ] && mkdir -p "$HOME/.cache/zsh"
+
 export HISTFILE="$HOME/.cache/zsh/history"
 
 function dig-any {

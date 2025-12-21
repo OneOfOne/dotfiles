@@ -16,6 +16,7 @@ end)
 au('LspAttach', nil, function()
 	vim.cmd([[match ErrorMsg '\s\+$']])
 end)
+
 --
 -- au({ 'CursorHold', 'InsertLeave' }, nil, function()
 -- 	local opts = {

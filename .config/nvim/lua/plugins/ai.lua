@@ -71,9 +71,9 @@ return {
 			copilot_model = 'claude-sonnet-4-20250514',
 			nes = {
 				enabled = false,
-				auto_trigger = true,
+				auto_trigger = false,
 				keymap = {
-					accept_and_goto = '<leader>p',
+					accept_and_goto = '<C-i>',
 					accept = false,
 					dismiss = '<Esc>',
 				},
