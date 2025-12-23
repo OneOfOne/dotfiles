@@ -22,14 +22,9 @@ return {
 	},
 	-- disabled to be able to use system binaries
 	{
-		'mason-nvim-dap.nvim',
-		enabled = not require('config.utils').is_local(),
-	},
-	{
 		'mason-lspconfig.nvim',
 		enabled = not require('config.utils').is_local(),
 	},
-	{ 'nvim-dap', enabled = false },
 	{
 		'conform.nvim',
 		enabled = false,
