@@ -100,8 +100,8 @@ return {
 				},
 			},
 			behaviour = {
-				auto_suggestions = true,
-				auto_add_current_file = false,
+				auto_suggestions = false,
+				auto_add_current_file = true,
 				auto_set_keymaps = true,
 				confirmation_ui_style = 'popup',
 			},
