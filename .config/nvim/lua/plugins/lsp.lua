@@ -50,7 +50,7 @@ return {
 					},
 				},
 				vtsls = {
-					-- enabled = false,
+					enabled = false,
 					settings = {
 						vtsls = {
 							complete_function_calls = false,
@@ -82,7 +82,7 @@ return {
 					},
 				},
 				tsgo = {
-					enabled = false,
+					-- enabled = false,
 					-- cmd = { 'tsgo', '--lsp', '--stdio' },
 					-- filetypes = {
 					-- 	'javascript',

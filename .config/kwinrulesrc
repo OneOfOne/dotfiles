@@ -110,9 +110,9 @@ clientmachine=localhost
 ignoregeometryrule=2
 maxsize=2560,1440
 noborder=true
-noborderrule=3
+noborderrule=2
 position=4394,0
-positionrule=3
+positionrule=2
 size=720,720
 sizerule=2
 skiptaskbar=true
@@ -121,7 +121,7 @@ strictgeometryrule=2
 title=nvim.*Konsole
 types=1
 windowrole=messages
-wmclass=python3.13 org.gajim.Gajim
+wmclass=python3.14 org.gajim.Gajim
 wmclasscomplete=true
 wmclassmatch=1
 
@@ -434,6 +434,13 @@ size=2560,1440
 sizerule=3
 wmclass=tasty.javafx.launcher.LauncherFxApp
 wmclassmatch=1
+
+[4c114c0d-6c0c-4108-b0b2-a1cc6cc24bd5]
+Description=WWM (wayland)
+position=1280,0
+positionrule=2
+size=2560,1440
+sizerule=2
 
 [5]
 Description=CS2
