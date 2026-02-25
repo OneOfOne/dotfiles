@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
-export WINEPREFIX=/games/lutris/battlenet
+export WINEPREFIX=/games/hgl/wine/Battle.net/
 export WINEDEBUG=-all
 export DXVK_LOG_LEVEL=none
 export VKD3D_DEBUG=none
@@ -18,7 +18,7 @@ cd "$WINEPREFIX/drive_c"
 
 if [ "$1" = "tsm" ]; then
 	cd /games/bnet-games/tsm
-	umu-run ./app/TSMApplication.exe
+	wine ./app/TSMApplication.exe
 
 elif [ "$1" = "logs" ]; then
 	./warcraftlogs*.appimage

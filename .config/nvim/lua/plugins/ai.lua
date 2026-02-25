@@ -68,7 +68,7 @@ return {
 		},
 		optional = true,
 		opts = {
-			copilot_model = 'claude-sonnet-4-20250514',
+			-- copilot_model = 'claude-sonnet-4-20250514x',
 			nes = {
 				enabled = false,
 				auto_trigger = false,
@@ -85,28 +85,37 @@ return {
 		event = 'InsertEnter',
 		optional = true,
 		opts = {
+			-- provider = 'llamacpp',
 			provider = 'copilot',
 			-- hints = { enabled = false },
 			providers = {
 				claude = {
 					endpoint = 'https://api.anthropic.com',
-					model = 'claude-sonnet-4-20250514',
+					model = 'claude-opus-4-6',
 					timeout = 60000, -- Timeout in milliseconds
 					extra_request_body = {
 						temperature = 0.75,
 						max_tokens = 20480,
 					},
-					api_key_name = 'cmd:kv-get get claude',
+					api_key_name = 'cmd:kv-get get claude-aiq',
+				},
+				copilot = {
+					-- model = 'claude-opus-4-6-fast',
+				},
+				llamacpp = {
+					__inherited_from = 'openai',
+					endpoint = 'http://localhost:10600/v1',
+					api_key_name = 'DISPLAY',
 				},
 			},
 			behaviour = {
 				auto_suggestions = false,
-				auto_add_current_file = true,
+				auto_add_current_file = false,
 				auto_set_keymaps = true,
 				confirmation_ui_style = 'popup',
 			},
 			selection = {
-				hint_display = 'delayed',
+				-- hint_display = 'delayed',
 			},
 			prompt_logger = {
 				enabled = false,
