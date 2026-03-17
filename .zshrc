@@ -32,7 +32,7 @@ plugins=(
 	zsh-interactive-cd
 	git
 	aliases
-	sudo
+	# sudo
 	safe-paste
 )
 

@@ -1,0 +1,12 @@
+#!/bin/sh
+REALM="${1:-thrall}"
+QUERY='{"operationName":"GetInitialRealmStatusData","variables":{"input":{"compoundRegionGameVersionSlug":"us"}},"extensions":{"persistedQuery":{"version":1,"sha256Hash":"426cde8247fd29903deb1eba33b8891a388724326f75f0ce73d852b6dce66c72"}}}'
+
+curl 'https://worldofwarcraft.blizzard.com/en-us/graphql' \
+  -H 'accept: */*' \
+  -H 'accept-language: en-US' \
+  -H 'content-type: application/json' \
+  -H 'x-static: false' \
+  --data-raw "$QUERY" 2>/dev/null \
+  | jq '.data.Realms[] | select(.slug == "'$REALM'") | .online'
+
