@@ -21,7 +21,8 @@ if [ "$1" = "tsm" ]; then
 	wine ./app/TSMApplication.exe
 
 elif [ "$1" = "logs" ]; then
-	./warcraftlogs*.appimage
+	cd /games/bnet-games/
+	./archon-v*.appimage
 
 elif [ "$1" = "wt" ]; then
 	shift

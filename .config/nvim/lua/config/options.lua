@@ -106,4 +106,5 @@ end
 
 vim.g.lazyvim_eslint_auto_format = false
 vim.g.copilot_nes = false
+vim.g.lazyvim_ts_lsp = 'tsgo'
 -- vim.g.ai_cmp = false

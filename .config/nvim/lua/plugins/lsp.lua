@@ -49,20 +49,20 @@ return {
 						},
 					},
 				},
-				vtsls = {
-					enabled = false,
-					settings = {
-						vtsls = {
-							complete_function_calls = false,
-							experimental = {
-								completion = {
-									enableServerSideFuzzyMatch = false,
-								},
-							},
-						},
-						typescript = { preferences = { useAliasesForRenames = false } },
-					},
-				},
+				-- vtsls = {
+				-- 	enabled = false,
+				-- 	settings = {
+				-- 		vtsls = {
+				-- 			complete_function_calls = false,
+				-- 			experimental = {
+				-- 				completion = {
+				-- 					enableServerSideFuzzyMatch = false,
+				-- 				},
+				-- 			},
+				-- 		},
+				-- 		typescript = { preferences = { useAliasesForRenames = false } },
+				-- 	},
+				-- },
 				gopls = {
 					-- cmd = { 'gopls', '-logfile=/tmp/gopls.log', '-rpc.trace' },
 					settings = {
@@ -80,25 +80,6 @@ return {
 							semanticTokens = true,
 						},
 					},
-				},
-				tsgo = {
-					-- enabled = false,
-					-- cmd = { 'tsgo', '--lsp', '--stdio' },
-					-- filetypes = {
-					-- 	'javascript',
-					-- 	'javascriptreact',
-					-- 	'javascript.jsx',
-					-- 	'typescript',
-					-- 	'typescriptreact',
-					-- 	'typescript.tsx',
-					-- },
-					-- root_markers = {
-					-- 	'tsconfig.json',
-					-- 	'jsconfig.json',
-					-- 	'package.json',
-					-- 	'.git',
-					-- 	'tsconfig.base.json',
-					-- },
 				},
 				html = {},
 				biome = {},
