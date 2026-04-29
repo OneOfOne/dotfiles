@@ -2,6 +2,10 @@ return {
 	{ 'xzbdmw/colorful-menu.nvim', opts = {} },
 	{
 		'saghen/blink.cmp',
+		dependencies = {
+			'saghen/blink.lib',
+		},
+
 		optional = true,
 		---@module 'blink.cmp'
 		---@type blink.cmp.Config

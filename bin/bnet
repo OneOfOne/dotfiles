@@ -22,7 +22,7 @@ if [ "$1" = "tsm" ]; then
 
 elif [ "$1" = "logs" ]; then
 	cd /games/bnet-games/
-	./archon-v*.appimage
+	./archon-v*.*
 
 elif [ "$1" = "wt" ]; then
 	shift

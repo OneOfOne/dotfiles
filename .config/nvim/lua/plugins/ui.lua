@@ -47,7 +47,7 @@ return {
 			contrast = '', -- can be "retro", "dim" or empty string for classic
 			overrides = {
 				Pmenu = { bg = 'none' },
-				BufferLineSeparator = { bg = '#3d3836', fg = '#3d3836' },
+				-- BufferLineSeparator = { bg = '#3d3836', fg = '#3d3836' },
 				String = { link = 'DarkboxAqua' },
 				StatusLine = { link = 'lualine_c_normal' },
 			},
