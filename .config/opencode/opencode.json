@@ -1,0 +1,36 @@
+{
+	"$schema": "https://opencode.ai/config.json",
+	"model": "llama.cpp/default",
+	"server": {
+		"port": 4096
+	},
+	"provider": {
+		"llama.cpp": {
+			"npm": "@ai-sdk/openai-compatible",
+			"name": "llama-server (local)",
+			"options": {
+				"baseURL": "http://127.0.0.1:10600/v1"
+			},
+			"models": {
+				"default": {
+					"name": "default",
+					"limit": {
+						"context": 128000,
+						"output": 65536
+					}
+				}
+			}
+		}
+	},
+	"permission": {
+		"external_directory": {
+			"/**": "deny"
+		},
+		"read": {
+			"/**": "deny"
+		},
+		"edit": {
+			"/**": "deny"
+		}
+	}
+}

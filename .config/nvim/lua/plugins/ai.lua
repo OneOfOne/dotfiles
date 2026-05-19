@@ -85,9 +85,17 @@ return {
 		event = 'InsertEnter',
 		optional = true,
 		opts = {
-			provider = 'llamacpp',
+			-- debug = true,
+			provider = 'opencode',
+			disabled_tools = { 'bash', 'python' },
 			-- provider = 'copilot',
 			-- hints = { enabled = false },
+			acp_providers = {
+				['opencode'] = {
+					command = 'opencode',
+					args = { 'acp' },
+				},
+			},
 			providers = {
 				claude = {
 					endpoint = 'https://api.anthropic.com',
@@ -98,9 +106,6 @@ return {
 						max_tokens = 20480,
 					},
 					api_key_name = 'cmd:kv-get get claude-aiq',
-				},
-				copilot = {
-					-- model = 'claude-opus-4-6-fast',
 				},
 				llamacpp = {
 					__inherited_from = 'openai',
