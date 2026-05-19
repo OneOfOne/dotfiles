@@ -1,6 +1,6 @@
 #!/bin/zsh
 set -e
-EDITOR="neovide"
+EDITOR="wvim"
 GOPATH="$(go env GOPATH)"
 BASE="$GOPATH/src/tmp/"
 

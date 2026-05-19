@@ -85,8 +85,8 @@ return {
 		event = 'InsertEnter',
 		optional = true,
 		opts = {
-			-- provider = 'llamacpp',
-			provider = 'copilot',
+			provider = 'llamacpp',
+			-- provider = 'copilot',
 			-- hints = { enabled = false },
 			providers = {
 				claude = {

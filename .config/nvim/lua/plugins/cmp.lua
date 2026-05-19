@@ -5,7 +5,9 @@ return {
 		dependencies = {
 			'saghen/blink.lib',
 		},
-
+		build = function()
+			require('blink.cmp').build():wait(60000)
+		end,
 		optional = true,
 		---@module 'blink.cmp'
 		---@type blink.cmp.Config

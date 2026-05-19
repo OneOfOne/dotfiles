@@ -1,42 +1,57 @@
 #!/bin/zsh
 
-local cwd="$PWD"
-local p="$1"
+local CWD="$PWD"
+local TARGET="$1"
 [ "$1" != "" ] && shift
-if [ -d "$p" ]; then
-	p="$(realpath $p)"
-	cwd="$p"
-elif [ -f "$p" ]; then
-	p="$(realpath $p)"
-	cwd="$(dirname $p)"
-elif [ "$p" != "" ]; then
-	p="$(realpath $p)"
-	touch "$p"
-	cwd="$(dirname $p)"
+if [ -d "$TARGET" ]; then
+	TARGET="$(realpath $TARGET)"
+	CWD="$TARGET"
+elif [ -f "$TARGET" ]; then
+	TARGET="$(realpath $TARGET)"
+	CWD="$(dirname $TARGET)"
+elif [ "$TARGET" != "" ]; then
+	TARGET="$(realpath $TARGET)"
+	touch "$TARGET"
+	CWD="$(dirname $TARGET)"
 fi
 
 export ZDOTDIR=~/.dotfiles
 
-JAIL_RW=("$p" "$HOME/.local/state/nvim" "$HOME/.local/share/nvim" "$HOME/.cache" "$HOME/.gnupg" "/var/run/docker.sock" "$HOME/.dotfiles/.config/nvim")
-JAIL_RW+=("$HOME/.expo" "$HOME/.bun" "$HOME/.docker" "$HOME/.app-store" "$HOME/.rustup" "$HOME/.cargo")
-which go &>/dev/null && JAIL_RW+=("$(go env GOMODCACHE)")
-[ -d "$HOME/.config/lazygit" ] && JAIL_RW+=("$HOME/.config/lazygit")
+local CMD=()
 
-#JAIL="firejail --noprofile --caps.drop=all --nonewprivs --seccomp --noroot --disable-mnt --read-only=\"$HOME\""
-JAIL="firejail --noprofile --caps.drop=all --nonewprivs --seccomp --disable-mnt --private-tmp --private-dev --read-only=\"$HOME\""
-JAIL="$JAIL --tracelog --ipc-namespace --writable-run-user --blacklist=/nas --blacklist=/games"
-for jp in $JAIL_RW; do
-	JAIL="$JAIL --read-write=\"$jp\""
-done
+[ "$(which kitty)" != "" ] && [ "$DISPLAY" != "" ] && CMD+=(kitty -d $CWD --)
 
-pushd $cwd
+if [ "$(which firejail)" != "" ]; then
+	JAIL_RW=("$TARGET" "$HOME/.local/state/nvim" "$HOME/.local/share/nvim" "$HOME/.cache" "$HOME/.gnupg" "/var/run/docker.sock" "$HOME/.dotfiles/.config/nvim")
+	JAIL_RW+=("$HOME/.expo" "$HOME/.bun" "$HOME/.docker" "$HOME/.app-store" "$HOME/.rustup" "$HOME/.cargo")
 
-# echo $JAIL
-if [ "$DISPLAY" != "" ]; then
-	# eval kitty -d $cwd -- $JAIL nvim $p $@ &>/dev/null &
-	eval kitty -d $cwd -- nvim $p $@ &>/dev/null &
+	which go &>/dev/null && JAIL_RW+=("$(go env GOMODCACHE)")
+	[ -d "$HOME/.config/lazygit" ] && JAIL_RW+=("$HOME/.config/lazygit" "$HOME/.local/state/lazygit")
+
+	JAIL_BL=(/nas /games)
+
+	CMD+=(firejail --noprofile --caps.drop=all --nonewprivs --seccomp --disable-mnt --private-tmp --private-dev --read-only="$HOME")
+	CMD+=(--tracelog --ipc-namespace --writable-run-user)
+
+	for v in $JAIL_RW; do
+		CMD+=(--read-write="$v")
+	done
+
+	for v in $JAIL_BL; do
+		CMD+=(--blacklist="$v")
+	done
+fi
+
+CMD+=(nvim "$TARGET" $@)
+
+# echo $CMD
+
+pushd $CWD
+
+if [[ "$CMD" = *"kitty"* ]]; then
+	$CMD &>/dev/null &
 else
-	eval $JAIL nvim $p $@
+	$CMD
 fi
 
 popd
