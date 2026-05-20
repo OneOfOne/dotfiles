@@ -2,9 +2,10 @@
 ARGS=(--host 0.0.0.0 --port 10600 --fit on --fit-ctx ${CTX:-$((64 * 1024))} --fit-target 256)
 ARGS+=(--batch-size 16384 --ubatch-size 1024 --cont-batching --cache-ram 8192)
 ARGS+=(--temp 1.0 --top-p 0.95 --top-k 20 --min-p 0.0 --presence-penalty 1.5 --repeat-penalty 1.0)
-ARGS+=(-np 1 -fa on --no-mmap --mlock -ctk q8_0 -ctv q5_1)
+ARGS+=(-np 1 -fa on --no-mmap --mlock --direct-io)
+ARGS+=(-ctk q8_0 -ctv q5_1 --kv-unified)
 ARGS+=(--chat-template-kwargs '{"preserve_thinking": true}' --reasoning ${THINK:-off})
-ARGS+=(--kv-unified --no-mmproj)
-[[ "$1" == *"MTP"* ]] && ARGS+=(--spec-type draft-mtp --spec-draft-n-max 3 --spec-draft-n-min 0.75)
+ARGS+=(--no-mmproj)
+[[ "$1" == *"MTP"* ]] && ARGS+=(--spec-type draft-mtp,ngram-mod,ngram-map-k4v --spec-draft-n-max 3 --spec-draft-n-min 0)
 echo llama-server $ARGS -hf $@
 llama-server $ARGS -hf $@

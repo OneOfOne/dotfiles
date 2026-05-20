@@ -15,7 +15,7 @@
 				"default": {
 					"name": "default",
 					"limit": {
-						"context": 128000,
+						"context": 131072,
 						"output": 65536
 					}
 				}
