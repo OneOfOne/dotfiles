@@ -489,10 +489,7 @@ wmclassmatch=1
 
 [5d7f008d-4926-4041-8c4d-2defb317dc2b]
 Description=WoW Wayland
-noborder=true
 noborderrule=2
-position=1280,0
-positionrule=2
 wmclass=\ssteam_app_default
 wmclasscomplete=true
 wmclassmatch=1
