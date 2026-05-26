@@ -1,3 +1,4 @@
 {
+	"theme": "solarized",
 	"plugin": ["@mrgray17/opentoken@latest"]
 }

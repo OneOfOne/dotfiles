@@ -44,10 +44,10 @@ require('lazy').setup({
 		-- 	import = 'lazyvim.plugins.extras.ai.copilot',
 		-- 	enabled = require('config.utils').is_local(),
 		-- },
-		{
-			import = 'lazyvim.plugins.extras.ai.avante',
-			enabled = require('config.utils').is_local(),
-		},
+		-- {
+		-- import = 'lazyvim.plugins.extras.ai.avante',
+		-- enabled = require('config.utils').is_local(),
+		-- },
 		-- {
 		-- 	import = 'lazyvim.plugins.extras.ai.sidekick',
 		-- 	enabled = require('config.utils').is_local(),

@@ -17,6 +17,9 @@ export DOCKER_BUILDKI=1
 # remove when node fixes their crap
 export UV_USE_IO_URING=0
 
+# OPENCODE
+export OPENCODE_ENABLE_EXA=true
+
 path=($HOME/.dotfiles/node_modules/.bin $path)
 path=($GOBIN $HOME/.cargo/bin $path)
 
