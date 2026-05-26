@@ -1,12 +1,17 @@
 #!/bin/zsh
-ARGS=(--host 0.0.0.0 --port 10600 --fit on --fit-ctx ${CTX:-$((64 * 1024))} --fit-target 256)
-ARGS+=(--batch-size 2048 --ubatch-size 512 --cache-ram $((16 * 1024)) --cont-batching)
-ARGS+=(--temp 1.0 --top-p 0.95 --top-k 20 --min-p 0.0 --presence-penalty 1.5 --repeat-penalty 1.0)
+ARGS=(--host 0.0.0.0 --port 10600 --fit on --fit-ctx ${CTX:-$((128 * 1024))} --fit-target 512)
+ARGS+=(--batch-size 2048 --ubatch-size 2048 --cache-ram $((16 * 1024)))
+ARGS+=(--temp 0.7 --top-p 0.95 --top-k 20 --min-p 0.0 --presence-penalty 1.5 --repeat-penalty 1.0)
 ARGS+=(-np 1 -fa on --no-mmap)
-ARGS+=(-ctk q8_0 -ctv q5_1)
+ARGS+=(-ctk q5_1 -ctv q5_1)
 ARGS+=(--chat-template-kwargs '{"preserve_thinking": true}' --reasoning ${THINK:-off})
 ARGS+=(--no-mmproj --kv-unified)
-# [[ "$1" == *"MTP"* ]] && ARGS+=(--spec-type draft-mtp,ngram-mod,ngram-map-k4v --spec-draft-n-max 3 --spec-draft-n-min 0)
-[[ "$1" == *"MTP"* ]] && ARGS+=(--spec-type draft-mtp --spec-draft-n-max 2 --spec-draft-n-min 0.75)
-echo llama-server $ARGS -hf $@
-llama-server $ARGS -hf $@
+
+if [[ "$@" == *"MTP"* ]]; then
+	ARGS+=(--spec-type draft-mtp --spec-draft-n-max 2 --spec-draft-n-min 0.75)
+else
+	ARGS+=(--spec-type ngram-mod,ngram-map-k4v)
+fi
+
+echo llama-server $ARGS $@
+llama-server $ARGS $@

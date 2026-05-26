@@ -2,6 +2,8 @@
 	"$schema": "https://opencode.ai/config.json",
 	"model": "llama.cpp/default",
 	"lsp": true,
+	"formatter": true,
+	"default_agent": "plan",
 	"server": {
 		"port": 4096
 	},
@@ -16,7 +18,7 @@
 				"default": {
 					"name": "default",
 					"limit": {
-						"context": 131072,
+						"context": 262144,
 						"output": 65536
 					}
 				}
