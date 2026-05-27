@@ -1,49 +1,58 @@
 {
-	"$schema": "https://opencode.ai/config.json",
-	"model": "llama.cpp/default",
-	"lsp": true,
-	"formatter": true,
-	"default_agent": "plan",
-	"server": {
-		"port": 4096
-	},
-	"provider": {
-		"llama.cpp": {
-			"npm": "@ai-sdk/openai-compatible",
-			"name": "llama-server (local)",
-			"options": {
-				"baseURL": "http://127.0.0.1:10600/v1"
-			},
-			"models": {
-				"default": {
-					"name": "default",
-					"limit": {
-						"context": 131072,
-						"output": 65536
-					}
-				}
-			}
-		}
-	},
-	"agent": {
-		"code-reviewer": {
-			"description": "Reviews code for best practices and potential issues",
-			"mode": "subagent",
-			"prompt": "You are a code reviewer. Focus on security, performance, and maintainability.",
-			"permission": {
-				"edit": "deny"
-			}
-		}
-	},
-	"permission": {
-		"external_directory": {
-			"/**": "deny"
-		},
-		"read": {
-			"/**": "deny"
-		},
-		"edit": {
-			"/**": "deny"
-		}
-	}
+  "$schema": "https://opencode.ai/config.json",
+  "model": "llama.cpp/default",
+  "lsp": true,
+  "formatter": true,
+  "default_agent": "plan",
+  "server": {
+    "port": 4096
+  },
+  "provider": {
+    "llama.cpp": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "llama-server (local)",
+      "options": {
+        "baseURL": "http://127.0.0.1:10600/v1"
+      },
+      "models": {
+        "default": {
+          "name": "default",
+          "limit": {
+            "context": 131072,
+            "output": 65536
+          }
+        }
+      }
+    }
+  },
+  "agent": {
+    "code-reviewer": {
+      "description": "Reviews code for best practices and potential issues",
+      "mode": "subagent",
+      "prompt": "You are a code reviewer. Focus on security, performance, and maintainability.",
+      "permission": {
+        "edit": "deny"
+      }
+    },
+    "explore": {
+      "disable": true
+    },
+    "general": {
+      "disable": true
+    }
+  },
+  "permission": {
+    "external_directory": {
+      "/**": "deny"
+    },
+    "read": {
+      "/**": "deny"
+    },
+    "edit": {
+      "/**": "deny"
+    }
+  },
+  "plugin": [
+    "oh-my-opencode-slim"
+  ]
 }

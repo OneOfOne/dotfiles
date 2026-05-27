@@ -1,11 +1,11 @@
 {
-  "version": 1,
-  "skills": {
-    "adhd": {
-      "source": "UditAkhourii/adhd",
-      "sourceType": "github",
-      "skillPath": "skills/adhd/SKILL.md",
-      "computedHash": "c193bae353065ec373978adfaa444590a5805842576c96621417fea33df96350"
-    }
-  }
+	"version": 1,
+	"skills": {
+		"adhd": {
+			"source": "UditAkhourii/adhd",
+			"sourceType": "github",
+			"skillPath": "skills/adhd/SKILL.md",
+			"computedHash": "c193bae353065ec373978adfaa444590a5805842576c96621417fea33df96350"
+		}
+	}
 }

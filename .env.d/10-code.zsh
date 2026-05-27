@@ -19,6 +19,7 @@ export UV_USE_IO_URING=0
 
 # OPENCODE
 export OPENCODE_ENABLE_EXA=true
+export OPENCODE_EXPERIMENTAL_BACKGROUND_SUBAGENTS=true
 
 path=($HOME/.dotfiles/node_modules/.bin $path)
 path=($GOBIN $HOME/.cargo/bin $path)

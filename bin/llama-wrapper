@@ -1,6 +1,6 @@
 #!/bin/zsh
 ARGS=(--host 0.0.0.0 --port 10600 --fit on --fit-ctx ${CTX:-$((128 * 1024))} --fit-target 512)
-ARGS+=(--batch-size 4096 --ubatch-size 1024 --cache-ram $((16 * 1024)))
+ARGS+=(--batch-size 4096 --ubatch-size 1024 --cache-ram $((8 * 1024)))
 ARGS+=(--temp ${TEMP:-1.0} --top-p 0.95 --top-k 20 --min-p 0.0 --presence-penalty 1.5 --repeat-penalty 1.0)
 ARGS+=(-np 1 -fa on --no-mmap)
 # ARGS+=(-ctk q5_1 -ctv q5_1)
@@ -11,7 +11,7 @@ else
 	ARGS+=(--reasoning-budget 0 --reasoning off)
 fi
 
-ARGS+=(--no-mmproj --kv-unified --ctx-checkpoints 64)
+ARGS+=(--no-warmup --no-mmproj --kv-unified --ctx-checkpoints 64)
 
 if [[ "$@" == *"MTP"* ]]; then
 	ARGS+=(--spec-type draft-mtp --spec-draft-n-max 2 --spec-draft-n-min 0.75)
