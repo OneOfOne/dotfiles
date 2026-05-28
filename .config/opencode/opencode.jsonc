@@ -4,9 +4,6 @@
 	"lsp": true,
 	"formatter": true,
 	"default_agent": "plan",
-	"server": {
-		"port": 4096
-	},
 	"provider": {
 		"llama.cpp": {
 			"npm": "@ai-sdk/openai-compatible",
@@ -36,6 +33,7 @@
 		},
 		"plan": {
 			"permission": {
+				"bash": "ask",
 				"edit": "deny",
 				"write": "deny"
 			}
