@@ -149,3 +149,9 @@ function gots {
 function gcp-enable-log {
 	gsutil logging set on -b gs://$1 -o AccessLog gs://$1
 }
+
+function opencode-purge {
+	for sess in $(opencode session list | grep ses | cut -f1 -d' '); do
+		opencode session delete $sess
+	done
+}

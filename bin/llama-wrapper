@@ -1,9 +1,10 @@
 #!/bin/zsh
-ARGS=(--host 0.0.0.0 --port 10600 --fit on --fit-ctx ${CTX:-$((128 * 1024))} --fit-target 512)
-ARGS+=(--batch-size 4096 --ubatch-size 1024 --cache-ram $((8 * 1024)))
+CTX=${CTX:-$((128 * 1024))}
+ARGS=(--host 0.0.0.0 --port 10600 --fit on --fit-ctx $CTX -c $CTX --fit-target 128)
+ARGS+=(--batch-size 4096 --ubatch-size 1024 --cache-ram $((16 * 1024)))
 ARGS+=(--temp ${TEMP:-1.0} --top-p 0.95 --top-k 20 --min-p 0.0 --presence-penalty 1.5 --repeat-penalty 1.0)
 ARGS+=(-np 1 -fa on --no-mmap)
-# ARGS+=(-ctk q5_1 -ctv q5_1)
+ARGS+=(-ctk q5_1 -ctv q5_1)
 
 if [[ "$THINK" == "1" ]]; then
 	ARGS+=(--chat-template-kwargs '{"preserve_thinking": true}' --reasoning-budget -1 --reasoning on)
@@ -13,11 +14,16 @@ fi
 
 ARGS+=(--no-warmup --no-mmproj --kv-unified --ctx-checkpoints 64)
 
+SPEC_ARGS=(--spec-ngram-map-k4v-size-n 64 --spec-ngram-map-k4v-size-m 32 --spec-ngram-map-k4v-min-hits 1 --spec-ngram-mod-n-max 64 --spec-ngram-mod-n-min 48)
+
 if [[ "$@" == *"MTP"* ]]; then
-	ARGS+=(--spec-type draft-mtp --spec-draft-n-max 2 --spec-draft-n-min 0.75)
+	SPEC_ARGS+=(--spec-draft-n-max 2 --spec-draft-n-min 0.75)
+	ARGS+=(--spec-type draft-mtp,ngram-mod,ngram-map-k4v)
 else
-	ARGS+=(--spec-type ngram-map-k4v --spec-ngram-map-k4v-size-n 8 --spec-ngram-map-k4v-size-m 8 --spec-ngram-map-k4v-min-hits 1 --spec-draft-n-max 64)
+	ARGS+=(--spec-type ngram-mod,ngram-map-k4v)
 fi
+
+ARGS+=("${SPEC_ARGS[@]}")
 
 echo llama-server $ARGS $@
 llama-server $ARGS $@

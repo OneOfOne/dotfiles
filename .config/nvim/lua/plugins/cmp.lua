@@ -77,18 +77,18 @@ return {
 			},
 			fuzzy = {},
 			sources = {
-				default = { 'minuet' },
-				providers = {
-					minuet = {
-						name = 'minuet',
-						module = 'minuet.blink',
-						async = true,
-						-- Should match minuet.config.request_timeout * 1000,
-						-- since minuet.config.request_timeout is in seconds
-						timeout_ms = 15000,
-						score_offset = 99, -- Gives minuet higher priority among suggestions
-					},
-				},
+				-- default = { 'minuet' },
+				-- providers = {
+				-- 	minuet = {
+				-- 		name = 'minuet',
+				-- 		module = 'minuet.blink',
+				-- 		async = true,
+				-- 		-- Should match minuet.config.request_timeout * 1000,
+				-- 		-- since minuet.config.request_timeout is in seconds
+				-- 		timeout_ms = 15000,
+				-- 		score_offset = 99, -- Gives minuet higher priority among suggestions
+				-- 	},
+				-- },
 			},
 		},
 	},
