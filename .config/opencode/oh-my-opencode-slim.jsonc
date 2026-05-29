@@ -1,0 +1,35 @@
+{
+	"$schema": "https://unpkg.com/oh-my-opencode-slim@latest/oh-my-opencode-slim.schema.json",
+	"preset": "lcpp",
+	"presets": {
+		"lcpp": {
+			"orchestrator": {
+				"model": "llama.cpp/default",
+				"skills": ["*"],
+				"mcps": ["*", "!context7"]
+			},
+			"oracle": {
+				"model": "llama.cpp/default",
+				"skills": ["simplify"]
+			},
+			"librarian": {
+				"model": "llama.cpp/default",
+				"mcps": ["websearch", "context7", "grep_app"]
+			},
+			"explorer": {
+				"model": "llama.cpp/default"
+			},
+			"designer": {
+				"model": "llama.cpp/default",
+				"skills": ["agent-browser"]
+			},
+			"fixer": {
+				"model": "llama.cpp/default"
+			},
+			"councillor": {
+				"model": "llama.cpp/default"
+			}
+		}
+	}
+	// "disabled_mcps": ["websearch"]
+}
