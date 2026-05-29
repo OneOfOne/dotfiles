@@ -12,14 +12,15 @@ Generate a commit message based on staged changes and beads context.
 git diff --cached --stat
 git diff --cached --name-only
 
+# if there are no staged changes, check all changes
+git diff --stat
+git diff --name-only
+
 # What branch are we on?
 git branch --show-current
 
 # Recent commits for style reference
 git log --oneline -5
-
-# Current bead context (if any in-progress)
-bd list --status in_progress --json 2>/dev/null | head -5
 ```
 
 ## Step 2: Analyze Changes
