@@ -23,6 +23,13 @@
 		}
 	},
 	"agent": {
+		"docs-writer": {
+			"description": "Writes concise code documentation with examples",
+			"mode": "subagent",
+			"permission": {
+				"bash": "deny"
+			}
+		},
 		"code-reviewer": {
 			"description": "Reviews code for best practices and potential issues",
 			"mode": "subagent",
@@ -50,6 +57,13 @@
 		}
 	},
 	"permission": {
+		"bash": {
+			"*": "allow",
+			"find *-exec*": "deny",
+			"git push*": "deny",
+			"rm -rf*": "deny",
+			"sudo *": "deny"
+		},
 		"external_directory": {
 			"/**": "deny"
 		},
@@ -61,5 +75,5 @@
 		}
 	},
 	"instructions": ["~/.config/opencode/guidelines.md", "AGENTS.md"],
-	"plugin": ["oh-my-opencode-slim"]
+	"plugin": ["oh-my-opencode-slim", "opencode-codebase-index"]
 }

@@ -1,0 +1,6 @@
+{
+	"embeddingProvider": "ollama",
+	"indexing": {
+		"autoIndex": true
+	}
+}
