@@ -74,6 +74,7 @@
 			"/**": "deny"
 		}
 	},
-	"instructions": ["~/.config/opencode/guidelines.md", "AGENTS.md"],
-	"plugin": ["oh-my-opencode-slim", "opencode-codebase-index"]
+	// "instructions": ["~/.config/opencode/guidelines.md", "AGENTS.md"],
+	"plugin": ["oh-my-opencode-slim@latest", "opencode-codebase-index@latest"]
+	// "plugin": ["oh-my-opencode-slim@latest"] //, "opencode-codebase-index@latest"]
 }

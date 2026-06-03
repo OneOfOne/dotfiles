@@ -156,4 +156,5 @@ function opencode-purge {
 	for sess in $(opencode session list | grep ses | cut -f1 -d' '); do
 		opencode session delete $sess
 	done
+	[[ "$1" == "1" ]] && rm -rf ~/.local/share/opencode ~/.cache/opencode/ ~/.local/state/opencode
 }
