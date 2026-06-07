@@ -1,11 +1,14 @@
 #!/bin/zsh
 CTX=${CTX:-$((128 * 1024))}
 ARGS=(--host 0.0.0.0 --port 10600 --fit on --fit-ctx $CTX -c $CTX --fit-target 128)
-ARGS+=(--batch-size $((8 * 1024)) --ubatch-size 2048)
+ARGS+=(--batch-size $((4 * 1024)) --ubatch-size 1024)
 ARGS+=(--cache-ram $((16 * 1024)))
-ARGS+=(--temp ${TEMP:-1.0} --top-p ${TOPP:-0.95} --top-k ${TOPK:-20} --min-p 0.0 --presence-penalty 1.5 --repeat-penalty 1.0)
-ARGS+=(-np ${NP:-1} -fa on --no-mmap --mlock)
-ARGS+=(-ctk q8_0 -ctv q5_1)
+# ARGS+=(--temp ${TEMP:-1.0} --top-p ${TOPP:-0.95} --top-k ${TOPK:-20} --min-p 0.0 --presence-penalty 1.05 --repeat-penalty 1.0)
+ARGS+=(--temp ${TEMP:-0.7} --top-p ${TOPP:-1.0} --top-k ${TOPK:-25} --min-p 0.05 --presence-penalty 0.2 --repeat-penalty 1.05)
+ARGS+=(-np ${NP:-1} -fa on --no-mmap --mlock --direct-io --prio 3 --prio-batch 3 --spec-draft-prio 3)
+
+ARGS+=(-ctk q8_0 -ctv q8_0)
+ARGS+=(-ctkd q8_0 -ctvd q8_0)
 
 if [[ "$THINK" == "1" ]]; then
 	ARGS+=(--chat-template-kwargs '{"preserve_thinking": true}' --reasoning-budget 512 --reasoning on)
@@ -17,14 +20,14 @@ ARGS+=(--no-warmup --no-mmproj --kv-unified --ctx-checkpoints 64)
 
 if [[ "$@" == *"MTP"* ]]; then
 	ARGS+=(--spec-type draft-mtp,ngram-mod)
-	ARGS+=(--spec-draft-n-max 2 --spec-draft-n-min 0.0)
+	ARGS+=(--spec-draft-n-max 2 --spec-draft-n-min 0.75)
 else
 	ARGS+=(--spec-type ngram-mod,ngram-map-k4v)
 	ARGS+=(--spec-ngram-map-k4v-size-n 64 --spec-ngram-map-k4v-size-m 32 --spec-ngram-map-k4v-min-hits 1)
 fi
 
 # opencode's prompt breaks this for some reason, use a custom template
-[[ "$@" == *"3.6"* ]] && ARGS+=(--chat-template-file ~/.dotfiles/qwen3.6.jinja)
+[[ "$@" == *"3.6"* ]] && ARGS+=(--chat-template-file ~/.dotfiles/llms/qwen3.6.jinja)
 
 echo llama-server $ARGS $@
 llama-server $ARGS $@

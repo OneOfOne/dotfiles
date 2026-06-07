@@ -13,3 +13,4 @@ bun.lock
 tls/
 .config/item2
 .config/lazygit/state.yml
+.opencode/

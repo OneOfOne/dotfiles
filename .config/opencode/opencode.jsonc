@@ -1,6 +1,7 @@
 {
 	"$schema": "https://opencode.ai/config.json",
 	"model": "llama.cpp/default",
+	//"model": "opencode/deepseek-v4-flash-free",
 	"lsp": true,
 	"formatter": true,
 	"default_agent": "plan",
@@ -14,9 +15,13 @@
 			"models": {
 				"default": {
 					"name": "default",
+					"options": {
+						"reasoningEffort": "low",
+						"textVerbosity": "low"
+					},
 					"limit": {
 						"context": 131072,
-						"output": 65536
+						"output": 32768
 					}
 				}
 			}
@@ -74,7 +79,6 @@
 			"/**": "deny"
 		}
 	},
-	// "instructions": ["~/.config/opencode/guidelines.md", "AGENTS.md"],
-	"plugin": ["oh-my-opencode-slim@latest", "opencode-codebase-index@latest"]
-	// "plugin": ["oh-my-opencode-slim@latest"] //, "opencode-codebase-index@latest"]
+	"instructions": ["~/.config/opencode/guidelines.md", "AGENTS.md"],
+	"plugin": ["oh-my-opencode-slim@latest", "opencode-codebase-index@latest", "./plugins/scheduler/index.ts"]
 }

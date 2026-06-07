@@ -1,0 +1,12 @@
+{
+	"dependencies": {
+		"@opencode-ai/plugin": "latest"
+	},
+	"name": "opencode",
+	"type": "module",
+	"private": true,
+	"devDependencies": {
+		"@types/bun": "latest",
+		"typescript": "latest"
+	}
+}
