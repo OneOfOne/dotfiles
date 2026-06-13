@@ -73,6 +73,7 @@ The built-in tools are safer, more reliable, and often faster than shell equival
 - Use `glob` over `bash find`
 - Use `grep` over `bash grep` / `rg`
 - Use `ast_grep_search` / `ast_grep_replace` for AST-aware code patterns
+- Use `implementation_lookup` / `ast_grep_search` over `grep`
 
 ### Network operations
 - Use `webfetch` over `bash curl`

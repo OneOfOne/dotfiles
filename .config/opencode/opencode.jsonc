@@ -1,14 +1,12 @@
 {
 	"$schema": "https://opencode.ai/config.json",
 	"model": "llama.cpp/default",
-	//"model": "opencode/deepseek-v4-flash-free",
 	"lsp": true,
 	"formatter": true,
-	"default_agent": "plan",
 	"provider": {
 		"llama.cpp": {
 			"npm": "@ai-sdk/openai-compatible",
-			"name": "llama-server (local)",
+			"name": "llama.cpp",
 			"options": {
 				"baseURL": "http://127.0.0.1:10600/v1"
 			},
@@ -28,6 +26,9 @@
 		}
 	},
 	"agent": {
+		"orchestrator": {
+			"model": "github-copilot/gpt-5.3-codex"
+		},
 		"docs-writer": {
 			"description": "Writes concise code documentation with examples",
 			"mode": "subagent",
@@ -52,16 +53,21 @@
 				},
 				"edit": "deny",
 				"write": "deny"
-			}
+			},
+			"disable": true
 		},
 		"explore": {
 			"disable": true
 		},
 		"general": {
 			"disable": true
+		},
+		"build": {
+			"disable": true
 		}
 	},
 	"permission": {
+		"websearch": "ask",
 		"bash": {
 			"*": "allow",
 			"find *-exec*": "deny",
@@ -80,5 +86,5 @@
 		}
 	},
 	"instructions": ["~/.config/opencode/guidelines.md", "AGENTS.md"],
-	"plugin": ["oh-my-opencode-slim@latest", "opencode-codebase-index@latest", "./plugins/scheduler/index.ts"]
+	"plugin": ["opencode-codebase-index@latest", "./plugins/scheduler", "oh-my-opencode-slim"]
 }

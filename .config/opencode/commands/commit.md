@@ -1,6 +1,5 @@
 ---
 description: Smart commit with beads context and conventional commit format
-agent: build
 ---
 
 Generate a commit message based on staged changes and beads context.

@@ -1,0 +1,9 @@
+{
+	"embeddingProvider": "custom",
+	"customProvider": {
+		"baseUrl": "http://127.0.0.1:10601/v1/",
+		"model": "bge-m3",
+		"dimensions": 1024
+	},
+	"indexing": {}
+}

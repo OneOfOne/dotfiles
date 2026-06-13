@@ -1,33 +1,55 @@
 #!/bin/zsh
-CTX=${CTX:-$((128 * 1024))}
-ARGS=(--host 0.0.0.0 --port 10600 --fit on --fit-ctx $CTX -c $CTX --fit-target 128)
-ARGS+=(--batch-size $((4 * 1024)) --ubatch-size 1024)
-ARGS+=(--cache-ram $((16 * 1024)))
-# ARGS+=(--temp ${TEMP:-1.0} --top-p ${TOPP:-0.95} --top-k ${TOPK:-20} --min-p 0.0 --presence-penalty 1.05 --repeat-penalty 1.0)
-ARGS+=(--temp ${TEMP:-0.7} --top-p ${TOPP:-1.0} --top-k ${TOPK:-25} --min-p 0.05 --presence-penalty 0.2 --repeat-penalty 1.05)
-ARGS+=(-np ${NP:-1} -fa on --no-mmap --mlock --direct-io --prio 3 --prio-batch 3 --spec-draft-prio 3)
 
-ARGS+=(-ctk q8_0 -ctv q8_0)
-ARGS+=(-ctkd q8_0 -ctvd q8_0)
-
-if [[ "$THINK" == "1" ]]; then
-	ARGS+=(--chat-template-kwargs '{"preserve_thinking": true}' --reasoning-budget 512 --reasoning on)
-else
-	ARGS+=(--reasoning-budget 0 --reasoning off)
+if [[ "$1" == "oc" ]]; then
+	trap 'kill "$pid" 2>/dev/null; echo "[INFO] Killing process $pid"; exit' INT TERM EXIT
+	llama-wrapper embed &
+	pid=$!
+	llama-wrapper -hf Jackrong/Qwopus3.6-35B-A3B-v1-MTP-GGUF:IQ4_XS
+	exit
 fi
 
-ARGS+=(--no-warmup --no-mmproj --kv-unified --ctx-checkpoints 64)
+if [[ "$1" == "ha" ]]; then
+	CTX=$((16 * 1024)) llama-wrapper -hf Jackrong/Qwopus3.5-4B-Coder-MTP-GGUF:Q5_K_M
+	exit
+fi
+
+if [[ "$1" == "embed" ]]; then
+	echo llama-server -hf ggml-org/bge-m3-Q8_0-GGUF --embeddings --port 10601 -b 8192 -ub 8192 -c 8192 --fit off --cache-ram 8192 -lv 1
+	llama-server -hf ggml-org/bge-m3-Q8_0-GGUF --embeddings --port 10601 -b 8192 -ub 8192 -c 8192 --fit off --cache-ram 8192 -lv 1
+	exit
+fi
+
+CTX=${CTX:-$((128 * 1024))}
+ARGS=(--host 0.0.0.0 --port 10600)
+ARGS+=(-np 1 -fa on --fit on --fit-ctx $CTX -c $CTX --fit-target 192 --no-host)
+# ARGS+=(--fit off -ngl 999 -c $CTX)
+ARGS+=(--batch-size $((4 * 1024)) --ubatch-size $((1 * 1024)) --cache-ram $((32 * 1024)))
+# ARGS+=(--temp ${TEMP:-1.0} --top-p ${TOPP:-0.95} --top-k ${TOPK:-20} --min-p 0.0 --presence-penalty 1.05 --repeat-penalty 1.0)
+ARGS+=(--temp ${TEMP:-0.7} --top-p ${TOPP:-1.0} --top-k ${TOPK:-25} --min-p 0.05 --presence-penalty 0.2 --repeat-penalty 1.05)
+# ARGS+=(--temp ${TEMP:-1.0} --top-p ${TOPP:-0.90} --top-k ${TOPK:-20} --min-p 0.05 --presence-penalty 1.5 --repeat-penalty 1.05)
+
+ARGS+=(--no-mmap --direct-io --prio 3 --prio-batch 3 --spec-draft-prio 3 -t 16 -tb 16)
+
+ARGS+=(-ctk q8_0 -ctv q8_0 --kv-unified)
+# ARGS+=(-ctkd q8_0 -ctvd q8_0)
+
+# ARGS+=(--chat-template-kwargs '{"preserve_thinking": false}' --reasoning-budget 512 --reasoning on --reasoning-budget-message " Okay, I have enough information to answer.")
+ARGS+=(--reasoning-budget 0 --reasoning off)
+
+ARGS+=(--no-warmup --no-mmproj --ctx-checkpoints 64)
 
 if [[ "$@" == *"MTP"* ]]; then
 	ARGS+=(--spec-type draft-mtp,ngram-mod)
-	ARGS+=(--spec-draft-n-max 2 --spec-draft-n-min 0.75)
+	ARGS+=(--spec-draft-n-max 1 --spec-draft-n-min 0.0)
 else
-	ARGS+=(--spec-type ngram-mod,ngram-map-k4v)
+	ARGS+=(--spec-default --spec-type ngram-mod,ngram-map-k4v)
 	ARGS+=(--spec-ngram-map-k4v-size-n 64 --spec-ngram-map-k4v-size-m 32 --spec-ngram-map-k4v-min-hits 1)
 fi
+
+ARGS+=(--spec-ngram-mod-n-match 24 --spec-ngram-mod-n-min 8 --spec-ngram-mod-n-max 16)
 
 # opencode's prompt breaks this for some reason, use a custom template
 [[ "$@" == *"3.6"* ]] && ARGS+=(--chat-template-file ~/.dotfiles/llms/qwen3.6.jinja)
 
 echo llama-server $ARGS $@
-llama-server $ARGS $@
+taskset -c 8-15,24-31 nice -n -10 llama-server $ARGS $@
