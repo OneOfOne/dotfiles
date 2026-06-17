@@ -8,6 +8,7 @@
 	"dependencies": {
 		"@ast-grep/cli": "latest",
 		"@biomejs/biome": "latest",
+		"@oh-my-pi/pi-coding-agent": "latest",
 		"@typescript/native-preview": "latest",
 		"@vtsls/language-server": "latest",
 		"bash-language-server": "latest",

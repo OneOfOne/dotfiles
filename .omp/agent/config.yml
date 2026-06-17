@@ -1,0 +1,15 @@
+setupVersion: 1
+modelRoles:
+  default: llamacpp/default
+defaultThinkingLevel: auto
+memory:
+  backend: local
+autolearn:
+  enabled: true
+  autoContinue: true
+plan:
+  defaultOnStartup: false
+task:
+  maxConcurrency: 1
+  enableLsp: true
+

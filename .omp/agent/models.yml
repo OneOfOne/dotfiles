@@ -1,0 +1,28 @@
+providers:
+  llamacpp:
+    api: openai-completions
+    apiKey: DISPLAY
+    baseUrl: http://127.0.0.1:10600/v1
+    models:
+      - contextWindow: 131072
+        cost:
+          cacheRead: 0
+          cacheWrite: 0
+          input: 0
+          output: 0
+        id: default
+        name: default
+        input:
+          - text
+        maxTokens: 32000
+        reasoning: false
+  llamacpp-embbed:
+    api: openai-responses
+    apiKey: DISPLAY
+    baseUrl: http://127.0.0.1:10601/v1
+    models:
+      - contextWindow: 8192
+        id: nomic-embed-text:latest
+        name: nomic-embed-text:latest
+        input:
+          - text

@@ -1,0 +1,5 @@
+biome.json
+gpu_cache.json
+agent/*.db*
+agent/sessions/
+logs/
