@@ -1,0 +1,18 @@
+{
+	"$schema": "https://raw.githubusercontent.com/can1357/oh-my-pi/main/packages/coding-agent/src/config/mcp-schema.json",
+	"mcpServers": {
+		"context7": {
+			"command": "bunx",
+			"args": ["@upstash/context7-mcp@latest"]
+		},
+		"playwright": {
+			"command": "bunx",
+			"args": ["@playwright/mcp@latest"]
+		},
+		"codegraph": {
+			"type": "stdio",
+			"command": "codegraph",
+			"args": ["serve", "--mcp"]
+		}
+	}
+}

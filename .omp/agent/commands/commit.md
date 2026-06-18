@@ -1,5 +1,6 @@
 
 ---
+name: commit
 description: Smart commit with beads context and conventional commit format
 ---
 

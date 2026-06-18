@@ -1,28 +1,59 @@
 providers:
-  llamacpp:
-    api: openai-completions
-    apiKey: DISPLAY
-    baseUrl: http://127.0.0.1:10600/v1
-    models:
-      - contextWindow: 131072
-        cost:
-          cacheRead: 0
-          cacheWrite: 0
-          input: 0
-          output: 0
-        id: default
-        name: default
-        input:
-          - text
-        maxTokens: 32000
-        reasoning: false
-  llamacpp-embbed:
-    api: openai-responses
-    apiKey: DISPLAY
-    baseUrl: http://127.0.0.1:10601/v1
-    models:
-      - contextWindow: 8192
-        id: nomic-embed-text:latest
-        name: nomic-embed-text:latest
-        input:
-          - text
+    llamacpp:
+        api: openai-completions
+        apiKey: DISPLAY
+        baseUrl: http://127.0.0.1:10600/v1
+        models:
+            - contextWindow: 196608
+              id: default
+              name: default
+              input:
+                  - text
+              maxTokens: 32768
+              reasoning: true
+    llamacpp-embbed:
+        api: openai-responses
+        apiKey: DISPLAY
+        baseUrl: http://127.0.0.1:10601/v1
+        models:
+            - contextWindow: 8192
+              id: nomic-embed-text:latest
+              name: nomic-embed-text:latest
+              input:
+                  - text
+    ollama:
+        api: openai-responses
+        auth: none
+        baseUrl: http://127.0.0.1:11434/v1
+        discovery:
+            type: ollama
+        models:
+            - contextWindow: 1000000
+              id: glm-5.2:cloud
+              input:
+                  - text
+              maxTokens: 131072
+              name: glm-5.2:cloud
+            - contextWindow: 262144
+              id: kimi-k2.7-code:cloud
+              input:
+                  - text
+              maxTokens: 262144
+              name: kimi-k2.7-code:cloud
+            - contextWindow: 524288
+              id: minimax-m3:cloud
+              input:
+                  - text
+              maxTokens: 131072
+              name: minimax-m3:cloud
+            - contextWindow: 262144
+              id: nemotron-3-super:cloud
+              input:
+                  - text
+              maxTokens: 65536
+              name: nemotron-3-super:cloud
+            - contextWindow: 2048
+              id: nomic-embed-text:latest
+              input:
+                  - text
+              name: nomic-embed-text:latest

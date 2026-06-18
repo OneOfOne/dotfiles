@@ -1,15 +1,32 @@
+autolearn:
+  autoContinue: true
+  enabled: true
+defaultThinkingLevel: minimal
+lsp:
+  diagnosticsOnEdit: true
+  formatOnWrite: true
+memory:
+  backend: mnemopi
 setupVersion: 1
+task:
+  enableLsp: true
+  maxConcurrency: 1
 modelRoles:
   default: llamacpp/default
-defaultThinkingLevel: auto
-memory:
-  backend: local
-autolearn:
+hideThinkingBlock: true
+mcp:
+  notifications: true
+contextPromotion:
   enabled: true
-  autoContinue: true
-plan:
-  defaultOnStartup: false
-task:
-  maxConcurrency: 1
-  enableLsp: true
+providers:
+  webSearch: exa
+  tinyModelDevice: auto
+  unexpectedStopModel: lfm2-1.2b
+  memoryModel: lfm2-1.2b
+exa:
+  enableResearcher: true
+  enableWebsets: true
+thinkingBudgets:
+  minimal: 512
+treeFilterMode: default
 

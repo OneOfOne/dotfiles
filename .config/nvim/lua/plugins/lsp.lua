@@ -70,14 +70,30 @@ return {
 							completeFunctionCalls = false,
 							usePlaceholders = false,
 							analyses = {
+								QF1001 = true,
+								QF1007 = true,
+								QF1011 = true,
+								S1008 = true,
+								S1011 = true,
+								S1016 = true,
+								S1021 = true,
+								S1025 = true,
+								S1029 = true,
+								SA1002 = true,
+								SA1014 = true,
+								SA1027 = true,
+								SA1032 = true,
 								nilness = true,
+								appendclipped = true,
+								slicesdelete = true,
 								unusedparams = true,
 								unusedwrite = true,
 								useany = true,
 								fillreturns = false,
 							},
 							staticcheck = true,
-							semanticTokens = true,
+							semanticTokens = false,
+							gofumpt = true,
 						},
 					},
 				},
@@ -93,13 +109,14 @@ return {
 		opts = function(_, opts)
 			local nls = require('null-ls').builtins
 			-- gofumpt doesn't follow gopls's disabled analysises
-			opts.sources = vim.tbl_filter(function(source)
-				return source ~= nls.formatting.gofumpt
-			end, opts.sources)
+			-- opts.sources = vim.tbl_filter(function(source)
+			-- 	return source ~= nls.formatting.gofumpt
+			-- end, opts.sources)
 
 			opts.sources = vim.tbl_extend('force', opts.sources, { --override lazyvim's default sources
 				nls.diagnostics.golangci_lint,
-				-- nls.formatting.gofumpt,
+				nls.formatting.goimports,
+				nls.formatting.gofumpt,
 				-- ts
 				nls.formatting.biome.with({
 					args = {

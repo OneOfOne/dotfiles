@@ -158,3 +158,7 @@ function opencode-purge {
 	done
 	[[ "$1" == "1" ]] && rm -rf ~/.local/share/opencode ~/.cache/opencode/ ~/.local/state/opencode
 }
+
+function omp-purge {
+	rm -rfv ~/.omp/agent/{{,terminal-}sessions,memories}/
+}

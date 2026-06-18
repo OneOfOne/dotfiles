@@ -1,5 +1,9 @@
 biome.json
 gpu_cache.json
 agent/*.db*
-agent/sessions/
+agent/*sessions/
+agent/last-changelog-version
+plugins/
+memories
+cache/
 logs/
