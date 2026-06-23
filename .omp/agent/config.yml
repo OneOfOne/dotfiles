@@ -1,32 +1,31 @@
 autolearn:
-  autoContinue: true
-  enabled: true
-defaultThinkingLevel: minimal
+    autoContinue: true
+    enabled: true
+defaultThinkingLevel: auto
 lsp:
-  diagnosticsOnEdit: true
-  formatOnWrite: true
+    diagnosticsOnEdit: true
+    formatOnWrite: true
 memory:
-  backend: mnemopi
+    backend: mnemopi
 setupVersion: 1
 task:
-  enableLsp: true
-  maxConcurrency: 1
+    enableLsp: true
+    maxConcurrency: 1
 modelRoles:
-  default: llamacpp/default
+    default: ollama/glm-5.2:cloud:medium
 hideThinkingBlock: true
 mcp:
-  notifications: true
+    notifications: true
 contextPromotion:
-  enabled: true
+    enabled: true
 providers:
-  webSearch: exa
-  tinyModelDevice: auto
-  unexpectedStopModel: lfm2-1.2b
-  memoryModel: lfm2-1.2b
+    webSearch: exa
+    tinyModelDevice: auto
+    unexpectedStopModel: lfm2-1.2b
+    memoryModel: lfm2-1.2b
 exa:
-  enableResearcher: true
-  enableWebsets: true
+    enableResearcher: true
+    enableWebsets: true
 thinkingBudgets:
-  minimal: 512
+    minimal: 512
 treeFilterMode: default
-

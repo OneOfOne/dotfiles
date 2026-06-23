@@ -1,16 +1,11 @@
 providers:
     llamacpp:
-        api: openai-completions
+        # api: openai-completions
+        api: openai-responses
         apiKey: DISPLAY
         baseUrl: http://127.0.0.1:10600/v1
-        models:
-            - contextWindow: 196608
-              id: default
-              name: default
-              input:
-                  - text
-              maxTokens: 32768
-              reasoning: true
+        discovery:
+            type: llama.cpp
     llamacpp-embbed:
         api: openai-responses
         apiKey: DISPLAY
@@ -34,6 +29,12 @@ providers:
                   - text
               maxTokens: 131072
               name: glm-5.2:cloud
+            - contextWindow: 1000000
+              id: deepseek-v4-flash:cloud
+              input:
+                  - text
+              maxTokens: 131072
+              name: deepseek-v4-flash:cloud
             - contextWindow: 262144
               id: kimi-k2.7-code:cloud
               input:

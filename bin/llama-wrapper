@@ -1,8 +1,14 @@
 #!/bin/zsh
 
+if [[ "$1" == "router" ]]; then
+	shift
+	taskset -c 8-15,24-31 nice -n -10 llama-server --host 0.0.0.0 --port 10600 --models-preset ~/.dotfiles/llms/router.ini --models-max 1 -np 1 $@
+	exit
+fi
+
 if [[ "$1" == "oc" ]]; then
 	shift
-	trap 'kill "$pid" 2>/dev/null; echo "[INFO] Killing process $pid"; exit' INT TERM EXIT
+	trap 'kill "$pid" 2>/dev/null; echo "[INFO] Killing process $pid"; exit' SIGINT SIGTERM SIGKILL EXIT
 	llama-wrapper embed &
 	pid=$!
 	# llama-wrapper -hf Jackrong/Qwopus3.6-35B-A3B-v1-MTP-GGUF:IQ4_XS $@
@@ -12,13 +18,18 @@ fi
 
 if [[ "$1" == "omp" ]]; then
 	shift
-	# llama-wrapper -hf Jackrong/Qwopus3.6-35B-A3B-v1-MTP-GGUF:IQ4_XS $@
-	llama-wrapper -m ~/.cache/huggingface/SIQ-1-35B.Q4_K_M.gguf -ctk q5_1 -ctv q5_1 $@
+	llama-wrapper -hf Jackrong/Qwopus3.6-35B-A3B-v1-MTP-GGUF:IQ4_XS $@
+	# llama-wrapper -m ~/.cache/huggingface/SIQ-1-35B.Q4_K_M.gguf $@
 	exit
 fi
 
 if [[ "$1" == "ha" ]]; then
 	CTX=$((16 * 1024)) llama-wrapper -hf Jackrong/Qwopus3.5-4B-Coder-MTP-GGUF:Q5_K_M
+	exit
+fi
+
+if [[ "$1" == "med" ]]; then
+	llama-wrapper -hf mradermacher/Reasoning-Medical-27B-i1-GGUF:Q4_K_M
 	exit
 fi
 
@@ -28,11 +39,11 @@ if [[ "$1" == "embed" ]]; then
 	exit
 fi
 
-CTX=${CTX:-$((192 * 1024))}
+CTX=${CTX:-$((128 * 1024))}
 ARGS=(--host 0.0.0.0 --port 10600)
 ARGS+=(-np 1 -fa on --fit on --fit-ctx $CTX -c $CTX --fit-target 256 -ngl 999 --no-host)
 # ARGS+=(--fit off -ngl 999 -c $CTX)
-ARGS+=(--batch-size $((16 * 1024)) --ubatch-size $((1 * 1024)) --cache-ram $((32 * 1024)))
+ARGS+=(--batch-size 2048 --ubatch-size 512 --cache-ram $((16 * 1024)))
 # ARGS+=(--temp ${TEMP:-1.0} --top-p ${TOPP:-0.95} --top-k ${TOPK:-20} --min-p 0.0 --presence-penalty 1.05 --repeat-penalty 1.0)
 ARGS+=(--temp ${TEMP:-0.7} --top-p ${TOPP:-0.95} --top-k ${TOPK:-25} --min-p 0.05 --presence-penalty 0.2 --repeat-penalty 1.05)
 # ARGS+=(--temp ${TEMP:-1.0} --top-p ${TOPP:-0.90} --top-k ${TOPK:-20} --min-p 0.05 --presence-penalty 1.5 --repeat-penalty 1.05)
@@ -40,7 +51,7 @@ ARGS+=(--temp ${TEMP:-0.7} --top-p ${TOPP:-0.95} --top-k ${TOPK:-25} --min-p 0.0
 ARGS+=(--no-mmap --direct-io --prio 3 --prio-batch 3 --spec-draft-prio 3 -t 16 -tb 16)
 
 ARGS+=(-ctk q8_0 -ctv q8_0 --kv-unified)
-# ARGS+=(-ctkd q8_0 -ctvd q8_0)
+ARGS+=(-ctkd q8_0 -ctvd q8_0)
 
 ARGS+=(--reasoning-budget 512 --reasoning on --reasoning-budget-message " Okay, I have enough information to answer.")
 # ARGS+=(--reasoning-budget 0 --reasoning off)

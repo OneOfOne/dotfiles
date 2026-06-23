@@ -4,7 +4,7 @@ return {
 		lazy = false,
 		priority = 1000,
 		opts = {
-			transparent = false, -- Enable this to disable setting the background color
+			transparent = true, -- Enable this to disable setting the background color
 			terminal_colors = true, -- Configure the colors used when opening a `:terminal` in [Neovim](https://github.com/neovim/neovim)
 			styles = {
 				comments = { italic = true },
@@ -59,7 +59,7 @@ return {
 		'LazyVim/LazyVim',
 		opts = {
 			-- colorscheme = 'solarized-osaka',
-			colorscheme = 'darkbox',
+			colorscheme = 'solarized-osaka',
 		},
 	},
 	{

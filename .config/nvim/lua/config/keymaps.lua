@@ -94,6 +94,10 @@ end, 'copy line and comment prev') -- thank you reddit
 --- misc
 nmap('<leader>sudo', '<cmd>w !sudo tee "%" >/dev/null<cr><cmd>edit!<cr>', 'sudo write')
 
+nmap('<leader>omp', function()
+	Snacks.terminal({ 'omp' }, { cwd = LazyVim.root.git() })
+end, 'omp')
+
 nmap('<leader>tw', function()
 	--https://www.reddit.com/r/neovim/comments/1bjlihf/comment/kvu63wj/
 	---@diagnostic disable-next-line: missing-fields
