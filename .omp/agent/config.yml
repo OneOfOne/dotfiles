@@ -10,9 +10,11 @@ memory:
 setupVersion: 1
 task:
     enableLsp: true
-    maxConcurrency: 1
+    maxConcurrency: 5
 modelRoles:
     default: ollama/glm-5.2:cloud:medium
+    advisor: ollama/deepseek-v4-flash:cloud
+    plan: anthropic/claude-opus-4-8
 hideThinkingBlock: true
 mcp:
     notifications: true
@@ -26,6 +28,7 @@ providers:
 exa:
     enableResearcher: true
     enableWebsets: true
-thinkingBudgets:
-    minimal: 512
 treeFilterMode: default
+browser:
+    headless: false
+

@@ -1,5 +1,5 @@
 providers:
-    llamacpp:
+    llama.cpp:
         # api: openai-completions
         api: openai-responses
         apiKey: DISPLAY

@@ -69,7 +69,7 @@ if [[ "$@" == *"MTP"* ]]; then
 fi
 
 # opencode's prompt breaks this for some reason, use a custom template
-[[ "$@" == *"3.6"* ]] && ARGS+=(--chat-template-file ~/.dotfiles/llms/qwen3.6.jinja)
+# [[ "$@" == *"3.6"* ]] && ARGS+=(--chat-template-file ~/.dotfiles/llms/qwen3.6.jinja)
 
 echo llama-server $ARGS $@
 taskset -c 8-15,24-31 nice -n -10 llama-server $ARGS $@
