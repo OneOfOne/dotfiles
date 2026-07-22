@@ -2,29 +2,12 @@
 
 if [[ "$1" == "router" ]]; then
 	shift
-	taskset -c 8-15,24-31 nice -n -10 llama-server --host 0.0.0.0 --port 10600 --models-preset ~/.dotfiles/llms/router.ini --models-max 1 -np 1 $@
-	exit
-fi
-
-if [[ "$1" == "oc" ]]; then
-	shift
-	trap 'kill "$pid" 2>/dev/null; echo "[INFO] Killing process $pid"; exit' SIGINT SIGTERM SIGKILL EXIT
-	llama-wrapper embed &
-	pid=$!
-	# llama-wrapper -hf Jackrong/Qwopus3.6-35B-A3B-v1-MTP-GGUF:IQ4_XS $@
-	llama-wrapper -hf unsloth/Qwen3.6-35B-A3B-MTP-GGUF:IQ4_XS $@
-	exit
-fi
-
-if [[ "$1" == "omp" ]]; then
-	shift
-	llama-wrapper -hf Jackrong/Qwopus3.6-35B-A3B-v1-MTP-GGUF:IQ4_XS $@
-	# llama-wrapper -m ~/.cache/huggingface/SIQ-1-35B.Q4_K_M.gguf $@
+	taskset -c 8-15,24-31 nice -n -10 llama-server --host 0.0.0.0 --port 10600 --models-preset ~/.dotfiles/llms/router.ini --models-max 1 --sleep-idle-seconds 600 -np 1 $@
 	exit
 fi
 
 if [[ "$1" == "ha" ]]; then
-	CTX=$((16 * 1024)) llama-wrapper -hf Jackrong/Qwopus3.5-4B-Coder-MTP-GGUF:Q5_K_M
+	CTX=$((16 * 1024)) llama-wrapper -hf Jackrong/Qwopus3.5-9B-Coder-MTP-GGUF:Q4_K_M
 	exit
 fi
 

@@ -63,6 +63,9 @@ return {
 				-- 		typescript = { preferences = { useAliasesForRenames = false } },
 				-- 	},
 				-- },
+				tsgo = {
+					cmd = { 'tsc', '--lsp', '--stdio' },
+				},
 				gopls = {
 					-- cmd = { 'gopls', '-logfile=/tmp/gopls.log', '-rpc.trace' },
 					settings = {

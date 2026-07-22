@@ -18,7 +18,9 @@ return {
 			lualine_bold = true,
 
 			on_highlights = function(hl)
-				hl.Pmenu = 'transparent'
+				hl.Pmenu = 'none'
+				hl.BlinkCmpMenu = 'none'
+				hl.BlinkCmpMenuBorder = 'none'
 			end,
 		},
 	},
