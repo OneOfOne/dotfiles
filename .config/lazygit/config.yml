@@ -1,7 +1,6 @@
 os:
     editPreset: "nvim"
 gui:
-    mouseEvents: false
     nerdFontsVersion: "3"
     theme:
         activeBorderColor:

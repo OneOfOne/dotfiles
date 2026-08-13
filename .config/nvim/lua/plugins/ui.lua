@@ -61,7 +61,7 @@ return {
 		'LazyVim/LazyVim',
 		opts = {
 			-- colorscheme = 'solarized-osaka',
-			colorscheme = 'solarized-osaka',
+			colorscheme = 'solarized-osaka-vivid',
 		},
 	},
 	{

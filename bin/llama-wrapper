@@ -2,7 +2,7 @@
 
 if [[ "$1" == "router" ]]; then
 	shift
-	taskset -c 8-15,24-31 nice -n -10 llama-server --host 0.0.0.0 --port 10600 --models-preset ~/.dotfiles/llms/router.ini --models-max 1 --sleep-idle-seconds 600 -np 1 $@
+	taskset -c 8-15,24-31 nice -n -10 llama-server --host 0.0.0.0 --port 10600 --models-preset ~/.dotfiles/llms/router.ini --models-max 1 --sleep-idle-seconds 600 -np 1 --load-mode dio $@
 	exit
 fi
 
@@ -31,7 +31,7 @@ ARGS+=(--batch-size 2048 --ubatch-size 512 --cache-ram $((16 * 1024)))
 ARGS+=(--temp ${TEMP:-0.7} --top-p ${TOPP:-0.95} --top-k ${TOPK:-25} --min-p 0.05 --presence-penalty 0.2 --repeat-penalty 1.05)
 # ARGS+=(--temp ${TEMP:-1.0} --top-p ${TOPP:-0.90} --top-k ${TOPK:-20} --min-p 0.05 --presence-penalty 1.5 --repeat-penalty 1.05)
 
-ARGS+=(--no-mmap --direct-io --prio 3 --prio-batch 3 --spec-draft-prio 3 -t 16 -tb 16)
+ARGS+=(--load-mode dio --prio 3 --prio-batch 3 --spec-draft-prio 3 -t 16 -tb 16)
 
 ARGS+=(-ctk q8_0 -ctv q8_0 --kv-unified)
 ARGS+=(-ctkd q8_0 -ctvd q8_0)
