@@ -1,34 +1,53 @@
-autolearn:
-    autoContinue: true
-    enabled: true
+autolearn: 
+  autoContinue: true
+  enabled: true
 defaultThinkingLevel: auto
-lsp:
-    diagnosticsOnEdit: true
-    formatOnWrite: true
-memory:
-    backend: mnemopi
-setupVersion: 1
-task:
-    enableLsp: true
-    maxConcurrency: 5
-modelRoles:
-    default: ollama/glm-5.2:cloud:medium
-    advisor: ollama/deepseek-v4-flash:cloud
-    plan: anthropic/claude-opus-4-8
+lsp: 
+  diagnosticsOnEdit: true
+  formatOnWrite: true
+memory: 
+  backend: mnemopi
+setupVersion: 2
+task: 
+  enableLsp: true
+  maxConcurrency: 5
+modelRoles: 
+  advisor: ollama/deepseek-v4-flash:cloud
+  plan: anthropic/claude-opus-4-8
+  default: llama.cpp/unsloth/Qwen3.8-27B-GGUF:Q4_K_M:xhigh
 hideThinkingBlock: true
-mcp:
-    notifications: true
-contextPromotion:
-    enabled: true
-providers:
-    webSearch: exa
-    tinyModelDevice: auto
-    unexpectedStopModel: lfm2-1.2b
-    memoryModel: lfm2-1.2b
-exa:
-    enableResearcher: true
-    enableWebsets: true
+mcp: 
+  notifications: true
+contextPromotion: 
+  enabled: true
+providers: 
+  tinyModelDevice: auto
+  unexpectedStopModel: lfm2-1.2b
+  memoryModel: lfm2-1.2b
+  webSearchOrder: 
+    - exa
+    - perplexity
+    - gemini
+    - anthropic
+    - codex
+    - xai
+    - zai
+    - tinyfish
+    - jina
+    - kagi
+    - tavily
+    - firecrawl
+    - brave
+    - kimi
+    - parallel
+    - synthetic
+    - searxng
+    - startpage
+    - duckduckgo
+    - ecosia
+    - google
+    - mojeek
+    - public
 treeFilterMode: default
-browser:
-    headless: false
-
+browser: 
+  headless: false

@@ -1,6 +1,15 @@
 -- vim.lsp.handlers['workspace/workspaceFolders'] = nil
 -- vim.cmd([[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false, max_width=80})]])
 vim.lsp.log.set_level('error')
+-- vim.api.nvim_create_autocmd('LspAttach', {
+-- 	callback = function(args)
+-- 		local client = vim.lsp.get_client_by_id(args.data.client_id)
+-- 		if client then
+-- 			client.server_capabilities.referencesProvider = false
+-- 			client.server_capabilities.codeLensProvider = nil
+-- 		end
+-- 	end,
+-- })
 
 return {
 	{
@@ -23,7 +32,7 @@ return {
 				enabled = false,
 			},
 			codelens = {
-				enabled = true,
+				enabled = false,
 			},
 			folds = {
 				enabled = false,
