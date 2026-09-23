@@ -1,53 +1,70 @@
-autolearn: 
-  autoContinue: true
-  enabled: true
+autolearn:
+    autoContinue: true
+    enabled: true
 defaultThinkingLevel: auto
-lsp: 
-  diagnosticsOnEdit: true
-  formatOnWrite: true
-memory: 
-  backend: mnemopi
+lsp:
+    diagnosticsOnEdit: true
+    formatOnWrite: true
+memory:
+    backend: mnemopi
+mnemopi:
+    scoping: per-project-tagged
+    dbPath: .omp/memory/mnemopi.db
 setupVersion: 2
-task: 
-  enableLsp: true
-  maxConcurrency: 5
-modelRoles: 
-  advisor: ollama/deepseek-v4-flash:cloud
-  plan: anthropic/claude-opus-4-8
-  default: llama.cpp/unsloth/Qwen3.8-27B-GGUF:Q4_K_M:xhigh
+task:
+    enableLsp: true
+    maxConcurrency: 5
+modelRoles:
+    advisor: ollama/deepseek-v4-flash:cloud
+    plan: anthropic/claude-opus-4-8
+    default: llama.cpp/unsloth/Qwen3.8-27B-GGUF:Q4_K_M:xhigh
+    web: web/exa
+    judge: typesafe/jev-latest
+    memory: local/lfm2-1.2b
 hideThinkingBlock: true
-mcp: 
-  notifications: true
-contextPromotion: 
-  enabled: true
-providers: 
-  tinyModelDevice: auto
-  unexpectedStopModel: lfm2-1.2b
-  memoryModel: lfm2-1.2b
-  webSearchOrder: 
-    - exa
-    - perplexity
-    - gemini
-    - anthropic
-    - codex
-    - xai
-    - zai
-    - tinyfish
-    - jina
-    - kagi
-    - tavily
-    - firecrawl
-    - brave
-    - kimi
-    - parallel
-    - synthetic
-    - searxng
-    - startpage
-    - duckduckgo
-    - ecosia
-    - google
-    - mojeek
-    - public
+mcp:
+    notifications: true
+contextPromotion:
+    enabled: true
+providers:
+    tinyModelDevice: auto
 treeFilterMode: default
-browser: 
-  headless: false
+browser:
+    headless: false
+retry:
+    fallbackChains:
+        web:
+            - web/perplexity
+            - google/gemini-2.5-flash
+            - anthropic/claude-haiku-4-5
+            - openai-codex/gpt-5.6-luna
+            - xai/grok-4.5
+            - web/zai
+            - web/tinyfish
+            - web/jina
+            - web/kagi
+            - web/tavily
+            - web/firecrawl
+            - web/brave
+            - web/kimi
+            - web/parallel
+            - web/synthetic
+            - web/searxng
+            - web/startpage
+            - web/duckduckgo
+            - web/ecosia
+            - web/google
+            - web/mojeek
+            - web/public
+            - google-antigravity/gemini-2.5-flash
+            - openai-codex/gpt-5.6
+            - openai-codex/gpt-5.5
+            - xai-oauth/grok-4.5
+            - web/ollama
+        judge:
+            - local/lfm2-1.2b
+            - "@tiny"
+            - "@smol"
+            - "@default"
+autoResume: true
+
