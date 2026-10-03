@@ -98,7 +98,7 @@
 	undo-last = reset --soft HEAD~1
 
 	delete-merged-branches = "!git fetch --prune && git branch --list --format '%(if:equals=[gone])%(upstream:track)%(then)%(refname:short)%(end)' | xargs git branch -D"
-	clean-old = "!f() { git delete-merged-branches; du -h --max-depth=0 .git && git reflog expire --all --expire=now && git gc --prune=now --aggressive; du -h --max-depth=0 .git; }; f"
+	clean-old = "!f() { du -h --max-depth=0 .git; git delete-merged-branches; git reflog expire --all --expire=now && git gc --prune=now --aggressive; du -h --max-depth=0 .git; }; f"
 
 
 	soft-reset = !git reset --soft 'HEAD^1'

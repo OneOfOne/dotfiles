@@ -25,12 +25,14 @@ if [ -f /usr/bin/bwrap ] || [ -f /bin/bwrap ]; then
 	CMD+=(bwrap --unshare-ipc --unshare-pid --new-session --die-with-parent)
 	CMD+=(--dev-bind /dev /dev --proc /proc --tmpfs /tmp --tmpfs /run)
 
-	# allow copy/paste
+	CMD+=(--ro-bind "$HOME" "$HOME")
+
+	# allow copy/paste and xdg
 	CMD+=(--setenv WAYLAND_DISPLAY "$WAYLAND_DISPLAY")
 	CMD+=(--setenv XDG_RUNTIME_DIR "$XDG_RUNTIME_DIR")
+	CMD+=(--setenv DBUS_SESSION_BUS_ADDRESS "unix:path=$XDG_RUNTIME_DIR/bus")
 	CMD+=(--ro-bind "$XDG_RUNTIME_DIR/$WAYLAND_DISPLAY" "$XDG_RUNTIME_DIR/$WAYLAND_DISPLAY")
-
-	CMD+=(--ro-bind "$HOME" "$HOME")
+	CMD+=(--ro-bind "$XDG_RUNTIME_DIR/bus" "$XDG_RUNTIME_DIR/bus")
 
 	if [ -f /etc/resolv.conf ]; then
 		local REAL_RESOLV="$(readlink -f /etc/resolv.conf)"
@@ -48,38 +50,37 @@ if [ -f /usr/bin/bwrap ] || [ -f /bin/bwrap ]; then
 
 	[ -S /var/run/docker.sock ] && CMD+=(--bind /var/run/docker.sock /var/run/docker.sock)
 
-	# 4. Map the Home Directory structure
-	# Making $HOME read-only mirrors your original firejail configuration
-	CMD+=(--ro-bind "$HOME" "$HOME")
-
 	# 5. Handle Writable Paths (Read-Write Bindings)
 	local JAIL_RW=()
+
 	[ -n "$TARGET" ] && JAIL_RW+=("$TARGET")
 	JAIL_RW+=("$HOME/.local/state/nvim" "$HOME/.local/share/nvim" "$HOME/.dotfiles/.config/nvim")
 	JAIL_RW+=("$HOME/.omp")
 	JAIL_RW+=("$HOME/.cache" "$HOME/.gnupg")
 	JAIL_RW+=("$HOME/.expo" "$HOME/.bun" "$HOME/.docker" "$HOME/.app-store" "$HOME/.rustup" "$HOME/.cargo")
+	JAIL_RW+=("$HOME/.config/kde-openrc" "$HOME/.config/pinentry-qtrc")
 
 	which go &>/dev/null && JAIL_RW+=("$(go env GOMODCACHE)")
 	[ -d "$HOME/.config/lazygit" ] && JAIL_RW+=("$HOME/.config/lazygit" "$HOME/.local/state/lazygit")
 
 	# Apply write permissions over the read-only home hierarchy
 	for v in $JAIL_RW; do
-		if [ -e "$v" ]; then
-			CMD+=(--bind "$v" "$(realpath $v)")
-		elif [ -d "$(dirname "$v")" ]; then
-			# If the specific path doesn't exist yet, make sure we can create it
-			CMD+=(--bind "$(dirname "$v")" "$(dirname "$v")")
-		fi
+		[ -e "$(realpath "$v")" ] && CMD+=(--bind "$v" "$(realpath "$v")")
 	done
 
-	# Set the current working directory inside the sandbox environment
+	local JAIL_BLOCKED=()
+	JAIL_BLOCKED+=("$HOME/.config/gcloud")
+
+	for v in $JAIL_BLOCKED; do
+		[ -d "$v" ] && CMD+=(--tmpfs "$v")
+	done
+
 	CMD+=(--chdir "$TARGET")
 fi
 
 CMD+=(nvim "$TARGET" $@)
 
-# echo $CMD
+echo $CMD
 
 pushd $CWD
 

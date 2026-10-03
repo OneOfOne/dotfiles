@@ -2,6 +2,7 @@ biome.json
 gpu_cache.json
 *.db*
 agent/*session*/
+agent/predict/
 agent/blobs/
 agent/last-changelog-version
 plugins/
