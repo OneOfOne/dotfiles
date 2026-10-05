@@ -1,0 +1,63 @@
+#!/bin/zsh
+
+local CMD=()
+
+TARGET="${TARGET:-$PWD}"
+local -a RW_PATHS=(${=RW_PATHS})
+
+CMD+=(bwrap --unshare-ipc --unshare-pid --new-session --die-with-parent)
+CMD+=(--dev-bind /dev /dev --proc /proc --tmpfs /tmp --tmpfs /run)
+
+CMD+=(--ro-bind "$HOME" "$HOME")
+
+# allow copy/paste and xdg
+CMD+=(--setenv WAYLAND_DISPLAY "$WAYLAND_DISPLAY")
+CMD+=(--setenv XDG_RUNTIME_DIR "$XDG_RUNTIME_DIR")
+CMD+=(--setenv DBUS_SESSION_BUS_ADDRESS "unix:path=$XDG_RUNTIME_DIR/bus")
+CMD+=(--ro-bind "$XDG_RUNTIME_DIR/$WAYLAND_DISPLAY" "$XDG_RUNTIME_DIR/$WAYLAND_DISPLAY")
+CMD+=(--ro-bind "$XDG_RUNTIME_DIR/bus" "$XDG_RUNTIME_DIR/bus")
+
+if [[ -f /etc/resolv.conf ]]; then
+	local REAL_RESOLV="$(readlink -f /etc/resolv.conf)"
+	CMD+=(--ro-bind "$REAL_RESOLV" "$REAL_RESOLV")
+	CMD+=(--symlink "$REAL_RESOLV" /etc/resolv.conf)
+else
+	CMD+=(--ro-bind-try /etc/resolv.conf /etc/resolv.conf)
+fi
+
+CMD+=(--ro-bind-try /etc/hosts /etc/hosts)
+
+for dir in /usr /bin /sbin /lib /lib64 /etc /var; do
+	[[ -d "$dir" ]] && CMD+=(--ro-bind "$dir" "$dir")
+done
+
+# 5. Handle Writable Paths (Read-Write Bindings)
+local JAIL_RW=()
+
+[[ -n "$TARGET" ]] && JAIL_RW+=("$TARGET")
+JAIL_RW+=("${RW_PATHS[@]}")
+
+JAIL_RW+=("$HOME/.local/state/nvim" "$HOME/.local/share/nvim" "$HOME/.dotfiles/.config/nvim")
+JAIL_RW+=("$HOME/.omp")
+JAIL_RW+=("$HOME/.cache" "$HOME/.gnupg")
+JAIL_RW+=("$HOME/.expo" "$HOME/.bun" "$HOME/.docker" "$HOME/.app-store" "$HOME/.rustup" "$HOME/.cargo")
+JAIL_RW+=("$HOME/.config/kde-openrc" "$HOME/.config/pinentry-qtrc")
+
+which go &>/dev/null && JAIL_RW+=("$(go env GOMODCACHE)")
+[[ -d "$HOME/.config/lazygit" ]] && JAIL_RW+=("$HOME/.config/lazygit" "$HOME/.local/state/lazygit")
+
+for v in $JAIL_RW; do
+	local REAL_PATH="$(realpath "$v")"
+	[[ -e "$REAL_PATH" ]] && CMD+=(--bind "$v" "$REAL_PATH")
+done
+
+local JAIL_BLOCKED=()
+JAIL_BLOCKED+=("$HOME/.config/gcloud" "$HOME/.ssh" "$HOME/.config/google-chrome/" "$HOME/.cache/google-chrome/")
+
+for v in $JAIL_BLOCKED; do
+	[[ -d "$v" ]] && CMD+=(--tmpfs "$v")
+done
+
+CMD+=(--chdir "$TARGET")
+
+"$CMD[@]" "$@"
