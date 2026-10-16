@@ -106,6 +106,7 @@ return {
 						},
 					},
 				},
+				oxlint = {},
 				html = {},
 				biome = {},
 			},

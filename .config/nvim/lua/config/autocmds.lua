@@ -17,6 +17,13 @@ au('LspAttach', nil, function()
 	vim.cmd([[match ErrorMsg '\s\+$']])
 end)
 
+vim.api.nvim_create_autocmd('BufWritePre', {
+	pattern = { '*.js', '*.jsx', '*.ts', '*.tsx', '*.vue', '*.svelte', '*.astro' },
+	callback = function()
+		vim.cmd('silent! LspOxlintFixAll')
+	end,
+})
+
 --
 -- au({ 'CursorHold', 'InsertLeave' }, nil, function()
 -- 	local opts = {
