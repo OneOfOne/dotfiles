@@ -17,10 +17,10 @@ task:
 modelRoles:
   advisor: ollama/deepseek-v4-flash:cloud
   plan: anthropic/claude-opus-4-8
-  default: llama.cpp/bartowski/ukisai_Swift-1.5-Qwen3.8-27b-GGUF:Q4_K_M
   web: web/exa
   judge: typesafe/jev-latest
   memory: local/lfm2-1.2b
+  default: llama.cpp/bartowski/ukisai_Swift-1.5-Qwen3.8-27b-GGUF:Q4_K_M
 hideThinkingBlock: true
 mcp:
   notifications: true

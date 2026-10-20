@@ -34,6 +34,12 @@ alias pcd="popd"
 path=($HOME/.dotfiles/bin $path)
 path=($HOME/bin $path)
 
+path=($path /opt/rocm/bin)
+
+typeset -aUT LD_LIBRARY_PATH ld_library_path
+ld_library_path=($ld_library_path /opt/rocm/lib)
+export LD_LIBRARY_PATH
+
 # macos utils are horrid
 if [[ $(uname -s) == 'Darwin' ]]; then
 	export HOMEBREW_NO_ENV_HINTS=1
@@ -50,7 +56,7 @@ alias df="df -Th --total"
 alias duh="du -ach | sort -h"
 
 alias mkdir="mkdir -pv"
-alias myip="curl -s -S https://icanhazip.com"
+alias myip="curl -s -S https://oneofone.dev/ip"
 
 alias grep="grep --color"
 alias egrep="grep -E --color"
