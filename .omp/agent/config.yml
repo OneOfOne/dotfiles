@@ -15,8 +15,8 @@ task:
   enableLsp: true
   maxConcurrency: 5
 modelRoles:
-  advisor: ollama/deepseek-v4-flash:cloud
-  plan: anthropic/claude-opus-4-8
+  advisor: anthropic/claude-haiku-5-5
+  plan: anthropic/claude-haiku-5-5:medium
   web: web/exa
   judge: typesafe/jev-latest
   memory: local/lfm2-1.2b

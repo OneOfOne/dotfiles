@@ -38,7 +38,7 @@ local JAIL_RW=()
 JAIL_RW+=("${RW_PATHS[@]}")
 
 JAIL_RW+=("$HOME/.local/state/nvim" "$HOME/.local/share/nvim" "$HOME/.dotfiles/.config/nvim")
-JAIL_RW+=("$HOME/.omp")
+JAIL_RW+=("$HOME/.omp" "$HOME/.dotfiles/.omp")
 JAIL_RW+=("$HOME/.cache" "$HOME/.gnupg")
 JAIL_RW+=("$HOME/.expo" "$HOME/.bun" "$HOME/.docker" "$HOME/.app-store" "$HOME/.rustup" "$HOME/.cargo")
 JAIL_RW+=("$HOME/.config/kde-openrc" "$HOME/.config/pinentry-qtrc")
