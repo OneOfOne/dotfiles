@@ -1,63 +1,107 @@
 #!/bin/zsh
 
-local CMD=()
+set -euo pipefail
 
-TARGET="${TARGET:-$PWD}"
-local -a RW_PATHS=(${=RW_PATHS})
+main() {
+	local -a CMD=()
+	local -a RW_PATHS=()
+	local -a JAIL_RW=()
+	local -a JAIL_BLOCKED=()
+	local TARGET="${TARGET:-$PWD}"
 
-CMD+=(bwrap --unshare-ipc --unshare-pid --new-session --die-with-parent)
-CMD+=(--dev-bind /dev /dev --proc /proc --tmpfs /tmp --tmpfs /run)
+	# Do not use top-level local.
+	CMD=(
+		bwrap
+		--unshare-all --share-net --new-session --die-with-parent
+		--dev /dev --proc /proc --tmpfs /tmp --tmpfs /run --tmpfs /dev/shm
+		--dev-bind-try /dev/dri /dev/dri
+		--ro-bind /sys /sys
+	)
 
-CMD+=(--ro-bind "$HOME" "$HOME")
+	for dir in "$HOME" /usr /bin /sbin /lib /lib64 /var; do
+		[[ -d $dir ]] && CMD+=(--ro-bind "$dir" "$dir")
+	done
 
-# allow copy/paste and xdg
-CMD+=(--setenv WAYLAND_DISPLAY "$WAYLAND_DISPLAY")
-CMD+=(--setenv XDG_RUNTIME_DIR "$XDG_RUNTIME_DIR")
-CMD+=(--setenv DBUS_SESSION_BUS_ADDRESS "unix:path=$XDG_RUNTIME_DIR/bus")
-CMD+=(--ro-bind "$XDG_RUNTIME_DIR/$WAYLAND_DISPLAY" "$XDG_RUNTIME_DIR/$WAYLAND_DISPLAY")
-CMD+=(--ro-bind "$XDG_RUNTIME_DIR/bus" "$XDG_RUNTIME_DIR/bus")
+	if [[ -n "${WAYLAND_DISPLAY:-}" && -n "${XDG_RUNTIME_DIR:-}" ]]; then
+		local runtime="$XDG_RUNTIME_DIR"
+		CMD+=(
+			--setenv WAYLAND_DISPLAY "$WAYLAND_DISPLAY"
+			--setenv XDG_RUNTIME_DIR "$runtime"
+			--setenv DBUS_SESSION_BUS_ADDRESS "unix:path=$runtime/bus"
+			--ro-bind-try "$runtime/$WAYLAND_DISPLAY" "$runtime/$WAYLAND_DISPLAY"
+			--ro-bind-try "$runtime/bus" "$runtime/bus"
+		)
+	fi
 
-if [[ -f /etc/resolv.conf ]]; then
-	local REAL_RESOLV="$(readlink -f /etc/resolv.conf)"
-	CMD+=(--ro-bind "$REAL_RESOLV" "$REAL_RESOLV")
-	CMD+=(--symlink "$REAL_RESOLV" /etc/resolv.conf)
-else
-	CMD+=(--ro-bind-try /etc/resolv.conf /etc/resolv.conf)
-fi
+	CMD+=(
+		--ro-bind /etc/resolv.conf /etc/resolv.conf
+		--ro-bind /run/systemd/resolve /run/systemd/resolve
 
-CMD+=(--ro-bind-try /etc/hosts /etc/hosts)
+		--ro-bind-try /etc/hosts /etc/hosts
 
-for dir in /usr /bin /sbin /lib /lib64 /etc /var; do
-	[[ -d "$dir" ]] && CMD+=(--ro-bind "$dir" "$dir")
-done
+		--ro-bind /etc/nsswitch.conf /etc/nsswitch.conf
+		--ro-bind /etc/localtime /etc/localtime
 
-# 5. Handle Writable Paths (Read-Write Bindings)
-local JAIL_RW=()
+		--ro-bind /etc/ssl/ /etc/ssl/
+		--ro-bind /etc/ca-certificates /etc/ca-certificates
+	)
 
-[[ -n "$TARGET" ]] && JAIL_RW+=("$TARGET")
-JAIL_RW+=("${RW_PATHS[@]}")
+	# Use a safer delimiter for RW_PATHS.
+	[[ -n "${RW_PATHS:-}" ]] && RW_PATHS=(${(s.:.)RW_PATHS})
 
-JAIL_RW+=("$HOME/.local/state/nvim" "$HOME/.local/share/nvim" "$HOME/.dotfiles/.config/nvim")
-JAIL_RW+=("$HOME/.omp" "$HOME/.dotfiles/.omp")
-JAIL_RW+=("$HOME/.cache" "$HOME/.gnupg")
-JAIL_RW+=("$HOME/.expo" "$HOME/.bun" "$HOME/.docker" "$HOME/.app-store" "$HOME/.rustup" "$HOME/.cargo")
-JAIL_RW+=("$HOME/.config/kde-openrc" "$HOME/.config/pinentry-qtrc")
+	JAIL_RW+=("$TARGET")
+	JAIL_RW+=("${RW_PATHS[@]}")
+	JAIL_RW+=(
+		"$TARGET"
+		"${RW_PATHS[@]}"
 
-which go &>/dev/null && JAIL_RW+=("$(go env GOMODCACHE)")
-[[ -d "$HOME/.config/lazygit" ]] && JAIL_RW+=("$HOME/.config/lazygit" "$HOME/.local/state/lazygit")
+		"$HOME/.local/state/nvim"
+		"$HOME/.local/share/nvim"
+		"$HOME/.dotfiles/.config/nvim"
+		"$HOME/.omp"
+		"$HOME/.dotfiles/.omp"
+		"$HOME/.cache"
+		"$HOME/.gnupg"
+		"$HOME/.expo"
+		"$HOME/.bun"
+		"$HOME/.docker"
+		"$HOME/.app-store"
+		"$HOME/.rustup"
+		"$HOME/.cargo"
+		"$HOME/.config/kde-openrc"
+		"$HOME/.config/pinentry-qtrc"
+	)
 
-for v in $JAIL_RW; do
-	local REAL_PATH="$(realpath "$v")"
-	[[ -e "$REAL_PATH" ]] && CMD+=(--bind "$v" "$REAL_PATH")
-done
+	if command -v go >/dev/null; then
+		local GOMODCACHE
+		GOMODCACHE="$(go env GOMODCACHE)"
+		JAIL_RW+=("$GOMODCACHE")
+	fi
 
-local JAIL_BLOCKED=()
-JAIL_BLOCKED+=("$HOME/.config/gcloud" "$HOME/.ssh" "$HOME/.config/google-chrome/" "$HOME/.cache/google-chrome/")
+	if [[ -d "$HOME/.config/lazygit" ]]; then
+		JAIL_RW+=("$HOME/.config/lazygit" "$HOME/.local/state/lazygit")
+	fi
 
-for v in $JAIL_BLOCKED; do
-	[[ -d "$v" ]] && CMD+=(--tmpfs "$v")
-done
+	for v in "${JAIL_RW[@]}"; do
+		local -a p=("${v:A}") # canonical path, builtin (no fork)
+		CMD+=(--bind-try "${p[1]}" "${p[1]}")
+	done
 
-CMD+=(--chdir "$TARGET")
+	JAIL_BLOCKED+=(
+		"$HOME/.config/gcloud"
+		"$HOME/.ssh"
+		"$HOME/.config/google-chrome"
+		"$HOME/.cache/google-chrome"
+	)
 
-"$CMD[@]" "$@"
+	for v in "${JAIL_BLOCKED[@]}"; do
+		[[ -d "$v" ]] && CMD+=(--tmpfs "$v")
+	done
+
+	CMD+=(--chdir "$TARGET")
+
+	echo $CMD
+	exec "${CMD[@]}" "$@"
+}
+
+main "$@"

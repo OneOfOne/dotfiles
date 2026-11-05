@@ -89,3 +89,5 @@ function qemu-uefi() {
 function tmuxs() {
 	tmux new -A -s $(basename $PWD)
 }
+
+alias rdp-defiant="xfreerdp3 /v:uss-defiant.local /u:oneofone /p:one +clipboard /smart-sizing /gfx:AVC420:on /network:auto /scale-desktop:150 /w:1920 /h:1200 &>/dev/null"

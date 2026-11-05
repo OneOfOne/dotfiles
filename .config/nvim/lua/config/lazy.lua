@@ -41,23 +41,11 @@ require('lazy').setup({
 
 		{ import = 'lazyvim.plugins.extras.test.core' },
 		-- { import = 'lazyvim.plugins.extras.dap.core' },
-		--
+
 		{
 			import = 'lazyvim.plugins.extras.ai.copilot',
 			enabled = require('config.utils').is_local(),
 		},
-		-- {
-		-- import = 'lazyvim.plugins.extras.ai.avante',
-		-- enabled = require('config.utils').is_local(),
-		-- },
-		-- {
-		-- 	import = 'lazyvim.plugins.extras.ai.sidekick',
-		-- 	enabled = require('config.utils').is_local(),
-		-- },
-		-- {
-		-- 	import = 'lazyvim.plugins.extras.ai.copilot-native',
-		-- 	enabled = require('config.utils').is_local(),
-		-- },
 
 		{ import = 'lazyvim.plugins.extras.util.mini-hipatterns' },
 		{ import = 'lazyvim.plugins.extras.util.dot' },

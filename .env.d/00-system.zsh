@@ -72,6 +72,11 @@ function mkgit {
 	mkcd $1 && git init
 }
 
+function update-mirrors {
+	sudo reflector --verbose --protocol https --latest 10 --age 1 -c US --sort rate -f 20 --save /etc/pacman.d/mirrorlist
+	sudo env RATE_MIRRORS_COUNTRY_NEIGHBORS_PER_COUNTRY=0 RATE_MIRRORS_ENTRY_COUNTRY=US cachyos-rate-mirrors
+}
+
 if [ "$(command -v nvim)" != "" ]; then
 	export VTE_VERSION=100
 	export EDITOR="$(command -v nvim)"

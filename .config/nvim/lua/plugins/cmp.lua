@@ -7,7 +7,7 @@ return {
 		},
 		build = function()
 			---@diagnostic disable-next-line: undefined-field
-			require('blink.cmp').build():wait(60000)
+			require('blink.cmp').build():wait(120000)
 		end,
 		optional = true,
 		---@module 'blink.cmp'
@@ -17,6 +17,7 @@ return {
 				nerd_font_variant = 'normal',
 			},
 			completion = {
+				ghost_text = { enabled = false },
 				menu = {
 					draw = {
 						treesitter = { 'lsp' },
@@ -78,17 +79,15 @@ return {
 			fuzzy = {},
 			sources = {
 				-- default = { 'minuet' },
-				-- providers = {
-				-- 	minuet = {
-				-- 		name = 'minuet',
-				-- 		module = 'minuet.blink',
-				-- 		async = true,
-				-- 		-- Should match minuet.config.request_timeout * 1000,
-				-- 		-- since minuet.config.request_timeout is in seconds
-				-- 		timeout_ms = 15000,
-				-- 		score_offset = 99, -- Gives minuet higher priority among suggestions
-				-- 	},
-				-- },
+				providers = {
+					minuet = {
+						name = 'minuet',
+						module = 'minuet.blink',
+						async = true,
+						score_offset = 100,
+						timeout_ms = 2500,
+					},
+				},
 			},
 		},
 	},

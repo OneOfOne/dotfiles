@@ -59,18 +59,45 @@
 -- 		},
 -- 	},
 -- })
-
 return {
 	{
-		'folke/sidekick.nvim',
-		optional = true,
-		keys = {
-			{
-				'<leader>aa',
-				function()
-					require('sidekick.cli').toggle({ name = 'opencode', focus = true })
-				end,
-				desc = 'Sidekick Toggle CLI',
+		'milanglacier/minuet-ai.nvim',
+		-- enabled = require('config.utils').is_local(),
+		enables = false,
+		dependencies = { 'nvim-lua/plenary.nvim' },
+		opts = {
+			n_completions = 3,
+			context_window = 8192,
+
+			throttle = 100,
+			debounce = 250,
+			request_timeout = 2,
+
+			provider = 'openai_fim_compatible',
+			provider_options = {
+				openai_fim_compatible = {
+					api_key = 'TERM',
+					end_point = 'http://127.0.0.1:10600/v1/completions',
+					model = 'mradermacher/AceCoder-Qwen2.5-Coder-7B-Ins-V1.1-i1-GGUF:Q4_K_M',
+
+					stream = true,
+
+					optional = {
+						max_tokens = 256,
+						temperature = 0.7,
+					},
+
+					template = {
+						prompt = function(context_before_cursor, context_after_cursor, _)
+							return '<|fim_prefix|>'
+								.. context_before_cursor
+								.. '<|fim_suffix|>'
+								.. context_after_cursor
+								.. '<|fim_middle|>'
+						end,
+						suffix = false,
+					},
+				},
 			},
 		},
 	},
@@ -81,7 +108,9 @@ return {
 		},
 		optional = true,
 		opts = {
-			-- copilot_model = 'claude-sonnet-4-20250514x',
+			suggestion = {
+				max_lines = 3,
+			}, -- copilot_model = 'claude-sonnet-4-20250514x',
 			nes = {
 				enabled = false,
 				auto_trigger = false,

@@ -1,60 +1,35 @@
 providers:
+    strata:
+        api: openai-responses
+        auth: none
+        baseUrl: http://127.0.0.1:10601/v1
+        compat:
+            supportsDeveloperRole: false
+        models:
+            - id: QFN
+              name: Swift-1.5 QFN
+              input: [text]
+              thinking:
+                  mode: effort
+                  efforts: [minimal, low, medium, high]
+                  defaultLevel: high
     llama.cpp:
         # api: openai-completions
         api: openai-responses
-        apiKey: DISPLAY
+        auth: none
         baseUrl: http://127.0.0.1:10600/v1
         discovery:
             type: llama.cpp
+        thinking:
+            mode: effort
+            efforts: [minimal, low, medium, high]
+            defaultLevel: medium
     llamacpp-embbed:
         api: openai-responses
-        apiKey: DISPLAY
-        baseUrl: http://127.0.0.1:10601/v1
+        auth: none
+        baseUrl: http://127.0.0.1:10600/v1
         models:
             - contextWindow: 8192
               id: nomic-embed-text:latest
               name: nomic-embed-text:latest
-              input:
-                  - text
-    ollama:
-        api: openai-responses
-        auth: none
-        baseUrl: http://127.0.0.1:11434/v1
-        discovery:
-            type: ollama
-        models:
-            - contextWindow: 1000000
-              id: glm-5.2:cloud
-              input:
-                  - text
-              maxTokens: 131072
-              name: glm-5.2:cloud
-            - contextWindow: 1000000
-              id: deepseek-v4-flash:cloud
-              input:
-                  - text
-              maxTokens: 131072
-              name: deepseek-v4-flash:cloud
-            - contextWindow: 262144
-              id: kimi-k2.7-code:cloud
-              input:
-                  - text
-              maxTokens: 262144
-              name: kimi-k2.7-code:cloud
-            - contextWindow: 524288
-              id: minimax-m3:cloud
-              input:
-                  - text
-              maxTokens: 131072
-              name: minimax-m3:cloud
-            - contextWindow: 262144
-              id: nemotron-3-super:cloud
-              input:
-                  - text
-              maxTokens: 65536
-              name: nemotron-3-super:cloud
-            - contextWindow: 2048
-              id: nomic-embed-text:latest
-              input:
-                  - text
-              name: nomic-embed-text:latest
+              input: [text]
