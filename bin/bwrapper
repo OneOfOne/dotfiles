@@ -19,7 +19,7 @@ main() {
 	)
 
 	for dir in "$HOME" /usr /bin /sbin /lib /lib64 /var; do
-		[[ -d $dir ]] && CMD+=(--ro-bind "$dir" "$dir")
+		CMD+=(--ro-bind "$dir" "$dir")
 	done
 
 	if [[ -n "${WAYLAND_DISPLAY:-}" && -n "${XDG_RUNTIME_DIR:-}" ]]; then
@@ -46,6 +46,44 @@ main() {
 		--ro-bind /etc/ca-certificates /etc/ca-certificates
 	)
 
+	JAIL_BLOCKED+=(
+		"$HOME/.ssh"
+		"$HOME/.cache"
+
+		# "$HOME/.config/google-chrome"
+		# "$HOME/.cache/google-chrome"
+
+		"$HOME/.config/gcloud"
+		"$HOME/.config/github-copilot"
+
+		"$HOME/.rustup"
+		"$HOME/.cargo"
+		"$HOME/.docker"
+		"$HOME/.gnupg"
+		"$HOME/.expo"
+		"$HOME/.app-store"
+
+		"$HOME/passwords.kdbx"
+
+		"$HOME/.npmrc"
+		"$HOME/.git-credentials"
+		"$HOME/.gitcookies"
+
+		"$HOME/.local/share/keyrings"
+		"$HOME/.psql_history"
+		"$HOME/.mysql_history"
+
+		"$HOME/.python_history"
+		"$HOME/.node_repl_history"
+
+		"$HOME/Downloads"
+	)
+
+	for v in "${JAIL_BLOCKED[@]}"; do
+		[[ -d "$v" ]] && CMD+=(--tmpfs "${v:A}")
+		[[ -f "$v" ]] && CMD+=(--ro-bind /dev/null "${v:A}")
+	done
+
 	# Use a safer delimiter for RW_PATHS.
 	[[ -n "${RW_PATHS:-}" ]] && RW_PATHS=(${(s.:.)RW_PATHS})
 
@@ -55,19 +93,18 @@ main() {
 		"$TARGET"
 		"${RW_PATHS[@]}"
 
+		"$HOME/.cache/go-build"
+		"$HOME/.cache/zsh"
+
 		"$HOME/.local/state/nvim"
 		"$HOME/.local/share/nvim"
 		"$HOME/.dotfiles/.config/nvim"
+
 		"$HOME/.omp"
 		"$HOME/.dotfiles/.omp"
-		"$HOME/.cache"
-		"$HOME/.gnupg"
-		"$HOME/.expo"
+
 		"$HOME/.bun"
-		"$HOME/.docker"
-		"$HOME/.app-store"
-		"$HOME/.rustup"
-		"$HOME/.cargo"
+
 		"$HOME/.config/kde-openrc"
 		"$HOME/.config/pinentry-qtrc"
 	)
@@ -84,18 +121,7 @@ main() {
 
 	for v in "${JAIL_RW[@]}"; do
 		local -a p=("${v:A}") # canonical path, builtin (no fork)
-		CMD+=(--bind-try "${p[1]}" "${p[1]}")
-	done
-
-	JAIL_BLOCKED+=(
-		"$HOME/.config/gcloud"
-		"$HOME/.ssh"
-		"$HOME/.config/google-chrome"
-		"$HOME/.cache/google-chrome"
-	)
-
-	for v in "${JAIL_BLOCKED[@]}"; do
-		[[ -d "$v" ]] && CMD+=(--tmpfs "$v")
+		CMD+=(--bind "${p[1]}" "${p[1]}")
 	done
 
 	CMD+=(--chdir "$TARGET")
