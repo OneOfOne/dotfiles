@@ -10,7 +10,7 @@ memory:
 mnemopi:
   scoping: per-project-tagged
   dbPath: .omp/memory/mnemopi.db
-setupVersion: 2
+setupVersion: 3
 task:
   enableLsp: true
   maxConcurrency: 5
@@ -20,7 +20,7 @@ modelRoles:
   web: web/exa
   judge: typesafe/jev-latest
   memory: local/lfm2-1.2b
-  default: anthropic/claude-sonnet-5-5
+  default: strata/QFN
 hideThinkingBlock: true
 mcp:
   notifications: true
@@ -69,3 +69,5 @@ autoResume: true
 compaction:
   modelThresholds:
     llama.cpp/bartowski/ukisai_Swift-1.5-Qwen3.8-27b-GGUF:Q4_K_M: 80%
+update:
+  auto: false

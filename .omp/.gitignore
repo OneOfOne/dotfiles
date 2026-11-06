@@ -7,7 +7,8 @@ agent/blobs/
 agent/last-changelog-version
 puppeteer/
 plugins/
-memories
+memories/
+session/
 cache/
 logs/
 run/

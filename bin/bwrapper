@@ -5,17 +5,24 @@ set -euo pipefail
 main() {
 	local -a CMD=()
 	local -a RW_PATHS=()
-	local -a JAIL_RW=()
 	local -a JAIL_BLOCKED=()
+	local -a JAIL_RO=()
+	local -a JAIL_RW=()
 	local TARGET="${TARGET:-$PWD}"
 
 	# Do not use top-level local.
 	CMD=(
 		bwrap
 		--unshare-all --share-net --new-session --die-with-parent
-		--dev /dev --proc /proc --tmpfs /tmp --tmpfs /run --tmpfs /dev/shm
+		--dev /dev --proc /proc
+		--tmpfs /tmp --tmpfs /run --tmpfs /dev/shm
 		--dev-bind-try /dev/dri /dev/dri
-		--ro-bind /sys /sys
+		--bind /sys /sys
+
+		--clearenv
+		--setenv PATH "$PATH" --setenv HOME "$HOME"
+		--setenv SHELL "$SHELL" --setenv EDITOR "$EDITOR"
+		--setenv COLORTERM "truecolor" --setenv TERM "xterm-256color"
 	)
 
 	for dir in "$HOME" /usr /bin /sbin /lib /lib64 /var; do
@@ -33,26 +40,11 @@ main() {
 		)
 	fi
 
-	CMD+=(
-		--ro-bind /etc/resolv.conf /etc/resolv.conf
-		--ro-bind /run/systemd/resolve /run/systemd/resolve
-
-		--ro-bind-try /etc/hosts /etc/hosts
-
-		--ro-bind /etc/nsswitch.conf /etc/nsswitch.conf
-		--ro-bind /etc/localtime /etc/localtime
-
-		--ro-bind /etc/ssl/ /etc/ssl/
-		--ro-bind /etc/ca-certificates /etc/ca-certificates
-	)
-
 	JAIL_BLOCKED+=(
 		"$HOME/.ssh"
 		"$HOME/.cache"
 
-		# "$HOME/.config/google-chrome"
-		# "$HOME/.cache/google-chrome"
-
+		"$HOME/.config/google-chrome"
 		"$HOME/.config/gcloud"
 		"$HOME/.config/github-copilot"
 
@@ -84,6 +76,31 @@ main() {
 		[[ -f "$v" ]] && CMD+=(--ro-bind /dev/null "${v:A}")
 	done
 
+	JAIL_RO+=(
+		"/etc/resolv.conf"
+		"/run/systemd/resolve"
+
+		"/etc/passwd"
+		"/etc/group"
+
+		"/etc/hosts"
+
+		"/etc/nsswitch.conf"
+		"/etc/localtime"
+
+		"/etc/ssl/"
+		"/etc/ca-certificates"
+
+		# github stuff
+		"$HOME/.ssh/known_hosts"
+		"$HOME/.ssh/id_ed25519"
+		"$HOME/.ssh/id_ed25519.pub"
+	)
+
+	for v in "${JAIL_RO[@]}"; do
+		CMD+=(--ro-bind "${v:A}" "${v:A}")
+	done
+
 	# Use a safer delimiter for RW_PATHS.
 	[[ -n "${RW_PATHS:-}" ]] && RW_PATHS=(${(s.:.)RW_PATHS})
 
@@ -95,6 +112,9 @@ main() {
 
 		"$HOME/.cache/go-build"
 		"$HOME/.cache/zsh"
+		"$HOME/.cache/oh-my-zsh"
+		"$HOME/.cache/gitstatus"
+		"$HOME/.cache/fontconfig"
 
 		"$HOME/.local/state/nvim"
 		"$HOME/.local/share/nvim"
@@ -105,6 +125,7 @@ main() {
 
 		"$HOME/.bun"
 
+		# needed for git
 		"$HOME/.gnupg"
 
 		"$HOME/.config/kde-openrc"
@@ -112,9 +133,7 @@ main() {
 	)
 
 	if command -v go >/dev/null; then
-		local GOMODCACHE
-		GOMODCACHE="$(go env GOMODCACHE)"
-		JAIL_RW+=("$GOMODCACHE")
+		JAIL_RW+=("$(go env GOMODCACHE)")
 	fi
 
 	if [[ -d "$HOME/.config/lazygit" ]]; then
@@ -122,8 +141,7 @@ main() {
 	fi
 
 	for v in "${JAIL_RW[@]}"; do
-		local -a p=("${v:A}") # canonical path, builtin (no fork)
-		CMD+=(--bind "${p[1]}" "${p[1]}")
+		CMD+=(--bind "${v:A}" "${v:A}")
 	done
 
 	CMD+=(--chdir "$TARGET")

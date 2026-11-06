@@ -17,12 +17,6 @@ export DOCKER_BUILDKI=1
 # remove when node fixes their crap
 export UV_USE_IO_URING=0
 
-# OPENCODE
-export OPENCODE_ENABLE_EXA=true
-export OPENCODE_EXPERIMENTAL_EXA=true
-export OPENCODE_EXPERIMENTAL_BACKGROUND_SUBAGENTS=true
-export OPENCODE_EXPERIMENTAL_PLAN_MODE=true
-
 # OMP
 export PI_CODING_AGENT_SESSION_DIR=./.omp/session
 
