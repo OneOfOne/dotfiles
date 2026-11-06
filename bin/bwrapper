@@ -59,7 +59,7 @@ main() {
 		"$HOME/.rustup"
 		"$HOME/.cargo"
 		"$HOME/.docker"
-		"$HOME/.gnupg"
+		# "$HOME/.gnupg"
 		"$HOME/.expo"
 		"$HOME/.app-store"
 
@@ -104,6 +104,8 @@ main() {
 		"$HOME/.dotfiles/.omp"
 
 		"$HOME/.bun"
+
+		"$HOME/.gnupg"
 
 		"$HOME/.config/kde-openrc"
 		"$HOME/.config/pinentry-qtrc"

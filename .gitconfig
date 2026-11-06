@@ -33,13 +33,9 @@
 	suppress-blank-empty = true
 	renamelimit = 0
 	algorithm = patience
-	tool = code
 
 [fetch]
 	recurseSubmodules = true
-
-[difftool "code"]
-	cmd = code --wait --diff $LOCAL $REMOTE
 
 [log]
 	date = iso
@@ -51,7 +47,7 @@
 	submodulesummary = true
 
 [http]
-	cookiefile = /home/oneofone/.gitcookies
+	cookiefile = ~/.gitcookies
 	postBuffer = 524288000
 
 [credential]
@@ -122,8 +118,8 @@
 [init]
 	defaultBranch = main
 
-[credential]
-	helper = cache
-
 [protocol "file"]
 	allow = always
+
+[url "git@github.com:"]
+	insteadOf = https://github.com/
