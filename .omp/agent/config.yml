@@ -3,24 +3,28 @@ autolearn:
   enabled: true
 defaultThinkingLevel: auto
 lsp:
-  diagnosticsOnEdit: true
+  diagnosticsOnEdit: false
   formatOnWrite: true
 memory:
   backend: mnemopi
 mnemopi:
   scoping: per-project-tagged
   dbPath: .omp/memory/mnemopi.db
+  enhancedRecall: true
+  proactiveLinking: true
 setupVersion: 3
 task:
-  enableLsp: true
-  maxConcurrency: 5
+  enableLsp: false
+  maxConcurrency: 2
 modelRoles:
-  advisor: anthropic/claude-haiku-5-5
-  plan: anthropic/claude-haiku-5-5:medium
+  advisor: llama.cpp/bartowski/ukisai_Swift-1.5-Qwen3.8-27b-GGUF:Q4_K_M
+  plan: llama.cpp/bartowski/ukisai_Swift-1.5-Qwen3.8-27b-GGUF:Q4_K_M
   web: web/exa
-  judge: typesafe/jev-latest
-  memory: local/lfm2-1.2b
-  default: strata/QFN
+  judge: llama.cpp/ggml-org/Laya-GGUF:Q8_0
+  memory: llama.cpp/bartowski/LFM3-1.7B-GGUF:Q6_K_L
+  default: llama.cpp/bartowski/ukisai_Swift-1.5-Qwen3.8-27b-GGUF:Q4_K_M
+  tiny: llama.cpp/bartowski/Spark-X2.6-4B-GGUF:Q4_K_M
+  commit: llama.cpp/bartowski/Spark-X2.6-4B-GGUF:Q4_K_M
 hideThinkingBlock: true
 mcp:
   notifications: true
@@ -71,3 +75,49 @@ compaction:
     llama.cpp/bartowski/ukisai_Swift-1.5-Qwen3.8-27b-GGUF:Q4_K_M: 80%
 update:
   auto: false
+personality: pragmatic
+advisor:
+  enabled: true
+prewalk:
+  auto: suggest
+startup:
+  changelogMode: hidden
+  checkUpdate: false
+edit:
+  mode: hashline
+bash:
+  gitGuard: true
+bashInterceptor:
+  enabled: true
+astGrep:
+  enabled: true
+ida:
+  enabled: false
+dev:
+  autoqa: true
+plan:
+  defaultOnStartup: true
+  autosave: true
+modelPresets:
+  Claude:
+    modelRoles:
+      advisor: anthropic/claude-haiku-5-5
+      plan: anthropic/claude-opus-5-5
+      web: web/exa
+      judge: llama.cpp/ggml-org/Laya-GGUF:Q8_0
+      memory: llama.cpp/bartowski/LFM3-1.7B-GGUF:Q6_K_L
+      default: anthropic/claude-sonnet-5-5
+      tiny: anthropic/claude-haiku-5-5
+      commit: llama.cpp/bartowski/Spark-X2.6-4B-GGUF:Q4_K_M
+    defaultThinkingLevel: auto
+  Local:
+    modelRoles:
+      advisor: llama.cpp/bartowski/ukisai_Swift-1.5-Qwen3.8-27b-GGUF:Q4_K_M
+      plan: llama.cpp/bartowski/ukisai_Swift-1.5-Qwen3.8-27b-GGUF:Q4_K_M
+      web: web/exa
+      judge: llama.cpp/ggml-org/Laya-GGUF:Q8_0
+      memory: llama.cpp/bartowski/LFM3-1.7B-GGUF:Q6_K_L
+      default: llama.cpp/bartowski/ukisai_Swift-1.5-Qwen3.8-27b-GGUF:Q4_K_M
+      tiny: llama.cpp/bartowski/Spark-X2.6-4B-GGUF:Q4_K_M
+      commit: llama.cpp/bartowski/Spark-X2.6-4B-GGUF:Q4_K_M
+    defaultThinkingLevel: auto

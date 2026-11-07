@@ -4,28 +4,35 @@ set -euo pipefail
 
 main() {
 	local -a CMD=()
-	local -a RW_PATHS=()
+	# Init from the inherited colon-separated env vars; a bare `local -a X=()` discards them.
+	local -a RW_PATHS=(${(s.:.)${RW_PATHS:-}})
+	local -a RO_PATHS=(${(s.:.)${RO_PATHS:-}})
 	local -a JAIL_BLOCKED=()
 	local -a JAIL_RO=()
 	local -a JAIL_RW=()
 	local TARGET="${TARGET:-$PWD}"
 
-	# Do not use top-level local.
 	CMD=(
 		bwrap
 		--unshare-all --share-net --new-session --die-with-parent
 		--dev /dev --proc /proc
 		--tmpfs /tmp --tmpfs /run --tmpfs /dev/shm
+
 		--dev-bind-try /dev/dri /dev/dri
-		--bind /sys /sys
 
 		--clearenv
-		--setenv PATH "$PATH" --setenv HOME "$HOME"
 		--setenv SHELL "$SHELL" --setenv EDITOR "$EDITOR"
-		--setenv COLORTERM "truecolor" --setenv TERM "xterm-256color"
+		--setenv PATH "$PATH" --setenv HOME "$HOME"
+		--setenv COLORTERM "$COLORTERM" --setenv TERM "$TERM"
+		--setenv ANDROID_HOME "$ANDROID_HOME"
 	)
 
-	for dir in "$HOME" /usr /bin /sbin /lib /lib64 /var; do
+	if [[ "$TARGET" -ef "$HOME" ]]; then
+		mkdir -p /tmp/home-$USER
+		TARGET=/tmp/home-$USER
+	fi
+
+	for dir in "$HOME" /usr /bin /sbin /lib /lib64 /var /sys; do
 		CMD+=(--ro-bind "$dir" "$dir")
 	done
 
@@ -77,6 +84,8 @@ main() {
 	done
 
 	JAIL_RO+=(
+		"${RO_PATHS[@]}"
+
 		"/etc/resolv.conf"
 		"/run/systemd/resolve"
 
@@ -92,7 +101,7 @@ main() {
 		"/etc/ca-certificates"
 
 		# github stuff
-		"$HOME/.ssh/known_hosts"
+		"$HOME/.ssh/github_known_hosts"
 		"$HOME/.ssh/github"
 		"$HOME/.ssh/github.pub"
 	)
@@ -101,11 +110,8 @@ main() {
 		CMD+=(--ro-bind "${v:A}" "${v:A}")
 	done
 
-	# Use a safer delimiter for RW_PATHS.
-	[[ -n "${RW_PATHS:-}" ]] && RW_PATHS=(${(s.:.)RW_PATHS})
+	CMD+=(--ro-bind "$HOME/.ssh/github_config" "$HOME/.ssh/config")
 
-	JAIL_RW+=("$TARGET")
-	JAIL_RW+=("${RW_PATHS[@]}")
 	JAIL_RW+=(
 		"$TARGET"
 		"${RW_PATHS[@]}"
@@ -117,13 +123,12 @@ main() {
 		"$HOME/.cache/fontconfig"
 
 		"$HOME/.local/state/nvim"
-		"$HOME/.local/share/nvim"
-		"$HOME/.dotfiles/.config/nvim"
 
 		"$HOME/.omp"
 		"$HOME/.dotfiles/.omp"
 
 		"$HOME/.bun"
+		"$HOME/.gradle"
 
 		# needed for git
 		"$HOME/.gnupg"
@@ -140,13 +145,17 @@ main() {
 		JAIL_RW+=("$HOME/.config/lazygit" "$HOME/.local/state/lazygit")
 	fi
 
+	if [[ "$TARGET" -ef "$HOME/.dotfiles" ]]; then
+		JAIL_RW+=("$HOME/.local/share/nvim")
+	fi
+
 	for v in "${JAIL_RW[@]}"; do
 		CMD+=(--bind "${v:A}" "${v:A}")
 	done
 
 	CMD+=(--chdir "$TARGET")
 
-	echo $CMD
+	# echo $CMD
 	exec "${CMD[@]}" "$@"
 }
 

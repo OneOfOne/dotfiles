@@ -11,7 +11,6 @@
 	autocrlf = false
 	safecrlf = false
 	editor = nvim
-	sshCommand = ssh -i ~/.ssh/github -F /dev/null
 
 [pack]
 	compression = 9
@@ -124,3 +123,4 @@
 
 [url "git@github.com:"]
 	insteadOf = https://github.com/
+
