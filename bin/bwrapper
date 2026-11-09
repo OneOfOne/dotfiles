@@ -86,9 +86,7 @@ main() {
 	JAIL_RO+=(
 		"${RO_PATHS[@]}"
 
-		"/etc/resolv.conf"
 		"/run/systemd/resolve"
-
 		"/etc/passwd"
 		"/etc/group"
 
@@ -111,6 +109,7 @@ main() {
 	done
 
 	CMD+=(--ro-bind "$HOME/.ssh/github_config" "$HOME/.ssh/config")
+	CMD+=(--symlink "/run/systemd/resolve/resolv.conf" "/etc/resolv.conf")
 
 	JAIL_RW+=(
 		"$TARGET"

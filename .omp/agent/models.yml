@@ -1,35 +1,42 @@
 providers:
-    strata:
-        api: openai-responses
-        auth: none
-        baseUrl: http://127.0.0.1:10601/v1
-        compat:
-            supportsDeveloperRole: false
-        models:
-            - id: QFN
-              name: Swift-1.5 QFN
-              input: [text]
-              thinking:
-                  mode: effort
-                  efforts: [minimal, low, medium, high]
-                  defaultLevel: high
-    llama.cpp:
-        # api: openai-completions
-        api: openai-responses
-        auth: none
-        baseUrl: http://127.0.0.1:10600/v1
-        discovery:
-            type: llama.cpp
-        thinking:
-            mode: effort
-            efforts: [minimal, low, medium, high]
-            defaultLevel: medium
-    llamacpp-embbed:
-        api: openai-responses
-        auth: none
-        baseUrl: http://127.0.0.1:10600/v1
-        models:
-            - contextWindow: 8192
-              id: nomic-embed-text:latest
-              name: nomic-embed-text:latest
-              input: [text]
+  strata:
+    api: openai-responses
+    auth: none
+    baseUrl: http://127.0.0.1:10601/v1
+    discovery:
+      type: llama.cpp
+    compat:
+      supportsDeveloperRole: false
+    thinking:
+      mode: effort
+      efforts: [minimal, low, medium, high]
+      defaultLevel: medium
+  llama.cpp:
+    # api: openai-completions
+    api: openai-responses
+    auth: none
+    baseUrl: http://127.0.0.1:10600/v1
+    discovery:
+      type: llama.cpp
+    thinking:
+      mode: effort
+      efforts: [minimal, low, medium, high]
+      defaultLevel: medium
+  llamacpp-judge:
+    api: typesafe
+    auth: none
+    baseUrl: http://127.0.0.1:10600/v1
+    models:
+      - contextWindow: 8192
+        id: ggml-org/Laya-GGUF:Q8_0
+        name: ggml-org/Laya-GGUF:Q8_0
+        input: [text]
+  llamacpp-embbed:
+    api: openai-responses
+    auth: none
+    baseUrl: http://127.0.0.1:10600/v1
+    models:
+      - contextWindow: 8192
+        id: nomic-embed-text:latest
+        name: nomic-embed-text:latest
+        input: [text]
