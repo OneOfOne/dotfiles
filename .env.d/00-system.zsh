@@ -100,12 +100,16 @@ env | grep -q SSH && export TERM=xterm-256color
 
 function update-nvim {
 	set -x
+
+	ARCH="x86_x64"
+	[[ "$(uname -m)" == "aarch64" ]] && ARCH="arm64"
+
 	mkcd ~/bin/ &&
-		curl -O -L https://github.com/neovim/neovim/releases/download/nightly/nvim-linux-x86_64.appimage &&
-		chmod +x nvim-linux-x86_64.appimage &&
-		./nvim-linux-x86_64.appimage --appimage-extract &&
+		curl -O -L https://github.com/neovim/neovim/releases/download/nightly/nvim-linux-${ARCH}.appimage &&
+		chmod +x nvim-linux-${ARCH}.appimage &&
+		./nvim-linux-${ARCH}.appimage --appimage-extract &&
 		ln -sfv ~/bin/squashfs-root/usr/bin/nvim ~/bin/nvim &&
-		rm -v nvim-linux-x86_64.appimage
+		rm -v nvim-linux-${ARCH}.appimage
 	cd -
 }
 

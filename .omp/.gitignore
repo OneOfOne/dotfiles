@@ -12,3 +12,4 @@ session/
 cache/
 logs/
 run/
+*.wasm

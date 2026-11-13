@@ -124,7 +124,7 @@ return {
 			-- end, opts.sources)
 
 			opts.sources = vim.tbl_extend('force', opts.sources, { --override lazyvim's default sources
-				nls.diagnostics.golangci_lint,
+				-- nls.diagnostics.golangci_lint,
 				nls.formatting.goimports,
 				nls.formatting.gofumpt,
 				-- ts

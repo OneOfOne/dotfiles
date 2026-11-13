@@ -116,9 +116,12 @@ main() {
 		"${RW_PATHS[@]}"
 
 		"$HOME/.cache/go-build"
+		"$HOME/go/pkg"
+
 		"$HOME/.cache/zsh"
 		"$HOME/.cache/oh-my-zsh"
 		"$HOME/.cache/gitstatus"
+
 		"$HOME/.cache/fontconfig"
 
 		"$HOME/.local/state/nvim"
