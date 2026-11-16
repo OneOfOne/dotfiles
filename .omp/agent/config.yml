@@ -129,3 +129,4 @@ modelPresets:
       tiny: strata/qwen3.8-flash-next-unsloth-ud-iq4_xs-v31:low
       commit: strata/qwen3.8-flash-next-unsloth-ud-iq4_xs-v31:low
     defaultThinkingLevel: auto
+disabledExtensions: []

@@ -1,6 +1,5 @@
 {
-	"root": false,
-	"$schema": ".dotfiles/node_modules/@biomejs/biome/configuration_schema.json",
+	"$schema": "https://biomejs.dev/schemas/latest/schema.json",
 	"formatter": {
 		"enabled": true,
 		"formatWithErrors": true,
@@ -20,6 +19,12 @@
 		},
 		"globals": ["__DEV__"]
 	},
+	"overrides": [
+		{
+			"includes": ["**/*.md"],
+			"formatter": { "enabled": false }
+		}
+	],
 	"files": {},
 	"assist": {
 		"enabled": true,
@@ -46,6 +51,9 @@
 	"linter": {
 		"enabled": true,
 		"rules": {
+			"a11y": {
+				"useValidLang": "off"
+			},
 			"complexity": {
 				"noUselessFragments": "off",
 				"noExcessiveCognitiveComplexity": "off"
@@ -66,13 +74,17 @@
 				"noArrayIndexKey": "off",
 				"noEmptyBlockStatements": "off",
 				"useAwait": "off",
-				"noConsole": "off"
+				"noConsole": "off",
+				"noTsIgnore": "off",
+				"noImportCycles": "error"
 			},
 			"correctness": {
 				"useExhaustiveDependencies": "off",
 				"useImportExtensions": "off",
 				"noUndeclaredDependencies": "off",
-				"noNodejsModules": "off"
+				"noNodejsModules": "off",
+				"useUniqueElementIds": "off",
+				"useHookAtTopLevel": "off"
 			},
 			"performance": {
 				"noReExportAll": "off",

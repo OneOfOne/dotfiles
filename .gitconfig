@@ -121,6 +121,5 @@
 [protocol "file"]
 	allow = always
 
-[url "git@github.com:"]
-	insteadOf = https://github.com/
-
+[include]
+	path = ~/.dotfiles/.gitconfig_private

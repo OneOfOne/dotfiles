@@ -42,9 +42,12 @@ export LD_LIBRARY_PATH
 
 # macos utils are horrid
 if [[ $(uname -s) == 'Darwin' ]]; then
-	export HOMEBREW_NO_ENV_HINTS=1
-	[ -d /opt/homebrew ] && path=($(find /opt/homebrew/Cellar -name gnubin) /opt/homebrew/bin $path)
-	path=($(find /usr/local -name gnubin) $path)
+	if [[ -d /opt/homebrew ]]; then
+		export HOMEBREW_NO_ENV_HINTS=1
+		path=($(find /opt/homebrew/Cellar -name gnubin) /opt/homebrew/bin $path)
+	else
+		path=($(find /usr/local -name gnubin) $path)
+	fi
 fi
 
 alias ls="ls -hF --group-directories-first --color"

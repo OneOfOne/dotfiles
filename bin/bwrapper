@@ -2,137 +2,199 @@
 
 set -euo pipefail
 
+typeset -ga CMD=(
+	bwrap
+	--unshare-all --share-net --new-session --die-with-parent
+	--dev /dev --proc /proc
+	--tmpfs /tmp --tmpfs /run --tmpfs /dev/shm
+
+	--dev-bind-try /dev/dri /dev/dri
+	--dev-bind-try /dev/tty /dev/tty
+
+	--clearenv
+)
+
+add_env() {
+	local name=$1 value=${2-}
+	[[ -n $value ]] || return 0
+	CMD+=(--setenv "$name" "$value")
+}
+
+add_rw_bind() {
+	local src=$1 dst=${2:-$1}
+	if [[ -L "$src" ]]; then
+		local target dir
+		target=$(readlink "$src") || return 0
+		dir=${src:h}
+		[[ $target != /* ]] && target="${dir%/}/$target"
+
+		if [[ "$target" != "$dst" ]]; then
+			CMD+=(--bind "${target}" "${target}")
+		fi
+
+		if [[ -e "$target" && -L "$dst" ]]; then
+			CMD+=(--symlink "${target}" "${dst}")
+		fi
+	elif [[ -e "$src" ]]; then
+		CMD+=(--bind "$src" "$dst")
+	fi
+}
+
+add_ro_bind() {
+	local src=$1 dst=${2:-$1}
+
+	echo "$src $dst"
+	if [[ -L "$src" ]]; then
+		local target dir
+		target=$(readlink "$src") || return 0
+		dir=${src:h}
+		[[ $target != /* ]] && target="${dir%/}/$target"
+
+		echo "$src $dst $target"
+		if [[ "$target" != "$dst" ]]; then
+			CMD+=(--ro-bind "$target" "$target")
+		fi
+
+		if [[ -e "$target" && -L "$dst" ]]; then
+			CMD+=(--symlink "${target}" "${dst}")
+		fi
+	elif [[ -e "$src" ]]; then
+		echo "$src $dst"
+		CMD+=(--ro-bind "$src" "$dst")
+	fi
+}
+
+add_blocked_path() {
+	return 0
+	local p=$1
+
+	if [[ -d "$p" ]]; then
+		CMD+=(--tmpfs "$p")
+	elif [[ -L "$p" ]]; then
+		CMD+=(--symlink /dev/null "$p")
+	elif [[ -e "$p" ]]; then
+		CMD+=(--ro-bind /dev/null "$p")
+	fi
+}
+
 main() {
-	local -a CMD=()
-	# Init from the inherited colon-separated env vars; a bare `local -a X=()` discards them.
 	local -a RW_PATHS=(${(s.:.)${RW_PATHS:-}})
 	local -a RO_PATHS=(${(s.:.)${RO_PATHS:-}})
-	local -a JAIL_BLOCKED=()
-	local -a JAIL_RO=()
-	local -a JAIL_RW=()
 	local TARGET="${TARGET:-$PWD}"
+	local entry
 
-	CMD=(
-		bwrap
-		--unshare-all --share-net --new-session --die-with-parent
-		--dev /dev --proc /proc
-		--tmpfs /tmp --tmpfs /run --tmpfs /dev/shm
-
-		--dev-bind-try /dev/dri /dev/dri
-
-		--clearenv
-		--setenv SHELL "$SHELL" --setenv EDITOR "$EDITOR"
-		--setenv PATH "$PATH" --setenv HOME "$HOME"
-		--setenv COLORTERM "$COLORTERM" --setenv TERM "$TERM"
-		--setenv ANDROID_HOME "$ANDROID_HOME"
-	)
-
+	# If targeting $HOME directly, jail into a scratch dir instead.
 	if [[ "$TARGET" -ef "$HOME" ]]; then
-		mkdir -p /tmp/home-$USER
-		TARGET=/tmp/home-$USER
+		mkdir -p "/tmp/home-$USER"
+		TARGET="/tmp/home-$USER"
 	fi
 
-	for dir in "$HOME" /usr /bin /sbin /lib /lib64 /var /sys; do
-		CMD+=(--ro-bind "$dir" "$dir")
+	# System directories (read-only by default).
+	for entry in /usr /bin /sbin /lib /lib64 /var /sys; do
+		add_ro_bind "$entry"
 	done
 
+	# Environment
+	local USERNAME="${USER:-$(id -un)}"
+	add_env HOME "$HOME"
+	add_env USER "$USERNAME"
+	add_env LOGNAME "$USERNAME"
+	add_env PATH "${PATH:-/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin}"
+	add_env SHELL "${SHELL:-/bin/zsh}"
+	add_env EDITOR "${EDITOR:-}"
+	add_env COLORTERM "${COLORTERM:-}"
+	add_env TERM "${TERM:-xterm-256color}"
+	add_env ANDROID_HOME "${ANDROID_HOME:-}"
+	add_env TMPDIR /tmp
+	add_env PWD "$TARGET"
+
+	# Wayland / D-Bus (conditional)
 	if [[ -n "${WAYLAND_DISPLAY:-}" && -n "${XDG_RUNTIME_DIR:-}" ]]; then
-		local runtime="$XDG_RUNTIME_DIR"
-		CMD+=(
-			--setenv WAYLAND_DISPLAY "$WAYLAND_DISPLAY"
-			--setenv XDG_RUNTIME_DIR "$runtime"
-			--setenv DBUS_SESSION_BUS_ADDRESS "unix:path=$runtime/bus"
-			--ro-bind-try "$runtime/$WAYLAND_DISPLAY" "$runtime/$WAYLAND_DISPLAY"
-			--ro-bind-try "$runtime/bus" "$runtime/bus"
-		)
+		add_env WAYLAND_DISPLAY "$WAYLAND_DISPLAY"
+		add_env XDG_RUNTIME_DIR "$XDG_RUNTIME_DIR"
+		add_env DBUS_SESSION_BUS_ADDRESS "unix:path=$XDG_RUNTIME_DIR/bus"
+		add_ro_bind "$XDG_RUNTIME_DIR/$WAYLAND_DISPLAY"
+		add_ro_bind "$XDG_RUNTIME_DIR/bus"
 	fi
 
-	JAIL_BLOCKED+=(
-		"$HOME/.ssh"
-		"$HOME/.cache"
-
+	# Hide sensitive paths (directories → empty tmpfs, files → /dev/null).
+	local -a JAIL_BLOCKED=(
+		# "$HOME/.ssh"
+		# "$HOME/.cache"
 		"$HOME/.config/google-chrome"
 		"$HOME/.config/gcloud"
-		"$HOME/.config/github-copilot"
-
-		"$HOME/.rustup"
-		"$HOME/.cargo"
-		"$HOME/.docker"
-		# "$HOME/.gnupg"
-		"$HOME/.expo"
-		"$HOME/.app-store"
-
-		"$HOME/passwords.kdbx"
-
-		"$HOME/.npmrc"
-		"$HOME/.git-credentials"
-		"$HOME/.gitcookies"
-
-		"$HOME/.local/share/keyrings"
-		"$HOME/.psql_history"
-		"$HOME/.mysql_history"
-
-		"$HOME/.python_history"
-		"$HOME/.node_repl_history"
-
-		"$HOME/Downloads"
+		# "$HOME/.rustup"
+		# "$HOME/.cargo"
+		# "$HOME/.docker"
+		# "$HOME/.expo"
+		# "$HOME/.app-store"
+		# "$HOME/passwords.kdbx"
+		# "$HOME/.npmrc"
+		# "$HOME/.git-credentials"
+		# "$HOME/.gitcookies"
+		# "$HOME/.local/share/keyrings"
+		# "$HOME/.psql_history"
+		# "$HOME/.mysql_history"
+		# "$HOME/.python_history"
+		# "$HOME/.node_repl_history"
 	)
-
-	for v in "${JAIL_BLOCKED[@]}"; do
-		[[ -d "$v" ]] && CMD+=(--tmpfs "${v:A}")
-		[[ -f "$v" ]] && CMD+=(--ro-bind /dev/null "${v:A}")
+	for entry in "${JAIL_BLOCKED[@]}"; do
+		add_blocked_path "$entry"
 	done
 
-	JAIL_RO+=(
+	# Read-only binds (system config + GitHub keys).
+	local -a JAIL_RO=(
 		"${RO_PATHS[@]}"
+		/etc/resolv.conf
+		/run/systemd/resolve
 
-		"/run/systemd/resolve"
-		"/etc/passwd"
-		"/etc/group"
+		/etc/passwd
+		/etc/group
 
-		"/etc/hosts"
+		/etc/hosts
+		/etc/nsswitch.conf
+		/etc/localtime
 
-		"/etc/nsswitch.conf"
-		"/etc/localtime"
+		/etc/ssl/
+		/etc/ca-certificates
 
-		"/etc/ssl/"
-		"/etc/ca-certificates"
+		"$HOME/.config"
 
-		# github stuff
+		"$HOME/.dotfiles"
+		"$HOME/.zshrc"
+
 		"$HOME/.ssh/github_known_hosts"
 		"$HOME/.ssh/github"
 		"$HOME/.ssh/github.pub"
+
+		"$HOME/Pictures/nyc.jpg"
 	)
-
-	for v in "${JAIL_RO[@]}"; do
-		CMD+=(--ro-bind "${v:A}" "${v:A}")
+	for entry in "${JAIL_RO[@]}"; do
+		add_ro_bind "$entry"
 	done
+	add_ro_bind "$HOME/.ssh/github_config" "$HOME/.ssh/config"
 
-	CMD+=(--ro-bind "$HOME/.ssh/github_config" "$HOME/.ssh/config")
-	CMD+=(--symlink "/run/systemd/resolve/resolv.conf" "/etc/resolv.conf")
-
-	JAIL_RW+=(
+	# Writable paths (work target + caches + tool config).
+	local -a JAIL_RW=(
 		"$TARGET"
 		"${RW_PATHS[@]}"
 
 		"$HOME/.cache/go-build"
 		"$HOME/go/pkg"
 
+		"$HOME/.tmux"
+		"$HOME/.gitconfig"
+
 		"$HOME/.cache/zsh"
 		"$HOME/.cache/oh-my-zsh"
 		"$HOME/.cache/gitstatus"
-
+		"$HOME/.cache/kitty"
 		"$HOME/.cache/fontconfig"
 
-		"$HOME/.local/state/nvim"
-
 		"$HOME/.omp"
-		"$HOME/.dotfiles/.omp"
-
 		"$HOME/.bun"
-		"$HOME/.gradle"
 
-		# needed for git
+		"$HOME/.gradle"
 		"$HOME/.gnupg"
 
 		"$HOME/.config/kde-openrc"
@@ -151,13 +213,12 @@ main() {
 		JAIL_RW+=("$HOME/.local/share/nvim")
 	fi
 
-	for v in "${JAIL_RW[@]}"; do
-		CMD+=(--bind "${v:A}" "${v:A}")
+	for entry in "${JAIL_RW[@]}"; do
+		add_rw_bind "$entry"
 	done
 
 	CMD+=(--chdir "$TARGET")
 
-	# echo $CMD
 	exec "${CMD[@]}" "$@"
 }
 

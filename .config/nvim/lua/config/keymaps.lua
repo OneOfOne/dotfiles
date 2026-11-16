@@ -66,7 +66,19 @@ vmap('<C-LeftRelease>', '"*P', 'replace selection with *')
 -- convenience
 -- vmap('<leader>j', 'zy:%s%\\V<C-r>0%%gc<left><left><left>', 'Search/replace visual')
 nmap('<leader>j', '<cmd>let @/=expand("<cword>")<cr>cgn', 'Search/replace normal')
-vmap('<leader>j', '""y<cmd>let @/=escape(@", "/[].*$^~")<cr>"_cgn', 'Search/replace visual')
+-- uses getregion instead of yanking: no register/clipboard clobbering, handles charwise/linewise/blockwise,
+-- escapes backslashes and turns newlines into \n so multi-line selections match too
+vmap('<leader>j', function()
+	local mode = vim.fn.mode()
+	local lines = vim.fn.getregion(vim.fn.getpos('v'), vim.fn.getpos('.'), { type = mode })
+	local pat = vim.tbl_map(function(l)
+		return vim.fn.escape(l, [==[\/.*$^~[]]==])
+	end, lines)
+	vim.fn.setreg('/', table.concat(pat, '\\n'))
+	vim.o.hlsearch = true
+	-- leave visual mode, then change the match under the cursor (gn also covers it when the cursor is at either end)
+	vim.api.nvim_feedkeys(vim.keycode('<esc>') .. '"_cgn', 'n', false)
+end, 'Search/replace visual')
 
 nmap('vv', ':normal! v<cr>', 'map vv to v because lazyvim overrides that')
 nmap('<home>', '^', 'make home go to the beginning of indentation')

@@ -15,13 +15,20 @@ elif [ "$TARGET" != "" ]; then
 	CWD="$(dirname $TARGET)"
 fi
 
-export ZDOTDIR=~/.dotfiles
-
-local CMD=()
+local -a CMD=()
 
 [ "$(which kitty)" != "" ] && [ "$WAYLAND_DISPLAY" != "" ] && CMD+=(kitty -d $TARGET --)
 
-[[ -e /usr/bin/bwrap ]] && CMD+=(env TARGET=$TARGET bwrapper)
+if [[ -e /usr/bin/bwrap ]]; then
+	local RO_PATHS="$HOME/.local/share/nvim"
+	local RW_PATHS="$HOME/.local/state/nvim:$HOME/.cache/nvim:$HOME/.cache/biome"
+	if [[ "$TARGET" -ef "$HOME/.dotfiles" ]]; then
+		RW_PATHS="$HOME/.local/share/nvim:$RW_PATHS"
+		RO_PATHS=""
+	fi
+
+	CMD+=(env TARGET=$TARGET RW_PATHS="$RW_PATHS" RO_PATHS="$RO_PATHS" bwrapper)
+fi
 
 CMD+=(nvim "$TARGET" $@)
 
