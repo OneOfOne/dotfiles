@@ -17,17 +17,30 @@ fi
 
 local -a CMD=()
 
-[ "$(which kitty)" != "" ] && [ "$WAYLAND_DISPLAY" != "" ] && CMD+=(kitty -d $TARGET --)
+[[ "$(which kitty)" != "" && -n "$WAYLAND_DISPLAY" ]] && CMD+=(kitty -d $TARGET --)
 
 if [[ -e /usr/bin/bwrap ]]; then
-	local RO_PATHS="$HOME/.local/share/nvim"
-	local RW_PATHS="$HOME/.local/state/nvim:$HOME/.cache/nvim:$HOME/.cache/biome"
+	local -a RO_PATHS=(
+		"${RO_PATHS[@]}"
+
+		".local/share/nvim"
+		".config/nvim"
+		".config/github-copilot"
+	)
+
+	local -a RW_PATHS=(
+		"${RW_PATHS[@]}"
+
+		".local/state/nvim"
+		".cache/nvim"
+		".cache/biome"
+	)
+
 	if [[ "$TARGET" -ef "$HOME/.dotfiles" ]]; then
-		RW_PATHS="$HOME/.local/share/nvim:$RW_PATHS"
-		RO_PATHS=""
+		RW_PATHS+=(".local/share/nvim")
 	fi
 
-	CMD+=(env TARGET=$TARGET RW_PATHS="$RW_PATHS" RO_PATHS="$RO_PATHS" bwrapper)
+	CMD+=(env TARGET="$TARGET" RW_PATHS="${(j:,:)RW_PATHS}" RO_PATHS="${(j:,:)RO_PATHS}" bwrapper)
 fi
 
 CMD+=(nvim "$TARGET" $@)
@@ -35,9 +48,9 @@ CMD+=(nvim "$TARGET" $@)
 pushd $CWD
 
 if [[ "$CMD" = *"kitty"* ]]; then
-	$CMD &>/dev/null &
+	exec $CMD &>/dev/null &
 else
-	$CMD
+	exec $CMD
 fi
 
 popd

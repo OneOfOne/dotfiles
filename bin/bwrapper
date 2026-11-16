@@ -11,213 +11,224 @@ typeset -ga CMD=(
 	--dev-bind-try /dev/dri /dev/dri
 	--dev-bind-try /dev/tty /dev/tty
 
+	--uid "$(id -u)" --gid "$(id -g)"
+
 	--clearenv
 )
 
 add_env() {
-	local name=$1 value=${2-}
+	local parts=("${(s:=:)1}")
+	local name="${parts[1]}"
+	local value="${parts[2]:-${2:-}}"
+
 	[[ -n $value ]] || return 0
+
 	CMD+=(--setenv "$name" "$value")
 }
 
-add_rw_bind() {
-	local src=$1 dst=${2:-$1}
+add_bind() {
+	local src="$1"
+	local dst="${2:-$1}"
+	[[ -n "$dst" ]] || return 0
+
+	[[ "$src" != /* ]] && src="$HOME/$src"
+	[[ "$dst" != /* ]] && dst="$HOME/$dst"
+
+	local bind_type="--ro-bind"
+	[[ -n "${RW:-}" ]] && bind_type="--bind"
+
 	if [[ -L "$src" ]]; then
-		local target dir
-		target=$(readlink "$src") || return 0
-		dir=${src:h}
+		local target="$(readlink "$src")" || return 0
+		local dir="${src:h}"
 		[[ $target != /* ]] && target="${dir%/}/$target"
 
 		if [[ "$target" != "$dst" ]]; then
-			CMD+=(--bind "${target}" "${target}")
+			CMD+=("$bind_type" "$target" "$target")
 		fi
 
 		if [[ -e "$target" && -L "$dst" ]]; then
 			CMD+=(--symlink "${target}" "${dst}")
 		fi
 	elif [[ -e "$src" ]]; then
-		CMD+=(--bind "$src" "$dst")
-	fi
-}
-
-add_ro_bind() {
-	local src=$1 dst=${2:-$1}
-
-	echo "$src $dst"
-	if [[ -L "$src" ]]; then
-		local target dir
-		target=$(readlink "$src") || return 0
-		dir=${src:h}
-		[[ $target != /* ]] && target="${dir%/}/$target"
-
-		echo "$src $dst $target"
-		if [[ "$target" != "$dst" ]]; then
-			CMD+=(--ro-bind "$target" "$target")
-		fi
-
-		if [[ -e "$target" && -L "$dst" ]]; then
-			CMD+=(--symlink "${target}" "${dst}")
-		fi
-	elif [[ -e "$src" ]]; then
-		echo "$src $dst"
-		CMD+=(--ro-bind "$src" "$dst")
+		CMD+=("$bind_type" "$src" "$dst")
 	fi
 }
 
 add_blocked_path() {
-	return 0
 	local p=$1
 
 	if [[ -d "$p" ]]; then
 		CMD+=(--tmpfs "$p")
-	elif [[ -L "$p" ]]; then
-		CMD+=(--symlink /dev/null "$p")
-	elif [[ -e "$p" ]]; then
+	else
 		CMD+=(--ro-bind /dev/null "$p")
 	fi
 }
 
 main() {
-	local -a RW_PATHS=(${(s.:.)${RW_PATHS:-}})
-	local -a RO_PATHS=(${(s.:.)${RO_PATHS:-}})
 	local TARGET="${TARGET:-$PWD}"
-	local entry
+	local value
 
-	# If targeting $HOME directly, jail into a scratch dir instead.
-	if [[ "$TARGET" -ef "$HOME" ]]; then
-		mkdir -p "/tmp/home-$USER"
-		TARGET="/tmp/home-$USER"
+	if [[ "$TARGET" == "$HOME" && "${ALLOW_HOME:-}" != "1" ]]; then
+		echo "RW access to home isn't allowed, use ALLOW_HOME=1" >/dev/stderr
+		exit 1
 	fi
 
 	# System directories (read-only by default).
-	for entry in /usr /bin /sbin /lib /lib64 /var /sys; do
-		add_ro_bind "$entry"
+	for value in /usr /bin /sbin /lib /lib64 /var /sys /opt/google /opt/rocm; do
+		add_bind "$value"
 	done
-
-	# Environment
-	local USERNAME="${USER:-$(id -un)}"
-	add_env HOME "$HOME"
-	add_env USER "$USERNAME"
-	add_env LOGNAME "$USERNAME"
-	add_env PATH "${PATH:-/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin}"
-	add_env SHELL "${SHELL:-/bin/zsh}"
-	add_env EDITOR "${EDITOR:-}"
-	add_env COLORTERM "${COLORTERM:-}"
-	add_env TERM "${TERM:-xterm-256color}"
-	add_env ANDROID_HOME "${ANDROID_HOME:-}"
-	add_env TMPDIR /tmp
-	add_env PWD "$TARGET"
 
 	# Wayland / D-Bus (conditional)
-	if [[ -n "${WAYLAND_DISPLAY:-}" && -n "${XDG_RUNTIME_DIR:-}" ]]; then
-		add_env WAYLAND_DISPLAY "$WAYLAND_DISPLAY"
+	if [[ -n "${XDG_RUNTIME_DIR:-}" && -d "$XDG_RUNTIME_DIR" ]]; then
 		add_env XDG_RUNTIME_DIR "$XDG_RUNTIME_DIR"
-		add_env DBUS_SESSION_BUS_ADDRESS "unix:path=$XDG_RUNTIME_DIR/bus"
-		add_ro_bind "$XDG_RUNTIME_DIR/$WAYLAND_DISPLAY"
-		add_ro_bind "$XDG_RUNTIME_DIR/bus"
+		# Created before any mounts, with the permissions clients expect.
+		CMD+=(--perms 0700 --dir "$XDG_RUNTIME_DIR")
+
+		# Wayland + D-Bus
+		if [[ -n "${WAYLAND_DISPLAY:-}" ]]; then
+			add_env WAYLAND_DISPLAY "$WAYLAND_DISPLAY"
+			add_env DBUS_SESSION_BUS_ADDRESS "unix:path=$XDG_RUNTIME_DIR/bus"
+			add_bind "$XDG_RUNTIME_DIR/$WAYLAND_DISPLAY"
+			add_bind "$XDG_RUNTIME_DIR/bus"
+		fi
+
+		# PipeWire (native protocol; the manager socket is optional)
+		add_bind "$XDG_RUNTIME_DIR/pipewire-0"
+		add_bind "$XDG_RUNTIME_DIR/pipewire-0-manager"
+
+		if [[ -S "$XDG_RUNTIME_DIR/pulse/native" ]]; then
+			add_env PULSE_SERVER "unix:$XDG_RUNTIME_DIR/pulse/native"
+			add_bind "$XDG_RUNTIME_DIR/pulse/native"
+		fi
+
+		add_bind ".local/share/vulkan"
+		RW=1 add_bind ".cache/mesa_shader_cache"
+		RW=1 add_bind ".cache/radv_builtin_shaders"
+
+		RW=1 add_bind ".cache/lsfg-vk"
+		add_bind ".config/lsfg-vk"
 	fi
 
-	# Hide sensitive paths (directories → empty tmpfs, files → /dev/null).
-	local -a JAIL_BLOCKED=(
-		# "$HOME/.ssh"
-		# "$HOME/.cache"
-		"$HOME/.config/google-chrome"
-		"$HOME/.config/gcloud"
-		# "$HOME/.rustup"
-		# "$HOME/.cargo"
-		# "$HOME/.docker"
-		# "$HOME/.expo"
-		# "$HOME/.app-store"
-		# "$HOME/passwords.kdbx"
-		# "$HOME/.npmrc"
-		# "$HOME/.git-credentials"
-		# "$HOME/.gitcookies"
-		# "$HOME/.local/share/keyrings"
-		# "$HOME/.psql_history"
-		# "$HOME/.mysql_history"
-		# "$HOME/.python_history"
-		# "$HOME/.node_repl_history"
+	if [[ -n "${DISPLAY:-}" ]]; then
+		add_env DISPLAY "$DISPLAY"
+		if [[ $DISPLAY == :* || $DISPLAY == unix:* ]]; then
+			local xnum=${DISPLAY#*:}
+			xnum=${xnum%%.*}
+			add_bind "/tmp/.X11-unix/X$xnum"
+		fi
+
+		# Auth cookie: $XAUTHORITY if set, else ~/.Xauthority.
+		local xauth=${XAUTHORITY:-$HOME/.Xauthority}
+		if [[ -e $xauth ]]; then
+			add_env XAUTHORITY "$xauth"
+			add_bind "$xauth"
+		fi
+	fi
+
+	local -a ENV=(
+		"HOME=$HOME"
+		"USER=$USER"
+		"LOGNAME=$USER"
+		"PATH=$PATH"
+		"SHELL=${SHELL:-/bin/zsh}"
+		"EDITOR=${EDITOR:-}"
+		"COLORTERM=${COLORTERM:-}"
+		"TERM=${TERM:-xterm-256color}"
+		"ANDROID_HOME=${ANDROID_HOME:-}"
+		"TMPDIR=/tmp"
+		"PWD=$TARGET"
+
+		"${(s.,.)${ENV:-}[@]}"
 	)
-	for entry in "${JAIL_BLOCKED[@]}"; do
-		add_blocked_path "$entry"
+
+	for value in "${ENV[@]}"; do
+		add_env "$value"
 	done
 
-	# Read-only binds (system config + GitHub keys).
-	local -a JAIL_RO=(
-		"${RO_PATHS[@]}"
-		/etc/resolv.conf
-		/run/systemd/resolve
-
-		/etc/passwd
-		/etc/group
-
-		/etc/hosts
-		/etc/nsswitch.conf
-		/etc/localtime
-
-		/etc/ssl/
-		/etc/ca-certificates
-
-		"$HOME/.config"
-
-		"$HOME/.dotfiles"
-		"$HOME/.zshrc"
-
-		"$HOME/.ssh/github_known_hosts"
-		"$HOME/.ssh/github"
-		"$HOME/.ssh/github.pub"
-
-		"$HOME/Pictures/nyc.jpg"
-	)
-	for entry in "${JAIL_RO[@]}"; do
-		add_ro_bind "$entry"
+	local -a BLOCKED_PATHS=()
+	for value in "${BLOCKED_PATHS[@]}"; do
+		add_blocked_path "$value"
 	done
-	add_ro_bind "$HOME/.ssh/github_config" "$HOME/.ssh/config"
 
-	# Writable paths (work target + caches + tool config).
-	local -a JAIL_RW=(
+	local -a RO_PATHS=(
+		"${(s.,.)${RO_PATHS:-}[@]}"
+
+		"/run/systemd/resolve"
+		"/etc/resolv.conf"
+
+		"/etc/ld.so.cache"
+		"/etc/ld.so.conf"
+		"/etc/ld.so.conf.d"
+
+		"/etc/fonts"
+
+		"/etc/passwd"
+		"/etc/group"
+
+		"/etc/hosts"
+		"/etc/nsswitch.conf"
+		"/etc/localtime"
+
+		"/etc/ssl/"
+		"/etc/ca-certificates"
+
+		".config/kitty"
+		".config/fontconfig"
+		".local/share/fonts"
+
+		".rustup"
+		".cargo"
+
+		".dotfiles"
+		".gitconfig"
+		".zshrc"
+
+		".ssh/github_known_hosts"
+		".ssh/github"
+		".ssh/github.pub"
+
+		"Pictures/nyc.jpg"
+	)
+
+	for value in "${RO_PATHS[@]}"; do
+		add_bind "$value"
+	done
+	add_bind ".ssh/github_config" ".ssh/config"
+
+	local -a RW_PATHS=(
 		"$TARGET"
-		"${RW_PATHS[@]}"
+		"${(s.,.)${RW_PATHS:-}[@]}"
 
-		"$HOME/.cache/go-build"
-		"$HOME/go/pkg"
+		".cache/zsh"
+		".cache/oh-my-zsh"
+		".cache/p10k-$USER"
+		".cache/gitstatus"
 
-		"$HOME/.tmux"
-		"$HOME/.gitconfig"
+		"$(go env GOMODCACHE 2>/dev/null)"
 
-		"$HOME/.cache/zsh"
-		"$HOME/.cache/oh-my-zsh"
-		"$HOME/.cache/gitstatus"
-		"$HOME/.cache/kitty"
-		"$HOME/.cache/fontconfig"
+		".cache/pkg"
 
-		"$HOME/.omp"
-		"$HOME/.bun"
+		".cache/kitty"
+		".cache/fontconfig"
 
-		"$HOME/.gradle"
-		"$HOME/.gnupg"
+		".config/lazygit"
+		".local/state/lazygit"
 
-		"$HOME/.config/kde-openrc"
-		"$HOME/.config/pinentry-qtrc"
+		".tmux"
+		".omp"
+		".bun"
+		".gradle"
+		".gnupg"
+
+		".config/kde-openrc"
+		".config/pinvalue-qtrc"
 	)
 
-	if command -v go >/dev/null; then
-		JAIL_RW+=("$(go env GOMODCACHE)")
-	fi
-
-	if [[ -d "$HOME/.config/lazygit" ]]; then
-		JAIL_RW+=("$HOME/.config/lazygit" "$HOME/.local/state/lazygit")
-	fi
-
-	if [[ "$TARGET" -ef "$HOME/.dotfiles" ]]; then
-		JAIL_RW+=("$HOME/.local/share/nvim")
-	fi
-
-	for entry in "${JAIL_RW[@]}"; do
-		add_rw_bind "$entry"
+	for value in "${RW_PATHS[@]}"; do
+		RW=1 add_bind "$value"
 	done
 
-	CMD+=(--chdir "$TARGET")
+	CMD+=(--remount-ro / --chdir "$TARGET")
 
 	exec "${CMD[@]}" "$@"
 }

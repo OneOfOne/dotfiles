@@ -121,5 +121,10 @@
 [protocol "file"]
 	allow = always
 
+[url "git@github.com:OneOfOne/"]
+	pushInsteadOf = https://github.com/OneOfOne/
+
 [include]
 	path = ~/.dotfiles/.gitconfig_private
+
+
