@@ -2,14 +2,14 @@
 
 local CWD="$PWD"
 local TARGET="$1"
-[ "$1" != "" ] && shift
-if [ -d "$TARGET" ]; then
+[[ -n "$1" ]] && shift
+if [[ -d "$TARGET" ]]; then
 	TARGET="$(realpath $TARGET)"
 	CWD="$TARGET"
-elif [ -f "$TARGET" ]; then
+elif [[ -f "$TARGET" ]]; then
 	TARGET="$(realpath $TARGET)"
 	CWD="$(dirname $TARGET)"
-elif [ "$TARGET" != "" ]; then
+elif [[ "$TARGET" != "" ]]; then
 	TARGET="$(realpath $TARGET)"
 	touch "$TARGET"
 	CWD="$(dirname $TARGET)"
@@ -17,7 +17,7 @@ fi
 
 local -a CMD=()
 
-[[ "$(which kitty)" != "" && -n "$WAYLAND_DISPLAY" ]] && CMD+=(kitty -d $TARGET --)
+[[ -n "$(command -v kitty 2>/dev/null)" && -n "$WAYLAND_DISPLAY" ]] && CMD+=(kitty -d $TARGET --)
 
 if [[ -e /usr/bin/bwrap ]]; then
 	local -a RO_PATHS=(
@@ -48,9 +48,9 @@ CMD+=(nvim "$TARGET" $@)
 pushd $CWD
 
 if [[ "$CMD" = *"kitty"* ]]; then
-	exec $CMD &>/dev/null &
+	"${CMD[@]}" &>/dev/null &
 else
-	exec $CMD
+	"${CMD[@]}"
 fi
 
 popd

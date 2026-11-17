@@ -1,6 +1,0 @@
-#!/bin/zsh
-
-# Without XDG_RUNTIME_DIR, systemd-run skips the user manager's private socket
-# (fails from inside the jail) and uses $DBUS_SESSION_BUS_ADDRESS instead.
-env -u XDG_RUNTIME_DIR systemd-run --user --quiet --no-block /usr/bin/xdg-open "$@" || /usr/bin/xdg-open "$@"
-

@@ -78,11 +78,25 @@ main() {
 		add_bind "$value"
 	done
 
-	# Wayland / D-Bus (conditional)
 	if [[ -n "${XDG_RUNTIME_DIR:-}" && -d "$XDG_RUNTIME_DIR" ]]; then
 		add_env XDG_RUNTIME_DIR "$XDG_RUNTIME_DIR"
-		# Created before any mounts, with the permissions clients expect.
 		CMD+=(--perms 0700 --dir "$XDG_RUNTIME_DIR")
+
+		if [[ -n "${DISPLAY:-}" ]]; then
+			add_env DISPLAY "$DISPLAY"
+			if [[ $DISPLAY == :* || $DISPLAY == unix:* ]]; then
+				local xnum=${DISPLAY#*:}
+				xnum=${xnum%%.*}
+				add_bind "/tmp/.X11-unix/X$xnum"
+			fi
+
+			# Auth cookie: $XAUTHORITY if set, else ~/.Xauthority.
+			local xauth=${XAUTHORITY:-$HOME/.Xauthority}
+			if [[ -e $xauth ]]; then
+				add_env XAUTHORITY "$xauth"
+				add_bind "$xauth"
+			fi
+		fi
 
 		# Wayland + D-Bus
 		if [[ -n "${WAYLAND_DISPLAY:-}" ]]; then
@@ -101,28 +115,17 @@ main() {
 			add_bind "$XDG_RUNTIME_DIR/pulse/native"
 		fi
 
-		add_bind ".local/share/vulkan"
+		# needed for xdg-open / kde-open
+		add_env XDG_CURRENT_DESKTOP "$XDG_CURRENT_DESKTOP"
+		add_env KDE_SESSION_VERSION "$KDE_SESSION_VERSION"
+		add_bind ".local/share/applications"
+
 		RW=1 add_bind ".cache/mesa_shader_cache"
 		RW=1 add_bind ".cache/radv_builtin_shaders"
+		add_bind ".local/share/vulkan"
 
 		RW=1 add_bind ".cache/lsfg-vk"
 		add_bind ".config/lsfg-vk"
-	fi
-
-	if [[ -n "${DISPLAY:-}" ]]; then
-		add_env DISPLAY "$DISPLAY"
-		if [[ $DISPLAY == :* || $DISPLAY == unix:* ]]; then
-			local xnum=${DISPLAY#*:}
-			xnum=${xnum%%.*}
-			add_bind "/tmp/.X11-unix/X$xnum"
-		fi
-
-		# Auth cookie: $XAUTHORITY if set, else ~/.Xauthority.
-		local xauth=${XAUTHORITY:-$HOME/.Xauthority}
-		if [[ -e $xauth ]]; then
-			add_env XAUTHORITY "$xauth"
-			add_bind "$xauth"
-		fi
 	fi
 
 	local -a ENV=(
@@ -145,7 +148,10 @@ main() {
 		add_env "$value"
 	done
 
-	local -a BLOCKED_PATHS=()
+	local -a BLOCKED_PATHS=(
+		"$HOME/.cache" # needed for xdg-open / kde-open
+	)
+
 	for value in "${BLOCKED_PATHS[@]}"; do
 		add_blocked_path "$value"
 	done
@@ -189,11 +195,11 @@ main() {
 
 		"Pictures/nyc.jpg"
 	)
+	add_bind ".ssh/github_config" ".ssh/config"
 
 	for value in "${RO_PATHS[@]}"; do
 		add_bind "$value"
 	done
-	add_bind ".ssh/github_config" ".ssh/config"
 
 	local -a RW_PATHS=(
 		"$TARGET"

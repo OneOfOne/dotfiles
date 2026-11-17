@@ -2,13 +2,16 @@
 export PROTON_DXVK_LOWLATENCY=1
 export PROTON_VKD3D_LOWLATENCY=1
 
+export PROTON_USE_WOW64=1
 export PROTON_ENABLE_WAYLAND=1
 export DXVK_HDR=1
 
 export PROTON_XESS_UPGRADE=1
-#export PROTON_FSR4_UPGRADE=4.1.1
 export DXIL_SPIRV_CONFIG=wmma_rdna3_workaround
+
+export PROTON_FSR4_UPGRADE=1
 export PROTON_MLFG_UPGRADE=1
 export FSR4_WATERMARK=1
 
+export LSFGVK_PROFILE=Default
 exec mangohud "$@"
