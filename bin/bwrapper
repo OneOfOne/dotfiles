@@ -16,10 +16,18 @@ typeset -ga CMD=(
 	--clearenv
 )
 
+# Associative array: keys are the paths that have already been bound.
+typeset -gA BOUND=()
+
 add_env() {
-	local parts=("${(s:=:)1}")
-	local name="${parts[1]}"
-	local value="${parts[2]:-${2:-}}"
+	local name value
+	if (($# == 1)); then
+		name="${1%%=*}"
+		value="${1#*=}"
+	else
+		name="$1"
+		value="$2"
+	fi
 
 	[[ -n $value ]] || return 0
 
@@ -43,7 +51,10 @@ add_bind() {
 		[[ $target != /* ]] && target="${dir%/}/$target"
 
 		if [[ "$target" != "$dst" ]]; then
-			CMD+=("$bind_type" "$target" "$target")
+			if [[ -z "${BOUND[$target]:-}" ]]; then
+				CMD+=("$bind_type" "$target" "$target")
+				BOUND[$target]=1
+			fi
 		fi
 
 		if [[ -e "$target" && -L "$dst" ]]; then
@@ -51,6 +62,7 @@ add_bind() {
 		fi
 	elif [[ -e "$src" ]]; then
 		CMD+=("$bind_type" "$src" "$dst")
+		BOUND[$src]=1
 	fi
 }
 
@@ -101,7 +113,7 @@ main() {
 		# Wayland + D-Bus
 		if [[ -n "${WAYLAND_DISPLAY:-}" ]]; then
 			add_env WAYLAND_DISPLAY "$WAYLAND_DISPLAY"
-			add_env DBUS_SESSION_BUS_ADDRESS "unix:path=$XDG_RUNTIME_DIR/bus"
+			add_env "DBUS_SESSION_BUS_ADDRESS=unix:path=$XDG_RUNTIME_DIR/bus"
 			add_bind "$XDG_RUNTIME_DIR/$WAYLAND_DISPLAY"
 			add_bind "$XDG_RUNTIME_DIR/bus"
 		fi
@@ -116,16 +128,18 @@ main() {
 		fi
 
 		# needed for xdg-open / kde-open
-		add_env XDG_CURRENT_DESKTOP "$XDG_CURRENT_DESKTOP"
-		add_env KDE_SESSION_VERSION "$KDE_SESSION_VERSION"
+		add_env XDG_CURRENT_DESKTOP "${XDG_CURRENT_DESKTOP:-}"
+		add_env KDE_SESSION_VERSION "${KDE_SESSION_VERSION:-}"
 		add_bind ".local/share/applications"
 
 		RW=1 add_bind ".cache/mesa_shader_cache"
 		RW=1 add_bind ".cache/radv_builtin_shaders"
 		add_bind ".local/share/vulkan"
 
-		RW=1 add_bind ".cache/lsfg-vk"
-		add_bind ".config/lsfg-vk"
+		if [[ -d "$HOME/.cache/lsfg-vk" && -d "$HOME/.config/lsfg-vk" ]]; then
+			RW=1 add_bind ".cache/lsfg-vk"
+			add_bind ".config/lsfg-vk"
+		fi
 	fi
 
 	local -a ENV=(
@@ -135,9 +149,9 @@ main() {
 		"PATH=$PATH"
 		"SHELL=${SHELL:-/bin/zsh}"
 		"EDITOR=${EDITOR:-}"
+		"GIT_EDITOR=${GIT_EDITOR:-}"
 		"COLORTERM=${COLORTERM:-}"
 		"TERM=${TERM:-xterm-256color}"
-		"ANDROID_HOME=${ANDROID_HOME:-}"
 		"TMPDIR=/tmp"
 		"PWD=$TARGET"
 
@@ -175,7 +189,7 @@ main() {
 		"/etc/nsswitch.conf"
 		"/etc/localtime"
 
-		"/etc/ssl/"
+		"/etc/ssl"
 		"/etc/ca-certificates"
 
 		".config/kitty"
@@ -184,6 +198,8 @@ main() {
 
 		".rustup"
 		".cargo"
+
+		"code/go/bin"
 
 		".dotfiles"
 		".gitconfig"
@@ -210,8 +226,6 @@ main() {
 		".cache/p10k-$USER"
 		".cache/gitstatus"
 
-		"$(go env GOMODCACHE 2>/dev/null)"
-
 		".cache/pkg"
 
 		".cache/kitty"
@@ -226,9 +240,17 @@ main() {
 		".gradle"
 		".gnupg"
 
+		"go"
+
 		".config/kde-openrc"
 		".config/pinvalue-qtrc"
 	)
+
+	# Go module cache (avoid spawning `go` when not installed)
+	if command -v go >/dev/null 2>&1; then
+		local gomods="$(go env GOMODCACHE 2>/dev/null)"
+		[[ -n "$gomods" ]] && RW_PATHS+=("$gomods")
+	fi
 
 	for value in "${RW_PATHS[@]}"; do
 		RW=1 add_bind "$value"

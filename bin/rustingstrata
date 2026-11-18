@@ -1,0 +1,13 @@
+#!/bin/zsh
+
+pushd ~/code/RustingStrata
+
+BASE=~/.cache/huggingface/hub/models--unsloth--Qwen3.8-Flash-Next-GGUF
+# BASE=~/.cache/huggingface/hub/models--unsloth--Qwen3.8-27B-GGUF
+M="$BASE/snapshots/f5d175de2cf7f720d45d6064019a81fcf056e986/UD-IQ4_XS/Qwen3.8-Flash-Next-UD-IQ4_XS-00001-of-00004.gguf"
+# M="$BASE/snapshots/4af51b3542f775b0a8e4b310bfb3f17e01c306c9/Qwen3.8-27B-UD-Q4_K_M.gguf"
+CTX=64000 # 252144
+STRATA_COLD_KEEP=1 radv_device_coherent_memory=true ./target/release/rustingstrata serve --model $M --backend vulkan --gpu --temp 1 --top-k 20 --top-p 0.95 --chunk 4096 \
+	--kv q8 --vram-margin 716 --ctx $CTX --mtp 3 --addr 0.0.0.0:10601 $@
+
+popd
