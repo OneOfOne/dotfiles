@@ -1,3 +1,3 @@
 #!/bin/zsh
 
-llama-server --host 0.0.0.0 --port 10600 --models-preset ~/.dotfiles/llms/router.ini --models-max 1 --sleep-idle-seconds 600 -np 1 --load-mode none $@
+llama-server --host 0.0.0.0 --port 10600 --models-preset ~/.dotfiles/llms/router.ini --models-max 1 --sleep-idle-seconds 600 -np 1 $@

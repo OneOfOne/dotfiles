@@ -13,3 +13,4 @@ cache/
 logs/
 run/
 *.wasm
+agent/codex*.json

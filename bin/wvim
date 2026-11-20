@@ -26,6 +26,8 @@ if [[ -e /usr/bin/bwrap ]]; then
 		".local/share/nvim"
 		".config/nvim"
 		".config/github-copilot"
+
+		".local/share/nvim/mason/bin/"
 	)
 
 	local -a RW_PATHS=(
@@ -39,7 +41,7 @@ if [[ -e /usr/bin/bwrap ]]; then
 	if [[ "$TARGET" -ef "$HOME/.dotfiles" ]]; then
 		RW_PATHS+=(".local/share/nvim")
 	fi
-
+	PATH="$PATH:$HOME/.local/share/nvim/mason/bin/"
 	CMD+=(env TARGET="$TARGET" RW_PATHS="${(j:,:)RW_PATHS}" RO_PATHS="${(j:,:)RO_PATHS}" bwrapper)
 fi
 

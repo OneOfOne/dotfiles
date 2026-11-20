@@ -166,10 +166,6 @@ main() {
 		"$HOME/.cache" # needed for xdg-open / kde-open
 	)
 
-	for value in "${BLOCKED_PATHS[@]}"; do
-		add_blocked_path "$value"
-	done
-
 	local -a RO_PATHS=(
 		"${(s.,.)${RO_PATHS:-}[@]}"
 
@@ -199,8 +195,6 @@ main() {
 		".rustup"
 		".cargo"
 
-		"code/go/bin"
-
 		".dotfiles"
 		".gitconfig"
 		".zshrc"
@@ -211,11 +205,7 @@ main() {
 
 		"Pictures/nyc.jpg"
 	)
-	add_bind ".ssh/github_config" ".ssh/config"
-
-	for value in "${RO_PATHS[@]}"; do
-		add_bind "$value"
-	done
+	[[ -e "$HOME/.ssh/github_config" ]] && add_bind ".ssh/github_config" ".ssh/config"
 
 	local -a RW_PATHS=(
 		"$TARGET"
@@ -243,14 +233,25 @@ main() {
 		"go"
 
 		".config/kde-openrc"
-		".config/pinvalue-qtrc"
+		".config/pinentry-qtrc"
 	)
 
 	# Go module cache (avoid spawning `go` when not installed)
 	if command -v go >/dev/null 2>&1; then
 		local gomods="$(go env GOMODCACHE 2>/dev/null)"
-		[[ -n "$gomods" ]] && RW_PATHS+=("$gomods")
+		if [[ -n "$gomods" ]]; then
+			RW_PATHS+=("$gomods" "go")
+			RO_PATHS+=("code/go/bin")
+		fi
 	fi
+
+	for value in "${BLOCKED_PATHS[@]}"; do
+		add_blocked_path "$value"
+	done
+
+	for value in "${RO_PATHS[@]}"; do
+		add_bind "$value"
+	done
 
 	for value in "${RW_PATHS[@]}"; do
 		RW=1 add_bind "$value"
