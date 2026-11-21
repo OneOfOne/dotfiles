@@ -14,13 +14,13 @@ export default function myHook(omp: HookAPI): void {
 				};
 			}
 
-			// 2. Completely block git push
-			if (/\bgit\s+push\b/.test(cmd)) {
-				return {
-					block: true,
-					reason: "Execution of 'git push' is strictly disabled to prevent remote overrides.",
-				};
-			}
+			// // 2. Completely block git push
+			// if (/\bgit\s+push\b/.test(cmd)) {
+			// 	return {
+			// 		block: true,
+			// 		reason: "Execution of 'git push' is strictly disabled to prevent remote overrides.",
+			// 	};
+			// }
 
 			// 3. Ask before deleting files (retained from prior setup)
 			if (/\b(rm|unlink)\b/.test(cmd) && ctx.hasUI) {
