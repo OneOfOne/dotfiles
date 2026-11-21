@@ -11,7 +11,7 @@ typeset -ga CMD=(
 	--dev-bind-try /dev/dri /dev/dri
 	--dev-bind-try /dev/tty /dev/tty
 
-	--uid "$(id -u)" --gid "$(id -g)"
+	--uid $UID --gid $GID
 
 	--clearenv
 )
@@ -45,15 +45,17 @@ add_bind() {
 	local bind_type="--ro-bind"
 	[[ -n "${RW:-}" ]] && bind_type="--bind"
 
+	[[ "${BOUND[$src]:-}" == "$bind_type" ]] && return 0
+
 	if [[ -L "$src" ]]; then
-		local target="$(readlink "$src")" || return 0
+		local target="${src:P}" || return 0
 		local dir="${src:h}"
 		[[ $target != /* ]] && target="${dir%/}/$target"
 
 		if [[ "$target" != "$dst" ]]; then
 			if [[ -z "${BOUND[$target]:-}" ]]; then
 				CMD+=("$bind_type" "$target" "$target")
-				BOUND[$target]=1
+				BOUND[$target]=$bind_type
 			fi
 		fi
 
@@ -62,12 +64,17 @@ add_bind() {
 		fi
 	elif [[ -e "$src" ]]; then
 		CMD+=("$bind_type" "$src" "$dst")
-		BOUND[$src]=1
+	else
+		echo "bind: $src doesn't exist" >/dev/stderr
 	fi
+
+	BOUND[$src]=$bind_type
 }
 
 add_blocked_path() {
 	local p=$1
+
+	[[ "$p" != /* ]] && p="$HOME/$p"
 
 	if [[ -d "$p" ]]; then
 		CMD+=(--tmpfs "$p")
@@ -91,8 +98,10 @@ main() {
 	done
 
 	if [[ -n "${XDG_RUNTIME_DIR:-}" && -d "$XDG_RUNTIME_DIR" ]]; then
-		add_env XDG_RUNTIME_DIR "$XDG_RUNTIME_DIR"
-		CMD+=(--perms 0700 --dir "$XDG_RUNTIME_DIR")
+		local XDG="$XDG_RUNTIME_DIR"
+
+		add_env XDG_RUNTIME_DIR "$XDG"
+		CMD+=(--perms 0700 --dir "$XDG")
 
 		if [[ -n "${DISPLAY:-}" ]]; then
 			add_env DISPLAY "$DISPLAY"
@@ -113,18 +122,18 @@ main() {
 		# Wayland + D-Bus
 		if [[ -n "${WAYLAND_DISPLAY:-}" ]]; then
 			add_env WAYLAND_DISPLAY "$WAYLAND_DISPLAY"
-			add_env "DBUS_SESSION_BUS_ADDRESS=unix:path=$XDG_RUNTIME_DIR/bus"
-			add_bind "$XDG_RUNTIME_DIR/$WAYLAND_DISPLAY"
-			add_bind "$XDG_RUNTIME_DIR/bus"
+			add_env "DBUS_SESSION_BUS_ADDRESS=unix:path=$XDG/bus"
+			add_bind "$XDG/$WAYLAND_DISPLAY"
+			add_bind "$XDG/bus"
 		fi
 
 		# PipeWire (native protocol; the manager socket is optional)
-		add_bind "$XDG_RUNTIME_DIR/pipewire-0"
-		add_bind "$XDG_RUNTIME_DIR/pipewire-0-manager"
+		add_bind "$XDG/pipewire-0"
+		add_bind "$XDG/pipewire-0-manager"
 
-		if [[ -S "$XDG_RUNTIME_DIR/pulse/native" ]]; then
-			add_env PULSE_SERVER "unix:$XDG_RUNTIME_DIR/pulse/native"
-			add_bind "$XDG_RUNTIME_DIR/pulse/native"
+		if [[ -S "$XDG/pulse/native" ]]; then
+			add_env PULSE_SERVER "unix:$XDG/pulse/native"
+			add_bind "$XDG/pulse/native"
 		fi
 
 		# needed for xdg-open / kde-open
@@ -142,7 +151,7 @@ main() {
 		fi
 	fi
 
-	local -a ENV=(
+	local -a ENV_VARS=(
 		"HOME=$HOME"
 		"USER=$USER"
 		"LOGNAME=$USER"
@@ -155,19 +164,22 @@ main() {
 		"TMPDIR=/tmp"
 		"PWD=$TARGET"
 
-		"${(s.,.)${ENV:-}[@]}"
+		${(s.:.)ENV:-}
 	)
 
-	for value in "${ENV[@]}"; do
+	for value in "${ENV_VARS[@]}"; do
 		add_env "$value"
 	done
 
-	local -a BLOCKED_PATHS=(
-		"$HOME/.cache" # needed for xdg-open / kde-open
+	local -a BLOCKED_PATHS_VARS=(
+		${(s.:.)${BLOCKED_PATHS:-}}
+
+		".cache"
 	)
 
-	local -a RO_PATHS=(
-		"${(s.,.)${RO_PATHS:-}[@]}"
+	local -a RO_PATHS_VARS=(
+		${(s.:.)${RO_PATHS:-}}
+		# ${(s.:.)${PATH:-}}
 
 		"/run/systemd/resolve"
 		"/etc/resolv.conf"
@@ -207,9 +219,9 @@ main() {
 	)
 	[[ -e "$HOME/.ssh/github_config" ]] && add_bind ".ssh/github_config" ".ssh/config"
 
-	local -a RW_PATHS=(
+	local -a RW_PATHS_VARS=(
 		"$TARGET"
-		"${(s.,.)${RW_PATHS:-}[@]}"
+		${(s.:.)${RW_PATHS:-}}
 
 		".cache/zsh"
 		".cache/oh-my-zsh"
@@ -230,30 +242,24 @@ main() {
 		".gradle"
 		".gnupg"
 
-		"go"
-
 		".config/kde-openrc"
 		".config/pinentry-qtrc"
 	)
 
-	# Go module cache (avoid spawning `go` when not installed)
-	if command -v go >/dev/null 2>&1; then
-		local gomods="$(go env GOMODCACHE 2>/dev/null)"
-		if [[ -n "$gomods" ]]; then
-			RW_PATHS+=("$gomods" "go")
-			RO_PATHS+=("code/go/bin")
-		fi
+	if ((${+commands[go]})); then
+		RW_PATHS+=("$(go env GOMODCACHE 2>/dev/null)" "go")
+		RO_PATHS+=("code/go/bin")
 	fi
 
-	for value in "${BLOCKED_PATHS[@]}"; do
+	for value in "${BLOCKED_PATHS_VARS[@]}"; do
 		add_blocked_path "$value"
 	done
 
-	for value in "${RO_PATHS[@]}"; do
+	for value in "${RO_PATHS_VARS[@]}"; do
 		add_bind "$value"
 	done
 
-	for value in "${RW_PATHS[@]}"; do
+	for value in "${RW_PATHS_VARS[@]}"; do
 		RW=1 add_bind "$value"
 	done
 
