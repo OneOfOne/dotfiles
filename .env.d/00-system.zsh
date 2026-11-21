@@ -1,7 +1,8 @@
 # Switching directories for lazy people
 setopt autocd
 # See: http://zsh.sourceforge.net/Intro/intro_6.html
-setopt autopushd pushdminus pushdsilent pushdtohome pushdignoredups
+setopt autopushd pushdminus pushdsilent pushdtohome
+setopt histignorealldups histignoredups histsavenodups pushdignoredups histexpiredupsfirst histfindnodups
 # Don't kill background jobs when I logout
 setopt nohup
 # See: http://zsh.sourceforge.net/Intro/intro_2.html
@@ -16,9 +17,8 @@ setopt longlistjobs # Display PID when using jobs
 #setopt autocontinue
 # setopt rmstarsilent
 
-setopt histreduceblanks histignorespace histignorealldups
-
 #autoload -U regexp-replace qq
+
 setopt re_match_pcre
 
 autoload zmv

@@ -45,18 +45,14 @@ add_bind() {
 	local bind_type="--ro-bind"
 	[[ -n "${RW:-}" ]] && bind_type="--bind"
 
-	[[ "${BOUND[$src]:-}" == "$bind_type" ]] && return 0
+	[[ "${BOUND[$src]:-}" == "$bind_type" ]] && return
 
 	if [[ -L "$src" ]]; then
-		local target="${src:P}" || return 0
-		local dir="${src:h}"
-		[[ $target != /* ]] && target="${dir%/}/$target"
+		local target="${src:P}"
 
-		if [[ "$target" != "$dst" ]]; then
-			if [[ -z "${BOUND[$target]:-}" ]]; then
-				CMD+=("$bind_type" "$target" "$target")
-				BOUND[$target]=$bind_type
-			fi
+		if [[ "$target" != "$dst" && -z "${BOUND[$target]:-}" ]]; then
+			CMD+=("$bind_type" "$target" "$target")
+			BOUND[$target]=$bind_type
 		fi
 
 		if [[ -e "$target" && -L "$dst" ]]; then
@@ -83,6 +79,61 @@ add_blocked_path() {
 	fi
 }
 
+add_xdg() {
+	[[ -n "${XDG_RUNTIME_DIR:-}" && -d "$XDG_RUNTIME_DIR" ]] || return 0
+	local XDG="$XDG_RUNTIME_DIR"
+
+	add_env XDG_RUNTIME_DIR "$XDG"
+	CMD+=(--perms 0700 --dir "$XDG")
+
+	if [[ -n "${DISPLAY:-}" ]]; then
+		add_env DISPLAY "$DISPLAY"
+		if [[ $DISPLAY == :* || $DISPLAY == unix:* ]]; then
+			local xnum=${DISPLAY#*:}
+			xnum=${xnum%%.*}
+			add_bind "/tmp/.X11-unix/X$xnum"
+		fi
+
+		# Auth cookie: $XAUTHORITY if set, else ~/.Xauthority.
+		local xauth=${XAUTHORITY:-$HOME/.Xauthority}
+		if [[ -e $xauth ]]; then
+			add_env XAUTHORITY "$xauth"
+			add_bind "$xauth"
+		fi
+	fi
+
+	# Wayland + D-Bus
+	if [[ -n "${WAYLAND_DISPLAY:-}" ]]; then
+		add_env WAYLAND_DISPLAY "$WAYLAND_DISPLAY"
+		add_env "DBUS_SESSION_BUS_ADDRESS=unix:path=$XDG/bus"
+		add_bind "$XDG/$WAYLAND_DISPLAY"
+		add_bind "$XDG/bus"
+	fi
+
+	# PipeWire (native protocol; the manager socket is optional)
+	add_bind "$XDG/pipewire-0"
+	add_bind "$XDG/pipewire-0-manager"
+
+	if [[ -S "$XDG/pulse/native" ]]; then
+		add_env PULSE_SERVER "unix:$XDG/pulse/native"
+		add_bind "$XDG/pulse/native"
+	fi
+
+	# needed for xdg-open / kde-open
+	add_env XDG_CURRENT_DESKTOP "${XDG_CURRENT_DESKTOP:-}"
+	add_env KDE_SESSION_VERSION "${KDE_SESSION_VERSION:-}"
+	add_bind ".local/share/applications"
+
+	RW=1 add_bind ".cache/mesa_shader_cache"
+	RW=1 add_bind ".cache/radv_builtin_shaders"
+	add_bind ".local/share/vulkan"
+
+	if [[ -d "$HOME/.cache/lsfg-vk" && -d "$HOME/.config/lsfg-vk" ]]; then
+		RW=1 add_bind ".cache/lsfg-vk"
+		add_bind ".config/lsfg-vk"
+	fi
+}
+
 main() {
 	local TARGET="${TARGET:-$PWD}"
 	local value
@@ -96,60 +147,6 @@ main() {
 	for value in /usr /bin /sbin /lib /lib64 /var /sys /opt/google /opt/rocm; do
 		add_bind "$value"
 	done
-
-	if [[ -n "${XDG_RUNTIME_DIR:-}" && -d "$XDG_RUNTIME_DIR" ]]; then
-		local XDG="$XDG_RUNTIME_DIR"
-
-		add_env XDG_RUNTIME_DIR "$XDG"
-		CMD+=(--perms 0700 --dir "$XDG")
-
-		if [[ -n "${DISPLAY:-}" ]]; then
-			add_env DISPLAY "$DISPLAY"
-			if [[ $DISPLAY == :* || $DISPLAY == unix:* ]]; then
-				local xnum=${DISPLAY#*:}
-				xnum=${xnum%%.*}
-				add_bind "/tmp/.X11-unix/X$xnum"
-			fi
-
-			# Auth cookie: $XAUTHORITY if set, else ~/.Xauthority.
-			local xauth=${XAUTHORITY:-$HOME/.Xauthority}
-			if [[ -e $xauth ]]; then
-				add_env XAUTHORITY "$xauth"
-				add_bind "$xauth"
-			fi
-		fi
-
-		# Wayland + D-Bus
-		if [[ -n "${WAYLAND_DISPLAY:-}" ]]; then
-			add_env WAYLAND_DISPLAY "$WAYLAND_DISPLAY"
-			add_env "DBUS_SESSION_BUS_ADDRESS=unix:path=$XDG/bus"
-			add_bind "$XDG/$WAYLAND_DISPLAY"
-			add_bind "$XDG/bus"
-		fi
-
-		# PipeWire (native protocol; the manager socket is optional)
-		add_bind "$XDG/pipewire-0"
-		add_bind "$XDG/pipewire-0-manager"
-
-		if [[ -S "$XDG/pulse/native" ]]; then
-			add_env PULSE_SERVER "unix:$XDG/pulse/native"
-			add_bind "$XDG/pulse/native"
-		fi
-
-		# needed for xdg-open / kde-open
-		add_env XDG_CURRENT_DESKTOP "${XDG_CURRENT_DESKTOP:-}"
-		add_env KDE_SESSION_VERSION "${KDE_SESSION_VERSION:-}"
-		add_bind ".local/share/applications"
-
-		RW=1 add_bind ".cache/mesa_shader_cache"
-		RW=1 add_bind ".cache/radv_builtin_shaders"
-		add_bind ".local/share/vulkan"
-
-		if [[ -d "$HOME/.cache/lsfg-vk" && -d "$HOME/.config/lsfg-vk" ]]; then
-			RW=1 add_bind ".cache/lsfg-vk"
-			add_bind ".config/lsfg-vk"
-		fi
-	fi
 
 	local -a ENV_VARS=(
 		"HOME=$HOME"
@@ -175,6 +172,7 @@ main() {
 		${(s.:.)${BLOCKED_PATHS:-}}
 
 		".cache"
+		".config"
 	)
 
 	local -a RO_PATHS_VARS=(
@@ -250,6 +248,8 @@ main() {
 		RW_PATHS+=("$(go env GOMODCACHE 2>/dev/null)" "go")
 		RO_PATHS+=("code/go/bin")
 	fi
+
+	add_xdg
 
 	for value in "${BLOCKED_PATHS_VARS[@]}"; do
 		add_blocked_path "$value"
