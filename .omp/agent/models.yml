@@ -1,42 +1,40 @@
 providers:
-  strata:
-    api: openai-responses
-    auth: none
-    baseUrl: http://127.0.0.1:10601/v1
-    discovery:
-      type: llama.cpp
-    compat:
-      supportsDeveloperRole: false
-    thinking:
-      mode: effort
-      efforts: [minimal, low, medium, high]
-      defaultLevel: medium
-  llama.cpp:
-    # api: openai-completions
-    api: openai-responses
-    auth: none
-    baseUrl: http://127.0.0.1:10600/v1
-    discovery:
-      type: llama.cpp
-    thinking:
-      mode: effort
-      efforts: [minimal, low, medium, high]
-      defaultLevel: medium
-  llamacpp-judge:
-    api: typesafe
-    auth: none
-    baseUrl: http://127.0.0.1:10600/v1
-    models:
-      - contextWindow: 8192
-        id: ggml-org/Laya-GGUF:Q8_0
-        name: ggml-org/Laya-GGUF:Q8_0
-        input: [text]
-  llamacpp-embbed:
-    api: openai-responses
-    auth: none
-    baseUrl: http://127.0.0.1:10600/v1
-    models:
-      - contextWindow: 8192
-        id: nomic-embed-text:latest
-        name: nomic-embed-text:latest
-        input: [text]
+    rusting:
+        api: openai-completions
+        # api: openai-responses
+        auth: none
+        baseUrl: http://127.0.0.1:10601/v1
+        discovery:
+            type: openai-models-list
+        modelOverrides:
+            Inkling-2-Mini-UD-Q4_K_XL:
+                contextWindow: 262144
+    llama.cpp:
+        # api: openai-completions
+        api: openai-responses
+        auth: none
+        baseUrl: http://127.0.0.1:10600/v1
+        discovery:
+            type: llama.cpp
+        thinking:
+            mode: effort
+            efforts: [minimal, low, medium, high]
+            defaultLevel: medium
+    llamacpp-judge:
+        api: typesafe
+        auth: none
+        baseUrl: http://127.0.0.1:10600/v1
+        models:
+            - contextWindow: 8192
+              id: ggml-org/Laya-GGUF:Q8_0
+              name: ggml-org/Laya-GGUF:Q8_0
+              input: [text]
+    llamacpp-embbed:
+        api: openai-responses
+        auth: none
+        baseUrl: http://127.0.0.1:10600/v1
+        models:
+            - contextWindow: 8192
+              id: nomic-embed-text:latest
+              name: nomic-embed-text:latest
+              input: [text]

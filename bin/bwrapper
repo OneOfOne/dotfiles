@@ -22,6 +22,10 @@ typeset -gA BOUND=()
 add_env() {
 	local name value
 	if (($# == 1)); then
+		[[ "$1" == *=* ]] || {
+			echo "add_env: expected NAME=VALUE" >/dev/stderr
+			return 1
+		}
 		name="${1%%=*}"
 		value="${1#*=}"
 	else
@@ -161,6 +165,8 @@ main() {
 		"TMPDIR=/tmp"
 		"PWD=$TARGET"
 
+		"LANG=${LANG:-}"
+
 		${(s.:.)ENV:-}
 	)
 
@@ -249,11 +255,11 @@ main() {
 		RO_PATHS+=("code/go/bin")
 	fi
 
-	add_xdg
-
 	for value in "${BLOCKED_PATHS_VARS[@]}"; do
 		add_blocked_path "$value"
 	done
+
+	add_xdg
 
 	for value in "${RO_PATHS_VARS[@]}"; do
 		add_bind "$value"

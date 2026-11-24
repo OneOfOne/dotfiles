@@ -58,20 +58,17 @@ return {
 						},
 					},
 				},
-				-- vtsls = {
-				-- 	enabled = false,
-				-- 	settings = {
-				-- 		vtsls = {
-				-- 			complete_function_calls = false,
-				-- 			experimental = {
-				-- 				completion = {
-				-- 					enableServerSideFuzzyMatch = false,
-				-- 				},
-				-- 			},
-				-- 		},
-				-- 		typescript = { preferences = { useAliasesForRenames = false } },
-				-- 	},
-				-- },
+				yamlls = {
+					settings = {
+						redhat = {
+							telemetry = { enabled = false },
+						},
+						yaml = {
+							editor = { tabSize = 4 },
+							validate = true,
+						},
+					},
+				},
 				gopls = {
 					-- cmd = { 'gopls', '-logfile=/tmp/gopls.log', '-rpc.trace' },
 					settings = {

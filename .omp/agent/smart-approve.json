@@ -1,3 +1,4 @@
 {
-	"mode": "auto"
+	"mode": "interactive",
+	"model": "llamacpp-judge/ggml-org/Laya-GGUF:Q8_0"
 }

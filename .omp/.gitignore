@@ -6,11 +6,11 @@ agent/predict/
 agent/blobs/
 agent/last-changelog-version
 puppeteer/
-plugins/
 memories/
 session/
 cache/
 logs/
 run/
+plugins/*.lock.json
 *.wasm
 agent/codex*.json

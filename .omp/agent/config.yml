@@ -50,8 +50,6 @@ edit:
 bash:
     gitGuard: true
     allowCompoundCommands: true
-bashInterceptor:
-    enabled: true
 astGrep:
     enabled: true
 ida:
@@ -84,28 +82,29 @@ modelPresets:
             commit: llama.cpp/bartowski/Spark-X2.6-4B-GGUF:Q4_K_M
             web: anthropic/claude-haiku-4-5
         defaultThinkingLevel: auto
-    qfn:
+    rusting:
         modelRoles:
-            advisor: strata/qwen3.8-flash-next-unsloth-ud-iq4_xs-v31
-            plan: strata/qwen3.8-flash-next-unsloth-ud-iq4_xs-v31
+            advisor: rusting/Inkling-2-Mini-UD-Q4_K_XL:off
+            plan: rusting/Inkling-2-Mini-UD-Q4_K_XL:medium
             judge: llamacpp-judge/ggml-org/Laya-GGUF:Q8_0
-            memory: llama.cpp/bartowski/LFM3-1.7B-GGUF:Q6_K_L
-            default: strata/qwen3.8-flash-next-unsloth-ud-iq4_xs-v31
-            tiny: strata/qwen3.8-flash-next-unsloth-ud-iq4_xs-v31:low
-            commit: strata/qwen3.8-flash-next-unsloth-ud-iq4_xs-v31:low
-            web: anthropic/claude-haiku-4-5
+            memory: rusting/Inkling-2-Mini-UD-Q4_K_XL:off
+            default: rusting/Inkling-2-Mini-UD-Q4_K_XL:low
+            tiny: rusting/Inkling-2-Mini-UD-Q4_K_XL:minimal
+            commit: rusting/Inkling-2-Mini-UD-Q4_K_XL:minimal
+            web: web/google
         defaultThinkingLevel: auto
 disabledExtensions: []
 modelRoles:
-    advisor: anthropic/claude-haiku-5-5
-    plan: anthropic/claude-opus-5-5
+    advisor: rusting/Inkling-2-Mini-UD-Q4_K_XL:minimal
+    plan: rusting/Inkling-2-Mini-UD-Q4_K_XL:low
     judge: llamacpp-judge/ggml-org/Laya-GGUF:Q8_0
-    memory: anthropic/claude-haiku-5-5
-    default: anthropic/claude-sonnet-5-5
-    tiny: anthropic/claude-haiku-5-5
-    commit: anthropic/claude-haiku-5-5
-    web: anthropic/claude-haiku-4-5
-
+    memory: rusting/Inkling-2-Mini-UD-Q4_K_XL:off
+    default: rusting/Inkling-2-Mini-UD-Q4_K_XL:minimal
+    tiny: rusting/Inkling-2-Mini-UD-Q4_K_XL:off
+    commit: rusting/Inkling-2-Mini-UD-Q4_K_XL:off
+    web: web/google
+tools:
+    approvalMode: yolo
 composer:
     tokenRate: true
 compaction:

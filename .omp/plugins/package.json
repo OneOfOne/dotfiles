@@ -1,0 +1,7 @@
+{
+	"name": "omp-plugins",
+	"private": true,
+	"dependencies": {
+		"smart-approve": "npm:smart-approve@^2.7.6"
+	}
+}

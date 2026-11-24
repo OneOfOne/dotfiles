@@ -15,6 +15,8 @@
 		"markdownlint-cli": "latest",
 		"markdownlint-cli2": "latest",
 		"marksman": "latest",
+		"oxlint": "latest",
+		"oxlint-tsgolint": "latest",
 		"typescript": "latest",
 		"typescript-language-server": "latest",
 		"vscode-html-languageservice": "latest",
