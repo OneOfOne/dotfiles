@@ -9,15 +9,13 @@ typeset -ga CMD=(
 	--tmpfs /tmp --tmpfs /run --tmpfs /dev/shm
 
 	--dev-bind-try /dev/dri /dev/dri
+	--dev-bind-try /dev/kfd /dev/kfd
 	--dev-bind-try /dev/tty /dev/tty
 
-	--uid $UID --gid $GID
+	--uid "$UID" --gid "$GID"
 
 	--clearenv
 )
-
-# Associative array: keys are the paths that have already been bound.
-typeset -gA BOUND=()
 
 add_env() {
 	local name value
@@ -33,21 +31,26 @@ add_env() {
 		value="$2"
 	fi
 
-	[[ -n $value ]] || return 0
+	[[ -n $value ]] || return
 
 	CMD+=(--setenv "$name" "$value")
 }
 
+typeset -gA BOUND=()
 add_bind() {
+	local bind_type="--ro-bind"
+
+	if [[ "$1" == "-rw" ]]; then
+		bind_type="--bind"
+		shift
+	fi
+
 	local src="$1"
 	local dst="${2:-$1}"
-	[[ -n "$dst" ]] || return 0
+	[[ -z "$dst" ]] && return
 
-	[[ "$src" != /* ]] && src="$HOME/$src"
-	[[ "$dst" != /* ]] && dst="$HOME/$dst"
-
-	local bind_type="--ro-bind"
-	[[ -n "${RW:-}" ]] && bind_type="--bind"
+	[[ "$src" != /* && "$src" != ./* ]] && src="$HOME/$src"
+	[[ "$dst" != /* && "$dst" != ./* ]] && dst="$HOME/$dst"
 
 	[[ "${BOUND[$src]:-}" == "$bind_type" ]] && return
 
@@ -72,9 +75,9 @@ add_bind() {
 }
 
 add_blocked_path() {
-	local p=$1
+	local p="$1"
 
-	[[ "$p" != /* ]] && p="$HOME/$p"
+	[[ "$p" != /* && "$p" != ./* ]] && src="$HOME/$p"
 
 	if [[ -d "$p" ]]; then
 		CMD+=(--tmpfs "$p")
@@ -84,7 +87,7 @@ add_blocked_path() {
 }
 
 add_xdg() {
-	[[ -n "${XDG_RUNTIME_DIR:-}" && -d "$XDG_RUNTIME_DIR" ]] || return 0
+	[[ -n "${XDG_RUNTIME_DIR:-}" && -d "$XDG_RUNTIME_DIR" ]] || return
 	local XDG="$XDG_RUNTIME_DIR"
 
 	add_env XDG_RUNTIME_DIR "$XDG"
@@ -128,12 +131,12 @@ add_xdg() {
 	add_env KDE_SESSION_VERSION "${KDE_SESSION_VERSION:-}"
 	add_bind ".local/share/applications"
 
-	RW=1 add_bind ".cache/mesa_shader_cache"
-	RW=1 add_bind ".cache/radv_builtin_shaders"
+	add_bind -rw ".cache/mesa_shader_cache"
+	add_bind -rw ".cache/radv_builtin_shaders"
 	add_bind ".local/share/vulkan"
 
 	if [[ -d "$HOME/.cache/lsfg-vk" && -d "$HOME/.config/lsfg-vk" ]]; then
-		RW=1 add_bind ".cache/lsfg-vk"
+		add_bind -rw ".cache/lsfg-vk"
 		add_bind ".config/lsfg-vk"
 	fi
 }
@@ -148,7 +151,7 @@ main() {
 	fi
 
 	# System directories (read-only by default).
-	for value in /usr /bin /sbin /lib /lib64 /var /sys /opt/google /opt/rocm; do
+	for value in /usr /bin /sbin /lib /lib64 /var /sys /opt/google; do
 		add_bind "$value"
 	done
 
@@ -170,10 +173,6 @@ main() {
 		${(s.:.)ENV:-}
 	)
 
-	for value in "${ENV_VARS[@]}"; do
-		add_env "$value"
-	done
-
 	local -a BLOCKED_PATHS_VARS=(
 		${(s.:.)${BLOCKED_PATHS:-}}
 
@@ -183,7 +182,7 @@ main() {
 
 	local -a RO_PATHS_VARS=(
 		${(s.:.)${RO_PATHS:-}}
-		# ${(s.:.)${PATH:-}}
+		${(s.:.)${PATH:-}}
 
 		"/run/systemd/resolve"
 		"/etc/resolv.conf"
@@ -221,7 +220,9 @@ main() {
 
 		"Pictures/nyc.jpg"
 	)
+
 	[[ -e "$HOME/.ssh/github_config" ]] && add_bind ".ssh/github_config" ".ssh/config"
+	[[ -d "/opt/rocm" ]] && RO_PATHS_VARS+=("/opt/rocm")
 
 	local -a RW_PATHS_VARS=(
 		"$TARGET"
@@ -251,9 +252,13 @@ main() {
 	)
 
 	if ((${+commands[go]})); then
-		RW_PATHS+=("$(go env GOMODCACHE 2>/dev/null)" "go")
-		RO_PATHS+=("code/go/bin")
+		RW_PATHS_VARS+=("$(go env GOMODCACHE 2>/dev/null)" "go")
+		RO_PATHS_VARS+=("$(go env GOBIN 2>/dev/null)")
 	fi
+
+	for value in "${ENV_VARS[@]}"; do
+		add_env "$value"
+	done
 
 	for value in "${BLOCKED_PATHS_VARS[@]}"; do
 		add_blocked_path "$value"
@@ -266,7 +271,7 @@ main() {
 	done
 
 	for value in "${RW_PATHS_VARS[@]}"; do
-		RW=1 add_bind "$value"
+		add_bind -rw "$value"
 	done
 
 	CMD+=(--remount-ro / --chdir "$TARGET")

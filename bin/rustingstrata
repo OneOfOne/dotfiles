@@ -4,10 +4,12 @@ pushd ~/code/RustingStrata
 
 # BASE=~/.cache/huggingface/hub/models--unsloth--Qwen3.8-Flash-Next-GGUF
 BASE="$HOME/.cache/huggingface/hub"
-MN="models--unsloth--Inkling-2-Mini-GGUF"
+# MN="models--unsloth--Inkling-2-Mini-GGUF"
+MN="models--unsloth--Qwen3.8-27B-GGUF"
 M="$(find "$BASE/$MN/snapshots" -name '*.gguf' -printf "%T+ %p\n" | sort -n | tail -1 | cut -d ' ' -f 2)"
+LORA="$BASE/$MN/Qwen3.8-27B-pi-lora-F16.gguf"
 DM="$BASE/$MN/dspark-Inkling-2-Mini-Q8_0.gguf"
-CTX=262144
+CTX=128144
 
 # ./target/release/rustingstrata bench --model $M --backend vulkan --gpu --vram-margin 716 \
 # 	--temp 1 --top-k 0 --top-p 1 --chunk 512 --kv f16 --ctx $CTX \
@@ -16,7 +18,7 @@ CTX=262144
 git pull && RUSTFLAGS="-Awarnings -C target-cpu=native" cargo build --release
 
 RW_PATHS=".cache/huggingface:/games/cache-ooo" bwrapper ./target/release/rustingstrata serve --addr 0.0.0.0:10601 --backend vulkan --gpu --max-tokens 65536 \
-	--temp 1 --top-k 0 --top-p 1 --chunk 4096 --kv q8 --ctx $CTX \
-	--mtp 0 --spec-type ngram-mod $@
+	--temp 1 --top-k 0 --top-p 1 --chunk 512 --kv q8 --ctx $CTX \
+	--mtp 4 --spec-type ngram-mod --spec-draft-n-max 2 $@
 
 popd
