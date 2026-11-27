@@ -37,6 +37,7 @@ add_env() {
 }
 
 typeset -gA BOUND=()
+
 add_bind() {
 	local bind_type="--ro-bind"
 
@@ -61,14 +62,14 @@ add_bind() {
 			CMD+=("$bind_type" "$target" "$target")
 			BOUND[$target]=$bind_type
 		fi
-
-		if [[ -e "$target" && -L "$dst" ]]; then
+		if [[ -e "$target" && "$target" != "$dst" ]]; then
 			CMD+=(--symlink "${target}" "${dst}")
 		fi
 	elif [[ -e "$src" ]]; then
 		CMD+=("$bind_type" "$src" "$dst")
 	else
 		echo "bind: $src doesn't exist" >/dev/stderr
+		return
 	fi
 
 	BOUND[$src]=$bind_type
@@ -77,12 +78,15 @@ add_bind() {
 add_blocked_path() {
 	local p="$1"
 
-	[[ "$p" != /* && "$p" != ./* ]] && src="$HOME/$p"
+	[[ "$p" != /* && "$p" != ./* ]] && p="$HOME/$p"
 
-	if [[ -d "$p" ]]; then
-		CMD+=(--tmpfs "$p")
-	else
+	if [[ -L "$p" ]]; then
+		p="${p:P}"
+	fi
+	if [[ -f "$p" || -L "$p" ]]; then
 		CMD+=(--ro-bind /dev/null "$p")
+	else
+		CMD+=(--perms 0700 --dir "$p")
 	fi
 }
 
@@ -98,14 +102,16 @@ add_xdg() {
 		if [[ $DISPLAY == :* || $DISPLAY == unix:* ]]; then
 			local xnum=${DISPLAY#*:}
 			xnum=${xnum%%.*}
-			add_bind "/tmp/.X11-unix/X$xnum"
-		fi
+			if [[ -e "/tmp/.X11-unix/X$xnum" ]]; then
+				add_bind "/tmp/.X11-unix/X$xnum"
 
-		# Auth cookie: $XAUTHORITY if set, else ~/.Xauthority.
-		local xauth=${XAUTHORITY:-$HOME/.Xauthority}
-		if [[ -e $xauth ]]; then
-			add_env XAUTHORITY "$xauth"
-			add_bind "$xauth"
+				# Auth cookie: $XAUTHORITY if set, else ~/.Xauthority.
+				local xauth=${XAUTHORITY:-$HOME/.Xauthority}
+				if [[ -e $xauth ]]; then
+					add_env XAUTHORITY "$xauth"
+					add_bind "$xauth"
+				fi
+			fi
 		fi
 	fi
 
@@ -144,6 +150,8 @@ add_xdg() {
 main() {
 	local TARGET="${TARGET:-$PWD}"
 	local value
+
+	TARGET="${TARGET:A}"
 
 	if [[ "$TARGET" == "$HOME" && "${ALLOW_HOME:-}" != "1" ]]; then
 		echo "RW access to home isn't allowed, use ALLOW_HOME=1" >/dev/stderr
@@ -241,9 +249,12 @@ main() {
 		".config/lazygit"
 		".local/state/lazygit"
 
+		".local/share/uv/tools"
+		".cache/uv"
+		".bun"
+
 		".tmux"
 		".omp"
-		".bun"
 		".gradle"
 		".gnupg"
 
@@ -252,8 +263,8 @@ main() {
 	)
 
 	if ((${+commands[go]})); then
-		RW_PATHS_VARS+=("$(go env GOMODCACHE 2>/dev/null)" "go")
-		RO_PATHS_VARS+=("$(go env GOBIN 2>/dev/null)")
+		RW_PATHS_VARS+=("$(go env GOMODCACHE 2>/dev/null || true)" "go")
+		RO_PATHS_VARS+=("$(go env GOBIN 2>/dev/null || true)")
 	fi
 
 	for value in "${ENV_VARS[@]}"; do

@@ -10,7 +10,10 @@ memories/
 session/
 cache/
 logs/
+plans/
 run/
 plugins/*.lock.json
+*.lock
 *.wasm
 agent/codex*.json
+

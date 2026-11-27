@@ -1,0 +1,28 @@
+[Unit]
+Description=autossh
+After=network-online.target
+
+[Service]
+Type=oneshot
+Environment="AUTOSSH_GATETIME=0"
+Environment="AUTOSSH_PORT=0"
+ExecStart=/usr/bin/autossh -M 0 -N \
+    -o "ServerAliveInterval 30" \
+    -o "ServerAliveCountMax 3" \
+    -o "ExitOnForwardFailure yes" \
+    -R 9099:localhost:9099 \
+    -f ooo
+
+ExecStart=/usr/bin/autossh -M 0 -N \
+    -o "ServerAliveInterval 30" \
+    -o "ServerAliveCountMax 3" \
+    -o "ExitOnForwardFailure yes" \
+    -R 22222:localhost:22222 \
+    -f ooo
+
+; Restart=always
+RemainAfterExit=yes
+RestartSec=10
+
+[Install]
+WantedBy=default.target

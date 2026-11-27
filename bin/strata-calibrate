@@ -1,6 +1,0 @@
-#!/bin/zsh
-set -e
-
-strata engine calibrate --profile launch-ud-iq4_xs-v31-256k --measure --exclusive --out /tmp/cali.json
-strata engine calibrate --profile launch-ud-iq4_xs-v31-256k --apply-result /tmp/cali.json --exclusive
-strata launch --preset 'UD-IQ4_XS-v31 256K' --retune
